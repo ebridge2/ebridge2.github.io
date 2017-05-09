@@ -55,12 +55,12 @@
 					<section>
 						<h2>What is a Connectome?</h2>
 						<ul style="float: left; border-right: solid 0px; width: 40%; ">
-				           <li> Connectomics Research is Rapidly Expanding</li>
+				           <li> Connectomics research is rapidly expanding</li>
 				           <li>"Connectome": a map of the brain</li>
 				           <li>Why?</li>
 				           <ul>
 				           		<li>Intuitive</li>
-				           		<li>Mathematical Ease</li>
+				           		<li>Mathematical ease</li>
 				           </ul>
 				        </ul>
 				    	<img src="../img/thesis/connectome.png" style="float: left;" />
@@ -80,15 +80,15 @@
 				    <section>
 						<h2>Who wants Connectomes?</h2>
 						<ul>
-							<li>Academic Community</li>
+							<li>Academic community</li>
 							<ul>
 								<li>Neuroscientists, Psychologists, Computer Scientists, Mathematicians</li>
 							</ul>
-							<li>Clinical Community</li>
+							<li>Clinical community</li>
 							<ul>
 								<li>Medical Doctors, Psychiatrists</li>
 							</ul>
-							<li>Why? Computational Objectivity</li>
+							<li>Why? Computational objectivity</li>
 						</ul>
 					</section>
 				</section>
@@ -100,7 +100,7 @@
 					<section>
 						<h2>BOLD Signal</h2>
 						<ul>
-							<li>Blood-Oxygen Level Dependent Imaging</li>
+							<li>Blood-Oxygen Level Dependent imaging</li>
 							<li>When brain region becomes more active, body sends more oxygenated blood</li>
 						</ul>
 						<img src="../img/thesis/hemo.png" />
@@ -120,9 +120,9 @@
 							<li>Image the BOLD value in each volume-pixel (voxel)</li>
 							<ul>
 								<li>$2\times 2\times 2\; mm^3$ squares we measure the BOLD contrast in</li>
-								<li>Image over entire brain spatially to get a 3D volume</li>
 							</ul>
 							<li>Take a 3D volume of a brain per timepoint</li>
+							<li>$4D$ image: $3$ spatial $+$ $1$ temporal (time)</li>
 						</ul>
 						<img src="../img/thesis/4D.jpeg" />
 
@@ -137,18 +137,18 @@
 					<section>
 						<h2>Throughput Problems</h2>
 						<ul>
-							<li>Processing Brain Graphs is Computationally Expensive</li>
+							<li>Processing brain scans is computationally expensive</li>
 							<ul>
 								<li>A brain scan has between 2-800 observations of about $10^6$ features</li>
 								<li>CPU/RAM usage is heavy</li>
-								<li>It is essentially a Prerequisite to have a cluster</li>
+								<li>It is essentially a prerequisite to have a cluster</li>
 							</ul>
 						</ul>
 					</section>
 					<section>
 						<h2>Software and Hardware Constraints</h2>
 						<ul>
-							<li>Many users who want Connectomes won't be able to setup a cluster</li>
+							<li>Many users who want connectomes won't be able to setup a cluster</li>
 							<li>Requisite software dependencies themselves require computer expertise</li>
 						</ul>
 					</section>
@@ -173,7 +173,7 @@
 						<h2>Desiderata</h2>
 						<ul>
 							<li>If I scan everybody in a room twice and acquire functional connectomes, will I be able to identify the pairs of connectomes?</li>
-							<li>Identify = Will everybody's closest connectome (as defined by euclidian distance) be their alternate connectome?</li>
+							<li>Identify = Will everybody's closest connectome (as defined by frobenius norm) be their alternate connectome?</li>
 						</ul>
 					</section>
 					<section>
@@ -263,8 +263,8 @@
 					<section>
 						<h2>Nuisance Variables</h2>
 						<ul>
-							<li>Scanner Heat Up: Quadratic Drifting of the Timeseries</li>
-							<li>Temporal Physiological Noise: heart beat, etc.</li>
+							<li>Scanner heat up: quadratic drifting of the timeseries</li>
+							<li>Temporal physiological noise: heart beat, etc.</li>
 							<ul>
 								<li>physiological factors that impact our signal but are not from brain activity</li>
 							</ul>
@@ -274,7 +274,7 @@
 					<section>
 						<h2>Nuisance Correction</h2>
 						<ul>
-							<li>PCA to estimate best-fit quadratic</li>
+							<li>GLM to estimate best-fit quadratic</li>
 							<ul>
 								<li>Neurological signal known to not behave globally quadratically, so a best-fit quadratic will not remove neurological signal</li>
 							</ul>
@@ -296,7 +296,7 @@
 					<section>
 						<h2>Downsampling</h2>
 						<ul>
-							<li>Anatomically and Functionally Defined Parcellations that are labelled by brain region</li>
+							<li>Anatomically and functionally defined parcellations that are labelled by brain region</li>
 							<li>Spatially downsample each 3D volume for each timepoint</li>
 							<li>$B \in \mathbb{R}^{10^6 \times t}$ for $t$ observations, $10^{6}$ features/voxels</li>
 							<li>$D = downsample(B) \in \mathbb{R}^{r \times t}$ where $r$ is between 20 to 300 generally depending on the spatial parcellation we use</li>
