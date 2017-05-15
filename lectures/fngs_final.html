@@ -42,7 +42,7 @@
 			<div class="slides">
 				<section>
 					<h1>FNGS</h1>
-					<h2>A One-Click Pipeline for the Automated Acquisition of Functional MRI Connectomes</h1>
+					<h3>A One-Click Pipeline for the Automated Acquisition of Functional MRI Connectomes</h3>
 					<p>
 						<small>Created by <a href="http://ericwb.me">Eric Bridgeford</a>, Tanay Agarwal, Eric Walker / Contact: <a href="http://github.com/ebridge2">@ebridge2</a></small>
 					</p>
@@ -53,7 +53,7 @@
 						<h2>Q: What is functional Neuroimaging?</h2>
 					</section>
 					<section>
-						<h2>BOLD Signal</h2>
+						<h3>BOLD Signal</h3>
 						<ul>
 							<li>Blood-Oxygen Level Dependent imaging</li>
 							<li>When brain region becomes more active, body sends more oxygenated blood</li>
@@ -61,7 +61,7 @@
 						<img src="../img/thesis/hemo.png" />
 					</section>
 					<section>
-						<h2>Hemodynamic Response</h2>
+						<h3>Hemodynamic Response</h3>
 						<ul>
 							<li>Deoxy-hemo has different MR signature than oxy-hemo</li>
 							<li>End up with this differential contrast when a brain region becomes active</li>
@@ -70,7 +70,7 @@
 						<img src="../img/thesis/hrf.png" />
 					</section>
 					<section>
-						<h2>4D Imaging</h2>
+						<h3>4D Imaging</h3>
 						<ul>
 							<li>Image the BOLD value in each volume-pixel (voxel)</li>
 							<ul>
@@ -82,7 +82,7 @@
 						<img src="../img/thesis/4D.jpeg" />
 					</section>
 					<section>
-						<h2>Anatomical Imaging</h2>
+						<h3>Anatomical Imaging</h3>
 						<ul>
 							<li>high resolution, 3D anatomical image taken with each subject</li>
 							<li>Same true brain shape, different resolution</li>
@@ -98,7 +98,7 @@
 					</section>
 
 					<section>
-						<h2>Throughput Problems</h2>
+						<h3>Throughput Problems</h3>
 						<ul>
 							<li>Processing brain scans is computationally expensive</li>
 							<ul>
@@ -110,14 +110,14 @@
 					</section>
 
 					<section>
-						<h2>Software and Hardware Constraints</h2>
+						<h3>Software and Hardware Constraints</h3>
 						<ul>
 							<li>Many users who want connectomes won't be able to setup a cluster</li>
 							<li>Requisite software dependencies themselves require computer expertise</li>
 						</ul>
 					</section>
 					<section>
-						<h2>Choice of Pipeline</h2>
+						<h3>Choice of Pipeline</h3>
 						<ul>
 							<li>Hundreds of Processing options</li>
 							<ul>
@@ -134,14 +134,14 @@
 						<h2>Q: How do we Choose a "Good" Pipeline?</h2>
 					</section>
 					<section>
-						<h2>Desiderata</h2>
+						<h3>Desiderata</h3>
 						<ul>
 							<li>If I scan everybody in a room twice and acquire functional connectomes, will I be able to identify the pairs of connectomes?</li>
 							<li>Identify = Will everybody's closest connectome (as defined by frobenius norm) be their alternate connectome?</li>
 						</ul>
 					</section>
 					<section>
-						<h2>Discriminability</h2>
+						<h3>Discriminability</h3>
 						<ul>
 							<li><a href="https://github.com/neurodata/discriminability">Discriminability</a> quantifies this</li>
 								<ul>
@@ -168,7 +168,7 @@
 					</section>
 
 					<section>
-						<h2>Motion Correction</h2>	
+						<h3>Motion Correction</h3>	
 						<ul>
 							<li>Problem: Scanning session is 3 to 10 minutes </li>
 							<ul>
@@ -183,7 +183,7 @@
 					</section>
 
 					<section>
-						<h2>Slice Timing Correction</h2>
+						<h3>Slice Timing Correction</h3>
 						<ul>
 							<li>Problem: a 3D volume is taken in 2D slices over the course of 2-3 seconds</li>
 							<li>Given: we know exactly when each slice is taken per timepoint</li>
@@ -194,7 +194,7 @@
 					</section>
 
 					<section>
-						<h2>Slice Timing Correction</h2>
+						<h3>Slice Timing Correction</h3>
 						<ul>
 							<li>Solution: Sinc Interpolation to center timeseries about each discrete timepoint</li>
 						</ul>
@@ -203,7 +203,7 @@
 					</section>
 
 					<section>
-						<h2>Preprocessing Improves Discriminability</h2>
+						<h3>Preprocessing Improves Discriminability</h3>
 						<img src="../img/thesis/no_preproc_preproc.png" border="0"/>
 						<ul>
 							<li>p-value of difference: $p = .01$</li>
@@ -229,7 +229,7 @@
 						</ul>
 					</section>
 					<section>
-						<h2>Stepwise-Alignment Advantages</h2>
+						<h3>Stepwise-Alignment offers fail-safe registration</h3>
 						<img src="../img/thesis/distorted.png" style="width: 40%;"/>
 						<img src="../img/thesis/no_distortion.png" style="width: 40%;"/>
 						<ul>
@@ -239,12 +239,12 @@
 				</section>
 				<section>
 					<section>
-						<h2>Nuisance Correction</h2>
+						<h3>Nuisance Correction</h3>
 				    	<img src="../img/thesis/nuis.png" style="width: 80%; "/>
 				    	<img src="../img/thesis/bottom.png" border="0" style="width: 60%;"/>
 					</section>
 					<section>
-						<h2>Nuisance Variables</h2>
+						<h3>Nuisance Variables</h3>
 						<ul>
 							<li>Scanner heat up: quadratic drifting of the timeseries</li>
 							<li>Temporal physiological noise: heart beat, etc.</li>
@@ -255,7 +255,7 @@
 						</ul>
 					</section>
 					<section>
-						<h2>Nuisance Correction</h2>
+						<h3>Nuisance Correction removes nuisance variables</h3>
 						<ul>
 							<li>GLM to estimate best-fit quadratic</li>
 							<ul>
@@ -281,7 +281,7 @@
 				    	<img src="../img/thesis/bottom.png" border="0" style="width: 60%;"/>
 					</section>
 					<section>
-						<h2>Downsampling</h2>
+						<h3>Downsampling</h3>
 						<ul>
 							<li>Anatomically and functionally defined parcellations that are labelled by brain region</li>
 							<li>Spatially downsample each 3D volume for each timepoint</li>
@@ -291,11 +291,11 @@
 						</ul>
 					</section>
 					<section>
-						<h2>Timeseries</h2>
+						<h3>Timeseries</h3>
 						<img src="../img/thesis/ts.png" border="0"/>						
 					</section>
 					<section>
-						<h2>Correlation Matrix/Connectome</h2>
+						<h3>Correlation Matrix/Connectome</h3>
 						<img src="../img/thesis/corr.png" border="0"/>						
 					</section>
 				</section>
@@ -305,15 +305,15 @@
 						<h1>Advantages of FNGS</h1>
 					</section>
 					<section>
-						<h2>Performance</h2>						
-						<img src="../img/thesis/perf.png"/>
+						<h3>FNGS has low memory and CPU requirements</h3>						
+						<img src="../img/thesis/perf.png" style="width: 80%; "/>
 						<ul>
 							<li>Single threaded: easy to parallelize</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Qualitative Advantages</h2>
+						<h3>FNGS is more user-friendly than comparable pipelines</h3>
 						<ul>
 							<li>Compared to a Nipype Pipeline, FNGS is:</li>
 							<ul>
@@ -326,7 +326,7 @@
 					</section>
 
 					<section>
-						<h2>Comparison CPAC vs FNGS</h2>
+						<h3>FNGS performs comparably to reference pipelines</h3>
 						<img src="../img/thesis/cpac_vs_fngs.png" border="0"/>
 					</section>
 				</section>
@@ -334,19 +334,16 @@
 
 				<section>
 					<section>
-						<h1>Deployment</h1>
+						<h2>Q: How do we make deployment easy?</h2>
 					</section>
 
 					<section>
 						<h2>FNGS Pipeline</h2>						
 						<img src="../img/thesis/pipeline.png" border="0"/>
 					</section>
-					<section>
-						<h2>Q: How do we make this easy?</h2>
-					</section>
 
 					<section>
-						<h2>Docker Containers</h2>
+						<h3>Docker Containers simplify dependency constraints</h3>
 						<ul>
 							<li>software container with all dependencies associated with our pipeline</li>
 							<li>user does not have to install anything locally (except for the docker controller)</li>
@@ -355,7 +352,7 @@
 					</section>
 
 					<section>
-						<h2>Deployment Options</h2>
+						<h3>FNGS Offers multiple options for deployment</h>
 						<ul>
 							<li><a href="https://github.com/neurodatadesign/local_bids.md">Local Deployment</a></li>
 							<li><a href="https://github.com/neurodatadesign/local_cloud.md">Command Line Cloud Deployment</a></li>
@@ -366,10 +363,10 @@
 				</section>
 				<section>
 					<section>
-						<h2>Does it really work?</h2>
+						<h2>Real Data Experiments</h2>
 					</section>
 					<section>
-						<h2>Single Dataset Analysis</h2>
+						<h3>Single Dataset Analysis  shows high discriminability</h3>
 						<ul>
 							<li>270 scans</li>
 							<li>Analyze in parallel: approximately $\$15$, about $2.5$ hours</li>
@@ -379,16 +376,16 @@
 					</section>
 
 					<section>
-						<h2>Average Connectome, $n=108$</h2>
+						<h3>Average Connectome, $n=108$</h3>
 						<img src="../img/thesis/corr.png" border="0"/>						
 					</section>
 					<section>
-						<h2>Single Dataset Analysis</h2>
+						<h3>Single Dataset Analysis shows high discriminability</h3>
 						<img src="../img/thesis/hnu.png" border="0"/>
 					</section>
 
 					<section>
-						<h2>Harmonized Analysis</h2>
+						<h3>Harmonized Analysis reveals quantitative variations in timeseries</h3>
 						<ul>
 							<li>$n=794$ scans collected at $6$ different sites</li>
 							<li>Similar scanners and parameter selection</li>
@@ -398,7 +395,7 @@
 					</section>
 
 					<section>
-						<h2>Harmonized Analysis</h2>
+						<h3>Harmonized Analysis reveals quantitative variations in timeseries</h3>
 						<img src="../img/thesis/dataset.png" border="0"/>
 						<ul>
 							<li>Theoretical random discriminability score: $0.248$</li>
@@ -408,7 +405,7 @@
 					</section>
 
 					<section>
-						<h2>Signal Subgraphing</h2>
+						<h3>Signal Subgraphing to assess task fMRI</h3>
 						<ul>
 							<li>Statistical Question: Can we identify the sub-network, or sub-graph, that variest between experimental conditions?</li>
 							<li>Related Question: How many timepoints, and how many observations, do we need to get a good prediction?</li>
@@ -422,9 +419,10 @@
 					</section>
 
 					<section>
-						<h2>Simulation Setting</h2>
+						<h3>Simulation Setting</h3>
 						<ul>
 							<li>Given: 2 Classes of Covariance Matrices and Mean Vectors</li>
+							<li>Identify 100 most variant edges, and define these edges as subgraph</li>
 							<li>Sample $t$ timepoints and form correlation matrix per observation</li>
 							<li>Binarize collection of Correlation matrices</li>
 							<li>Run Signal Subgraphing, and identify the ranges of "good-performing $t, n$</li>
@@ -433,14 +431,14 @@
 					</section>
 
 					<section>
-						<h2>"Good" Subgraph, Realistic Number of Timepoints</h2>
+						<h3>Signal Subgraphing finds a good approximation of the actual subgraph</h3>
 						<img src="../img/thesis/ssg_sim.png" border="0"/>
 					</section>
 				</section>
 
 				<section>
 					<section>
-						<h2>Future Goals</h2>
+						<h3>Future Goals</h3>
 						<ul>
 							<li>Improve Nuisance Correction Further</li>
 							<ul>
@@ -452,7 +450,7 @@
 					</section>
 
 					<section>
-						<h2>Acknowledgements</h2>
+						<h3>Acknowledgements</h3>
 						<ul>
 							<li>Team: Eric Bridgeford, Tanay Agarwal, Eric Walker</li>
 							<li>Dr. Josh Vogelstein: PI</li>
@@ -463,7 +461,7 @@
 					</section>
 
 					<section>
-						<h2>Important Links</h2>
+						<h3>Important Links</h3>
 						<ul>
 							<li>Live Webservice: <a href="cortex.jhu.edu:8003">FNGS homepage</a></li>
 							<li>Docker Cloud: <a href="https://hub.docker.com/r/ericw95/fngs/">FNGS pipeline</a>
@@ -474,7 +472,7 @@
 						</p>
 					</section>
 					<section>
-						<h2>Questions?</h2>
+						<h3>Questions?</h2>
 						<ul>
 							<li>TODO: Demo running in cloud</li>
 						</ul>
