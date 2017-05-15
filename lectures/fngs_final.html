@@ -204,7 +204,10 @@
 
 					<section>
 						<h2>Preprocessing Improves Discriminability</h2>
-						TODO: ADD FIGURE SHOWING THAT DISCRIMINABILITY IS INCREASED BY PREPROC
+						<img src="../img/thesis/no_preproc_preproc.png" border="0"/>
+						<ul>
+							<li>p-value of difference: $p = .01$</li>
+						</ul>
 					</section>
 				</section>
 
@@ -225,9 +228,13 @@
 							<li>Use the T1w to align with the template, since we can use anatomically precise landmarking while registering</li>
 						</ul>
 					</section>
-
 					<section>
-						<h2>TODO: Insert justification Image that fails FNIRT, but succeeds with FLIRT</h2>
+						<h2>Stepwise-Alignment Advantages</h2>
+						<img src="../img/thesis/distorted.png" style="width: 40%;"/>
+						<img src="../img/thesis/no_distortion.png" style="width: 40%;"/>
+						<ul>
+							<li>If a brain fails on an aggressive strategy like FNIRT, fall back on a gentle strategy like FLIRT</li>
+						</ul>
 					</section>
 				</section>
 				<section>
@@ -350,9 +357,9 @@
 					<section>
 						<h2>Deployment Options</h2>
 						<ul>
-							<li><a href="https://github.com/neurodatadesign/local_bids.md">Local Deployment</a>: run all analyses locally in series</li>
-							<li><a href="https://github.com/neurodatadesign/local_cloud.md">Command Line Cloud Deployment</a>: Deploy to cloud from your terminal</li>
-							<li><a href="https://github.com/neurodatadesign/website_cloud.md">Website Deployment</a>: Deploy to cloud from web GUI</li>
+							<li><a href="https://github.com/neurodatadesign/local_bids.md">Local Deployment</a></li>
+							<li><a href="https://github.com/neurodatadesign/local_cloud.md">Command Line Cloud Deployment</a></li>
+							<li><a href="https://github.com/neurodatadesign/website_cloud.md">Website Deployment</a></li>
 						</ul>
 					</section>
 
@@ -426,17 +433,8 @@
 					</section>
 
 					<section>
-						<h2>Simulation $\hat{L}$</h2>
-						<img src="../img/thesis/ssg_sim.png" border="0"/>
-					</section>
-
-					<section>
 						<h2>"Good" Subgraph, Realistic Number of Timepoints</h2>
 						<img src="../img/thesis/ssg_sim.png" border="0"/>
-					</section>
-
-					<section>
-						<h2></h2>
 					</section>
 				</section>
 
