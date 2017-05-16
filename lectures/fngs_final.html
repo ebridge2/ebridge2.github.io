@@ -54,7 +54,7 @@
 
 				<section>
 					<section>
-						<h3>4D Imaging</h3>
+						<h3>4D Functional Imaging</h3>
 						<ul>
 							<li>Image the BOLD value in each volume-pixel (voxel)</li>
 							<ul>
@@ -79,7 +79,7 @@
 
 				<section>
 					<section>
-						<h3>Discriminability</h3>
+						<h3>Quantifying an effective pipeline is difficult</h3>
 						<ul>
 							<li><a href="https://github.com/neurodata/discriminability">Discriminability</a> quantifies variations of repeated measurements of a property given several classes</li>
 								<ul>
@@ -91,7 +91,7 @@
 
 				<section>
 					<section>
-						<h2>Preprocessing</h2>	
+						<h2><a href="https://neurodatadesign.github.io/fngs/about_fngs/Preprocessing.html">Preprocessing</a></h2>	
 				    	<img src="../img/thesis/preproc.png" style="width: 80%; "/>
 				    	<img src="../img/thesis/bottom.png" border="0" style="width: 60%;"/>
 					</section>
@@ -101,13 +101,14 @@
 						<img src="../img/thesis/no_preproc_preproc.png" border="0" style="width: 70%;"/>
 						<ul>
 							<li>p-value of difference: $p = .01$</li>
+							<li><a href="https://htmlpreview.github.io/?https://github.com/NeuroDataDesign/fngs-archive/blob/gh-pages/tanay/MCFLIRT.html">Preprocessing Notebook</a></li>
 						</ul>
 					</section>
 				</section>
 
 				<section>
 					<section>
-						<h2>Registration</h2>
+						<h2><a href="https://neurodatadesign.github.io/fngs/about_fngs/Registration.html">Registration</a></h2>
 				    	<img src="../img/thesis/reg.png" style="width: 80%; "/>
 						<img src="../img/thesis/bottom.png" border="0" style="width: 60%;"/>
 					</section>
@@ -118,13 +119,14 @@
 						<img src="../img/thesis/no_distortion.png" style="width: 40%;"/>
 						<ul>
 							<li>If a brain fails on an aggressive strategy like FNIRT, fall back on a gentle strategy like FLIRT</li>
+							<li><a href="https://github.com/NeuroDataDesign/fngs/blob/master/docs/ebridge2/fngs_reg/week_0327/reg.ipynb">Registration Notebook</a></li>
 						</ul>
 					</section>
 				</section>
 
 				<section>
 					<section>
-						<h3>Nuisance Correction</h3>
+						<h3><a href="https://neurodatadesign.github.io/fngs/about_fngs/Nuisance+Correction.html">Nuisance Correction</a></h3>
 				    	<img src="../img/thesis/nuis.png" style="width: 80%; "/>
 				    	<img src="../img/thesis/bottom.png" border="0" style="width: 60%;"/>
 					</section>
@@ -134,13 +136,14 @@
 				    	<img src="../img/thesis/nuisance.png" border="0" style="width: 70%;"/>
 				    	<ul>
 				    		<li>p-value of a difference: $p = .01$</li>
+				    		<li><a href="https://github.com/NeuroDataDesign/fngs/blob/master/docs/ewalke31/nuisance_correction/week_0403/nuiscorr_ftest_v3.ipynb">Nuisance Notebook</a></li>
 				    	</ul>
 					</section>
 				</section>
 
 				<section>
 					<section>
-						<h2>Connectome Estimation</h2>
+						<h2><a href="https://neurodatadesign.github.io/fngs/about_fngs/Timeseries+Extraction.html">Connectome Estimation</a></h2>
 				    	<img src="../img/thesis/con_est.png" style="width: 80%; "/>
 				    	<img src="../img/thesis/bottom.png" border="0" style="width: 60%;"/>
 					</section>
@@ -157,7 +160,7 @@
 					</section>
 
 					<section>
-					<h3>FNGS is more user-friendly than comparable pipelines</h3>
+					<h3>FNGS offers simplified scalable deployment compared to CPAC</h3>
 					<table>
 						<thead>
 							<tr>
@@ -214,12 +217,14 @@
 					</section>
 
 					<section>
-						<h3>FNGS Offers multiple options for deployment</h>
-						<ul>
-							<li><a href="https://github.com/neurodatadesign/local_bids.md">Local Deployment</a></li>
-							<li><a href="https://github.com/neurodatadesign/local_cloud.md">Command Line Cloud Deployment</a></li>
-							<li><a href="https://github.com/neurodatadesign/website_cloud.md">Website Deployment</a></li>
+						<h3>FNGS Offers multiple options for deployment</h3>
+						<ul style="float: left; border-right: solid 0px; width: 45%; ">
+							<li><a href="https://github.com/neurodatadesign/fngs/local_bids.md">Local Deployment</a></li>
+							<li><a href="https://github.com/neurodatadesign/fngs/local_cloud.md">Cloud Deployment</a></li>
+							<li><a href="https://github.com/neurodatadesign/fngs/website_cloud.md">Website Deployment</a></li>
+							<li>Assumes all data formatted in <a href="http://bids.neuroimaging.io/">BIDs</a> spec</li>
 						</ul>
+				    	<img src="../img/thesis/bids.png" style="float: left; width: 40%; " />
 					</section>
 
 					<section>
@@ -282,30 +287,21 @@
 
 					<section>
 						<h3>Important Links</h3>
-						<ul>
-							<li>Live Webservice: <a href="http://ec2-184-72-107-114.compute-1.amazonaws.com:80">FNGS homepage</a></li>
-							<li>Docker Cloud: <a href="https://hub.docker.com/r/ericw95/fngs/">FNGS pipeline</a>
-							<li>Docker Web Service: <a href="https://hub.docker.com/r/ericw95/fngs-webapp/">FNGS web service</a>
-							<li>Weekly Updates: <a href="https://github.com/neurodatadesign/fngs">FNGS repo</a></li>
-							<li>Code: <a href="https://github.com/neurodata/ndmg">NDMG pipeline</a> (contains FNGS pipeline)</li>
+						<ul style="float: left; border-right: solid 0px; width: 40%; ">
+							<li><a href="http://ec2-184-72-107-114.compute-1.amazonaws.com:80">FNGS web-service</a></li>
+							<li><a href="https://hub.docker.com/r/ericw95/fngs/">pipeline docker</a>
+							<li><a href="https://hub.docker.com/r/ericw95/fngs-webapp/">web-service docker</a>
+							<li><a href="https://github.com/neurodata/ndmg">FNGS pipeline code</a></li>
+							<li><a href="https://github.com/neurodatadesign/fngs">FNGS repo and demos</a></li>
 						</ul>
-					</section>
-
-					<section>
-						<h3>Acknowledgements</h3>
-						<ul>
-							<li>Team: Eric Bridgeford, Tanay Agarwal, Eric Walker</li>
-							<li>Dr. Josh Vogelstein: PI</li>
-							<li>Greg Kiar: PhD student at McGill University</li>
-
-							<li>Neurodata</li>
-						</ul>
+				    	<img src="../img/thesis/FNGS_submit.png" style="float: left; width: 50%; " />
 					</section>
 
 					<section>
 						<h3>Questions?</h2>
 						<p>
 						<small>Created by <a href="http://ericwb.me">Eric Bridgeford</a>, Tanay Agarwal, Eric Walker / Contact: <a href="http://github.com/ebridge2">@ebridge2</a></small>
+						<small>Special thanks to Jovo, our TA Greg Kiar, and the Neurodata Team!</small>
 						</p>
 					</section>
 				</section>
