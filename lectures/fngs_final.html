@@ -47,28 +47,12 @@
 						<small>Created by <a href="http://ericwb.me">Eric Bridgeford</a>, Tanay Agarwal, Eric Walker / Contact: <a href="http://github.com/ebridge2">@ebridge2</a></small>
 					</p>
 				</section>
-
 				<section>
-					<section>
-						<h2>Q: What is functional Neuroimaging?</h2>
-					</section>
-					<section>
-						<h3>BOLD Signal</h3>
-						<ul>
-							<li>Blood-Oxygen Level Dependent imaging</li>
-							<li>When brain region becomes more active, body sends more oxygenated blood</li>
-						</ul>
-						<img src="../img/thesis/hemo.png" />
-					</section>
-					<section>
-						<h3>Hemodynamic Response</h3>
-						<ul>
-							<li>Deoxy-hemo has different MR signature than oxy-hemo</li>
-							<li>End up with this differential contrast when a brain region becomes active</li>
-							<li>Blood response pattern called Hemodynamic Response Function (HRF)</li>
-						</ul>
-						<img src="../img/thesis/hrf.png" />
-					</section>
+					<ul>
+						<li>Slideshow with links: <a href="ericwb.me/lectures/fngs_final.html">ericwb.me/lectures/fngs_final.html</a></li>
+					</ul>
+				</section>
+				<section>
 					<section>
 						<h3>4D Imaging</h3>
 						<ul>
@@ -94,32 +78,17 @@
 
 				<section>
 					<section>
-						<h2>Q: How do we Choose a "Good" Pipeline?</h2>
-					</section>
-					<section>
-						<h3>Desiderata</h3>
-						<ul>
-							<li>If I scan everybody in a room twice and acquire functional connectomes, will I be able to identify the pairs of connectomes?</li>
-							<li>Identify = Will everybody's closest connectome (as defined by frobenius norm) be their alternate connectome?</li>
-						</ul>
+						<h2>FNGS Pipeline</h2>						
+				    	<img src="../img/thesis/pipeline.png" border="0"/>
 					</section>
 					<section>
 						<h3>Discriminability</h3>
 						<ul>
-							<li><a href="https://github.com/neurodata/discriminability">Discriminability</a> quantifies this</li>
+							<li><a href="https://github.com/neurodata/discriminability">Discriminability</a> quantifies variations of repeated measurements of a property</li>
 								<ul>
 									<li>Low Discriminability: all connectomes look the same</li>
-									<li>High Discirminability: repeated connectomes of same subject look most similar</li>
+									<li>High Discirminability: repeated connectomes of same label look most similar</li>
 								</ul>
-							<li>brute-force search over many popular pipeline options (64 total) to help us understand pipeline performance</li>
-						</ul>
-					</section>
-				</section>
-
-				<section>
-					<section>
-						<h2>FNGS Pipeline</h2>						
-				    	<img src="../img/thesis/pipeline.png" border="0"/>
 					</section>
 				</section>
 
@@ -132,7 +101,7 @@
 
 					<section>
 						<h3>Preprocessing Improves Discriminability</h3>
-						<img src="../img/thesis/no_preproc_preproc.png" border="0"/>
+						<img src="../img/thesis/no_preproc_preproc.png" border="0" style="width: 70%;"/>
 						<ul>
 							<li>p-value of difference: $p = .01$</li>
 						</ul>
@@ -165,7 +134,10 @@
 
 					<section>
 						<h3>Nuisance Correction Improves task-Block Correlation Discriminability</h3>
-				    	<img src="../img/thesis/nuisance.png" border="0" style="width: 60%;"/>
+				    	<img src="../img/thesis/nuisance.png" border="0" style="width: 70%;"/>
+				    	<ul>
+				    		<li>p-value of a difference: $p = .01$</li>
+				    	</ul>
 					</section>
 				</section>
 
@@ -176,15 +148,6 @@
 				    	<img src="../img/thesis/bottom.png" border="0" style="width: 60%;"/>
 					</section>
 
-					<section>
-						<h3>Timeseries</h3>
-						<img src="../img/thesis/ts.png" border="0"/>						
-					</section>
-					
-					<section>
-						<h3>Correlation Matrix/Connectome</h3>
-						<img src="../img/thesis/corr.png" border="0"/>						
-					</section>
 				</section>
 
 				<section>
@@ -200,16 +163,48 @@
 					</section>
 
 					<section>
-						<h3>FNGS is more user-friendly than comparable pipelines</h3>
-						<ul>
-							<li>Compared to a Nipype Pipeline, FNGS is:</li>
-							<ul>
-								<li>Easy to Use: no config files</li>
-								<li>Intuitive: No convoluted output structure</li>
-								<li>Robust: no chance of picking a bad pipeline</li>
-								<li>Scalable on Cloud: Nipype pipelines must be individually tuned to a specific cluster software</li>
-							</ul>
-						</ul>
+					<h3>FNGS is more user-friendly than comparable pipelines</h3>
+					<table>
+						<thead>
+							<tr>
+								<th>Feature</th>
+								<th>FNGS</th>
+								<th>CPAC</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Configuration Files</td>
+								<td>None</td>
+								<td>Required</td>
+							</tr>
+							<tr>
+								<td>Pipeline Robustness</td>
+								<td>Investigated</td>
+								<td>Highly Variable</td>
+							</tr>
+							<tr>
+								<td>Simple Output Scheme</td>
+								<td>Yes</td>
+								<td>No</td>
+							</tr>
+							<tr>
+								<td>Intuitive QA for all steps</td>
+								<td>Yes</td>
+								<td>No</td>
+							</tr>
+							<tr>
+								<td>Cloud Deployment</td>
+								<td>EC2/Batch</td>
+								<td>EC2</td>
+							</tr>			
+							<tr>
+								<td>Command Line Callable</td>
+								<td>Yes</td>
+								<td>No</td>
+							</tr>		
+						</tbody>
+					</table>
 					</section>
 
 					<section>
@@ -220,15 +215,6 @@
 
 
 				<section>
-					<section>
-						<h2>Q: How do we make deployment easy?</h2>
-					</section>
-
-					<section>
-						<h2>FNGS Pipeline</h2>						
-						<img src="../img/thesis/pipeline.png" border="0"/>
-					</section>
-
 					<section>
 						<h3>Docker Containers simplify dependency constraints</h3>
 						<ul>
@@ -247,13 +233,18 @@
 						</ul>
 					</section>
 
+					<section>
+						<h2>FNGS Pipeline</h2>						
+						<img src="../img/thesis/pipeline.png" border="0"/>
+					</section>
 				</section>
+
 				<section>
 					<section>
 						<h2>Real Data Experiments</h2>
 					</section>
 					<section>
-						<h3>Single Dataset Analysis  shows high discriminability</h3>
+						<h3>Single Dataset Analysis shows high discriminability</h3>
 						<ul>
 							<li>270 scans</li>
 							<li>Analyze in parallel: approximately $\$15$, about $2.5$ hours</li>
@@ -263,7 +254,7 @@
 					</section>
 
 					<section>
-						<h3>Average Connectome, $n=108$</h3>
+						<h3>Average Connectome, $n=270$</h3>
 						<img src="../img/thesis/corr.png" border="0"/>						
 					</section>
 					<section>
@@ -329,7 +320,19 @@
 								<li>Quantify "Bad Nuisance Correction"</li>
 							</ul>
 							<li>Implement LDDMM (Large Deformation Diffeomorphic Metric Mapping) for Registration</li>
-							<li>Explore Multigraphs</li>
+							<li>Explore Multigraphs between functional and diffusion MR connectomes</li>
+						</ul>
+					</section>
+
+
+					<section>
+						<h3>Important Links</h3>
+						<ul>
+							<li>Live Webservice: <a href="http://ec2-184-72-107-114.compute-1.amazonaws.com:80">FNGS homepage</a></li>
+							<li>Docker Cloud: <a href="https://hub.docker.com/r/ericw95/fngs/">FNGS pipeline</a>
+							<li>Docker Web Service: <a href="https://hub.docker.com/r/ericw95/fngs-webapp/">FNGS web service</a>
+							<li>Weekly Updates: <a href="https://github.com/neurodatadesign/fngs">FNGS repo</a></li>
+							<li>Code: <a href="https://github.com/neurodata/ndmg">NDMG pipeline</a> (contains FNGS pipeline)</li>
 						</ul>
 					</section>
 
@@ -345,21 +348,7 @@
 					</section>
 
 					<section>
-						<h3>Important Links</h3>
-						<ul>
-							<li>Live Webservice: <a href="cortex.jhu.edu:8003">FNGS homepage</a></li>
-							<li>Docker Cloud: <a href="https://hub.docker.com/r/ericw95/fngs/">FNGS pipeline</a>
-							<li>Docker Web Service: <a href="https://hub.docker.com/r/ericw95/fngs-webapp/">FNGS web service</a>
-							<li>Weekly Updates: <a href="https://github.com/neurodatadesign/fngs">FNGS repo</a></li>
-							<li>Code: <a href="https://github.com/neurodata/ndmg">NDMG pipeline</a> (contains FNGS pipeline)</li>
-						</ul>
-						</p>
-					</section>
-					<section>
 						<h3>Questions?</h2>
-						<ul>
-							<li>TODO: Demo running in cloud</li>
-						</ul>
 						<p>
 						<small>Created by <a href="http://ericwb.me">Eric Bridgeford</a>, Tanay Agarwal, Eric Walker / Contact: <a href="http://github.com/ebridge2">@ebridge2</a></small>
 						</p>
