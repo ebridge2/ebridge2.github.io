@@ -46,12 +46,12 @@
 					<p>
 						<small>Created by <a href="http://ericwb.me">Eric Bridgeford</a>, Tanay Agarwal, Eric Walker / Contact: <a href="http://github.com/ebridge2">@ebridge2</a></small>
 					</p>
+					<p></p>
+					<p>
+						<small>Follow the slides: <a href="ericwb.me/lectures/fngs_final.html">ericwb.me/lectures/fngs_final.html</a></small>
+					</p>
 				</section>
-				<section>
-					<ul>
-						<li>Slideshow with links: <a href="ericwb.me/lectures/fngs_final.html">ericwb.me/lectures/fngs_final.html</a></li>
-					</ul>
-				</section>
+
 				<section>
 					<section>
 						<h3>4D Imaging</h3>
@@ -65,6 +65,7 @@
 						</ul>
 						<img src="../img/thesis/4D.jpeg" />
 					</section>
+
 					<section>
 						<h3>Anatomical Imaging</h3>
 						<ul>
@@ -78,16 +79,12 @@
 
 				<section>
 					<section>
-						<h2>FNGS Pipeline</h2>						
-				    	<img src="../img/thesis/pipeline.png" border="0"/>
-					</section>
-					<section>
 						<h3>Discriminability</h3>
 						<ul>
-							<li><a href="https://github.com/neurodata/discriminability">Discriminability</a> quantifies variations of repeated measurements of a property</li>
+							<li><a href="https://github.com/neurodata/discriminability">Discriminability</a> quantifies variations of repeated measurements of a property given several classes</li>
 								<ul>
-									<li>Low Discriminability: all connectomes look the same</li>
 									<li>High Discirminability: repeated connectomes of same label look most similar</li>
+									<li>Low Discriminability: all connectomes look the same regardless of label</li>
 								</ul>
 					</section>
 				</section>
@@ -152,9 +149,6 @@
 
 				<section>
 					<section>
-						<h1>Advantages of FNGS</h1>
-					</section>
-					<section>
 						<h3>FNGS has low memory and CPU requirements</h3>						
 						<img src="../img/thesis/perf.png" style="width: 80%; "/>
 						<ul>
@@ -184,12 +178,7 @@
 								<td>Highly Variable</td>
 							</tr>
 							<tr>
-								<td>Simple Output Scheme</td>
-								<td>Yes</td>
-								<td>No</td>
-							</tr>
-							<tr>
-								<td>Intuitive QA for all steps</td>
+								<td>Simple Output/QA Scheme</td>
 								<td>Yes</td>
 								<td>No</td>
 							</tr>
@@ -241,40 +230,19 @@
 
 				<section>
 					<section>
-						<h2>Real Data Experiments</h2>
-					</section>
-					<section>
-						<h3>Single Dataset Analysis shows high discriminability</h3>
-						<ul>
-							<li>270 scans</li>
-							<li>Analyze in parallel: approximately $\$15$, about $2.5$ hours</li>
-							<li>Compute Discriminability between subjects using <a href="https://github.com/ebridge2/Discriminability">Discriminability package</a></li>
-							<li>Goal: Are the connectomes differentiable between subjects?</li>
-						</ul>
-					</section>
-
-					<section>
-						<h3>Average Connectome, $n=270$</h3>
-						<img src="../img/thesis/corr.png" border="0"/>						
-					</section>
-					<section>
-						<h3>Single Dataset Analysis shows high discriminability</h3>
-						<img src="../img/thesis/hnu.png" border="0"/>
-					</section>
-
-					<section>
 						<h3>Harmonized Analysis reveals quantitative variations in timeseries</h3>
 						<ul>
 							<li>$n=794$ scans collected at $6$ different sites</li>
 							<li>Similar scanners and parameter selection</li>
 							<li>Analyze in parallel: approximately $\$50$, and about $7$ hours</li>
-							<li>Goal: Are the connectomes differentiable between Scan Site?</li>
+							<li>Goal: Are the connectomes differentiable between scan site?</li>
 						</ul>
 					</section>
 
 					<section>
 						<h3>Harmonized Analysis reveals quantitative variations in timeseries</h3>
-						<img src="../img/thesis/dataset.png" border="0"/>
+						<img src="../img/thesis/corr.png" border="0" style="width: 40%; "/>		
+						<img src="../img/thesis/dataset.png" border="0" style="width: 40%; "/>
 						<ul>
 							<li>Theoretical random discriminability score: $0.248$</li>
 							<li>p-value of difference: $p = 0.001$</li>
@@ -283,30 +251,18 @@
 					</section>
 
 					<section>
-						<h3>Signal Subgraphing to assess task fMRI</h3>
-						<ul>
-							<li>Statistical Question: Can we identify the sub-network, or sub-graph, that variest between experimental conditions?</li>
-							<li>Related Question: How many timepoints, and how many observations, do we need to get a good prediction?</li>
-							<li>Constraints: Graphs are binarized</li>
-							<li>Classification: Bayes Plugin Classifier trained on the estimated subgraph</li>
-							<li>Quantification: $\hat{L}$, the misclassification rate</li>
-						</ul>
-					</section>
-
-					<section>
-						<h3>Simulation Setting</h3>
+						<h3>Signal Subgraphing identifies the maximally variant subgraphs in task fMRI</h3>
 						<ul>
 							<li>Given: 2 Classes of Covariance Matrices and Mean Vectors</li>
 							<li>Identify 100 most variant edges, and define these edges as subgraph</li>
 							<li>Sample $t$ timepoints and form correlation matrix per observation</li>
-							<li>Binarize collection of Correlation matrices</li>
-							<li>Run Signal Subgraphing, and identify the ranges of "good-performing $t, n$</li>
-							<li>$\hat{L} = \textrm{min}_{t, n} {L}(C_{t, n} | S(C_{t, n}))$</li>
+							<li>Estimate most-variant edges between the 2 classes using Signal Subgraphing Algorithm</li>
+							<li>Measure Misclassification rate $\hat{L}$</li>
 						</ul>
 					</section>
 
 					<section>
-						<h3>Signal Subgraphing finds a good approximation of the actual subgraph</h3>
+						<h3>Signal Subgraphing identifies the maximally variant subgraphs in task fMRI</h3>
 						<img src="../img/thesis/ssg_sim.png" border="0"/>
 					</section>
 				</section>
@@ -323,7 +279,6 @@
 							<li>Explore Multigraphs between functional and diffusion MR connectomes</li>
 						</ul>
 					</section>
-
 
 					<section>
 						<h3>Important Links</h3>
