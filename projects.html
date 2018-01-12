@@ -77,13 +77,45 @@
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center">NeuroData MRI Graphs
-                        <strong>(NDMG)</strong>
+                    <h2 class="intro-text text-center">Multiscale Generalized Correlation
+                        <strong>(MGC)</strong>
                     </h2>
                     <hr>
                 </div>
                 <div class="col-lg-12">
-                    <p>Processing MRI graphs has exploded into the forefront of modern neuroscience. With this sudden burst, many new problems arise for modern nueroscience researchers, namely, how to have their brain scans processed optimally. Using our discriminability analysis results (see below), we propose an optimal fMRI processing pipeline, and are developing a full scale pipeline to complement our existing DTI processing pipeline for fMRI scans. Our pipeline will be installable through pip, and will allow users to easily process their scans locally for either fMRI or DTI datasets to produce robust graphs. Additionally, we will extend our fMRI pipeline to be deployable on our Neurodata architecture, so that any neuroscietists can simply upload their scans and have their graphs sent to them. Moreover, we will build visualization tools to enable high resolution examination of the results, along with a comprehensive quality control suite to ensure the accuracy of our computations.</p>
+                    <p>In modern scientific discovery, it is becoming increasingly critical to uncover whether one property of a dataset is related to another. The MGC (pronounced magic), or Multiscale Generalized Correlation, provides a framework for investigation into the relationships between properties of a dataset and the underlying geometries of the relationships, all while requiring sample sizes feasible in real data scenarios. Our work can be found in an R package <a href="https://github.com/neurodata/mgc">MGC package</a>, and we are currently summarizing our results in a manuscript.</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Linear Optimal Low-Rank Projection
+                        <strong>(LOL)</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-lg-12">
+                    <p>Supervised learning techniques designed for the situation when the dimensionality exceeds the sample size have a tendency to overfit as the dimensionality of the data increases. To remedy the HDLSS (High Dimensionality, low sample size) situation, we attempt to learn a lower-dimensional representation of the data before learning a classifier. That is, we project the data to a situation where the dimensionality is more manageable, and then are able to better apply standard classification or clustering techniques since we will have fewer dimensions to overfit. A number of previous works have focused on how to strategically reduce dimensionality in the unsupervised case, yet in the labeled HDLSS (LHDLSS) regime, few works have attempted to devise dimensionality reduction techniques that leverage the labels associated with the data. In this package, we provide several methods for feature extraction, some utilizing labels and some not, along with utilities to simplify cross-validative efforts to identify the best feature extraction method measuring performance using several classification algorithms. Additionally, we provide a series of adaptable benchmark simulations to serve as a standard for future investigative efforts into supervised HDLSS. Finally, we provide a comprehensive comparison of the included algorithms across a range of benchmark simulations and real data applications. Our work can be found in the <a href="https://github.com/neurodata/lol">LOL R package</a>, and we are currrently summarizing our results in a manuscript.</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+                <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Structured Independent Edge Modelling
+                        <strong>(SIEM)</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-lg-12">
+                    <p>In modern graph analytics, it is often the case that dimensions of graph attributes can be batched together to simplify summarizing models of a graph. For instance, in binary graphs, the popular Stochastic Block Model (SBM) generalizes the vertices of a graph into vertex communities, and analyzes characteristics of the probability of edges existing between the different vertex communities. In the SIEM, we generalize the Stochastic Block Model and the Independent Edge Model to treat a graph as a collection of edge communities with disparate interactions between the respective communities. In conjunction with the graphs processed from NDMG, we are able to identify unique edge community interactions between graphs obtained from diffusion MRI (dMRI) and functional MRI (fMRI) graphs. Particularly, we show that the connectivity ipsi-laterally (edges connecting vertices in the same hemisphere) vs contra-laterally (edges connecting vertices in the opposite hemisphere) in dMRI graphs exceeds that of fMRI graphs in <a href="http://docs.neurodata.io/graphstats/siem/hemisphere_across.html">hemispheric connectivity notebook</a>. On the other hand, the connectivity associated with homotopic interactions (same brain region in opposite brain hemisphere; ie, an edge connecting the primary motor cortex in the left and right hemispheres) vs heterotopically (an edge connecting regions in opposite hemisphere that are not the same region; ie, an edge connecting the primary motor cortex in the left hemisphere to the primary visual cortex in the right hemisphere) in fMRI graphs exceeds that of dMRI graphs in <a href="http://docs.neurodata.io/graphstats/siem/bilateral_across.html">bilateral connectivity notebook</a>. Finally, using the SIEM, we are able to show that pooling across sites reveals the present of batch effects <a href="http://docs.neurodata.io/graphstats/siem/batch_bil.html">in bilateral connectivity</a>, <a href="http://docs.neurodata.io/graphstats/siem/batch_hem.html">in hemispheric connectivity</a> for both dMRI and fMRI graphs. This suggests the need for improved methods to improve model generalizability in human connectomics. Our model, and several other existing models, are being prepared into the <a href="https://github.com/neurodata/graphstats">graphstats R package</a>.</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -94,18 +126,27 @@
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center">
-                        <strong>Working Memory</strong>
+                    <h2 class="intro-text text-center">NeuroData MRI Graphs
+                        <strong>(NDMG)</strong>
                     </h2>
                     <hr>
                 </div>
                 <div class="col-lg-12">
-                    <p>Along with our fMRI processing pipeline, we are seeking to understand the complex neural mechanism behind working memory, and how different types of tasks impact the activation of regions of interest. Unfortunately I can't say too much on the topic yet as we are in the early stages of our analysis, however, I can say that we have some super exciting results so far, and will come out with some awesome discoveries over the next year! Once we finish our analyses here, we will extend our methods to our fMRI portion of the NDMG pipeline and provide a robust way for researchers to perform task based analysis.</p>
-               </div>
+                    <p>Scientific validity and clinical utility depend on our ability to generate replicable scientific results. Potential
+obstacles to reproducibility and replicability include measurement error, variability of sample demographics,
+data acquisition details, analysis methods, or statistical errors. We developed a set of statistical and computational
+principles to guide the design of pipelines that eliminate as many sources of variability as possible.
+As an example, we introduce NeuroData’s MRI to Graph (NDMG) pipeline. Running NDMG on data from
+17 functional studies and 11 diffusion studies (a total of 3,571 individuals and 5,993 scans) demonstrates that
+certain coarse-scale connectome properties are consistently preserved across all studies, regardless of scanner
+manufacturer, acquisition protocols, and demographics. Nevertheless, other more fine-scale connectome
+properties remain highly variable, even after harmonizing data processing and controlling for these additional
+sources of variability. This work therefore suggest the need for further efforts to mitigate sources of variability
+in multimodal connectome data. Our pipeline is packaged in a <a href="https://hub.docker.com/r/neurodata/m3r-release/">docker container</a> and as the <a href="https://github.com/neurodata/ndmg/tree/m3r-release">ndmg python package</a>, and our in-progress manuscript can be found <a href="https://www.biorxiv.org/content/early/2017/09/16/188706">on BioRxiv</a>.</p>
+                </div>
                 <div class="clearfix"></div>
             </div>
         </div>
-
 
 
         <div class="row">
