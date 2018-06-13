@@ -70,30 +70,11 @@
 					</section>
 
 					<section>
-						<h3>fMRI discretizes the BOLD response</h3>
+						<h3>Publicly Accessible Datasets are Extensive</h3>
 						<ul>
-							<li>BOLD response: movement of blood to regions expending more energy</li>
-							<li>$v$ voxels and $T$ time windows</li>
-						</ul>
-					</section>
-
-					<section>
-						<h3>dMRI gives insights into axonal fiber tracts</h3>
-						<ul>
-							<li>tensors of water movement at $v$ voxels as we sweep over $d$ possible diffusion directions</li>
-							<li>use tractography to "trace" water movement through the brain</li>
-							<li>extrapolate axonal fiber tracts</li>
-						</ul>
-					</section>
-
-
-					<section>
-						<h3>Connectomics Simplifies M3R to Graphs</h3>
-						<ul>
-							<li>take voxelwise M3R image, and downsample to $n \ll v$ regions</li>
-							<li>simplify functional activity with "similarity" of timeseries between regions, often correlation</li>
-							<li>simplify diffusion tracts with spatial aggregation metric</li>
-							<li>end up with $n \times n$ adjacency matrix giving "connectivity" between regions</li>
+							<li>Massive open-access datasets with extensive metadata records</li>
+							<li>CoRR dataset, HCP dataset, HBN dataset</li>
+							<li>record of M3R scans, complementary data (EEG, genomic), metadata</li>
 						</ul>
 					</section>
 				</section>
@@ -112,11 +93,11 @@
 					</section>
 
 					<section>
-						<h3>Features of a Good Pipeline</h3>
+						<h3>Qualifying a Good Pipeline</h3>
 						<ul>
-							<li>Statistical Principles: is it empirically sound?</li>
-							<li>Computational Principles: does it scale?</li>
-							<li>Connectomics principles: does it produce the outputs we need for connectomics?</li>
+							<li>Statistical Principles: Accurate? Reliable? Robust?</li>
+							<li>Computational Principles: Expedient? Scalable? Portable? Turn-Key? Open?</li>
+							<li>Connectomics principles: Multi-Modal? Raw-to-Graph?</li>
 						</ul>
 					</section>
 
@@ -125,7 +106,7 @@
 						<img src="./img/principles.png" alt="Principles">
 					</section>
 				</section>
-				
+
 				<section>
 					<section>
 						<h1>Action</h1>
@@ -137,32 +118,8 @@
 					</section>
 
 					<section>
-						<h3>Deployment of NDMG</h3>
+						<h3>NDMG Scales in the Cloud</h3>
 						<img src="./img/deploy.png" alt="Deployment">
-					</section>
-				</section>
-
-				<section>
-					<section>
-						<h1>Downstream Impact</h1>
-					</section>
-
-					<section>
-						<h3>NDMG: A Pipeline for Efficient Connectomics</h3>
-						<ul>
-							<li>development of open-source reference pipeline: <a href="https://github.com/neurodata/ndmg">ndmg</a></li>
-							<li>pipeline is hyper-parallelizable with AWS: ~1 hour per M3R, all running in parallel</li>
-							<li>Compliant with best-practices of community to make generalizability trivial</li>
-							<li>Docker, singularity, and AMI for ease of deployment across site</li>
-						</ul>
-					</section>
-
-					<section>
-						<h3>NDMG expands the open-source neuroscience community</h3>
-						<ul>
-							<li><a href="https://github.com/neurodata/ndmg">ndmg codebase</a> is open-source on github</li>
-							<li>thousands of connectomes available online at <a href="https://neurodata.io/project/projectomes/">neurodata.io</a></li>
-						</ul>
 					</section>
 
 					<section>
@@ -193,6 +150,39 @@
 						<h3>Cross-Site Batch Effects are Prevalent and Prominent</h3>
 						<img src="./img/xsite_pvals.png" alt="Cross-Site">
 					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Downstream Impact</h1>
+					</section>
+
+					<section>
+						<h3>NDMG: A Pipeline for Efficient Connectomics</h3>
+						<ul>
+							<li>development of open-source reference pipeline: <a href="https://github.com/neurodata/ndmg">ndmg</a></li>
+							<li>pipeline is hyper-parallelizable with AWS: ~1 hour per M3R, all running in parallel</li>
+							<li>Compliant with best-practices of community to make generalizability trivial</li>
+							<li>Docker, singularity, and AMI for ease of deployment across site</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>NDMG expands the open-source neuroscience community</h3>
+						<ul>
+							<li><a href="https://github.com/neurodata/ndmg">ndmg codebase</a> is open-source on github</li>
+							<li>thousands of connectomes available online at <a href="https://neurodata.io/project/projectomes/">neurodata.io</a></li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Meganalysis Demonstrates Troublesome Cross-Site Generalizability</h3>
+						<ul>
+							<li>Many neuroscientific approaches suffer from small or limited sampling</li>
+							<li>simple meganalysis study highlights need to emphasize cross-site replicability</li>
+						</ul>
+					</section>
+
 				</section>
 
 				<section>
