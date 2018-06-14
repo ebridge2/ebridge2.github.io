@@ -50,7 +50,7 @@
 					</p>
 					<p></p>
 					<p>
-						<small>Follow the slides: <a href="ericwb.me/lectures/ohbm_ndmg.html">ericwb.me/lectures/ohbm_ndmg.html</a></small>
+						<small>Follow the slides: <a href="ericwb.me/lectures/ohbm/ohbm_ndmg.html">ericwb.me/lectures/ohbm/ohbm_ndmg.html</a></small>
 					</p>
 				</section>
 
@@ -63,39 +63,10 @@
 						<h3>Multimodal MRI Imaging is Becoming Commonplace</h3>
 						<ul>
 							<li>Multimodal MRI (M3R): a dataset containing MRI images from multiple modalities</li>
-							<li>Functional MRI (fMRI): look at functional window of activity</li>
-							<li>Diffusion MRI (dMRI): look at how water moves through the brain</li>
-							<li>Structural MRI (sMRI): high-resolution look at anatomical features of brain</li>
+							<li>Open-access datasets are expansive (CoRR, HBN, HCP)</li>
+							<li>No clinical relevance for dMRI and fMRI</li>
 						</ul>
-					</section>
-
-					<section>
-						<h3>fMRI discretizes the BOLD response</h3>
-						<ul>
-							<li>BOLD response: movement of blood to regions expending more energy</li>
-							<li>$v$ voxels and $T$ time windows</li>
-						</ul>
-					</section>
-
-					<section>
-						<h3>dMRI gives insights into axonal fiber tracts</h3>
-						<ul>
-							<li>tensors of water movement at $v$ voxels as we sweep over $d$ possible diffusion directions</li>
-							<li>use tractography to "trace" water movement through the brain</li>
-							<li>extrapolate axonal fiber tracts</li>
-						</ul>
-					</section>
-
-
-					<section>
-						<h3>Connectomics Simplifies M3R to Graphs</h3>
-						<ul>
-							<li>take voxelwise M3R image, and downsample to $n \ll v$ regions</li>
-							<li>simplify functional activity with "similarity" of timeseries between regions, often correlation</li>
-							<li>simplify diffusion tracts with spatial aggregation metric</li>
-							<li>end up with $n \times n$ adjacency matrix giving "connectivity" between regions</li>
-						</ul>
-					</section>
+					</section>	
 				</section>
 
 				<section>
@@ -112,20 +83,11 @@
 					</section>
 
 					<section>
-						<h3>Features of a Good Pipeline</h3>
-						<ul>
-							<li>Statistical Principles: is it empirically sound?</li>
-							<li>Computational Principles: does it scale?</li>
-							<li>Connectomics principles: does it produce the outputs we need for connectomics?</li>
-						</ul>
-					</section>
-
-					<section>
 						<h3>A Principled Approach for Connectomics</h3>
 						<img src="./img/principles.png" alt="Principles">
 					</section>
 				</section>
-				
+
 				<section>
 					<section>
 						<h1>Action</h1>
@@ -137,8 +99,28 @@
 					</section>
 
 					<section>
-						<h3>Deployment of NDMG</h3>
+						<h3>NDMG Scales in the Cloud</h3>
 						<img src="./img/deploy.png" alt="Deployment">
+					</section>
+
+					<section>
+						<h3><a href="https://neurodata.io/project/projectomes/">Thousands of Scans Processed and Available</a></h3>
+						<img src="./img/data.png" alt="Summary of Data">
+					</section>
+
+					<section>
+						<h3>NDMG offers hypotheses for M3R connectome inference</h3>
+						<img src="./img/biomarkers.png" alt="Biomarkers">
+					</section>
+
+					<section>
+						<h3>NDMG identifies consistent biomarkers for M3R connectomes</h3>
+						<img src="./img/biomarkers_pvals.png" alt="Biomarkers Pvals">
+					</section>
+
+					<section>
+						<h3>Cross-Site Batch Effects are Prevalent and Prominent</h3>
+						<img src="./img/xsite_pvals.png" alt="Cross-Site">
 					</section>
 				</section>
 
@@ -162,36 +144,16 @@
 						<ul>
 							<li><a href="https://github.com/neurodata/ndmg">ndmg codebase</a> is open-source on github</li>
 							<li>thousands of connectomes available online at <a href="https://neurodata.io/project/projectomes/">neurodata.io</a></li>
+							<li>extensive QA suite produced with each connectome</li>
 						</ul>
 					</section>
 
 					<section>
-						<h3>NDMG identifies consistent biomarkers for connectomes</h3>
+						<h3>Meganalysis Demonstrates Troublesome Cross-Site Generalizability</h3>
 						<ul>
-							<li>dMRI: structural connectivity of the brain</li>
-							<ul>
-								<li>strong within-hemisphere connectivity</li>
-							</ul>
-							<li>fMRI: functional connectivity of the brain</li>
-							<ul>
-								<li>strong homotopic connectivity</li>
-							</ul>
+							<li>Many neuroscientific approaches suffer from small or limited sampling</li>
+							<li>simple meganalysis study highlights need to emphasize cross-site replicability</li>
 						</ul>
-					</section>
-
-					<section>
-						<h3>NDMG identifies consistent biomarkers for connectomes</h3>
-						<img src="./img/biomarkers.png" alt="Biomarkers">
-					</section>
-
-					<section>
-						<h3>NDMG identifies consistent biomarkers for connectomes</h3>
-						<img src="./img/biomarkers_pvals.png" alt="Biomarkers Pvals">
-					</section>
-
-					<section>
-						<h3>Cross-Site Batch Effects are Prevalent and Prominent</h3>
-						<img src="./img/xsite_pvals.png" alt="Cross-Site">
 					</section>
 				</section>
 
@@ -199,16 +161,19 @@
 					<section>
 						<h3>Links</h3>
 						<ul>
+							<li><a href="https://www.biorxiv.org/content/early/2018/04/24/188706">ndmg paper</a></li>
 							<li><a href="https://github.com/neurodata/ndmg">ndmg repo</a></li>
 							<li><a href="https://hub.docker.com/r/neurodata/ndmg/">ndmg docker</a></li>
 							<li><a href="https://github.com/neurodata/graphstats">graphstats repo</a></li>
 						</ul>
 					</section>
+
 					<section>
 						<h3>Questions?</h2>
 						<p>
 						<small>Created by <a href="https://github.com/ebridge2">Eric Bridgeford</a></small>
-						<small>Special thanks to Jovo, Greg Kiar, and the Neurodata Team!</small>
+						<small>Special Thanks: Josh Vogelstein, Greg Kiar, Brian Caffo, Carey Priebe, Cameron Craddock, Michael Milham, Randal Burns, Xi-Nian Zuo, Vince Calhoun, Sephira Ryman, Rex Jung, Daniel Marguiles, Vikram Chandrashekhar, Disa Mehembere, Will Roncal</small>
+						<small>Acknowledgements: DARPA {XDATA, SIMPLEX, GRAPHS}; NSF; NIH; Kavli</small>
 						</p>
 					</section>
 				</section>
