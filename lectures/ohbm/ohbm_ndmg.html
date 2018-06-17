@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>NDMG: A One-Click Pipeline for Cloud Connectomics</title>
+		<title>A High-Throughput Pipeline Identifies Robust Connectomes But Troublesome Variability</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -43,10 +43,10 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>NDMG</h1>
-					<h3>A Principled Approach to Statistical Connectomics and Mega‐Analysis</h3>
+					<!-- <h1>NDMG</h1> -->
+					<h3>A High-Throughput Pipeline Identifies Robust Connectomes But Troublesome Variability</h3>
 					<p>
-						<small>Created by <a href="https://github.com/ebridge2">Eric Bridgeford</a></small>
+						<small>Presented by <a href="https://github.com/ebridge2">Eric Bridgeford</a></small>
 					</p>
 					<p></p>
 					<p>
@@ -55,31 +55,39 @@
 				</section>
 
 				<section>
-					<section>
+					<!-- <section>
 						<h1>Opportunity</h1>
-					</section>
+					</section> -->
 
 					<section>
 						<h3>Multimodal MRI Imaging is Becoming Commonplace</h3>
 						<ul>
-							<li>Multimodal MRI (M3R): a dataset containing MRI images from multiple MRI modalities (dMRI, fMRI, sMRI or T1w)</li>
-							<li>Open-access datasets are expansive (CoRR, HBN, HCP)</li>
-							<li>No clinical relevance for dMRI and fMRI</li>
+							<li>Multimodal MRI (M3R):dMRI, fMRI, sMRI</li>
+							<li>Many open-access datasets:
+								<ul>
+									<li>Consortium for Reliability and Reproducibility</li>
+									<li>Human Connectome Project</li>
+									<li>Healthy Brain Network</li>
+								</ul>
+							<li>No clinical brain imaging biomarkers for psychiatry</li>
 						</ul>
-					</section>	
+					</section>
 				</section>
 
 				<section>
-					<section>
+					<!-- <section>
 						<h1>Challenge</h1>
-					</section>
+					</section> -->
 					<section>
-						<h3>Acquisition of Connectomes is difficult</h3>
+						<h3>Processing and Analysis of Connectomes is Challenging</h3>
 						<ul>
-							<li>computationally intensive</li>
-							<li>hard to identify a "good" pipeline</li>
-							<li>what desiderata do we want?</li>
+							<li>sample sizes of single studies are relatively small</li>
+							<li>data are heterogeneous within and across studies</li>
+							<li>existing pipelines are customized per dataset</li>
+							<li>lack of generative statistical network models</li>
 						</ul>
+						<br><br>
+						&rArr; many failures to replicate
 					</section>
 
 					<section>
@@ -90,91 +98,116 @@
 
 				<section>
 					<section>
-						<h1>Action</h1>
+						<h1>Results</h1>
 					</section>
 
 					<section>
-						<h3>NDMG Provides Processing Options for dMRI and fMRI connectomics</h3>
+						<h3>NDMG  Processes dMRI & fMRI in Parallel</h3>
 						<img src="./img/pipe.png" alt="Pipeline">
 					</section>
 
 					<section>
-						<h3>NDMG Scales in the Cloud</h3>
-						<img src="./img/deploy.png" alt="Deployment">
+						<h3>slide on discriminability and SBM model</h3>
 					</section>
 
+					<!-- <section>
+						<h3>NDMG Scales in the Cloud</h3>
+						<img src="./img/deploy.png" alt="Deployment">
+					</section> -->
+
 					<section>
-						<h3><a href="https://neurodata.io/project/projectomes/">Thousands of Scans Processed and Available</a></h3>
+						<h3>25+ Studies with 6000+ Scans: <a href="https://neurodata.io/project/projectomes/">http://m2g.io</a></h3>
 						<img src="./img/data.png" width="100%" alt="Summary of Data">
 					</section>
 
+				<!-- </section>
+				<section>
 					<section>
-						<h3>NDMG offers hypotheses for M3R connectome inference</h3>
-						<img src="./img/hemisphere.png" alt="Hemisphere">
-					</section>
+						<h1>Results</h1>
+					</section> -->
 
 					<section>
-						<h3>A simple model confirms our basic hypotheses</h3>
+						<h4>Ipsilateral/Homotopic Connections Are Stronger than Contralateral/Heterotopic</h4>
+						<img src="./img/hemisphere.png" alt="Hemisphere" height="350">
+						<img src="./img/biomarkers.png" alt="Biomarkers" height="350">
+						<!-- <h4>Homotopic Connections Seem Stronger than Heterotopic</h4> -->
+					</section>
+
+					<!-- <section>
+						<h4>A statistical model confirms these hypotheses for <bold>nearly every single scan</bold> across modalities</h4>
 						<img src="./img/biomarkers.png" alt="Biomarkers">
+					</section> -->
+
+					<section>
+						<h4>Yet, Magnitudes of Effects Exhibit Large Heterogeneity Within and Across Sites</h4>
+						<img src="./img/biomarkers_pvals.png" alt="Biomarkers Pvals">
 					</section>
 
 					<section>
-						<h3>Cross-Site Batch Effects are Prevalent and Prominent</h3>
-						<img src="./img/biomarkers_pvals.png" alt="Biomarkers Pvals">
+						<h4>Conditioning on Basic Demographics and Stuy Fails to Eliminate Heterogeneity</h4>
+						show plot here of density/histogram/rug/etc. of only site and demographic
+						<!-- <img src="./img/biomarkers_pvals.png" alt="Biomarkers Pvals"> -->
 					</section>
 
 				</section>
 
 				<section>
 					<section>
-						<h1>Downstream Impact</h1>
+						<h1>Discussion & Impact</h1>
 					</section>
 
 					<section>
 						<h3>NDMG: A Pipeline for Efficient Connectomics</h3>
 						<ul>
-							<li>pipeline is hyper-parallelizable with AWS: ~1 hour per M3R, all running in parallel</li>
-							<li>Compliant with best-practices of community to make generalizability trivial</li>
-							<li>Docker, singularity, and AMI for ease of deployment across site</li>
-						</ul>
-					</section>
-
-					<section>
-						<h3>NDMG expands the open-source neuroscience community</h3>
-						<ul>
-							<li><a href="https://github.com/neurodata/ndmg">ndmg codebase</a> is open-source on github</li>
-							<li>thousands of connectomes available online at <a href="https://neurodata.io/project/projectomes/">neurodata.io</a></li>
+							<li><a href="https://github.com/neurodata/ndmg">ndmg</a> pipeline is open-source,parallel: ~1 hr/scan</li>
+							<li>Docker, singularity, BIDS App, and AMI</li>
+							<li>>6000 of connectomes  online at <a href="https://neurodata.io/project/projectomes/">neurodata.io</a></li>
 							<li>extensive QA suite produced with each connectome</li>
 						</ul>
 					</section>
 
 					<section>
-						<h3>Meganalysis Demonstrates Troublesome Cross-Site Generalizability</h3>
-						<ul>
-							<li>Many neuroscientific approaches suffer from small or limited sampling</li>
-							<li>simple meganalysis study highlights need to emphasize cross-site replicability</li>
-						</ul>
+					  <h4>Meganalysis Demonstrates Troublesome Cross-Site Generalizability</h4>
+					  <ul>
+					    <!-- <li>Many neuroscientific approaches suffer from small or limited sampling</li> -->
+					    <!-- <li>simple meganalysis study highlights need to emphasize cross-site replicability</li> -->
+					    <li>analysis trade-offs were required to achieve all goals</li>
+							<ul>
+								<li>computationally efficient multi-tensor models and/or probabilistic tractography</li>
+								<li>multiscale atlases</li>
+								<li>more elaborate batch harmonization techniques</li>
+							</ul>
+
+					    <li>data acquisition improvements possible remedy</li>
+							<ul>
+										<li>deep phenotyping</li>
+										<li>data acquisition harmonization</li>
+										<li>quantitaive MRI</li>
+							</ul>
+
+					  </ul>
 					</section>
+
 				</section>
 
-				<section>
 					<section>
-						<h3>Links</h3>
-						<ul>
-							<li><a href="https://www.biorxiv.org/content/early/2018/04/24/188706">ndmg paper (bioarxiv)</a></li>
-							<li><a href="https://github.com/neurodata/ndmg">neurodata/ndmg (pipeline repo)</a></li>
-							<li><a href="https://hub.docker.com/r/neurodata/ndmg/">neurodata/ndmg (docker container)</a></li>
-							<li><a href="https://github.com/neurodata/graphstats">neurodata/graphstats (analysis code)</a></li>
-						</ul>
-					</section>
 
 					<section>
-						<h3>Questions?</h2>
-						<p>
-						<small>Created by <a href="https://github.com/ebridge2">Eric Bridgeford</a></small>
-						<small>Special Thanks: Josh Vogelstein, Greg Kiar, Brian Caffo, Carey Priebe, Cameron Craddock, Michael Milham, Randal Burns, Xi-Nian Zuo, Vince Calhoun, Sephira Ryman, Rex Jung, Daniel Marguiles, Vikram Chandrashekhar, Disa Mehembere, Will Roncal</small>
-						<small>Acknowledgements: DARPA {XDATA, SIMPLEX, GRAPHS}; NSF; NIH; Kavli</small>
+						<h4>Links</h4>
+						<small>
+							<ul>
+							<li><a href="https://www.biorxiv.org/content/early/2018/04/24/188706">ndmg paper (bioarxiv)</a></li>
+							<li><a href="https://github.com/neurodata/ndmg">neurodata/ndmg (pipeline on github)</a></li>
+							<li><a href="https://hub.docker.com/r/neurodata/ndmg/">neurodata/ndmg (docker container)</a></li>
+							<li><a href="https://github.com/neurodata/graphstats">neurodata/graphstats (analysis on github)</a></li>
+						</ul>
+						</small>
+						<br><br>
+						<h4>Acknowledgements</h4>
+						<small>Joshua T. Vogelstein, Greg Kiar, Randal Burns, Xi-Nian Zuo, Vince Calhoun, Sephira Ryman, Rex Jung, Daniel Marguiles, Vikram Chandrashekhar, Disa Mehembere, Will Gray Roncal, Brian Caffo, Carey Priebe, Cameron Craddock, Michael Milham</small>
+						<small>DARPA {XDATA, SIMPLEX, GRAPHS}; NSF {NeuroNex}; NIH; Kavli</small>
 						</p>
+						<h4>Questions?</h4>
 					</section>
 				</section>
 
