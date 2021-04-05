@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Bayesian Decision-Making Forests (BaD-MF)</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../../reveal.js/css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../../reveal.js/lib/css/zenburn.css">
+		<link rel="shortcut icon" type="image/png" href="./img/neurodata.png"/>
+		<link rel="shortcut icon" type="image/png" href="./img/neurodata.png"/>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+
+		<!--[if lt IE 9]>
+		<script src="../reveal.js/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<style>
+				    .container { 
+				    font-size:0}
+
+				    .left { 
+				    display: inline-block; 
+				    width: 60%; 
+				    font-size:1rem; /* IE9+ */
+				    }
+
+				    .ie7 .left {font-size:16px; display:inline; zoom:1}
+
+				    .ie8 .left {font-size:16px}
+
+				    .right { 
+				    display: inline-block; 
+				    width: 38%; 
+				    font-size:1rem; /* IE9+ */
+				    }
+
+				    .ie7 .right {font-size:16px; display:inline; zoom:1}
+
+				    .ie8 .right {font-size:16px}
+
+				</style>
+ 
+				<section>
+					<!-- <h1>NDMG</h1> -->
+					<h1>BaD-MF</h1>
+					<h3>Bayesian Decision-Making Forests</h3>
+					<p>
+						<small>Presented by <a href="https://github.com/ebridge2">Eric Bridgeford</a></small>
+					</p>
+					<p></p>
+					<p>
+						<small>Follow the slides: <a href="ericwb.me/lectures/badmf/bayesian_final.html">ericwb.me/lectures/badmf/bayesian_final.html</a></small>
+					</p>
+				</section>
+				<section>
+					<h2>What we will cover</h2>
+					<ul>
+						<li>Problem Setup</li>
+						<li>Introduction to Decision Trees</li>
+						<li>Introduction to Random Forests</li>
+						<li>BaD-MF</li>
+						<li>Evaluation</li>
+					</ul>
+				</section>
+				<section>
+					<section><h1>Problem Setup</h1></section>
+					<section>
+						<h3>Nonparametric Supervised Learning</h3>
+						<ul>
+							<li>Given $\mathcal D = (X_i, Y_i)_{i = 1}^n$</li>
+							<li>$Y_i \in \{1, ..., K\}, X_i \in \mathbb{R}^p$</li>
+							<li>Goal: characterize $Y_i | X_i$</li>
+							<li>Constraint: Avoid distributional assumptions about $Y_i | X_i$</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Decision Trees</h1>
+					</section>
+
+					<section>
+						<h3>What is a Decision Tree?</h3>
+						<ul>
+							<li>A decision tree is a set of rules and actions</li>
+							<li>Intuitive: Natural approach to problem solving</li>
+						</ul>
+						<img src="./img/dec_tree_basic.jpg" alt="Decision Tree Example">
+					</section>
+
+					<section>
+						<ul>
+							<li>We're grad students; of course we don't have 25 dollars</li>
+						</ul>
+						<img src="https://media3.giphy.com/media/3o7buhm1O1bOJV4ZWM/giphy.gif" alt="burger">
+					</section>
+
+					<section>
+						<h3>What Did we Just Do?</h3>
+						<ul>
+							<li>Goal: Deciding how to eat</li>
+							<li>Nodes: Propose a question</li>
+							<ul>
+								<li>Construct a "split": Do I continue along the tree to the left, or the right?</li>
+							</ul>
+							<li>Leaves: Decisions</li>
+							<ul>
+								<li>I'm hungry, and I don't have $25, so I buy a hamburger</li>
+							</ul>
+						</ul>
+					</section>
+					<section>
+						<h3>Extending Decision Trees to Continuous Data</h3>
+						<img src="./img/xor_setup.png" alt="XOR Setup" height="360" width="580">
+					</section>
+					<section>
+						<h3>Making a Split</h3>
+						<ul>
+							<li>Check $d_j = 1, ..., p$, trying $\tau_{ij} = (X_{ij})_i$</li>
+							<li>Find the split $(d^*_{(1)}, \tau^*_{(1)})$ that minimizes the class impurity</li>
+						</ul>
+						<img src="./img/xor_tree_first.png" alt="XOR Split" height="230" width="420">
+						<img src="./img/xor_split.png" alt="XOR Split" height="230" width="420">  
+					</section>
+					<section>
+						<h3>Obtaining a Decision Rule</h3>
+						<ul>
+							<li>Keep pushing the splits down, until we reach a maximum depth, or there are no more samples</li>
+							<li>The resulting partitions/splits form the "decision rule"</li>
+						</ul>
+						<img src="./img/xor_tree_complete.png" alt="XOR Done" height="230" width="420">
+						<img src="./img/xor_done.png" alt="XOR Done" height="230" width="420">  
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>From Trees to Forests</h1>
+					</section>
+					<section>
+						<h3>How can we Augment the Decision Tree?</h3>
+						<ul>
+							<li>Clear that the Decision Tree Approach is a powerful foundation</li>
+							<ul>
+								<li>Many classes of supervised learning algorithms can't handle the XOR Problem</li>
+							</ul>
+							<li>We are often concerned with the $p \gg 1$ case</li>
+							<ul>
+								<li>Decision Trees tend to overfit</li>
+							</ul>
+							<li>How can we leverage the power of the decision tree, but improve generalizability?</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Planting a Forest</h3>
+						<ul>
+							<li>Bootstrap AGGregating (bagging): Given $n$ points, sample $n'_k$ uniformly with replacement for $k = 1, ..., m$</li>
+							<ul>
+								<li>Train $m$ decision trees on the bootstrapped samples</li>
+								<li>Instead of trying all features, try $d \ll p$ of them</li>
+							</ul>
+						</ul>
+					</section>
+					<section>
+						<h3>Majority Rules</h3>
+							<li>let $p_k(x)$ denote the predicted class for $x$ by tree $k$</li>
+							<ul>
+								<li>$\hat y(x) = \textrm{argmax}_{p}\sum_{i = 1}^k\mathbb{I}\{p_k(x) = p\}$</li>
+							</ul>
+					</section>
+
+					<section>
+						<h3>Example Forest Prediction</h3>
+						<img src="https://cdn-images-1.medium.com/max/1554/1*i0o8mjFfCn-uD79-F1Cqkw.png" alt="RF">
+					</section>
+				</section>
+				<section>
+
+					<section>
+						<h1>From Forests to... BaD-MFs</h1>
+					</section>
+
+					<section>
+						<h3>Missing what Matters Most</h3>
+						<ul>
+							<li>Each decision tree sees only a (often small) subset of the data</li>
+							<li>Each split node only attempts $d \ll p$ feature splits to avoid overfitting</li>
+							<li>Intuitively, we would want the impactful features to be the ones we split based on</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Idea: Leverage Bayesian Techniques</h3>
+						<ul>
+							<li>Assume: let $n_j$ be the total number of times feature $j$ used as a split criterion</li>
+							<li>$N = (n_j)_{j=1}^p \sim \textrm{Multinom}\left(\pi_1, ..., \pi_p\right)$</li>
+							<li>Put a prior on the feature probabilities: $\pi_j \sim \textrm{Dir}\left(\alpha_1, ..., \alpha_p\right)$</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Learning the Optimal Features</h3>
+						<ul>
+							<li>What we've done so far allows us to convey information we know ahead of time to our classifer</li>
+							<li>How do we allow the data to speak for itself?</li>
+							<li>Dirichlet Posterior: $\pi_1', ..., \pi_p' | N \sim \textrm{Dir}\left(\alpha_1 + n_1 , ..., \alpha_p + n_p\right)$</li>
+						</ul>
+					</section>
+
+					<section style="text-align: left;">
+						<h3>Putting it all Together</h3>
+						Given $(\alpha, \mathcal D)$:
+						<ul>
+							<li>Train a Random Forest, with features attempted at split nodes sampled with probability $\pi \sim \textrm{Dir}\left(\alpha\right)$</li>
+							<li>Update $\alpha' = \alpha + N = (\alpha_j + n_j)_{j = 1}^p$</li>
+							<li>Train a second Forest, with features attempted at split nodes sampled with probability $\pi' \sim\textrm{Dir}\left(\alpha'\right)$</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Performance</h1>
+					</section>
+
+					<section>
+						<h3>Forest Stability</h3>
+						<ul>How interpretable are the forests we are learning?</ul>
+						<img src="./img/stability_plot.png" alt="Stability">						
+					</section>
+					<section>
+						<h3>Benchmark Problems</h3>
+						<ul>
+							<li>How well does the classifier do under various finite sample scenarios?</li>
+							<li>Metric: Misclassification rate</li>
+							<ul>
+								<li>$\hat{L} = \mathbb{P}_n \mathbb{I}\{\hat y_i(x) \neq y_i\} \equiv \frac{1}{n}\sum_i\mathbb{I}\{\hat y_i(x) \neq y_i\}$</li>
+							</ul>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Benchmark Performance</h3>
+						<img src="./img/sim_results.png" alt="Sim Results" height=500>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>
+							Future Work
+						</h1>
+					</section>
+
+					<section>
+						<h3>Future work</h3>
+						<ul>
+							<li>All of the coding was done in 2 days</li>
+							<ul>
+								<li>Did not have time to explore the simulations in very much depth</li>
+								<li>Did not get a chance to revise the simulations after my first run</li>
+							</ul>
+							<li>Explore the $d \ll p$ case much more</li>
+							<li>How can forest stability be quantified? Dissimilarity implications?</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<h3>References</h3>
+					<ul>
+						<li><a href="https://github.com/ebridge2/badmf">R Package</a></li>
+						<li><a href="https://www.imdb.com/title/tt0110912/">Pulp Fiction</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>Questions?</h3>
+					<img src="./img/giphy.gif" alt="Jules">
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../../reveal.js/lib/js/head.min.js"></script>
+		<script src="../../reveal.js/js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				math: {
+					// mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+					config: 'TeX-AMS_HTML-full'
+				},
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: '../../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

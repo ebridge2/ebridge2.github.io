@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Discriminability for Optimal Reference Method Identification</title>
+
+		<meta name="description" content="Discriminability">
+		<meta name="author" content="Eric Bridgeford">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../../reveal.js/css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../../reveal.js/lib/css/zenburn.css">
+		<link rel="shortcut icon" type="image/png" href="./img/neurodata.png"/>
+		<link rel="shortcut icon" type="image/png" href="./img/neurodata.png"/>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+
+		<!--[if lt IE 9]>
+		<script src="../reveal.js/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<style>
+				    .container { 
+				    font-size:0}
+
+				    .left { 
+				    display: inline-block; 
+				    width: 60%; 
+				    font-size:1rem; /* IE9+ */
+				    }
+
+				    .ie7 .left {font-size:16px; display:inline; zoom:1}
+
+				    .ie8 .left {font-size:16px}
+
+				    .right { 
+				    display: inline-block; 
+				    width: 38%; 
+				    font-size:1rem; /* IE9+ */
+				    }
+
+				    .ie7 .right {font-size:16px; display:inline; zoom:1}
+
+				    .ie8 .right {font-size:16px}
+
+				</style>
+ 
+				<section>
+					<!-- <h1>NDMG</h1> -->
+					<h3>Optimal Decisions for Reference Pipelines and Data</h3>
+					<p>
+						<small>Presented by <a href="https://github.com/ebridge2">Eric Bridgeford</a></small>
+					</p>
+					<p></p>
+					<p>
+						<small>Follow the slides: <a href="ericwb.me/lectures/lunch_presentations/discr.html">ericwb.me/lectures/lunch_presentations/discr.html</a></small>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Why, and how, do we choose a good reference method?</h2>
+					</section>
+
+					<section>
+						<h3>What is a reference method?</h3>
+						<ul>
+							<li>Reference method: an approach for collecting or preprocessing data for downstream inference</li>
+							<ul>
+								<li>Data Collection: what procedure do we use to collect raw data?</li>
+								<li>Data Processing: how do we take the raw data, and produce a usable piece of data for external tasks?</li>
+								<li>Downstream Inference: what do we really want to solve or learn about?</li>
+							</ul>
+						</ul>
+					</section>
+
+					<section>
+						<h3>What are problems with current reference method evaluation?</h3>
+						<ul>
+							<li>Most direct: Look directly at the output, and assess its correctness</li>
+							<!--<ul>
+								<li>Requires an objective notion of correctness: we don't usually have this</li>
+								<li>We would need to know all future inference tasks exhaustively</li>
+							</ul>-->
+							<li>Less direct: look at the steps along the way, and assess how well they "look" like what we expect</li>
+							<!--<ul>
+								<li>Lacks objectivity; ie, how well does a registration pipeline appear to register brains?</li>
+							</ul>-->
+							<li>Problem: we don't know the ground truth, and both of these would require that</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>What can we do in the absence of a ground truth?</h3>
+						<ul>
+							<li>If we are to trust downstream inference, it had better be repeatable</li>
+							<!--<ul>
+								<li>When we measure something twice, a "subject", it should look similar across both measurements</li>
+							</ul>-->
+							<li>If we are going to find anything interesting, new members of the population should be differentiable</li>
+							<!--<ul>
+								<li>Ie, if we are interested in using a subset of the genome for breast cancer biomarker identification, there should be appreciable differences in the genomes</li>
+							</ul>-->
+						</ul>
+					</section>
+
+					<!-- TODO: add figure -->
+					<section>
+						<h3>What's out there?</h3>
+						<ul>
+							<li>ICC: Intraclass Correlation Coefficient</li>
+							<ul>
+								<li>Proportion of variance explained by subject effect</li>
+							</ul>
+							<li>MANOVA: Multivariate ANOVA</li>
+							<ul>
+								<li>Assumptions of independence to use products of variance ratios</li>
+							</ul>
+							<li>I2C2: Image Intraclass Correlation Coefficient</li>
+							<ul>
+								<li>similar to MANOVA; better for HDLSS</li>
+							</ul>
+							<li>DISCO: Distance Components</li>
+							<ul>
+								<li>distribution of within-subject distances relative between-subject distances</li>
+							</ul>
+						</ul>
+						<ul>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h1>How can we do it better?</h1>
+					</section>
+					<section>
+						<h3>Discriminability</h3>
+						<ul>
+							<li>Assume: $x_{it} = v_{i} + \epsilon_{it}$, where $\epsilon_{it} \overset{iid}{\sim} f$, $t \in \left\{1, ..., s\right\}$</li>
+							<li>$D = \mathbb{P}\left(\delta_{i,t,t'} < \delta_{i,i',t,t''}\right)$</li>
+							<li>Make no assumptions about $f$</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Why Sample Discriminability?</h3>
+						<ul>
+							<li>Consistent, unbiased for discriminability with no rigorous distributional assumptions</li>
+							<li>Flexible</li>
+							<li>Intuitive: result is easy to interpret</li>
+							<li>One and two-sample testing: goodness of fit and equality</li>
+							<li>Bounds classification performance error</li>
+						</ul>
+					</section>
+					<!-- TODO: add figure -->
+					<section>
+						<h3>The Sample Discriminability Procedure</h3>
+
+						<img src="./img/discr/basic_sim.png" width="100%" alt="Basic Sim">
+					</section>
+
+					<section>
+						<h3>Comparisons to Existing Metrics</h3>
+						<table>
+							<thead>
+								<tr>
+									<th></th>
+									<th>ICC</th>
+									<th>I2C2</th>
+									<th>MANOVA</th>
+									<th>Discr</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Multivariate</td>
+									<td></td>
+									<td>&#10004;</td>
+									<td>&#10004;</td>
+									<td>&#10004;</td>
+								</tr>
+
+								<tr>
+									<td>Scalable</td>
+									<td>&#10004;</td>
+									<td>&#10004;</td>
+									<td></td>
+									<td>&#10004;</td>
+								</tr>
+								<tr>
+									<td>Lax Assumptions</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>&#10004;</td>
+								</tr>
+								<tr>
+									<td>One Sample Testing</td>
+									<td>&#10004;</td>
+									<td></td>
+									<td>&#10004;</td>
+									<td>&#10004;</td>
+								</tr>
+								<tr>
+									<td>Two Sample Testing</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>&#10004;</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+				</section>
+				<!-- TODO: add figure -->
+				<section>
+					<h3>Discriminability Outperforms Existing Techniques Empirically</h3>
+						<img src="./img/discr/discr_sim.png" width="100%" alt="Basic Sim">
+				</section>
+
+				<section>
+					<section>
+						<h1>Is Discriminability Useful?</h1>
+					</section>
+					
+					<section>
+						<h3>fMRI Connectomics Use-Case</h3>
+						<ul>
+							<li>CoRR Dataset: $n=1600$ subjects, approx. $4000$ total scans</li>
+							<li>Subject, Sex, and Age metadata for all$^*$ subjects</li>
+							<li>Processed via 192 different processing pipelines</li>
+						</ul>
+						<br><br>
+						<small>$^*$ most</small>
+					</section>
+					<!-- TODO: Add Figure -->
+					<section>
+						<h3>Processing Options Attempted</h3>
+						<img src="./img/discr/strats.png" width="100%" alt="Basic Sim">
+					</section>
+					<!-- TODO Add Figure of discr 64 -->
+					<section>
+						<img src="./img/discr/64_pipe.png" width="100%" alt="Basic Sim">
+
+					</section>
+					<!-- TODO: Add figure of marginalized options -->
+					<section>
+						<img src="./img/discr/opts.png" width="100%" alt="Basic Sim">
+
+					</section>
+					<!-- TODO: Add figure of downstream inference task -->
+
+					<section>
+						<img src="./img/discr/inference.png" width="100%" alt="Basic Sim">
+
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Take Aways for Discriminability</h3>
+						<ul>
+							<li>Intuitive and interpretable</li>
+							<li>One and two-sample tests directly answer relevant inquiries for pipeline engineering</li>
+							<li>Fast; flexible; scales well (parallelizable)</li>
+							<li>Has an awesome codebase maintainer</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Useful Links</h3>
+						<ul>
+							<li><a href="https://www.overleaf.com/3148576876tdxxqrvvmncw">Discriminability Manuscript (overleaf)</a></li>
+							<li><a href="https://github.com/neurodata/r-mgc/tree/discr-dev">neurodata/r-mgc (discr-dev branch)</a></li>
+						</ul>
+					</section>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="../../reveal.js/lib/js/head.min.js"></script>
+		<script src="../../reveal.js/js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				math: {
+					// mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+					config: 'TeX-AMS_HTML-full'
+				},
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: '../../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>CS Senior Thesis - Eric Bridgeford</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../reveal.js/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>FNGS</h1>
+					<h2>A One-Click Pipeline for the Automated Acquisition of Functional MRI Connectomes</h1>
+					<p>
+						<small>Created by <a href="http://ericwb.me">Eric Bridgeford</a> / <a href="http://github.com/ebridge2">@ebridge2</a></small>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Q: What is a Connectome, and Why are We Concerned?</h2>
+					</section>
+					<section>
+						<h2>What is a Connectome?</h2>
+						<ul style="float: left; border-right: solid 0px; width: 40%; ">
+				           <li> Connectomics research is rapidly expanding</li>
+				           <li>"Connectome": a map of the brain</li>
+				           <li>Why?</li>
+				           <ul>
+				           		<li>Intuitive</li>
+				           		<li>Mathematical ease</li>
+				           </ul>
+				        </ul>
+				    	<img src="../img/thesis/connectome.png" style="float: left;" />
+				    </section>
+				    <section>
+						<h2>Why are People Concerned?</h2>
+						<ul>
+				            <li>What are the brain signatures responsible for different phenotypes?</li>
+				            <ul>
+				            	<li>Brain Phenotype: observable characteristics resulting from brain activity</li>
+				            	<li>Intelligence</li>
+				            	<li>Personality</li>
+				            	<li>Mental Illness</li>
+				            </ul>
+				        </ul>
+				    </section>
+				    <section>
+						<h2>Who wants Connectomes?</h2>
+						<ul>
+							<li>Academic community</li>
+							<ul>
+								<li>Neuroscientists, Psychologists, Computer Scientists, Mathematicians</li>
+							</ul>
+							<li>Clinical community</li>
+							<ul>
+								<li>Medical Doctors, Psychiatrists</li>
+							</ul>
+							<li>Why? Computational objectivity</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Q: What are we Imaging?</h2>
+					</section>
+					<section>
+						<h2>BOLD Signal</h2>
+						<ul>
+							<li>Blood-Oxygen Level Dependent imaging</li>
+							<li>When brain region becomes more active, body sends more oxygenated blood</li>
+						</ul>
+						<img src="../img/thesis/hemo.png" />
+					</section>
+					<section>
+						<h2>Hemodynamic Response</h2>
+						<ul>
+							<li>Deoxy-hemo has different MR signature than oxy-hemo</li>
+							<li>End up with this differential contrast when a brain region becomes active</li>
+							<li>Blood response pattern called Hemodynamic Response Function (HRF)</li>
+						</ul>
+						<img src="../img/thesis/hrf.png" />
+					</section>
+					<section>
+						<h2>4D Imaging</h2>
+						<ul>
+							<li>Image the BOLD value in each volume-pixel (voxel)</li>
+							<ul>
+								<li>$2\times 2\times 2\; mm^3$ squares we measure the BOLD contrast in</li>
+							</ul>
+							<li>Take a 3D volume of a brain per timepoint</li>
+							<li>$4D$ image: $3$ spatial $+$ $1$ temporal (time)</li>
+						</ul>
+						<img src="../img/thesis/4D.jpeg" />
+					</section>
+					<section>
+						<h2>Anatomical Imaging</h2>
+						<ul>
+							<li>high resolution, 3D anatomical image taken with each subject</li>
+							<li>Same true brain shape, different resolution</li>
+							<li>Allows a look at anatomical features themselves</li>
+						</ul>
+						<img src="../img/thesis/anat.png" width="40%"/>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Q: What are the computational restrictions hampering modern neuroscience?</h2>
+					</section>
+
+					<section>
+						<h2>Throughput Problems</h2>
+						<ul>
+							<li>Processing brain scans is computationally expensive</li>
+							<ul>
+								<li>A brain scan has between 2-800 observations of about $10^6$ features</li>
+								<li>CPU/RAM usage is heavy</li>
+								<li>It is essentially a prerequisite to have a cluster</li>
+							</ul>
+						</ul>
+					</section>
+					<section>
+						<h2>Software and Hardware Constraints</h2>
+						<ul>
+							<li>Many users who want connectomes won't be able to setup a cluster</li>
+							<li>Requisite software dependencies themselves require computer expertise</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Choice of Pipeline</h2>
+						<ul>
+							<li>Hundreds of Processing options</li>
+							<ul>
+								<li>Difficulty quantifying a "good" pipeline</li>
+								<li>Most studies are single-dataset: few meganalyses</li>
+							</ul>
+							<li>Choice of pipeline is highly nonconvex: best options locally might not be best globally</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Q: How do we Choose a "Good" Pipeline?</h2>
+					</section>
+					<section>
+						<h2>Desiderata</h2>
+						<ul>
+							<li>If I scan everybody in a room twice and acquire functional connectomes, will I be able to identify the pairs of connectomes?</li>
+							<li>Identify = Will everybody's closest connectome (as defined by frobenius norm) be their alternate connectome?</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Discriminability</h2>
+						<ul>
+							<li><a href="https://github.com/neurodata/discriminability">Discriminability</a> quantifies this</li>
+								<ul>
+									<li>Low Discriminability: all connectomes look the same</li>
+									<li>High Discirminability: repeated connectomes of same subject look most similar</li>
+								</ul>
+							<li>brute-force search over many popular pipeline options (64 total) to help us understand pipeline performance</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>FNGS Pipeline</h2>						
+				    	<img src="../img/thesis/pipeline.png" border="0"/>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Preprocessing</h1>	
+				    	<img src="../img/thesis/preproc.png" style="width: 80%; "/>
+				    	<img src="../img/thesis/bottom.png" border="0" style="width: 60%;"/>
+					</section>
+
+					<section>
+						<h2>Motion Correction</h2>	
+						<ul>
+							<li>Problem: Scanning session is 3 to 10 minutes </li>
+							<ul>
+								<li>Subjects can rotate and move (translate) their heads</li>
+							</ul>
+							<li>Given: Brain shape is fixed: no need to rescale</li>
+							<li>Solution: Rigid Affine Transformation with 6 degrees of freedom</li>
+							<ul>
+								<li>Estimate x, y, z translation and x, y, z rotation at each timepoint</li>
+							</ul>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Slice Timing Correction</h2>
+						<ul>
+							<li>Problem: a 3D volume is taken in 2D slices over the course of 2-3 seconds</li>
+							<li>Given: we know exactly when each slice is taken per timepoint</li>
+						</ul>
+				    	<img src="../img/thesis/un_stc.png" border="0" style="width: 20%;"/>
+				    	<img src="../img/thesis/un_stc_overlay.png" border="0" style="width: 20%;"/>
+				    	<img src="../img/thesis/stc_graph.png" border="0" style="width: 55%;"/>
+					</section>
+
+					<section>
+						<h2>Slice Timing Correction</h2>
+						<ul>
+							<li>Solution: Sinc Interpolation to center timeseries about each discrete timepoint</li>
+						</ul>
+				    	<img src="../img/thesis/un_stc.png" border="0" style="width: 30%;"/>
+				    	<img src="../img/thesis/stc.png" border="0" style="width: 30%;"/>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Registration</h1>
+				    	<img src="../img/thesis/reg.png" style="width: 80%; "/>
+						<img src="../img/thesis/bottom.png" border="0" style="width: 60%;"/>
+					</section>
+					<section>
+						<h2>Registration Procedure</h2>
+						<ul>
+							<li>Self-registration should be near-perfect</li>
+							<ul>
+								<li>The functional scan has the same true shape as the T1w anatomical scan</li>
+								<li>Only difference is the resolution and modality of the images</li>
+							</ul>
+							<li>Use the T1w to align with the template, since we can use anatomically precise landmarking while registering</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Nuisance Correction</h2>
+				    	<img src="../img/thesis/nuis.png" style="width: 80%; "/>
+				    	<img src="../img/thesis/bottom.png" border="0" style="width: 60%;"/>
+					</section>
+					<section>
+						<h2>Nuisance Variables</h2>
+						<ul>
+							<li>Scanner heat up: quadratic drifting of the timeseries</li>
+							<li>Temporal physiological noise: heart beat, etc.</li>
+							<ul>
+								<li>physiological factors that impact our signal but are not from brain activity</li>
+							</ul>
+							<li>T1 effect: magnetic dynamics take a few seconds to stabilize</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Nuisance Correction</h2>
+						<ul>
+							<li>GLM to estimate best-fit quadratic</li>
+							<ul>
+								<li>Neurological signal known to not behave globally quadratically, so a best-fit quadratic will not remove neurological signal</li>
+							</ul>
+							<li>Highpass filter to remove low-frequency drift</li>
+							<ul>
+								<li>Brain activity is on order of $0.1$ Hz, so high-pass over $0.01$ Hz for a generous threshold</li>
+							</ul>
+							<li>Throw away first 10 seconds of every scan</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Connectome Estimation</h2>
+				    	<img src="../img/thesis/con_est.png" style="width: 80%; "/>
+				    	<img src="../img/thesis/bottom.png" border="0" style="width: 60%;"/>
+					</section>
+					<section>
+						<h2>Downsampling</h2>
+						<ul>
+							<li>Anatomically and functionally defined parcellations that are labelled by brain region</li>
+							<li>Spatially downsample each 3D volume for each timepoint</li>
+							<li>$B \in \mathbb{R}^{10^6 \times t}$ for $t$ observations, $10^{6}$ features/voxels</li>
+							<li>$D = downsample(B) \in \mathbb{R}^{r \times t}$ where $r$ is between 20 to 300 generally depending on the spatial parcellation we use</li>
+							<li>$C = cor(D) \in \mathbb{R}^{r \times r}$ representing our adjacency matrix or functional connectome</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Timeseries</h2>
+						<img src="../img/thesis/ts.png" border="0"/>						
+					</section>
+					<section>
+						<h2>Correlation Matrix/Connectome</h2>
+						<img src="../img/thesis/corr.png" border="0"/>						
+					</section>
+				</section>
+
+				<section>
+					<h2>Performance</h2>						
+					<img src="../img/thesis/perf.png"/>
+					<ul>
+						<li>I can (and often do!) run this on my laptop</li>
+						<li>Single threaded: easy to parallelize</li>
+					</ul>
+				</section>
+
+				<section>
+					<section>
+						<h1>Deployment</h1>
+					</section>
+
+					<section>
+						<h2>FNGS Pipeline</h2>						
+						<img src="../img/thesis/pipeline.png" border="0"/>
+					</section>
+					<section>
+						<h2>Q: How do we make this easy?</h2>
+					</section>
+
+					<section>
+						<h2>Docker Containers</h2>
+						<ul>
+							<li>software container with all dependencies associated with our pipeline</li>
+							<li>user does not have to install anything locally (except for the docker controller)</li>
+							<li>All drivers and controllers, for cloud or local usage, can be called from here with one click</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Local Deployment</h2>
+						<ul>
+							<li>Data Setup</li>
+							<ul>
+								<li><a href="http://bids.neuroimaging.io/">BIDs Spec</a></li>
+							</ul>
+							<li>Every-time Input Required</li>
+							<ul>
+								<li><a href="https://github.com/NeuroDataDesign/fngs/blob/master/local_analysis.md">Local Analysis</a></li>
+							</ul>
+							<li>1 click for Local Deployment from docker container</li>
+						</ul>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							### Deploying Locally
+							+ Assumes: user has data in BIDs spec
+							```
+							ndmg_bids <bids-local-directory> <output-directory> \
+							participant func
+							```
+						</script>
+					</section>
+					<section>
+						<h2>AWS Architecture</h2>
+						<ul>
+							<li>AWS S3: Data Storage</li>
+							<li>AWS EC2: Cloud Computers</li>
+							<ul>
+								<li>Can be automated to deploy with docker containers pre-loaded</li>
+							</ul>
+							<li>AWS Batch: Deploy cloud computers</li>
+						</ul>
+					</section>
+					<section>
+						<h2>FNGS Pipeline</h2>						
+						<img src="../img/thesis/pipeline.png" border="0"/>
+					</section>
+					<section>
+						<h2>Simplifying Cloud Deployment</h2>
+						<ul>
+							<li>One-Time Input Required</li>
+							<ul>
+								<li><a href="https://github.com/NeuroDataDesign/fngs/blob/master/AWS_user_setup.md">AWS User Configuration</a></li>
+								<li><a href="https://github.com/NeuroDataDesign/fngs/blob/master/S3_data.md">AWS S3 Bucket Setup</a></li>
+								<li><a href="https://github.com/NeuroDataDesign/fngs/blob/master/compute.md">AWS Compute Environments</a></li>
+							</ul>
+							<li>Every-time Input Required</li>
+							<ul>
+								<li><a href="https://github.com/NeuroDataDesign/fngs/blob/master/analysis.md">AWS Batch Deployment</a></li>
+							</ul>
+							<li>1 click for ANALYSIS Cloud Deployment</li>
+						</ul>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							### Deploying on Cloud
+							+ Assumes: user has data in BIDs spec, User has data in S3, user has environment created
+							+ we provide tutorials for these steps, which are not totally automated yet
+							```
+							ndmg_cloud participant --bucket <your-bucket> --bidsdir \
+							<your-bids> --stc <slice-timing> --modality func
+							```
+						</script>
+					</section>
+
+					<section>
+						<h2>Logistics of Cloud</h2>
+						<ul>
+							<li>Cost of EC2: $\frac{\$0.133}{hour} \cdot \frac{.4\;hours}{scan} = \frac{\$.053}{scan}$</li>
+							<li>Cost of S3: $\frac{\$.0135}{GB\cdot month} \cdot \frac{.3 \; GB}{scan} = \frac{\$.00735}{scan \cdot month}$</li>
+							<li>Cost of I/O transfer: $\frac{\$.005}{1000\; requests}$ negligible</li>
+							<li>Parallelize about 20-40 instances at once</li>
+							<ul>
+								<li>upwards $80$ scans per hour</li>
+							</ul>
+							<li>subject level analysis and group analysis cloud scripts</li>
+							<li>Note: these numbers fluctuate by dataset, but all $1000$ scans we have analyzed fell in this range</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Single Dataset Analysis</h2>
+						<ul>
+							<li>270 scans</li>
+							<li>Analyze in parallel: approximately $\$15$, about $2.5$ hours</li>
+							<li>Compute Discriminability between subjects using <a href="https://github.com/ebridge2/Discriminability">Discriminability package</a></li>
+							<li>Goal: Are the connectomes differentiable between subjects?</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Correlation Matrix/Connectome</h2>
+						<img src="../img/thesis/corr.png" border="0"/>						
+					</section>
+					<section>
+						<h2>Single Dataset Analysis</h2>
+						<img src="../img/thesis/hnu.png" border="0"/>
+					</section>
+					<section>
+						<h2>Harmonized Analysis</h2>
+						<li>$n=794$ scans collected at $6$ different sites</li>
+						<li>Similar scanners and parameter selection</li>
+						<li>Analyze in parallel: approximately $\$50$, and about $7$ hours</li>
+						<li>Goal: Are the connectomes differentiable between Scan Site?</li>
+					</section>
+					<section>
+						<h2>Harmonized Analysis</h2>
+						<img src="../img/thesis/dataset.png" border="0"/>
+						<ul>
+							<li>Theoretical random discriminability score: $0.248$</li>
+							<li>p-value of difference: $p = 0.001$</li>
+							<li>Scanning site plays a heavy role in quantitative properties</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Future Goals</h2>
+						<ul>
+							<li>Automated Web Service (Neurodata Design Project)</li>
+							<ul>
+								<li>Automate the compute environments and bucket uploading</li>
+								<li>Make it one-click for all, not just one-click for analysis</li>
+							</ul>
+							<li>Improve Nuisance Correction Further</li>
+							<ul>
+								<li>Can we optimize for task fMRI and rs fMRI?</li>
+							</ul>
+							<li>Pass Final Exams</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Acknowledgements</h2>
+						<ul>
+							<li>Dr. Josh Vogelstein: PI</li>
+							<li>Greg Kiar: PhD student at McGill University</li>
+							<li>Tanay Agarwal: Undergraduate</li>
+							<li>Eric Walker: Undergraduate</li>
+							<li>Neurodata</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Important Links</h2>
+						<ul>
+							<li>Docker Service: <a href="https://hub.docker.com/r/ericw95/fngs/">FNGS service</a>
+							<li>Weekly Updates: <a href="https://github.com/neurodatadesign/fngs">FNGS repo</a></li>
+							<li>Code: <a href="https://github.com/neurodata/ndmg">NDMG pipeline</a> (contains FNGS pipeline)</li>
+						</ul>
+						</p>
+					</section>
+					<section>
+						<h2>Questions?</h2>
+						<p>
+						<small>Created by <a href="http://ericwb.me">Eric Bridgeford</a> / <a href="http://github.com/ebridge2">@ebridge2</a></small>
+						</p>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/lib/js/head.min.js"></script>
+		<script src="../reveal.js/js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				math: {
+					// mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+					config: 'TeX-AMS_HTML-full'
+				},
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: '../reveal.js/plugin/math/math.js', async: true },
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
