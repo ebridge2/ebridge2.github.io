@@ -342,12 +342,13 @@ name:batchsim
 
 ### When data is "balanced", traditional techniques work
 
-- recall traditional linear model, $y\_{ij} = f(x\_i) + e\_{ij}$
+- recall traditional linear model, $y\_{ij} = f(x\_i) + t_i + e\_{ij}$
 - $y\_{ij}$ is an outcome, $x_i$ is a covariate (e.g. age), $f(x\_i)$ is the effect of the covariate on the outcome
-- $e\_{ij}$ is noise
+- $e\_{ij}$ is noise and $t_i$ is the undesirable batch effect
 - $f(x\_i)$: effect of the covariate on the outcome depends on the covariate
 - e.g., $y\_{ij}$ is blood presssure, $x_i$ is age
   - $f(x\_i)$ is small if age is low, and much bigger if age is higher
+  - the blood pressure cuff used at site $0$ always gives smaller readings than the blood pressure cuff at site $1$
 
 ---
 
