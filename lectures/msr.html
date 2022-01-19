@@ -157,8 +157,7 @@ name:graspologic
 - consider a coin flip which has not yet occurred
 - the coin flip itself is either heads or tails, where the coin lands on heads with probability $p$
 - once we flip a coin, we see whether it is heads or tails
-- the outcome of a coin which has been flipped is called a .ye[realization] of the coin flip
-- looking at how many times the coin lands on heads or tails allows us to perform statistical inference on the coin itself
+- looking at how many times the coin lands on heads or tails allows us to learn about the coin
 
 ---
 
@@ -166,34 +165,55 @@ name:graspologic
 
 - in much the same way, we can think of the edges of a graph as the outcome of a coin flip
 - the edge between nodes $i$ and node $j$ occurs with probability $p_{ij}$
+  - if the coin lands on heads, the edge exists, and if it lands on tails, the edge does not exist
 - we can combine all of these probabilities into a .ye[probability matrix] $P$
   - the $(i,j)^{th}$ entry of the matrix $P$ indicates the probability $p_{ij}$ between nodes $i$ and $j$
-- a random graph is the equivalent of a coin which has not yet been flipped
+- a random graph is equivalent to a coin which has not yet been flipped
   - edges exist, or do not exist, with a probability matrix
 
 ---
 
 ### What do random graphs help us with?
 
-- if we extended how we would perform statistical inference on the coin flips, we might try to learn about $p_{ij}$ using the $(i, j)^{th}$ edge of a graph in our data
+- if we extended how we would perform learn about the coin flips, we might try to learn about $p_{ij}$ using the $(i, j)^{th}$ edge of a graph in our data
 - Problem: if we have too few graphs, we won't be able to learn about all of the edge probabilities simultaneously
   - If our data only includes one graph, we would be forced to estimate $p_{ij}$ using only the $(i,j)$ edge from our data
   - If you flipped a coin once, are you confident you could guess the probability?
-- instead, we construct simplified models for $P$ which have a lot fewer than $\binom{n}{2}$ parameters
-  - this allows us to learn about the $p_{ij}$s in tandem with other edges in the network
 
 ---
 
-### What is an RDPG, and why do we care?
-
+### What do random graphs help us with?
+- instead, we construct simplified models for $P$ which have a lot fewer than $\binom{n}{2}$ parameters
+  - this allows us to learn about the $p_{ij}$s in tandem with other edges in the network
 - an RDPG is a particular way of reprenting $P$ that gives us great flexibility
-- Stochastsic Block Models (SBM) and Erd\"os Renyi (ER) Random Graphs, two of the most common random graph models, are special cases of RDPGs
+- Stochastsic Block Models (SBM) and Erdos Renyi (ER) Random Graphs, two of the most common random graph models, are special cases of RDPGs
 - If we devise techniques for RDPGs, they extend to SBMs and ER random graphs too
+
+---
+
+### What do RDPGs look like?
+
+![:scale 100%](./images/msr/er.png)
+
+---
+
+### What do RDPGs look like?
+
+![:scale 100%](./images/msr/sbm.png)
+
+
+---
+
+### What do RDPGs look like?
+
+![:scale 100%](./images/msr/rdpg.png)
+
 
 ---
 
 ### Core of Graspologic
 
+- graspologic is a conglomeration of functions and analyses that can be performed on different types of RDPGs
 - The functionality of graspologic has existed for quite a while
 - Youngser Park, Heather Patsolic, Vince Lyzinski, Donniel Fishkind, and many others accumulated R repos over their tenure with much of the core functionality
 
@@ -229,7 +249,7 @@ name:graspologic
 
 ### Origins of Graspologic Book
 
-- about a year and a half later, Jaewon recruited me to a project to summarize many of the main topics of the (now) graspologic package
+- about a year and a half later, we sought to summarize many of the main topics of the (now) graspologic package
 - we spent about 3 months working towards developing a summary, found [here](#https://www.annualreviews.org/doi/abs/10.1146/annurev-statistics-042720-023234), which explained many of the more theoretical aspects to the package
 - Problem: there was nothing that really linked the graspologic package to the theoretical underpinnings of random graphs
 
@@ -237,7 +257,6 @@ name:graspologic
 
 ### Graspologic Book
 
-- During CoVID, I agreed to help with a book on the graspologic package
 - Our aim was a ground-up approach to leveraging techniques devised for random graphs
 - the book is generally structured as:
 1. the foundations of graphs as pieces of data,
