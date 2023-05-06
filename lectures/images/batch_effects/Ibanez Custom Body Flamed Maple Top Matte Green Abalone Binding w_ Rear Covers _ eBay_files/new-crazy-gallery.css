@@ -1,0 +1,1585 @@
+#cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper0 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper0 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper0 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper0 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper0 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper0 {display: none;}
+    #cross-sell-gallery-element_48-image0 {
+        background-image: url("https://i.ebayimg.com/images/g/u-sAAOSwAANY7wDa/s-l1600.jpg?set_id=8800005007") !important;
+        background-size: cover;
+    }
+    #cross-sell-gallery-element_48-item-name0::after {
+        content: "Ty Beanie Baby RED OSITO Bear Mexico w/ Tag ERRORS Plush Toy RARE PE NEW RETIRED";
+    }
+    #cross-sell-gallery-element_48-item-price0::after {
+            content: "Buy it now: 300 USD";
+        }
+        #cross-sell-gallery-element_48-item-ends-in0::after {
+            content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_1] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_11] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper11 {
+        width: 5%;
+        left: 50px;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper0 {
+        width: 10%;
+        left: 50px;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper0:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper1 {
+        width: 16%;
+        left: 19.43%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper1:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper2 {
+        width: 20%;
+        left: 39.63%;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper2:hover {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ .cross-sell-gallery-link #cross-sell-gallery-item-description2 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper3 {
+        width: 16%;
+        left: 64.57%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper3:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper4 {
+        width: 10%;
+        left: 84.77%;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper4:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper5 {
+        left: 84.77%;
+        width: 5%;
+        display: block;
+        opacity: 0;
+    }
+    #mobile-cross-sell-gallery-element_48-item-name0::after {
+        content: "Ty Beanie Baby RED OSITO Bear Mexico w/ Tag ERRORS Plush Toy RARE PE NEW RETIRED";
+    }
+    #mobile-cross-sell-gallery-element_48-item-price0::after {
+            content: "Buy it now: 300 USD";
+        }
+        #mobile-cross-sell-gallery-element_48-item-ends-in0::after {
+           content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_0:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_1] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_11] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper11 {
+        left: -175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper0 {
+        left: 0;
+        opacity: 1;
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper1 {
+        left: 175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_0:checked ~ .cross-sell-gallery-link #mobile-cross-sell-gallery-item-description0 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper1 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper1 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper1 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper1 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper1 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper1 {display: none;}
+    #cross-sell-gallery-element_48-image1 {
+        background-image: url("https://i.ebayimg.com/images/g/jxYAAOSwU8hY7vw1/s-l1600.jpg?set_id=8800005007") !important;
+        background-size: cover;
+    }
+    #cross-sell-gallery-element_48-item-name1::after {
+        content: "Ty Beanie JOLLY Walrus w/ Tag ERRORS Plush Toy RARE PVC NEW RETIRED";
+    }
+    #cross-sell-gallery-element_48-item-price1::after {
+            content: "Buy it now: 220 USD";
+        }
+        #cross-sell-gallery-element_48-item-ends-in1::after {
+            content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_2] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_0] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper0 {
+        width: 5%;
+        left: 50px;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper1 {
+        width: 10%;
+        left: 50px;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper1:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper2 {
+        width: 16%;
+        left: 19.43%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper2:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper3 {
+        width: 20%;
+        left: 39.63%;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper3:hover {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ .cross-sell-gallery-link #cross-sell-gallery-item-description3 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper4 {
+        width: 16%;
+        left: 64.57%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper4:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper5 {
+        width: 10%;
+        left: 84.77%;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper5:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper6 {
+        left: 84.77%;
+        width: 5%;
+        display: block;
+        opacity: 0;
+    }
+    #mobile-cross-sell-gallery-element_48-item-name1::after {
+        content: "Ty Beanie JOLLY Walrus w/ Tag ERRORS Plush Toy RARE PVC NEW RETIRED";
+    }
+    #mobile-cross-sell-gallery-element_48-item-price1::after {
+            content: "Buy it now: 220 USD";
+        }
+        #mobile-cross-sell-gallery-element_48-item-ends-in1::after {
+           content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_1:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_2] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_0] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper0 {
+        left: -175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper1 {
+        left: 0;
+        opacity: 1;
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper2 {
+        left: 175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_1:checked ~ .cross-sell-gallery-link #mobile-cross-sell-gallery-item-description1 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper2 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper2 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper2 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper2 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper2 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper2 {display: none;}
+    #cross-sell-gallery-element_48-image2 {
+        background-image: url("https://i.ebayimg.com/images/g/30AAAOSwS7BerDBv/s-l1600.jpg?set_id=8800005007") !important;
+        background-size: cover;
+    }
+    #cross-sell-gallery-element_48-item-name2::after {
+        content: "SUPERMAN Night Flight Holographic Card Christopher Reeves 1978 # 37 Topps 75 ";
+    }
+    #cross-sell-gallery-element_48-item-price2::after {
+            content: "Buy it now: 47.49 USD";
+        }
+        #cross-sell-gallery-element_48-item-ends-in2::after {
+            content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_3] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_1] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper1 {
+        width: 5%;
+        left: 50px;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper2 {
+        width: 10%;
+        left: 50px;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper2:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper3 {
+        width: 16%;
+        left: 19.43%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper3:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper4 {
+        width: 20%;
+        left: 39.63%;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper4:hover {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ .cross-sell-gallery-link #cross-sell-gallery-item-description4 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper5 {
+        width: 16%;
+        left: 64.57%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper5:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper6 {
+        width: 10%;
+        left: 84.77%;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper6:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper7 {
+        left: 84.77%;
+        width: 5%;
+        display: block;
+        opacity: 0;
+    }
+    #mobile-cross-sell-gallery-element_48-item-name2::after {
+        content: "SUPERMAN Night Flight Holographic Card Christopher Reeves 1978 # 37 Topps 75 ";
+    }
+    #mobile-cross-sell-gallery-element_48-item-price2::after {
+            content: "Buy it now: 47.49 USD";
+        }
+        #mobile-cross-sell-gallery-element_48-item-ends-in2::after {
+           content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_2:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_3] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_1] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper1 {
+        left: -175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper2 {
+        left: 0;
+        opacity: 1;
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper3 {
+        left: 175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_2:checked ~ .cross-sell-gallery-link #mobile-cross-sell-gallery-item-description2 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper3 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper3 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper3 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper3 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper3 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper3 {display: none;}
+    #cross-sell-gallery-element_48-image3 {
+        background-image: url("https://i.ebayimg.com/images/g/UD8AAOSwU8hY7vpm/s-l1600.jpg?set_id=8800005007") !important;
+        background-size: cover;
+    }
+    #cross-sell-gallery-element_48-item-name3::after {
+        content: "Ty Beanie SWIRLY Snail w/ Tag ERRORS Plush Toy RARE PE NEW RETIRED";
+    }
+    #cross-sell-gallery-element_48-item-price3::after {
+            content: "Buy it now: 40 USD";
+        }
+        #cross-sell-gallery-element_48-item-ends-in3::after {
+            content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_4] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_2] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper2 {
+        width: 5%;
+        left: 50px;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper3 {
+        width: 10%;
+        left: 50px;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper3:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper4 {
+        width: 16%;
+        left: 19.43%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper4:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper5 {
+        width: 20%;
+        left: 39.63%;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper5:hover {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ .cross-sell-gallery-link #cross-sell-gallery-item-description5 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper6 {
+        width: 16%;
+        left: 64.57%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper6:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper7 {
+        width: 10%;
+        left: 84.77%;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper7:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper8 {
+        left: 84.77%;
+        width: 5%;
+        display: block;
+        opacity: 0;
+    }
+    #mobile-cross-sell-gallery-element_48-item-name3::after {
+        content: "Ty Beanie SWIRLY Snail w/ Tag ERRORS Plush Toy RARE PE NEW RETIRED";
+    }
+    #mobile-cross-sell-gallery-element_48-item-price3::after {
+            content: "Buy it now: 40 USD";
+        }
+        #mobile-cross-sell-gallery-element_48-item-ends-in3::after {
+           content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_3:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_4] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_2] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper2 {
+        left: -175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper3 {
+        left: 0;
+        opacity: 1;
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper4 {
+        left: 175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_3:checked ~ .cross-sell-gallery-link #mobile-cross-sell-gallery-item-description3 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper4 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper4 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper4 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper4 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper4 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper4 {display: none;}
+    #cross-sell-gallery-element_48-image4 {
+        background-image: url("https://i.ebayimg.com/images/g/JuQAAOSwPCVX8wGe/s-l1600.jpg?set_id=8800005007") !important;
+        background-size: cover;
+    }
+    #cross-sell-gallery-element_48-item-name4::after {
+        content: "Ty Beanie Baby SNIP 1996 Cat w/ Tag ERRORS Plush Toy RARE NEW RETIRED";
+    }
+    #cross-sell-gallery-element_48-item-price4::after {
+            content: "Buy it now: 100 USD";
+        }
+        #cross-sell-gallery-element_48-item-ends-in4::after {
+            content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_5] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_3] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper3 {
+        width: 5%;
+        left: 50px;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper4 {
+        width: 10%;
+        left: 50px;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper4:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper5 {
+        width: 16%;
+        left: 19.43%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper5:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper6 {
+        width: 20%;
+        left: 39.63%;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper6:hover {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ .cross-sell-gallery-link #cross-sell-gallery-item-description6 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper7 {
+        width: 16%;
+        left: 64.57%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper7:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper8 {
+        width: 10%;
+        left: 84.77%;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper8:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper9 {
+        left: 84.77%;
+        width: 5%;
+        display: block;
+        opacity: 0;
+    }
+    #mobile-cross-sell-gallery-element_48-item-name4::after {
+        content: "Ty Beanie Baby SNIP 1996 Cat w/ Tag ERRORS Plush Toy RARE NEW RETIRED";
+    }
+    #mobile-cross-sell-gallery-element_48-item-price4::after {
+            content: "Buy it now: 100 USD";
+        }
+        #mobile-cross-sell-gallery-element_48-item-ends-in4::after {
+           content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_4:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_5] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_3] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper3 {
+        left: -175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper4 {
+        left: 0;
+        opacity: 1;
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper5 {
+        left: 175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_4:checked ~ .cross-sell-gallery-link #mobile-cross-sell-gallery-item-description4 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper5 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper5 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper5 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper5 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper5 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper5 {display: none;}
+    #cross-sell-gallery-element_48-image5 {
+        background-image: url("https://i.ebayimg.com/images/g/Hf8AAOSwls5Y7unS/s-l1600.jpg?set_id=8800005007") !important;
+        background-size: cover;
+    }
+    #cross-sell-gallery-element_48-item-name5::after {
+        content: "Ty Beanie Baby GiGi 1997 Poodle Dog w/ Tag ERRORS Plush Toy RARE PE NEW RETIRED";
+    }
+    #cross-sell-gallery-element_48-item-price5::after {
+            content: "Buy it now: 80 USD";
+        }
+        #cross-sell-gallery-element_48-item-ends-in5::after {
+            content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_6] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_4] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper4 {
+        width: 5%;
+        left: 50px;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper5 {
+        width: 10%;
+        left: 50px;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper5:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper6 {
+        width: 16%;
+        left: 19.43%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper6:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper7 {
+        width: 20%;
+        left: 39.63%;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper7:hover {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ .cross-sell-gallery-link #cross-sell-gallery-item-description7 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper8 {
+        width: 16%;
+        left: 64.57%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper8:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper9 {
+        width: 10%;
+        left: 84.77%;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper9:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper10 {
+        left: 84.77%;
+        width: 5%;
+        display: block;
+        opacity: 0;
+    }
+    #mobile-cross-sell-gallery-element_48-item-name5::after {
+        content: "Ty Beanie Baby GiGi 1997 Poodle Dog w/ Tag ERRORS Plush Toy RARE PE NEW RETIRED";
+    }
+    #mobile-cross-sell-gallery-element_48-item-price5::after {
+            content: "Buy it now: 80 USD";
+        }
+        #mobile-cross-sell-gallery-element_48-item-ends-in5::after {
+           content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_5:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_6] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_4] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper4 {
+        left: -175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper5 {
+        left: 0;
+        opacity: 1;
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper6 {
+        left: 175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_5:checked ~ .cross-sell-gallery-link #mobile-cross-sell-gallery-item-description5 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper6 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper6 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper6 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper6 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper6 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper6 {display: none;}
+    #cross-sell-gallery-element_48-image6 {
+        background-image: url("https://i.ebayimg.com/images/g/u4gAAOSwTM5Y7vQv/s-l1600.jpg?set_id=8800005007") !important;
+        background-size: cover;
+    }
+    #cross-sell-gallery-element_48-item-name6::after {
+        content: "Ty Beanie Baby BERNIE Dog  w/ Tag ERRORS Plush Toy RARE PVC NEW RETIRED Nurnberg";
+    }
+    #cross-sell-gallery-element_48-item-price6::after {
+            content: "Buy it now: 300 USD";
+        }
+        #cross-sell-gallery-element_48-item-ends-in6::after {
+            content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_7] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_5] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper5 {
+        width: 5%;
+        left: 50px;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper6 {
+        width: 10%;
+        left: 50px;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper6:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper7 {
+        width: 16%;
+        left: 19.43%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper7:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper8 {
+        width: 20%;
+        left: 39.63%;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper8:hover {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ .cross-sell-gallery-link #cross-sell-gallery-item-description8 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper9 {
+        width: 16%;
+        left: 64.57%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper9:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper10 {
+        width: 10%;
+        left: 84.77%;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper10:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper11 {
+        left: 84.77%;
+        width: 5%;
+        display: block;
+        opacity: 0;
+    }
+    #mobile-cross-sell-gallery-element_48-item-name6::after {
+        content: "Ty Beanie Baby BERNIE Dog  w/ Tag ERRORS Plush Toy RARE PVC NEW RETIRED Nurnberg";
+    }
+    #mobile-cross-sell-gallery-element_48-item-price6::after {
+            content: "Buy it now: 300 USD";
+        }
+        #mobile-cross-sell-gallery-element_48-item-ends-in6::after {
+           content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_6:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_7] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_5] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper5 {
+        left: -175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper6 {
+        left: 0;
+        opacity: 1;
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper7 {
+        left: 175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_6:checked ~ .cross-sell-gallery-link #mobile-cross-sell-gallery-item-description6 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper7 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper7 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper7 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper7 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper7 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper7 {display: none;}
+    #cross-sell-gallery-element_48-image7 {
+        background-image: url("https://i.ebayimg.com/images/g/wnwAAOSwmLlX8wRQ/s-l1600.jpg?set_id=8800005007") !important;
+        background-size: cover;
+    }
+    #cross-sell-gallery-element_48-item-name7::after {
+        content: "Ty Beanie Baby CONGO 1996 GORILLA w/ Tag ERRORS Plush Toy RARE PVC NEW RETIRED";
+    }
+    #cross-sell-gallery-element_48-item-price7::after {
+            content: "Buy it now: 149.99 USD";
+        }
+        #cross-sell-gallery-element_48-item-ends-in7::after {
+            content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_8] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_6] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper6 {
+        width: 5%;
+        left: 50px;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper7 {
+        width: 10%;
+        left: 50px;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper7:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper8 {
+        width: 16%;
+        left: 19.43%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper8:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper9 {
+        width: 20%;
+        left: 39.63%;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper9:hover {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ .cross-sell-gallery-link #cross-sell-gallery-item-description9 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper10 {
+        width: 16%;
+        left: 64.57%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper10:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper11 {
+        width: 10%;
+        left: 84.77%;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper11:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper0 {
+        left: 84.77%;
+        width: 5%;
+        display: block;
+        opacity: 0;
+    }
+    #mobile-cross-sell-gallery-element_48-item-name7::after {
+        content: "Ty Beanie Baby CONGO 1996 GORILLA w/ Tag ERRORS Plush Toy RARE PVC NEW RETIRED";
+    }
+    #mobile-cross-sell-gallery-element_48-item-price7::after {
+            content: "Buy it now: 149.99 USD";
+        }
+        #mobile-cross-sell-gallery-element_48-item-ends-in7::after {
+           content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_7:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_8] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_6] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper6 {
+        left: -175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper7 {
+        left: 0;
+        opacity: 1;
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper8 {
+        left: 175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_7:checked ~ .cross-sell-gallery-link #mobile-cross-sell-gallery-item-description7 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper8 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper8 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper8 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper8 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper8 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper8 {display: none;}
+    #cross-sell-gallery-element_48-image8 {
+        background-image: url("https://i.ebayimg.com/images/g/0CsAAOSwpcNfj0oo/s-l1600.jpg?set_id=8800005007") !important;
+        background-size: cover;
+    }
+    #cross-sell-gallery-element_48-item-name8::after {
+        content: "Star Wars Clone Wars Republic AT-TE Tank Vehicle Hasbro LIGHTS SOUNDS MISSILES";
+    }
+    #cross-sell-gallery-element_48-item-price8::after {
+            content: "Buy it now: 499.99 USD";
+        }
+        #cross-sell-gallery-element_48-item-ends-in8::after {
+            content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_9] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_7] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper7 {
+        width: 5%;
+        left: 50px;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper8 {
+        width: 10%;
+        left: 50px;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper8:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper9 {
+        width: 16%;
+        left: 19.43%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper9:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper10 {
+        width: 20%;
+        left: 39.63%;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper10:hover {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ .cross-sell-gallery-link #cross-sell-gallery-item-description10 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper11 {
+        width: 16%;
+        left: 64.57%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper11:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper0 {
+        width: 10%;
+        left: 84.77%;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper0:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper1 {
+        left: 84.77%;
+        width: 5%;
+        display: block;
+        opacity: 0;
+    }
+    #mobile-cross-sell-gallery-element_48-item-name8::after {
+        content: "Star Wars Clone Wars Republic AT-TE Tank Vehicle Hasbro LIGHTS SOUNDS MISSILES";
+    }
+    #mobile-cross-sell-gallery-element_48-item-price8::after {
+            content: "Buy it now: 499.99 USD";
+        }
+        #mobile-cross-sell-gallery-element_48-item-ends-in8::after {
+           content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_8:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_9] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_7] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper7 {
+        left: -175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper8 {
+        left: 0;
+        opacity: 1;
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper9 {
+        left: 175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_8:checked ~ .cross-sell-gallery-link #mobile-cross-sell-gallery-item-description8 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper9 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper9 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper9 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper9 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper9 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper9 {display: none;}
+    #cross-sell-gallery-element_48-image9 {
+        background-image: url("https://i.ebayimg.com/images/g/zLYAAOSwAlJemWz7/s-l1600.jpg?set_id=8800005007") !important;
+        background-size: cover;
+    }
+    #cross-sell-gallery-element_48-item-name9::after {
+        content: "VW Volkswagen PASSAT Front Bumper License Plate Mounting Bracket 561.807.287 OEM";
+    }
+    #cross-sell-gallery-element_48-item-price9::after {
+            content: "Buy it now: 13.5 USD";
+        }
+        #cross-sell-gallery-element_48-item-ends-in9::after {
+            content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_10] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_8] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper8 {
+        width: 5%;
+        left: 50px;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper9 {
+        width: 10%;
+        left: 50px;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper9:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper10 {
+        width: 16%;
+        left: 19.43%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper10:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper11 {
+        width: 20%;
+        left: 39.63%;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper11:hover {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ .cross-sell-gallery-link #cross-sell-gallery-item-description11 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper0 {
+        width: 16%;
+        left: 64.57%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper0:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper1 {
+        width: 10%;
+        left: 84.77%;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper1:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper2 {
+        left: 84.77%;
+        width: 5%;
+        display: block;
+        opacity: 0;
+    }
+    #mobile-cross-sell-gallery-element_48-item-name9::after {
+        content: "VW Volkswagen PASSAT Front Bumper License Plate Mounting Bracket 561.807.287 OEM";
+    }
+    #mobile-cross-sell-gallery-element_48-item-price9::after {
+            content: "Buy it now: 13.5 USD";
+        }
+        #mobile-cross-sell-gallery-element_48-item-ends-in9::after {
+           content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_9:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_10] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_8] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper8 {
+        left: -175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper9 {
+        left: 0;
+        opacity: 1;
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper10 {
+        left: 175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_9:checked ~ .cross-sell-gallery-link #mobile-cross-sell-gallery-item-description9 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper10 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper10 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper10 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper10 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper10 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper10 {display: none;}
+    #cross-sell-gallery-element_48-image10 {
+        background-image: url("https://i.ebayimg.com/images/g/zoYAAOSwtVZegvar/s-l1600.jpg?set_id=8800005007") !important;
+        background-size: cover;
+    }
+    #cross-sell-gallery-element_48-item-name10::after {
+        content: "ZOOM Pedal Effects Guitar Accessories Sales Brochure Catalog NEW 20 Pages G2 G1";
+    }
+    #cross-sell-gallery-element_48-item-price10::after {
+            content: "Buy it now: 19.99 USD";
+        }
+        #cross-sell-gallery-element_48-item-ends-in10::after {
+            content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_11] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_9] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper9 {
+        width: 5%;
+        left: 50px;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper10 {
+        width: 10%;
+        left: 50px;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper10:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper11 {
+        width: 16%;
+        left: 19.43%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper11:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper0 {
+        width: 20%;
+        left: 39.63%;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper0:hover {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ .cross-sell-gallery-link #cross-sell-gallery-item-description0 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper1 {
+        width: 16%;
+        left: 64.57%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper1:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper2 {
+        width: 10%;
+        left: 84.77%;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper2:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper3 {
+        left: 84.77%;
+        width: 5%;
+        display: block;
+        opacity: 0;
+    }
+    #mobile-cross-sell-gallery-element_48-item-name10::after {
+        content: "ZOOM Pedal Effects Guitar Accessories Sales Brochure Catalog NEW 20 Pages G2 G1";
+    }
+    #mobile-cross-sell-gallery-element_48-item-price10::after {
+            content: "Buy it now: 19.99 USD";
+        }
+        #mobile-cross-sell-gallery-element_48-item-ends-in10::after {
+           content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_10:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_11] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_9] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper9 {
+        left: -175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper10 {
+        left: 0;
+        opacity: 1;
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper11 {
+        left: 175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_10:checked ~ .cross-sell-gallery-link #mobile-cross-sell-gallery-item-description10 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper11 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper11 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper11 {display: none;}
+    #cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper11 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-left-arrow-wrapper11 {display: none;}
+    #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-right-arrow-wrapper11 {display: none;}
+    #cross-sell-gallery-element_48-image11 {
+        background-image: url("https://i.ebayimg.com/images/g/NAwAAOSwFoFf9zwf/s-l1600.jpg?set_id=8800005007") !important;
+        background-size: cover;
+    }
+    #cross-sell-gallery-element_48-item-name11::after {
+        content: "TPG - Craftsman Hobby Mini File Set of 6 #96757 5 1/2\" - Swiss Made";
+    }
+    #cross-sell-gallery-element_48-item-price11::after {
+            content: "Buy it now: 99.49 USD";
+        }
+        #cross-sell-gallery-element_48-item-ends-in11::after {
+            content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_0] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_10] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper10 {
+        width: 5%;
+        left: 50px;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper11 {
+        width: 10%;
+        left: 50px;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper11:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper0 {
+        width: 16%;
+        left: 19.43%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper0:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper1 {
+        width: 20%;
+        left: 39.63%;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper1:hover {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ .cross-sell-gallery-link #cross-sell-gallery-item-description1 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper2 {
+        width: 16%;
+        left: 64.57%;
+        opacity: 0.8;
+        display: block;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper2:hover {
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper3 {
+        width: 10%;
+        left: 84.77%;
+        opacity: 0.5;
+        display: block;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper3:hover {
+        opacity: 1;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #cross-sell-gallery-wrapper .cross-sell-gallery-link #cross-sell-gallery-image-wrapper4 {
+        left: 84.77%;
+        width: 5%;
+        display: block;
+        opacity: 0;
+    }
+    #mobile-cross-sell-gallery-element_48-item-name11::after {
+        content: "TPG - Craftsman Hobby Mini File Set of 6 #96757 5 1/2\" - Swiss Made";
+    }
+    #mobile-cross-sell-gallery-element_48-item-price11::after {
+            content: "Buy it now: 99.49 USD";
+        }
+        #mobile-cross-sell-gallery-element_48-item-ends-in11::after {
+           content: "SOLD OUT";
+        }
+        #cross-sell-gallery-element_48-input_11:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-left-arrow-wrapper[for=cross-sell-gallery-element_48-input_0] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #mobile-cross-sell-gallery-wrapper .cross-sell-gallery-right-arrow-wrapper[for=cross-sell-gallery-element_48-input_10] {
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper10 {
+        left: -175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper11 {
+        left: 0;
+        opacity: 1;
+        display: block;
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ #mobile-cross-sell-gallery-wrapper #cross-sell-gallery-image-wrapper0 {
+        left: 175%;
+        display: block;
+        opacity: 0;
+    }
+    #cross-sell-gallery-element_48-input_11:checked ~ .cross-sell-gallery-link #mobile-cross-sell-gallery-item-description11 {
+        opacity: 1;
+        transition-delay: 250ms;
+        z-index: 1;
+    }
+    
