@@ -33,6 +33,7 @@ name:talk
 - [Notation](#theory)
 - [Batch effect detection](#detect)
 - [Batch effect removal](#removal)
+- [Results](#results)
 - [Discussion](#disc)
 
 ### [Additional Content](#extra)
@@ -47,6 +48,7 @@ name:back
 - [Notation](#theory)
 - [Batch effect detection](#detect)
 - [Batch effect removal](#removal)
+- [Results](#results)
 - [Discussion](#disc)
 
 ### [Additional Content](#extra)
@@ -84,7 +86,7 @@ name:back
 ### Problem 2
 
 
-<center>![:scale 60%](images/defense/causal_dag.png)</center>
+<center>![:scale 60%](images/causal/causal_ex.png)</center>
 
 - Measured: old smokers, and young non-smokers
   - did the smoking cause the cancer, or is cancer just a function of aging?
@@ -115,10 +117,10 @@ name:back
 
 ### Existing work (detection)
 
-#### Conditional Independence (CI) testing
+##### Conditional Independence (CI) testing
 
 - focus on the problem of determining whether two variables are not (causally) related more than the problem of determing whether two variables are (causally) related
-  - establishing causality is difficult
+  - establishing causality is difficult (need more assumptions)
 
 ---
 
@@ -126,7 +128,7 @@ name:back
 
 - ComBat (Johnson 2007)
   - fit a linear model, where individual "batches" are a linear transformation of one another
-  - optional: include terms for covariates (e.g., age, sex)
+  - optional: "adjust" with terms for covariates (e.g., age, sex)
 
 --
 - Surrogate Variable Analysis (SVA, Leek 2007/2014)
@@ -145,6 +147,7 @@ name:back
 - focus on estimation with linear/non-linear models (e.g., ComBat, NeuroHarmonize)?
 
 Proposal: leverage techniques from .ye[causal inference] to yield strategies which are both theoretically and empirically sensible for batch effect analyses
+- develop suitable language and estimands which allow us to be .ye[precise] when referring to batch effects
 
 ---
 
@@ -166,6 +169,7 @@ name:theory
 - Notation
 - [Batch effect detection](#detect)
 - [Batch effect removal](#removal)
+- [Results](#results)
 - [Discussion](#disc)
 
 ### [Additional Content](#extra)
@@ -180,7 +184,8 @@ name:theory
 | $U$ | random variable |
 | $u$ | realization of random variable $U$ |
 | $F\_{U \vert v}$ | distribution of $U$ conditional on $V = v$ |
-| $P(u \vert v)$ | probability of $U = u$ conditional on $V = v$ |
+| $f\_{U \vert v}(u)$ | density of $u$ conditional on $V = v$ |
+| $P\_{U \vert v}(u)$ | probability of $U = u$ conditional on $V = v$ |
 
 ---
 
@@ -204,6 +209,7 @@ name:detect
 - [Notation](#theory)
 - Batch effect detection
 - [Batch effect removal](#removal)
+- [Results](#results)
 - [Discussion](#disc)
 
 ### [Additional Content](#extra)
@@ -212,9 +218,9 @@ name:detect
 
 ### Causal  discrepancy
 
-Let $ f\_{Y\_i\(t\)| x, z}(y)$ denote the potential outcome density, conditional on the measured .ye[and] unmeasured covariates
+Let $ F\_{Y\_i\(t\)| x, z}$ denote the true potential outcome distribution, conditional on the measured .ye[and] unmeasured covariates
 
-$$\forall t \in [K]:\;\;\;\;f\_{Y\_i(t)}(y) = \int f\_{Y\_i\(t\)| x, z}(y) f(x,z) d(x,z)$$
+$$\forall t \in [K]:\;\;\;\;f\_{Y\_i(t)}(y) = \int\_{\mathcal X, \mathcal Z} f\_{Y\_i\(t\)| x, z}(y) f(x,z) d(x,z)$$
 
 for two exposures $k$ and $l$, there is a .ye[causal discrepancy] if:
 
@@ -257,9 +263,8 @@ $$F\_{Y\_i \vert k} \neq F_{Y\_i \vert l}$$
 
 <center>![:scale 60%](images/causal/ass_fail.png)</center>
 
-- Measured: old people at one site, and young people at another
-  - did the age cause the difference, or did the batch cause the difference?
-  - overlap violation
+- Propensity score overlap: $f_{X_i | t}(x) > 0$ for all $x, t$
+  - "covariates cannot fully determine who is in which exposure"
 
 ---
 
@@ -295,7 +300,8 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
 
 - detection tends to be an easier problem than estimation
 - Universally consistent tests readily exist for natural tests for non-causal effects in general settings (bounded variance)
-  - implication: don't need to limit the scope of distributions under consideration
+
+.ye[implication]: don't need to limit the scope of distributions under consideration, nor the types of "differences" that can exist between exposures
 
 ---
 
@@ -325,7 +331,7 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
 
 <center>![:scale 60%](images/causal/ass_fail.png)</center>
 
-- Overlap is a pre-hoc criterion: $P(x | t) > 0$ for all $x, t$
+- Overlap is a pre-hoc criterion: $f_{X_i | t}(x) > 0$ for all $x, t$
 - "Approximate" overlap? Propensity trimming
 
 ---
@@ -394,6 +400,7 @@ name:removal
 - [Notation](#theory)
 - [Batch effect detection](#detect)
 - Batch effect removal
+- [Results](#results)
 - [Discussion](#disc)
 
 ### [Additional Content](#extra)
@@ -496,7 +503,7 @@ Let $\hat g(y, t) = y - \hat \beta_0 \mathbb I(t = 2)$
 
 <center>![:scale 90%](images/causal/incorrect_spec.png)</center>
 
-- ComBat will (willingly and ablely) give us arbitrarily wrong answers
+- $\texttt{ComBat}$ will (willingly and ablely) give us arbitrarily wrong answers
 - "Extrapolation" works very not fine: batch effects are worse!
 
 ---
@@ -519,10 +526,40 @@ Let $\hat g(y, t) = y - \hat \beta_0 \mathbb I(t = 2)$
 
 ### Matching
 
+- .ye[Goal]: equate the empirical propensity distributions between the two batches
+- .ye[Implication]: improves robustness of estimates to model misspecification (Warnbaum 2012, VDV 1998)
 
+<center>![:scale 90%](images/causal/matching.png)</center>
 
 ---
 
+### When we "guess" wrong, stable
+
+<center>![:scale 90%](images/causal/incorrect_spec_causal.png)</center>
+
+- prepending "matching" yields stable estimates of batch effects
+  - limited overlap: no information to do .ye[anything]
+
+---
+
+name:results
+
+### Outline
+
+- [Motivation and background](#back)
+- [Notation](#theory)
+- [Batch effect detection](#detect)
+- [Batch effect removal](#removal)
+- Results
+- [Discussion](#disc)
+
+### [Additional Content](#extra)
+
+---
+
+
+
+---
 
 name:disc
 
@@ -532,9 +569,120 @@ name:disc
 - [Notation](#theory)
 - [Batch effect detection](#detect)
 - [Batch effect removal](#removal)
+- [Results](#results)
 - Discussion
 
 ### [Additional Content](#extra)
+
+---
+
+### Accomplishments (detection)
+
+- developed new causal language and machinery for detection of causal effects in high-dimensional regimes
+- demonstrated valid and powerful performance, unlike existing approaches (which often were neither)
+
+##### Implications
+
+- causal structure learning?
+- causal discovery?
+- large number of covariates?
+- continuous exposures?
+- $\texttt{VM}$ with ordinal exposures?
+
+---
+
+### Accomplishments (estimation)
+
+- revised language for batch effects to be more precise and specific
+- simulations reveal substantial limitations of $\texttt{ComBat}$
+  - uncover the benefits of causal perspective
+- highlighted internal and external validity problems with neuroimaging
+  - prioritizing internal validity yields dramatically different conclusions
+
+---
+
+### Limitations/Future work
+
+- limited studies with high sample size and demographic overlap between batches
+  - ABCD study (2021) "playground"
+- can use these studies to directly investigate robustness 
+  - split datasets into demographically non-aligned subsets; investigate stability
+
+##### Paths to check further
+
+- HDLSS problem: difficult to work with high dimensionality and low samples
+  - reduce model complexity: direct use of graph models with connectomes ($n \times n$ to $n \times d$)
+  - GNNs? GAMs?
+
+
+---
+
+### Acknowledgements
+
+
+<div class="small-container">
+  <img src="faces/jovo.png"/>
+  <div class="centered">Josh Vogelstein</div>
+</div>
+<div class="small-container">
+  <img src="faces/powell.jpg"/>
+  <div class="centered">Mike Powell</div>
+</div>
+<div class="small-container">
+  <img src="faces/ting.jpeg"/>
+  <div class="centered">Ting Xu</div>
+</div>
+<div class="small-container">
+  <img src="faces/gkiar.jpg"/>
+  <div class="centered">Greg Kiar</div>
+</div>
+<div class="small-container">
+  <img src="faces/snoble.jpeg"/>
+  <div class="centered">Stephanie Noble</div>
+</div>
+<div class="small-container">
+  <img src="faces/bcaffo.jpg"/>
+  <div class="centered">Brian Caffo</div>
+</div>
+<div class="small-container">
+  <img src="faces/mm.jpg"/>
+  <div class="centered">Michael Milham</div>
+</div>
+<div class="small-container">
+  <img src="faces/jaewon.jpg"/>
+  <div class="centered">J1 Chung</div>
+</div>
+<div class="small-container">
+  <img src="faces/sambit.jpg"/>
+  <div class="centered">Sambit Panda</div>
+</div>
+<div class="small-container">
+  <img src="faces/ross.jpg"/>
+  <div class="centered">Ross Lawrence</div>
+</div>
+<div class="small-container">
+  <img src="faces/bgilbert.jpeg"/>
+  <div class="centered">Brian Gilbert</div>
+</div>
+<div class="small-container">
+  <img src="faces/cshen.jpg"/>
+  <div class="centered">Cencheng Shen</div>
+</div>
+<div class="small-container">
+  <img src="faces/abadea.jpeg"/>
+  <div class="centered">Alexandra Badea</div>
+</div>
+
+<img src="images/funding/nsf_fpo.png" STYLE="HEIGHT:95px;"/>
+<img src="images/funding/nih_fpo.png" STYLE="HEIGHT:95px;"/>
+<img src="images/funding/darpa_fpo.png" STYLE=" HEIGHT:95px;"/>
+<img src="images/funding/iarpa_fpo.jpg" STYLE="HEIGHT:95px;"/>
+<img src="images/funding/KAVLI.jpg" STYLE="HEIGHT:95px;"/>
+<img src="images/funding/schmidt.jpg" STYLE="HEIGHT:95px;"/>
+
+- [Batch Effects (Bioarxiv)](https://www.biorxiv.org/content/10.1101/802629v8)
+- [Causal effect detection (draft)](https://www.overleaf.com/read/vrmfvgnzyqzk)
+- Code for [causal effect detection](https://github.com/ebridge2/cdcorr) and [batch effects paper](https://github.com/ebridge2/batch_effects)
 
 ---
 name:extra
