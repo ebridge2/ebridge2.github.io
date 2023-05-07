@@ -135,7 +135,7 @@ name:back
   - use latent variable models to capture sources of batch heterogeneity
 
 --
-- NeuroHarmonize (Fortin 2017)
+- NeuroHarmonize (Pomponio 2020)
   - estimate covariate relationships with Generalized Additive Models (GAMs)
 
 ---
@@ -557,7 +557,40 @@ name:results
 
 ---
 
+### CoRR Demographics
 
+
+<center>![:scale 100%](images/causal/demographic.png)</center>
+
+---
+
+### Associational/conditional effects can almost always be estimated 
+
+<center>![:scale 70%](images/causal/ass_eff.png)</center>
+
+---
+
+### Effects which respect confounding biases cannot
+
+<center>![:scale 70%](images/causal/caus_eff.png)</center>
+
+---
+
+### Edge-wise analysis
+
+- Effect of sex on connectivity (per edge), conditional on age
+
+<center>![:scale 100%](images/causal/effect_size.png)</center>
+
+- subsetting the data to demographically-aligned individuals, versus just demographically overlapping individuals, yields dramatically different inference
+
+---
+
+### Different assumptions produce radically different inference
+
+<center>![:scale 100%](images/causal/edges.png)</center>
+
+- upstream assumptions for batch effect correction play enormous role downstream
 
 ---
 
@@ -594,10 +627,12 @@ name:disc
 ### Accomplishments (estimation)
 
 - revised language for batch effects to be more precise and specific
+  - provides theoretical support for past investigations of batch effects (e.g., Fortin 2018)
 - simulations reveal substantial limitations of $\texttt{ComBat}$
   - uncover the benefits of causal perspective
 - highlighted internal and external validity problems with neuroimaging
   - prioritizing internal validity yields dramatically different conclusions
+- internal validity is a pre-req for external validity, so unclear the implications of non-causal protocols
 
 ---
 
@@ -605,15 +640,16 @@ name:disc
 
 - limited studies with high sample size and demographic overlap between batches
   - ABCD study (2021) "playground"
-- can use these studies to directly investigate robustness 
+- can use these studies to directly investigate robustness (e.g., Fortin 2018)
   - split datasets into demographically non-aligned subsets; investigate stability
+  - determine "best" batch effect correction protocols
 
 ##### Paths to check further
 
+- strategies to overcome batch effects external post-hoc?
 - HDLSS problem: difficult to work with high dimensionality and low samples
   - reduce model complexity: direct use of graph models with connectomes ($n \times n$ to $n \times d$)
-  - GNNs? GAMs?
-
+  - GNNs? boosting strategies with GAMs (Mayr 2012)?
 
 ---
 
