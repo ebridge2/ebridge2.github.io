@@ -218,8 +218,8 @@ name:detect
 
 ### Causal  discrepancy
 
-Let $ F\_{Y\_i\(t\)| x, z}$ denote the true potential outcome distribution, conditional on the measured .ye[and] unmeasured covariates
-
+Let $ F\_{Y\_i\(t\)| x, z}$ denote the potential outcome distribution, conditional on the measured .ye[and] unmeasured covariates
+  - distribution we would expect in exposure $t$ for an individual $i$ with covariates $(x, z)$
 $$\forall t \in [K]:\;\;\;\;f\_{Y\_i(t)}(y) = \int\_{\mathcal X, \mathcal Z} f\_{Y\_i\(t\)| x, z}(y) f(x,z) d(x,z)$$
 
 for two exposures $k$ and $l$, there is a .ye[causal discrepancy] if:
@@ -234,7 +234,7 @@ $$F\_{Y\_i(k)} \neq F\_{Y\_i(l)}$$
 
 ### Observational studies and causality
 
-- .ye[observational study]: variable under study is not controlled directly by the experimenters
+- .ye[observational study]: exposure is not controlled directly by the experimenters
   - $Y_i$ and $Y_i(t)$ do not, in general, have similar conditional/unconditional distributions
 
 --
@@ -254,7 +254,7 @@ $$F\_{Y\_i \vert k} \neq F_{Y\_i \vert l}$$
 
 --
 - Causal if measured and unmeasured covariates ($X$ and $Z$) are .ye[non-confounding] (unconditional ignorability and overlap)
-- difficult to ensure in observational studies
+- difficult to argue in observational studies
   - if exposure groups (e.g., batches) fundamentally differ at all then not causal
 ---
 
@@ -263,7 +263,7 @@ $$F\_{Y\_i \vert k} \neq F_{Y\_i \vert l}$$
 
 <center>![:scale 60%](images/causal/ass_fail.png)</center>
 
-- Propensity score overlap: $f_{X_i | t}(x) > 0$ for all $x, t$
+- Propensity score overlap: $P\_{T\_i | x}(t) > 0$ for all $x, t$
   - "covariates cannot fully determine who is in which exposure"
 
 ---
@@ -271,12 +271,12 @@ $$F\_{Y\_i \vert k} \neq F_{Y\_i \vert l}$$
 ### Conditional Effect
 
 - Observe $\left(y_i, t_i, x_i\right)$ for all $i \in [n]$
- - $F_{\mathbf Y\_i \vert t, x}$ is the .ye[observed] outcome distribution, conditional on the exposure (e.g., batch) and covariates $x$
+ - $F_{Y\_i \vert t, x}$ is the .ye[observed] outcome distribution, conditional on the exposure (e.g., batch) and covariates $x$
 
 Conditional effect exists between groups $k$ and $l$ if:
 $$F\_{Y\_i \vert k, x} \neq F\_{Y\_i \vert l, x}$$
 - Causal if .ye[no unmeasured confounding] (ignorability and overlap)
-- most common presentation in observational data
+- most common estimands from observational data
 
 ---
 
@@ -288,7 +288,7 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
 - covariates $x(t)=$ traits/histories + States
 
 --
-- Traits/histories are constant to individuals, and therefore perfectly balanced across both groups
+- Traits/histories are constant to individuals, and therefore perfectly balanced across exposures by design
 
 --
 - States may be different, as they are functions of location & time
@@ -308,8 +308,8 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
 ### Detecting batch effects
 
 ##### Crossover
-- confounding states observed and constant: $\texttt{DCorr}$
-- confounding states observed and not constant: $\texttt{cDCorr}$
+- states observed (or not) and constant/randomized: $\texttt{DCorr}$
+- states observed and not constant/non-randomized: $\texttt{cDCorr}$
 - .ye[usually not possible]
 
 --
@@ -331,7 +331,7 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
 
 <center>![:scale 60%](images/causal/ass_fail.png)</center>
 
-- Overlap is a pre-hoc criterion: $f_{X_i | t}(x) > 0$ for all $x, t$
+- Overlap is a pre-hoc criterion: $P\_{T\_i | x}(t) > 0$ for all $x, t$
 - "Approximate" overlap? Propensity trimming
 
 ---
@@ -360,6 +360,11 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
 
 ---
 
+% be more clear? 80/100? 
+% make image larger??
+% important????
+% take more time
+
 ### Question 1: validity
 
 - Fix $\Delta = 0$
@@ -367,7 +372,7 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
   - estimate type I error rate over $r=100$ trials
 
 --
-- Valid test: Type I error rate = $\alpha$
+- Valid test: Type I error rate $\approx \alpha = 0.05$
 
 ---
 
@@ -379,8 +384,19 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
 <center>![:scale 100%](images/causal/validity.png)</center>
 
 - Causal cDCorr and KernelCDTest are only valid strategies
-- Causal cDCorr only test which works on multi-group settings
+- Causal cDCorr only test which works on $>2$ exposure settings
 
+
+---
+
+### Question 2: power
+
+- $H_A$ is true for $\Delta > 0$ (there is an effect)
+- for all tests, vary $\Delta$ from $0$ to $1.0$ (outcome/covariate distributions very different across exposures):
+  - estimate statistical power over $r=100$ trials
+
+--
+- Powerful test: statistical power increasing (to $\approx 1$) as $\Delta$ increases
 
 ---
 
@@ -458,7 +474,7 @@ where $f$ is known
 
 ### Simulation
 
-Let $\mathbb E[Y(t) | x] = \beta_x f(x) + \beta_0\mathbb I(t = 2)$ be the "expected signal" for a covariate level $x$ in batch $t$
+Let $\mathbb E[Y\_i(t) | x] = \beta_x f(x) + \beta_0\mathbb I(t = 2)$ be the "expected signal" for a covariate level $x$ in batch $t$
 
 <center>![:scale 60%](images/causal/sim_simple.png)</center>
 
@@ -467,7 +483,7 @@ Let $\mathbb E[Y(t) | x] = \beta_x f(x) + \beta_0\mathbb I(t = 2)$ be the "expec
 
 ### Simulation
 
-Sample $(t_i, x_i, \epsilon_i)$ and let $y_i = \mathbb E[Y(t_i) | x_i] + \epsilon_i$ for $n=200$ points
+Sample $(t\_i, x\_i, \epsilon\_i)$ and let $y\_i = \mathbb E[Y(t\_i) | x\_i] + \epsilon_i$ for $n=200$ points
 
 <center>![:scale 60%](images/causal/sim_simple2.png)</center>
 
@@ -485,7 +501,7 @@ Fit linear model, obtain estimate of $\beta_0$
 ### Simulation
 
 Let $\hat g(y, t) = y - \hat \beta_0 \mathbb I(t = 2)$
-- Success: $\hat g\left(\mathbb E[Y(2) | x_i], 2\right) = \hat g\left(\mathbb E[Y(1) | x_i], 1\right)$
+- Success: $\hat g\left(\mathbb E[Y\_i(2) | x\_i], 2\right) \approx \hat g\left(\mathbb E[Y\_i(1) | x\_i], 1\right)$
 
 <center>![:scale 60%](images/causal/sim_simple5.png)</center>
 
