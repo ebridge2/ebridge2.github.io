@@ -354,16 +354,9 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
 - Settings: non-linear, non-monotone, second order, and multi-class non-linear true covariate/outcome relationship
 - balance: how well do the covariates overlap?
 - Effect size $\Delta$: how different is the data between batches?
-
 <center>![:scale 100%](images/causal/Sigmoidal.png)</center>
 
-
 ---
-
-% be more clear? 80/100? 
-% make image larger??
-% important????
-% take more time
 
 ### Question 1: validity
 
@@ -372,7 +365,11 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
   - estimate type I error rate over $r=100$ trials
 
 --
-- Valid test: Type I error rate $\approx \alpha = 0.05$
+- Valid test: Type I error rate $\leq \alpha = 0.05$
+- total of 80 possible settings (10 levels of "covariate balance" $\times$ 8 simulation settings)
+  - cMANOVA cannot be used in high dimensional regimes (40 total settings)
+  - KernelCDTest cannot be used in $>2$ exposure settings (20 total settings)
+  -"Valid": type I error rate within 1 SE of $.05$
 
 ---
 
@@ -396,6 +393,7 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
   - estimate statistical power over $r=100$ trials
 
 --
+
 - Powerful test: statistical power increasing (to $\approx 1$) as $\Delta$ increases
 
 ---
@@ -643,7 +641,7 @@ name:disc
 ### Accomplishments (estimation)
 
 - revised language for batch effects to be more precise and specific
-  - provides theoretical support for past investigations of batch effects (e.g., Fortin 2018)
+  - provides theoretical foundation for past investigations of batch effects (e.g., Fortin 2018)
 - simulations reveal substantial limitations of $\texttt{ComBat}$
   - uncover the benefits of causal perspective
 - highlighted internal and external validity problems with neuroimaging
@@ -656,16 +654,54 @@ name:disc
 
 - limited studies with high sample size and demographic overlap between batches
   - ABCD study (2021) "playground"
-- can use these studies to directly investigate robustness (e.g., Fortin 2018)
-  - split datasets into demographically non-aligned subsets; investigate stability
-  - determine "best" batch effect correction protocols
 
-##### Paths to check further
+##### Strategies to investigate batch effects pre-hoc
 
-- strategies to overcome batch effects external post-hoc?
-- HDLSS problem: difficult to work with high dimensionality and low samples
-  - reduce model complexity: direct use of graph models with connectomes ($n \times n$ to $n \times d$)
-  - GNNs? boosting strategies with GAMs (Mayr 2012)?
+- possible that there exist pre-processing strategies that reduce or worsen batch effects
+- Pre-process ABCD study using large number of pre-processing pipelines (ChildMind Institute)
+- use mechanisms for quantifying batch effects previously developed (Causal $\texttt{cDCorr}$) to quantify the "batch effect" 
+- directly investigate the impact of pre-processing choices on batch effects
+- identify strategies which "reduce" batch effects downstream, and strategies which "worsen" batch effects downstream
+
+---
+
+### Limitations/Future work
+
+- limited studies with high sample size and demographic overlap between batches
+  - ABCD study (2021) "playground"
+
+##### Investigate essential covariates for batch effect correction
+
+- seems (fairly) clear that if the covariate/outcome model is wrong, the result is disasterous
+  - likely that age and sex are woefully insufficient to characterize the full covariate/outcome relationship
+- perform a sensitivity analysis of batch effect adjustment techniques to upstream different covariate/outcome model specifications
+- identify covariates whose inclusion is critical to properly adjusting for batch effects, and covariates which are fairly irrelevant
+  - investigate stability of estimates in a richer covariate space than just age and sex
+
+---
+
+### Limitations/Future work
+
+- limited studies with high sample size and demographic overlap between batches
+  - ABCD study (2021) "playground"
+
+##### Developed principled connectome-specific methods for batch effect correction (embedding)
+
+- connectome: brain graph
+- use spectral embeddings or graph neural networks to "embed" connectomes into a latent space which is lower dimensionality
+  - estimation via GAMs is far simpler in less complicated spaces
+- investigate the utility of non-linear strategies in a regime where they can excel
+
+---
+
+### Limitations/Future work
+
+- limited studies with high sample size and demographic overlap between batches
+  - ABCD study (2021) "playground"
+
+##### Developed principled connectome-specific methods for batch effect correction (GNN)
+
+- use graph neural networks to "post-process" connectomes which obtain maximally similar representations to the connectomes, but are maximally .ye[uninformative] for batch effect detection (Seedat 2022)
 
 ---
 
