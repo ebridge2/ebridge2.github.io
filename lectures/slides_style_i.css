@@ -271,8 +271,8 @@ th {
   font-size: 10pt;
   margin-bottom: -11.6px;
   margin-right: 10px;
-  color: black; /*#FFFFFF; /* white */
-  opacity: 0; /* default: 0.5 */
+  color: white; /*#FFFFFF; /* white */
+  opacity: 1; /* default: 0.5 */
 }
 
 .remark-slide-content {
