@@ -336,7 +336,7 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
 
 ---
 
-### Vertex matching (VM)
+### Propensity Trimming
 
 - use generalized propensity score to "trim" individuals with low propensities for other exposures
   - generalizes well to $K \geq 2$ exposures
@@ -393,7 +393,6 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
   - estimate statistical power over $r=100$ trials
 
 --
-
 - Powerful test: statistical power increasing (to $\approx 1$) as $\Delta$ increases
 
 ---
@@ -590,13 +589,23 @@ name:results
 
 ---
 
+### Procedure for real data analysis
+
+.ye[Motivation]: does the manner in which we include/exclude samples for batch effect "correction" and subsequent inference matter?
+- If confounding is irrelevant, smaller samples = similar inference, but (in general) higher $p$-values
+  - If adjustment functions are reasonable "within range of overlap", propensity balancing should suffice
+
+<center>![:scale 60%](images/defense/eff_exp.png)</center>
+
+---
+
 ### Edge-wise analysis
 
 - Effect of sex on connectivity (per edge), conditional on age
 
 <center>![:scale 100%](images/causal/effect_size.png)</center>
 
-- subsetting the data to demographically-aligned individuals, versus just demographically overlapping individuals, yields dramatically different inference
+- (approximate) propensity balancing and fully matching yield widely different inference (much smaller $p$-values with fully matching)
 
 ---
 
@@ -604,8 +613,10 @@ name:results
 
 <center>![:scale 100%](images/causal/edges.png)</center>
 
+- compare strategies using full data to strategies using matching: almost orthogonal inference
 - upstream assumptions for batch effect correction play enormous role downstream
-
+  - is batch effect correction adding artifacts?
+  - are we missing crucial variables somewhere along the way?
 ---
 
 name:disc
@@ -644,8 +655,9 @@ name:disc
   - provides theoretical foundation for past investigations of batch effects (e.g., Fortin 2018)
 - simulations reveal substantial limitations of $\texttt{ComBat}$
   - uncover the benefits of causal perspective
-- highlighted internal and external validity problems with neuroimaging
-  - prioritizing internal validity yields dramatically different conclusions
+- discussion of paper focuses on implications of these results with internal and external validity (not discussed)
+  - .ye[internal validity]: "unbiased estimand" (causal techniques prioritize this)
+  - .ye[external validity]: achieve results which apply widely (non-causal techniques might achieve this, if causality doesn't matter)
 - internal validity is a pre-req for external validity, so unclear the implications of non-causal protocols
 
 ---
@@ -763,10 +775,6 @@ name:disc
 
 <img src="images/funding/nsf_fpo.png" STYLE="HEIGHT:95px;"/>
 <img src="images/funding/nih_fpo.png" STYLE="HEIGHT:95px;"/>
-<img src="images/funding/darpa_fpo.png" STYLE=" HEIGHT:95px;"/>
-<img src="images/funding/iarpa_fpo.jpg" STYLE="HEIGHT:95px;"/>
-<img src="images/funding/KAVLI.jpg" STYLE="HEIGHT:95px;"/>
-<img src="images/funding/schmidt.jpg" STYLE="HEIGHT:95px;"/>
 
 - [Batch Effects (Bioarxiv)](https://www.biorxiv.org/content/10.1101/802629v8)
 - [Causal effect detection (draft)](https://www.overleaf.com/read/vrmfvgnzyqzk)
