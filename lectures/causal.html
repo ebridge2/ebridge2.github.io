@@ -94,6 +94,15 @@ name:back
 
 ---
 
+### Connectome data
+
+- connectome: brain graph, where the data structure indicates the level of functional similarity or structural connectivity between areas of the brain
+  - relatively expensive, and very high-dimensional
+- goal: identify properties of these graphs that allow researchers to derive insights about people
+- expense $\Rightarrow$ collect data and pool
+
+---
+
 ### The problem of batch effects
 
 - .ye[batch effect]: the impact of the data collection procedure (measurement device, measurement protocol, season, etc.) on the data collected
@@ -154,7 +163,7 @@ Proposal: leverage techniques from .ye[causal inference] to yield strategies whi
 ### Motivating questions
 
 - how do we formulate batch effects as a problem in causal inference?
-- how do we detect batch effects for more than two groups?
+- how do we detect causal effects for more than two exposures?
 - under what assumptions are existing techniques to estimate batch effects reasonable?
 - how robust are these techniques to confounding?
 - what happens if the relationships are .ye[complicated] and there is confounding?
@@ -249,13 +258,13 @@ $$F\_{Y\_i(k)} \neq F\_{Y\_i(l)}$$
 
 - observe $(y_i, t_i)$ for $i \in [n]$
 
-Associational effect exists between groups $k$ and $l$ if:
+Associational effect exists between exposures $k$ and $l$ if:
 $$F\_{Y\_i \vert k} \neq F_{Y\_i \vert l}$$
 
 --
 - Causal if measured and unmeasured covariates ($X$ and $Z$) are .ye[non-confounding] (unconditional ignorability and overlap)
 - difficult to argue in observational studies
-  - if exposure groups (e.g., batches) fundamentally differ at all then not causal
+  - if exposures (e.g., batches) fundamentally differ at all then not causal
 ---
 
 ### Problem with associational effects
@@ -273,7 +282,7 @@ $$F\_{Y\_i \vert k} \neq F_{Y\_i \vert l}$$
 - Observe $\left(y_i, t_i, x_i\right)$ for all $i \in [n]$
  - $F_{Y\_i \vert t, x}$ is the .ye[observed] outcome distribution, conditional on the exposure (e.g., batch) and covariates $x$
 
-Conditional effect exists between groups $k$ and $l$ if:
+Conditional effect exists between exposures $k$ and $l$ if:
 $$F\_{Y\_i \vert k, x} \neq F\_{Y\_i \vert l, x}$$
 - Causal if .ye[no unmeasured confounding] (ignorability and overlap)
 - most common estimands from observational data
@@ -338,7 +347,7 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
 
 ### Propensity Trimming
 
-- use generalized propensity score to "trim" individuals with low propensities for other exposures
+- use generalized propensity score to "trim" individuals with extremely low (or high) propensities for particular exposures
   - generalizes well to $K \geq 2$ exposures
 
 <center>![:scale 100%](images/causal/vm.png)</center>
@@ -349,18 +358,32 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
 
 ### Simulations
 
-- $n = 100$ samples
+##### Settings
+
+- $n = 100$ samples in $ \geq 2$ batches
 - $d=10$ (low dimensional) or $d=101$ (high dimensional)
-- Settings: non-linear, non-monotone, second order, and multi-class non-linear true covariate/outcome relationship
-- balance: how well do the covariates overlap?
+- Settings: non-linear, non-monotone, second order, and multi-class
+
+<center>![:scale 100%](images/causal/Sigmoidal.png)</center>
+
+---
+
+### Simulations
+
+##### Key Aspects
+
+- Balance: how well do the covariates overlap?
 - Effect size $\Delta$: how different is the data between batches?
+  - $H_0 :$ no difference in batch distributions
+  - $H_A :$ difference in batch distributions
+
 <center>![:scale 100%](images/causal/Sigmoidal.png)</center>
 
 ---
 
 ### Question 1: validity
 
-- Fix $\Delta = 0$
+- Fix $\Delta = 0$ ($H_0$ is true)
 - for all tests, varying balance from $0.2$ (low balance) to $1.0$ (complete balance):
   - estimate type I error rate over $r=100$ trials
 
@@ -399,9 +422,9 @@ $$F\_{Y\_i(k) | x(k)} \neq F\_{Y\_i(l) | x(l)}$$
 
 ### Power testing
 
-<center>![:scale 100%](images/causal/powers.png)</center>
+<center>![:scale 95%](images/causal/powers.png)</center>
 
-- Causal $\texttt{cDCorr}$ is only approach powerful in all contexts
+- Causal $\texttt{cDCorr}$ is only approach powerful in all contexts (and at or near highest in any one context)
 
 ---
 
@@ -428,7 +451,7 @@ $$F\_{Y\_i(k)} \neq F\_{Y\_i(l)}$$
 
 and:
 
-$$F\_{g(Y\_i(k))} = F\_{g(Y\_i(l))}$$
+$$F\_{g(Y\_i(k), k)} = F\_{g(Y\_i(l), l)}$$
 
 --
 
@@ -997,7 +1020,7 @@ Adding causal assumptions, a CI test is equivalent to a causal conditional discr
 - Impossible to verify: condition about $P(T_i = t | X_i = x) > 0$
   - we can modify the data to .ye[approximate] positivity
 - Vector matching: exclude covariate levels that are "impossible"
-  - .ye[propensity trimming] to $K \geq 2$ groups
+  - .ye[propensity trimming] to $K \geq 2$ exposures
 
 <center>![:scale 100%](images/causal/vm.png)</center>
 
@@ -1011,7 +1034,7 @@ Adding causal assumptions, a CI test is equivalent to a causal conditional discr
 
 ##### Known
 1. Applies readily to high-dimensional data
-2. Applies to multiple groups (lemma)
+2. Applies to multiple exposures (lemma)
 3. (Asymptotically) consistent test for causal conditional discrepancy testing (corollary)
   - works with .ye[enough] data
 
