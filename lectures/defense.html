@@ -21,7 +21,9 @@
 
 ![:scale 40%](images/neurodata_blue.png)
 
-Eric W. Bridgeford | [ericwb.me](http://ericwb.me)
+| Eric W. Bridgeford | {Biostatistics, BME, CIS} |
+| --- | --- |
+| [ericwb95@gmail.com](mailto:ericwb95 at gmail dot com)  | [ericwb.me](https://ericwb.me) |
 
 ---
 name:talk
@@ -85,6 +87,24 @@ name:defn
 - .ye[Accidental deviations]: sources of variability not of scientific interest
 - .ye[Systematic deviations]: variability of interest
 - fundamental question of data science: identify systematic deviations in the presence of accidental deviations
+
+---
+
+### Connectome data
+
+- connectome: brain graph, where the data structure indicates the level of functional similarity or structural connectivity between areas of the brain
+  - relatively expensive, and very high-dimensional
+- goal: identify properties of these graphs that allow researchers to derive insights about people
+- expense $\Rightarrow$ collect data and pool
+
+---
+
+### What data will we be using?
+
+- CoRR mega-study
+- $N>1,700$ individuals imaged across $26$ different "batches"
+  - anatomical MRI and fMRI scans for each
+  - Individuals are measured at least twice
 
 ---
 
@@ -213,15 +233,6 @@ name:discr-results
 ### [Additional Content](#extra)
 
 ---
-
-### What data will we be using?
-
-- CoRR metadataset
-- $N>1,700$ individuals imaged across $26$ different datasets
-  - anatomical MRI and fMRI scans for each
-  - Individuals are measured at least twice
-
----
 ### Analysis Procedure
 
 Process each  measurement using $192$ different pipelines
@@ -301,7 +312,7 @@ How do we address the impact of too many processing strategies, and arbitrary su
 
 How do we address the impact of too many processing strategies, and arbitrary subsequent tasks?
 
-- .ye[Maximize desirable characteristics (e.g., discriminability) over massive meta-studies, and only change to strategies which have passed this test]
+- .ye[Maximize desirable characteristics (e.g., discriminability) over massive mega-studies, and adopt strategies which have passed this test]
 
 <center>![:scale 60%](images/defense/causal_dag.png)</center>
 
@@ -339,52 +350,43 @@ name: causal-mot
 
 ---
 
+### The problem of batch effects
 
-### Typical problem in causal inference
-
-<center>![:scale 60%](images/defense/causal1.png)</center>
-
-- goal: estimate impact of an exposure (smoking) on measurements (cancer), given a set of covariates (ages)
-
----
-
-
-### Problem 1: Unmeasured variables
-
-
-<center>![:scale 60%](images/defense/causal2.png)</center>
-
-- what if we didn't measure BMI, but BMI causes cancer and is related to smoking?
+- .ye[batch effect]: the impact of the data collection procedure (measurement device, measurement protocol, season, etc.) on the data collected
+- .ye[demographic effect]: impact on the data of scientifically "interesting" characteristics of the object under study
+- When datasets are demographically diverse (high confounding) and measurements are large (high number of features), difficult to <tagname style="color:red">mitigate batch effects</tagname> while <tagname style="color:green;">preserving demographic effects</tagname>
 
 ---
 
-### Solution 1
+### DAG for a neuroimaging study
 
-
-<center>![:scale 60%](images/defense/causal3.png)</center>
-
-- Assume unmeasured variables are minimally impactful
+<center>![:scale 100%](images/causal/CoRR_DAG.png)</center>
 
 ---
 
-### Problem 2
+### Existing work (correction)
 
+- ComBat (Johnson 2007)
+  - fit a linear model, where individual "batches" are a linear transformation of one another
+  - optional: "adjust" with terms for covariates (e.g., age, sex)
 
-<center>![:scale 60%](images/defense/causal_dag.png)</center>
+--
+- Surrogate Variable Analysis (SVA, Leek 2007/2014)
+  - use latent variable models to capture sources of batch heterogeneity
 
-- Measured: old smokers, and young non-smokers
-  - did the smoking cause the cancer, or is cancer just a function of aging?
-  - Technical term: .ye[Confounding]
+--
+- NeuroHarmonize (Pomponio 2020)
+  - estimate covariate relationships with Generalized Additive Models (GAMs)
 
 ---
 
-### Existing work
+### How do we propose to address batch effects?
 
-- classical causal inference focuses on this problem for univariate measurements (e.g., smoking)
-- some work (causal structure learning, conditional independence testing) attempts to do this in multivariate regimes
-  - how robust are these techniques to confounding?
-  - what do we do for more than two groups?
-  - what happens if the relationships are .ye[complicated]?
+- skip to latent variable modelling (e.g., SVA)?
+- focus on estimation with linear/non-linear models (e.g., ComBat, NeuroHarmonize)?
+
+Proposal: leverage techniques from .ye[causal inference] to yield strategies which are both theoretically and empirically sensible for batch effect analyses
+- develop suitable language and estimands which allow us to be .ye[precise] when referring to batch effects
 
 ---
 
@@ -405,46 +407,232 @@ name:causal-theory
 
 ---
 
-### Notation
+### General notation
 
-- $y_i$: an outcome of interest
-- $t_i$: an exposure of interest in one of $K$ groups
-- $x_i$: covariates
-- $y_i(t)$: potential outcome
-  - what would the outcome look like if the exposure had been $t$?
-
----
-
-### Causal assumptions
-
-- Consistency: $y_i = \\sum_t y_i(t) \\mathbb I\\{t_i = t\\}$
-  - we only observe one potential outcome (the rest are "missing")
---
-
-- Positivity: $P(t_i  = t | x_i = x) > 0$ for all $x$
-  - covariate distributions "overlap"
---
-
-- Ignorability: $\left(y_i(1), ..., y_i(K)\right) \perp t_i | x_i$
-  - missing data does not depend on missing data
---
-
-- No interference: treatments of units do not impact potential outcomes of other units
+| Symbol | Interpretation |
+| --- | --- |
+| $U$ | random variable |
+| $u$ | realization of random variable $U$ |
+| $F\_{U \vert v}$ | distribution of $U$ conditional on $V = v$ |
+| $f\_{U \vert v}(u)$ | density of $u$ conditional on $V = v$ |
+| $P\_{U \vert v}(u)$ | probability of $U = u$ conditional on $V = v$ |
 
 ---
 
-### Motivating question
+### Specific notation
 
-- .ye[causal conditional discrepancy]:
-$F\_{y(k)|x} \neq F\_{y(t) | x}$
-- When are causal discrepancies identifiable?
+| Symbol | Interpretation |
+| --- | --- |
+| $Y_i$ | random variable representing an outcome |
+| $T_i$ | random nominal ($1$ of $K$) exposure |
+| $X_i$ | random variable representing measured covariates |
+| $Z_i$ | random variable representing unmeasured covariates |
+| $Y_i(t)$ | potential outcome under exposure $t$ |
 
 ---
 
-### Theoretical results
+### Causal discrepancy
 
-- Under standard causal assumptions, conditional independence tests can be used for testing whether potential outcome distributions differ (conditional on covariates)
-- 
+Let $ F\_{Y\_i\(t\)| x, z}$ denote the potential outcome distribution, conditional on the measured .ye[and] unmeasured covariates
+  - distribution we would expect in exposure $t$ for an individual $i$ with covariates $(x, z)$
+$$\forall t \in [K]:\;\;\;\;f\_{Y\_i(t)}(y) = \int\_{\mathcal X, \mathcal Z} f\_{Y\_i\(t\)| x, z}(y) f(x,z) d(x,z)$$
+
+for two exposures $k$ and $l$, there is a .ye[causal discrepancy] if:
+
+$$F\_{Y\_i(k)} \neq F\_{Y\_i(l)}$$
+
+--
+- idea: potential outcomes (e.g., connectomes) for an individual differ in exposures (e.g., batches) $k$ and $l$
+- "batch effect"
+
+---
+
+### Observational studies and causality
+
+- .ye[observational study]: exposure is not controlled directly by the experimenters
+  - $Y_i$ and $Y_i(t)$ do not, in general, have similar conditional/unconditional distributions
+
+--
+- problem: sensible definition of a batch effect relies on potential outcomes $Y_i(t)$
+
+--
+- what other estimands "might" people discuss?
+
+---
+
+### Testing for batch effects
+
+##### Conditional setting
+- observe $\left(y_i, x_i, t_i\right)$ for all $i \in [n]$
+- Determine $F\_{Y\_i | k, x} \neq F\_{Y\_i | l, x}$ for batches $k, l$
+- causal if ignorability, covariate overlap hold
+  - if covariates "different enough" across batches, not causal
+
+---
+
+### Detecting batch effects
+
+- detection tends to be an easier problem than estimation
+- Universally consistent tests readily exist for natural tests for non-causal effects in general settings (bounded variance)
+
+.ye[implication]: don't need to limit the scope of distributions under consideration, nor the types of "differences" that can exist between exposures
+
+--
+- problem: existing approaches tend to perform poorly (finite sample) when positivity assumption is violated
+
+---
+
+### Overlap and batch effects (conditional)
+
+<center>![:scale 60%](images/causal/ass_fail.png)</center>
+
+- Overlap is a pre-hoc criterion: $P\_{T\_i | x}(t) > 0$ for all $x, t$
+- "Approximate" overlap? Propensity trimming
+
+---
+
+### Propensity Trimming
+
+- use generalized propensity score to "trim" individuals with extremely low (or high) propensities for particular exposures
+  - generalizes well to $K \geq 2$ exposures
+
+<center>![:scale 100%](images/causal/vm.png)</center>
+
+- Causal $\texttt{cDCorr}$: prepend VM to $\texttt{cDCorr}$
+
+---
+
+### Causal effect removal
+
+A function $g$ removes the causal discrepancy between exposures $k$ and $l$ if:
+
+$$F\_{Y\_i(k)} \neq F\_{Y\_i(l)}$$
+
+and:
+
+$$F\_{g(Y\_i(k), k)} = F\_{g(Y\_i(l), l)}$$
+
+--
+
+- idea: $g$ is a (usually unknown) function which "corrects" the disparity between potential outcomes
+
+--
+- "batch effect correction": estimating $g$ via $\hat g$
+
+---
+
+### Removing batch effects
+
+##### Crossover setting
+
+- estimate $\hat g$ using $\left(y_i(t), x_i(t)\right)$ for all ${\color{yellow}{t \in [K]}}, i \in [n]$
+- if states are changing, use conditional technique, else, associational
+
+##### Associational setting
+
+- estimate $\hat g$ using $\left(y_i, t_i\right)$ for all $i \in [n]$
+
+##### Conditional setting
+
+---
+
+### Conditional $\texttt{ComBat}$
+
+- estimate $\hat g$ using $\left(y_i, t_i, x_i\right)$ for all $i \in [n]$
+
+$\texttt{cComBat}$: model "batch" as a linear transform of an "underlying" signal
+
+$$y\_i = \alpha\_{t\_i} \left(f(x\_i) + \beta\_{t\_i}\right)$$
+where $f$ is known
+
+--
+- estimate $\alpha\_{t\_i}$ and $\beta\_{t\_i}$ via regression approaches
+- How critical is "knowing" $f$?
+
+---
+
+### Simulation
+
+Let $\mathbb E[Y\_i(t) | x] = \beta_x f(x) + \beta_0\mathbb I(t = 2)$ be the "expected signal" for a covariate level $x$ in batch $t$
+
+<center>![:scale 60%](images/causal/sim_simple.png)</center>
+
+---
+
+### Simulation
+
+Sample $(t\_i, x\_i, \epsilon\_i)$ and let $y\_i = \mathbb E[Y(t\_i) | x\_i] + \epsilon_i$ for $n=200$ points
+
+<center>![:scale 60%](images/causal/sim_simple2.png)</center>
+
+
+---
+
+### Simulation
+
+Fit linear model, obtain estimate of $\beta_0$
+
+<center>![:scale 60%](images/causal/sim_simple4.png)</center>
+
+---
+
+### Simulation
+
+Let $\hat g(y, t) = y - \hat \beta_0 \mathbb I(t = 2)$
+- Success: $\hat g\left(\mathbb E[Y\_i(2) | x\_i], 2\right) \approx \hat g\left(\mathbb E[Y\_i(1) | x\_i], 1\right)$
+
+<center>![:scale 60%](images/causal/sim_simple5.png)</center>
+
+---
+
+### When we "guess" right, balance doesn't matter
+
+<center>![:scale 90%](images/causal/correct_spec.png)</center>
+
+- "Extrapolation" works just fine
+
+---
+
+### When we "guess" wrong, disaster
+
+<center>![:scale 90%](images/causal/incorrect_spec.png)</center>
+
+- $\texttt{ComBat}$ will (willingly and ablely) give us arbitrarily wrong answers
+- "Extrapolation" works very not fine: batch effects are worse!
+
+---
+
+### When we "guess" wrong, disaster
+
+- "Extrapolation" requires extreme confidence in our model
+- when the number of outcome dimensions are high, how can we possibly expect to "guess" appropriate $f$ (for every dimension)?
+
+--
+
+##### (Possible) solutions
+- nonparametric estimation of $f$ ($\texttt{NeuroHarm}$)
+  - number of samples can be low; unclear how robust techniques (e.g., GAMs) are to HDLSS (high dimensionality; low sample size) problem
+
+--
+- Matching?
+
+---
+
+### Matching
+
+- .ye[Goal]: equate the empirical propensity distributions between the two batches
+- .ye[Implication]: improves robustness of estimates to model misspecification (Warnbaum 2012, VDV 1998)
+
+<center>![:scale 90%](images/causal/matching.png)</center>
+
+---
+
+### When we "guess" wrong, stable
+
+<center>![:scale 90%](images/causal/incorrect_spec_causal.png)</center>
+
+- prepending "matching" yields stable estimates of batch effects
+  - limited overlap: no information to do .ye[anything]
 
 ---
 
@@ -465,6 +653,55 @@ name:causal-results
 
 ---
 
+### CoRR Demographics
+
+
+<center>![:scale 100%](images/causal/demographic.png)</center>
+
+---
+
+### Associational/conditional effects can almost always be estimated 
+
+<center>![:scale 70%](images/causal/ass_eff.png)</center>
+
+---
+
+### Effects which respect confounding biases cannot
+
+<center>![:scale 70%](images/causal/caus_eff.png)</center>
+
+---
+
+### Procedure for real data analysis
+
+.ye[Motivation]: does the manner in which we include/exclude samples for batch effect "correction" and subsequent inference matter?
+- If confounding is irrelevant, smaller samples = similar inference, but (in general) higher $p$-values
+  - If adjustment functions are reasonable "within covariate overlap", should get similar inference with approximate propensity trimming and fully matched
+
+<center>![:scale 60%](images/defense/eff_exp.png)</center>
+
+---
+
+### Edge-wise analysis
+
+- Effect of sex on connectivity (per edge), conditional on age
+
+<center>![:scale 100%](images/causal/effect_size.png)</center>
+
+- (approximate) propensity trimming and fully matching yield widely different inference (much smaller $p$-values with fully matching)
+
+---
+
+### Different assumptions produce radically different inference
+
+<center>![:scale 100%](images/causal/edges.png)</center>
+
+- compare strategies using full data to strategies using matching: almost orthogonal inference
+- upstream assumptions for batch effect correction play enormous role downstream
+  - is batch effect correction adding artifacts?
+  - are we missing crucial variables somewhere along the way?
+---
+
 name:causal-disc
 
 ### Outline
@@ -482,6 +719,30 @@ name:causal-disc
 
 ---
 
+### Accomplishments (detection)
+
+- developed new causal language and machinery for detection of causal effects in high-dimensional regimes
+- demonstrated valid and powerful performance, unlike existing approaches (which often were neither)
+
+##### Implications
+
+- causal structure learning?
+- causal discovery?
+
+---
+
+### Accomplishments (estimation)
+
+- revised language for batch effects to be more precise and specific
+  - provides theoretical foundation for past investigations of batch effects (e.g., Fortin 2018)
+- simulations reveal substantial limitations of $\texttt{ComBat}$
+  - uncover the benefits of causal perspective
+- discussion of paper focuses on implications of these results with internal and external validity (not discussed)
+  - .ye[internal validity]: "unbiased estimand" (causal techniques prioritize this)
+  - .ye[external validity]: achieve results which apply widely (non-causal techniques might achieve this, if causality doesn't matter)
+- internal validity is a pre-req for external validity, so unclear the implications of non-causal protocols
+
+---
 
 ### Acknowledgements
 
@@ -489,8 +750,18 @@ name:causal-disc
   <img src="faces/jovo.png"/>
   <div class="centered">Josh Vogelstein</div>
 </div>
-
-
+<div class="small-container">
+  <img src="faces/bcaffo.jpg"/>
+  <div class="centered">Brian Caffo</div>
+</div>
+<div class="small-container">
+  <img src="faces/carlo.jpeg"/>
+  <div class="centered">Carlo Colantuoni</div>
+</div>
+<div class="small-container">
+  <img src="faces/powell.jpg"/>
+  <div class="centered">Mike Powell</div>
+</div>
 <div class="small-container">
   <img src="faces/shangsi.jpg"/>
   <div class="centered">Shangsi Wang</div>
@@ -524,10 +795,6 @@ name:causal-disc
   <div class="centered">William Gray-Roncal</div>
 </div>
 <div class="small-container">
-  <img src="faces/carlo.jpeg"/>
-  <div class="centered">Carlo Colantuoni</div>
-</div>
-<div class="small-container">
   <img src="faces/cdouville.jpeg"/>
   <div class="centered">Christopher Douville</div>
 </div>
@@ -540,10 +807,6 @@ name:causal-disc
   <div class="centered">Carey Priebe</div>
 </div>
 <div class="small-container">
-  <img src="faces/bcaffo.jpg"/>
-  <div class="centered">Brian Caffo</div>
-</div>
-<div class="small-container">
   <img src="faces/mm.jpg"/>
   <div class="centered">Michael Milham</div>
 </div>
@@ -551,18 +814,39 @@ name:causal-disc
   <img src="faces/xinian.jpg"/>
   <div class="centered">Xinian Zuo</div>
 </div>
+<div class="small-container">
+  <img src="faces/jaewon.jpg"/>
+  <div class="centered">J1 Chung</div>
+</div>
+<div class="small-container">
+  <img src="faces/sambit.jpg"/>
+  <div class="centered">Sambit Panda</div>
+</div>
+<div class="small-container">
+  <img src="faces/ross.jpg"/>
+  <div class="centered">Ross Lawrence</div>
+</div>
+<div class="small-container">
+  <img src="faces/bgilbert.jpeg"/>
+  <div class="centered">Brian Gilbert</div>
+</div>
+<div class="small-container">
+  <img src="faces/cshen.jpg"/>
+  <div class="centered">Cencheng Shen</div>
+</div>
+<div class="small-container">
+  <img src="faces/cboy.png"/>
+  <div class="centered">Cramér</div>
+</div>
 
 <img src="images/funding/nsf_fpo.png" STYLE="HEIGHT:95px;"/>
 <img src="images/funding/nih_fpo.png" STYLE="HEIGHT:95px;"/>
-<img src="images/funding/darpa_fpo.png" STYLE=" HEIGHT:95px;"/>
-<img src="images/funding/iarpa_fpo.jpg" STYLE="HEIGHT:95px;"/>
-<img src="images/funding/KAVLI.jpg" STYLE="HEIGHT:95px;"/>
-<img src="images/funding/schmidt.jpg" STYLE="HEIGHT:95px;"/>
 
-- [BioRxiv manuscript](https://www.biorxiv.org/content/10.1101/802629v6)
-- Code implementations in [python](https://github.com/neurodata/hyppo) and [R](https://github.com/neurodata/r-mgc)
+- [Discriminability paper 1](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009279) and [Discriminability paper 2](https://arxiv.org/pdf/2005.11911.pdf)
+- [Batch effects paper](https://www.biorxiv.org/content/10.1101/2021.09.03.458920v3)
 
 ---
+
 name:extra
 
 ### [Outline](#talk)
@@ -769,22 +1053,21 @@ name:discr-limitations
 - These statistics are not immune to sample characteristics
   - confounds such as age may inflate discriminability
 
-  ---
+---
 
-  name:discr-extension
+name:discr-extension
   
-  ### [Outline](#talk)
+### [Outline](#talk)
   
-  ### Additional Content
+### Additional Content
   
-  - Discriminability
-    - [Theory](#discr-theory)
-    - [Other Reproducibility Statistics](#discr-other)
-    - [Limitations](#discr-limitations)
-    - Extension: Discriminability Decomposition 
-  - [Causal Discrepency Testing](#causal-extra)
+- Discriminability
+  - [Theory](#discr-theory)
+  - [Other Reproducibility Statistics](#discr-other)
+  - [Limitations](#discr-limitations)
+  - Extension: Discriminability Decomposition 
+- [Causal Discrepency Testing](#causal-extra)
   
-
 ---
 
 ### Extension: Discriminability Decomposition
@@ -802,11 +1085,9 @@ $(x_{i}^k, y_i)$ $i=1, ..., n$, $k=1,...,s$, $y_i \in$ \{$1, ..., Y$\}
 - $D(y)$ is the group discriminability for group $y$
 - "How discriminable are samples from group $y$?"
 --
-
 - Note that $W = \mathbb P(\delta(x_i^k, x_i^{k'}) < \delta(x_i^k, x_j^{k''}) | y_i= y_j)$= $\frac{\mathbb P(\delta(x_i^k, x_i^{k'}) < \delta(x_i^k, x_j^{k''}) , y_i = y_j)}{\mathbb P(y_i = y_j)}$ by def conditional probability
 
 --
-
 - Let $w(y) = \mathbb P(y_i=y_j = y)$ denote the within-group weights 
 - With $\omega = \sum_y w(y)$, then:
 
@@ -819,15 +1100,13 @@ $(x_{i}^k, y_i)$ $i=1, ..., n$, $k=1,...,s$, $y_i \in$ \{$1, ..., Y$\}
 - "How discriminable are samples from group $y$ vs group $y'$, and vice versa?"
 
 --
-
 - Note that $B = \mathbb P(\delta(x_i^k, x_i^{k'}) < \delta(x_i^k, x_j^{k''}) | y_i\neq  y_j)$= $\frac{\mathbb P(\delta(x_i^k, x_i^{k'}) < \delta(x_i^k, x_j^{k''}) , y_i \neq y_j)}{\mathbb P(y_i \neq y_j)}$ by def conditional probability
 
 --
-
 - Let $b(y, y') = \mathbb P(y_i = y, y_j = y')$ denote the between group weights 
 - With $\beta = \sum_{y\neq y'} b(y,y')$, then:
 
-$B = \frac{1}{\beta}\sum_{y \neq y'}b(y,y')D(y,y')$ is the between-group Discriminability
+$B = \frac{1}{\beta}\sum_{y \neq y'}b(y,y')D(y,y')$ is the between-group Discr.
 
 ---
 ### Discriminability Decomposition
@@ -841,7 +1120,6 @@ $B = \frac{1}{\beta}\sum_{y \neq y'}b(y,y')D(y,y')$ is the between-group Discrim
 - are certain between-group discriminabilities greater than others?
 - "ANOVA-esque" or DISCO-esque"
 
-
 ---
 
 name:causal-extra
@@ -852,11 +1130,15 @@ name:causal-extra
 
 - [Discriminability](#discr-extra)
 - Causal Discrepency Testing
-  - [Unconditional discrepency testing](#causal-uncond)
+  - [Background](#causal-back)
+  - [Conditional causal discrepency testing](#causal-cond)
+  - [Simulations](#causal-sims)
+  - [Limitations (detection)](#causal-detect-lims)
+  - [Limitations (estimation)](#causal-rem-lims)
 
 ---
 
-name:causal-uncond
+name:causal-back
 
 ### [Outline](#talk)
 
@@ -864,50 +1146,350 @@ name:causal-uncond
 
 - [Discriminability](#discr-extra)
 - Causal Discrepency Testing
-  - Unconditional discrepency testing
+  - Background
+  - [Conditional causal discrepency testing](#causal-cond)
+  - [Simulations](#causal-sims)
+  - [Limitations (detection)](#causal-detect-lims)
+  - [Limitations (estimation)](#causal-rem-lims)
+
+---
+
+### The average treatment effect
+
+$\gamma \triangleq ATE = \mathbb E[Y_i(2) - Y_i(1)]$
+
+$H_0 : \gamma = 0$ against $H_A : \gamma \neq 0$
+
+- .ye[Fundamental problem of causal inference]: we observe $Y_i$, not $Y_i(t)$
+
+---
+
+### "Standard causal assumptions"
+
+- Consistency: $Y_i = \\sum_t Y_i(t) \\mathbb I\\{T_i = t\\}$
+  - we only observe one potential outcome (the rest are "missing")
+--
+
+- Positivity: $P(T_i  = t | X_i = x) > 0$ for all $x$
+  - covariate distributions "overlap"
+--
+
+- Ignorability: $\left(Y_i(1), ..., Y_i(K)\right) \perp T_i | X_i$
+  - missing data does not depend on missing data
+  - Did we "observe" all impactful variables?
+--
+
+- No interference: treatments of units do not impact potential outcomes of other units
+
+---
+
+### Causal assumptions allow us to describe potential outcomes
+
+Under standard causal assumptions, $\mathbb E[Y_i(t)] = \mathbb E\left[\mathbb E[Y_i | T_i = t, X_i]\right]$
+  - uses: .ye[$G$-computation formula]
+  - convenience: $\mathbb E[Y_i | T_i = 1, X_i]$ can be estimated
+
+--
+
+$\gamma \triangleq ATE = \mathbb E[Y_i(2) - Y_i(1)]$
+
+$\Rightarrow \gamma = \mathbb E[\mathbb E[Y_i | T_i = 1, X_i] - \mathbb E[Y_i | T_i = 1, X_i]]$
+
+---
+
+### Simulated example
+
+<center>![:scale 80%](images/causal/task.png)</center>
+
+- assumption: age and malnutrition are the only factors that impact height
+
+---
+
+### Simulated example
+
+<center>![:scale 80%](images/causal/data.png)</center>
+
+- Causal assumptions?
+
+---
+
+### Simulated example
+
+<center>![:scale 80%](images/causal/ate_ex_pos.png)</center>
+
+- Run linear regression, look for offset
+  - Offset "is" $\hat \gamma$
+
+---
+
+### "Unequal" impact across covariates?
+
+<center>![:scale 80%](images/causal/cate_mot.png)</center>
+
+---
+
+### Conditional ATE
+
+$\gamma_x \triangleq CATE(x) = \mathbb E[Y_i(2) - Y_i(1) | X = x]$
+
+$H_0 : \gamma_x = 0$ against $H_A : \gamma_x \neq 0$
+
+- Standard assumptions: $\mathbb E[Y_i(t) | X = x] = \mathbb E[Y_i | T_i = t, X = x]$ 
+  - as before, can be estimated (and tested)
+
+---
+
+### "Unequal" impact across covariates?
+
+<center>![:scale 80%](images/causal/cate_task.png)</center>
+- problem: higher order moments?
+
+---
+
+name:causal-cond
+
+### [Outline](#talk)
+
+### Additional Content
+
+- [Discriminability](#discr-extra)
+- Causal Discrepency Testing
+  - [Background](#causal-back)
+  - Conditional causal discrepency testing
+  - [Simulations](#causal-sims)
+  - [Limitations (detection)](#causal-detect-lims)
+  - [Limitations (estimation)](#causal-rem-lims)
+
+---
+
+### Causal conditional discrepancy
+
+- .ye[Causal conditional discrepancy]:
+
+$F\_{Y\_i(k) | x} \neq F\_{Y\_i(l) | x}$
+
+- for two "exposures" $k$ and $l$, there is a "discrepancy" in the potential outcome distributions for some covariate level $x$
+
+--
+- problem: cannot determine from data (some potential outcomes $Y_i(t)$ are typically missing)
+
+---
+
+### Conditional discrepancy
+
+.ye[Conditional discrepancy]:
+
+$F\_{Y\_i | k, x} \neq F\_{Y\_i | l, x}$
+
+- can determine from observed data (statements about observed $Y_i$)
+
+--
+
+##### Lemma
+
+Under standard causal assumptions, the following two tests are equivalent:
+
+1. $H\_0 : F\_{Y\_i(k) | x} = F\_{Y\_i(l) | x}$ against $H\_A: F\_{Y\_i(k) | x} \neq F\_{Y\_i(l) | x}$
+2. $H\_0 : F\_{Y\_i | k, x} = F\_{Y\_i | l, x}$ against $H\_A: F\_{Y\_i | k, x} \neq F\_{Y\_i | l, x}$
+
+--
+- Tests for causal conditional discrepancies are equivalent to conditional discrepancies
+
+---
+
+### Testing for causal discrepancies
+
+Related: Conditional independence (CI) testing
+
+$H\_0 : F\_{Y\_i, V\_i | x} = F\_{Y\_i | x}F\_{V\_i | x}$ against $H\_A : F\_{Y\_i, V\_i | x} \neq F\_{Y\_i | x}F\_{V\_i | x}$
+- if $V\_i$ is nominal, this is a conditional discrepancy test
+
+##### Remark (known)
+
+If $V\_i$ is nominal, a CI test is equivalent to a conditional discrepancy test.
+
+##### Corollary
+
+Adding causal assumptions, a CI test is equivalent to a causal conditional discrepancy test.
+
+---
+
+##### Known
+1. CI tests apply readily to high-dimensional data
+2. CI tests apply to multiple exposures (lemma)
+3. (Asymptotically) consistent test for causal conditional discrepancy testing (corollary)
+  - works with .ye[enough] data
+
+--
+
+##### Unknown
+  - Finite sample performance?
+  - Impact of group imbalance on inference?
+---
+
+
+name:causal-sims
+
+### [Outline](#talk)
+
+### Additional Content
+
+- [Discriminability](#discr-extra)
+- Causal Discrepency Testing
+  - [Background](#causal-back)
+  - [Conditional causal discrepency testing](#causal-cond)
+  - Simulations
+  - [Limitations (detection)](#causal-detect-lims)
+  - [Limitations (estimation)](#causal-rem-lims)
+
+---
+
+### Simulations
+
+##### Settings
+
+- $n = 100$ samples in $ \geq 2$ batches
+- $d=10$ (low dimensional) or $d=101$ (high dimensional)
+- Settings: non-linear, non-monotone, second order, and multi-class
+
+<center>![:scale 100%](images/causal/Sigmoidal.png)</center>
+
+---
+
+### Simulations
+
+##### Key Aspects
+
+- Balance: how well do the covariates overlap?
+- Effect size $\Delta$: how different is the data between batches?
+  - $H_0 :$ no difference in batch distributions
+  - $H_A :$ difference in batch distributions
+
+<center>![:scale 100%](images/causal/Sigmoidal.png)</center>
+
+---
+
+### Question 1: validity
+
+- Fix $\Delta = 0$ ($H_0$ is true)
+- for all tests, varying balance from $0.2$ (low balance) to $1.0$ (complete balance):
+  - estimate type I error rate over $r=100$ trials
+
+--
+- Valid test: Type I error rate $\leq \alpha = 0.05$
+- total of 80 possible settings (10 levels of "covariate balance" $\times$ 8 simulation settings)
+  - cMANOVA cannot be used in high dimensional regimes (40 total settings)
+  - KernelCDTest cannot be used in $>2$ exposure settings (20 total settings)
+  - "Valid": type I error rate within 1 SE of $.05$
+
+---
+
+### Validity testing
+
+<br/>
+
+
+<center>![:scale 100%](images/causal/validity.png)</center>
+
+- Causal cDCorr and KernelCDTest are only valid strategies
+- Causal cDCorr only test which works on $>2$ exposure settings
+
+
+---
+
+### Question 2: power
+
+- $H_A$ is true for $\Delta > 0$ (there is an effect)
+- for all tests, vary $\Delta$ from $0$ to $1.0$ (outcome/covariate distributions very different across exposures):
+  - estimate statistical power over $r=100$ trials
+
+--
+- Powerful test: statistical power increasing (to $\approx 1$) as $\Delta$ increases
+
+---
+
+### Power testing
+
+<center>![:scale 95%](images/causal/powers.png)</center>
+
+- Causal $\texttt{cDCorr}$ is only approach powerful in all contexts (and at or near highest in any one context)
+
+---
+
+name:causal-detect-lims
+
+### [Outline](#talk)
+
+### Additional Content
+
+- [Discriminability](#discr-extra)
+- Causal Discrepency Testing
+  - [Background](#causal-back)
+  - [Conditional causal discrepency testing](#causal-cond)
+  - [Simulations](#causal-sims)
+  - Limitations (detection)
+  - [Limitations (estimation)](#causal-rem-lims)
+
+---
+
+---
+
+name:causal-rem-lims
+
+### [Outline](#talk)
+
+### Additional Content
+
+- [Discriminability](#discr-extra)
+- Causal Discrepency Testing
+  - [Background](#causal-back)
+  - [Conditional causal discrepency testing](#causal-cond)
+  - [Simulations](#causal-sims)
+  - [Limitations (detection)](#causal-detect-lims)
+  - Limitations (estimation)
 
 ---
 
 </textarea>
-  <!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script> -->
-  <!-- <script src="remark-latest.min.js"></script> -->
-  <script src="remark-latest.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/contrib/auto-render.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
-  <script type="text/javascript">
+<!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script> -->
+<!-- <script src="remark-latest.min.js"></script> -->
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/katex.min.css">
+<script type="text/javascript">
 
-    var options = {};
-    var renderMath = function () {
-      renderMathInElement(document.body);
-      // or if you want to use $...$ for math,
-      renderMathInElement(document.body, {
-        delimiters: [ // mind the order of delimiters(!?)
-          { left: "$$", right: "$$", display: true },
-          { left: "$", right: "$", display: false },
-          { left: "\\[", right: "\\]", display: true },
-          { left: "\\(", right: "\\)", display: false },
-        ]
-      });
-    }
+  var options = {};
+  var renderMath = function () {
+    renderMathInElement(document.body);
+    // or if you want to use $...$ for math,
+    renderMathInElement(document.body, {
+      delimiters: [ // mind the order of delimiters(!?)
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false },
+      ]
+    });
+  }
 
-    remark.macros.scale = function (percentage) {
-      var url = this;
-      return '<img src="' + url + '" style="width: ' + percentage + '" />';
-    };
+  remark.macros.scale = function (percentage) {
+    var url = this;
+    return '<img src="' + url + '" style="width: ' + percentage + '" />';
+  };
 
-    // var slideshow = remark.create({
-    // Set the slideshow display ratio
-    // Default: '4:3'
-    // Alternatives: '16:9', ...
-    // {
-    // ratio: '16:9',
-    // });
+  // var slideshow = remark.create({
+  // Set the slideshow display ratio
+  // Default: '4:3'
+  // Alternatives: '16:9', ...
+  // {
+  // ratio: '16:9',
+  // });
 
-    var slideshow = remark.create(options, renderMath);
+  var slideshow = remark.create(options, renderMath);
 
 
-  </script>
+</script>
 </body>
 
 </html>
