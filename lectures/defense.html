@@ -56,27 +56,27 @@ name:defn
 <p align="center">
   ![:scale 60%](images/defense/typical.png)
 </p>
-- goal: establish relationship between exposure of interest and measurements, conditional on other covariates
+- goal: establish relationship between exposure of interest and data samples, conditional on other covariates
     - conclusion is externally valid: our analysis "generalizes"
-- domain expertise: "downplay" role of unmeasured covariates, and reach stable conclusion
-
----
-
-### Similar measurements can be collected using many different techniques
-
-<p align="center">
-  ![:scale 100%](images/defense/typical2.png)
-</p>
-- different acquisition protocols impart different "characteristics" to measurements
+- domain expertise: context for unmeasured variables
 
 ---
 
 ### Measurements are usually manipulated prior to analysis
 
+<p align="center">
+  ![:scale 100%](images/defense/typical2.png)
+</p>
+- the measurement that we obtain is rarely the measurement of interest
+  - .ye[derivative]: information that is a function of a raw measurement that is used to learn about the data
+
+---
+
+#### Similar measurements can be collected using many different techniques
+
 ![:scale 100%](images/defense/typical3.png)
 
-- Data pre-processing and processing: procedure of obtaining useful derivatives for our question of interest
-  - .ye[derivative]: information that is obtained from a raw measurement (a function of the raw measurement)
+- small differences in acquisition protocols (device used, settings, technician preparation, etc.) can impart biases to measurements
 
 ---
 
@@ -92,9 +92,12 @@ name:defn
 
 ### Connectome data
 
-- connectome: brain graph, where the data structure indicates the level of functional similarity or structural connectivity between areas of the brain
-  - relatively expensive, and very high-dimensional
-- goal: identify properties of these graphs that allow researchers to derive insights about people
+- connectome: brain graph, where the edges indicates the level of functional similarity or structural connectivity between areas of the brain
+<p align="center">
+  ![:scale 50%](images/defense/fmri_conn.png)
+</p>
+  - very high-dimensional
+  - properties about graph $\Rightarrow$ insights about brain function
 - expense $\Rightarrow$ collect data and pool
 
 ---
@@ -722,7 +725,7 @@ name:causal-disc
 ### Accomplishments (detection)
 
 - developed new causal language and machinery for detection of causal effects in high-dimensional regimes
-- demonstrated valid and powerful performance, unlike existing approaches (which often were neither)
+- demonstrated valid and powerful performance, unlike existing approaches (which often were neither, not discussed)
 
 ##### Implications
 
