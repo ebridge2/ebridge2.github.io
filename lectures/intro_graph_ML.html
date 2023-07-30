@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Causal inference in high dimensions</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="fonts/quadon/quadon.css">
+  <link rel="stylesheet" href="fonts/gentona/gentona.css">
+  <link rel="stylesheet" href="slides_style_i.css">
+  <script type="text/javascript" src="assets/plotly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+  <textarea id="source">
+
+
+
+<!-- TODO add slide numbers & maybe slide name -->
+
+### Causal inference and the problem of batch effects
+
+![:scale 40%](images/neurodata_blue.png)
+
+Eric W. Bridgeford &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | {Biostatistics, BME, CIS}<br>
+[ericwb95@gmail.com](mailto:ericwb95 at gmail dot com)  | [ericwb.me](https://ericwb.me)
+
+---
+name:talk
+
+### Outline
+
+- [Basics of Graph Data](#graphs)
+- [Random Graph Models](#models)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+name:graphs
+
+### Outline
+
+- Basics of Graph Data
+  - What is a network?
+  - [Matrix Representations](#matrix)
+  - [Summary Statistics](#summary)
+- [Random Graph Models](#models)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+name:matrix
+
+### Outline
+
+- Basics of Graph Data
+  - [What is a network?](#graphs)
+  - Matrix Representations
+  - [Summary Statistics](#summary)
+- [Random Graph Models](#models)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+name:summary
+
+### Outline
+
+- Basics of Graph Data
+  - [What is a network?](#graphs)
+  - [Matrix Representations](#matrix)
+  - Summary Statistics
+- [Random Graph Models](#models)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+name:models
+
+### Outline
+
+- [Basics of Graph Data](#graphs)
+- Random Graph Models
+  - Why do we use Random Graph Models?
+  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
+  - [Erdös Rényi Random Graphs](#er)
+  - [Stochastic Block Models](#sbm)
+  - [RDPGs](#rdpg)
+  - [Properties of Random Networks](#props)
+  - [Degree-Corrected Stochastic Block Models](#dcsbm)
+  - [Positive Semi-Definiteness](#psd)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+name:models
+
+### Outline
+
+- [Basics of Graph Data](#graphs)
+- Random Graph Models
+  - [Why do we use Random Graph Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
+  - [Erdös Rényi Random Graphs](#er)
+  - [Stochastic Block Models](#sbm)
+  - [RDPGs](#rdpg)
+  - [Properties of Random Networks](#props)
+  - [Degree-Corrected Stochastic Block Models](#dcsbm)
+  - [Positive Semi-Definiteness](#psd)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+
+name:ier
+
+### Outline
+
+- [Basics of Graph Data](#graphs)
+- Random Graph Models
+  - [Why do we use Random Graph Models?](#models)
+  - Inhomogeneous Erdös Rényi Random Graphs
+  - [Erdös Rényi Random Graphs](#er)
+  - [Stochastic Block Models](#sbm)
+  - [RDPGs](#rdpg)
+  - [Properties of Random Networks](#props)
+  - [Degree-Corrected Stochastic Block Models](#dcsbm)
+  - [Positive Semi-Definiteness](#psd)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+name:er
+
+### Outline
+
+- [Basics of Graph Data](#graphs)
+- Random Graph Models
+  - [Why do we use Random Graph Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
+  - Erdös Rényi Random Graphs
+  - [Stochastic Block Models](#sbm)
+  - [RDPGs](#rdpg)
+  - [Properties of Random Networks](#props)
+  - [Degree-Corrected Stochastic Block Models](#dcsbm)
+  - [Positive Semi-Definiteness](#psd)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+name:sbm
+
+### Outline
+
+- [Basics of Graph Data](#graphs)
+- Random Graph Models
+  - [Why do we use Random Graph Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
+  - [Erdös Rényi Random Graphs](#er)
+  - Stochastic Block Models
+  - [RDPGs](#rdpg)
+  - [Properties of Random Networks](#props)
+  - [Degree-Corrected Stochastic Block Models](#dcsbm)
+  - [Positive Semi-Definiteness](#psd)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+name:rdpg
+
+### Outline
+
+- [Basics of Graph Data](#graphs)
+- Random Graph Models
+  - [Why do we use Random Graph Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
+  - [Erdös Rényi Random Graphs](#er)
+  - [Stochastic Block Models](#sbm)
+  - RDPGs
+  - [Properties of Random Networks](#props)
+  - [Degree-Corrected Stochastic Block Models](#dcsbm)
+  - [Positive Semi-Definiteness](#psd)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+name:props
+
+### Outline
+
+- [Basics of Graph Data](#graphs)
+- Random Graph Models
+  - [Why do we use Random Graph Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
+  - [Erdös Rényi Random Graphs](#er)
+  - [Stochastic Block Models](#sbm)
+  - [RDPGs](#rdpg)
+  - Properties of Random Networks
+  - [Degree-Corrected Stochastic Block Models](#dcsbm)
+  - [Positive Semi-Definiteness](#psd)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+name:dcsbm
+
+### Outline
+
+- [Basics of Graph Data](#graphs)
+- Random Graph Models
+  - [Why do we use Random Graph Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
+  - [Erdös Rényi Random Graphs](#er)
+  - [Stochastic Block Models](#sbm)
+  - [RDPGs](#rdpg)
+  - [Properties of Random Networks](#props)
+  - Degree-Corrected Stochastic Block Models
+  - [Positive Semi-Definiteness](#psd)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+name:psd
+
+### Outline
+
+- [Basics of Graph Data](#graphs)
+- Random Graph Models
+  - [Why do we use Random Graph Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
+  - [Erdös Rényi Random Graphs](#er)
+  - [Stochastic Block Models](#sbm)
+  - [RDPGs](#rdpg)
+  - [Properties of Random Networks](#props)
+  - [Degree-Corrected Stochastic Block Models](#dcsbm)
+  - Positive Semi-Definiteness
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+
+### Example of complicated LaTeX
+
+Related: Conditional independence (CI) testing
+
+$H\_0 : F\_{Y\_i, V\_i | x} = F\_{Y\_i | x}F\_{V\_i | x}$ against $H\_A : F\_{Y\_i, V\_i | x} \neq F\_{Y\_i | x}F\_{V\_i | x}$
+- if $V\_i$ is nominal, this is a conditional discrepancy test
+
+##### Remark (known)
+
+If $V\_i$ is nominal, a CI test is equivalent to a conditional discrepancy test.
+
+##### Corollary
+
+Adding causal assumptions, a CI test is equivalent to a causal conditional discrepancy test.
+
+---
+
+### Example of images
+
+- Impossible to verify: condition about $P(T_i = t | X_i = x) > 0$
+  - we can modify the data to .ye[approximate] positivity
+- Vector matching: exclude covariate levels that are "impossible"
+  - .ye[propensity trimming] to $K \geq 2$ exposures
+
+<center>![:scale 100%](images/causal/vm.png)</center>
+
+
+</textarea>
+<!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script> -->
+<!-- <script src="remark-latest.min.js"></script> -->
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/katex.min.css">
+<script type="text/javascript">
+
+  var options = {};
+  var renderMath = function () {
+    renderMathInElement(document.body);
+    // or if you want to use $...$ for math,
+    renderMathInElement(document.body, {
+      delimiters: [ // mind the order of delimiters(!?)
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false },
+      ]
+    });
+  }
+
+  remark.macros.scale = function (percentage) {
+    var url = this;
+    return '<img src="' + url + '" style="width: ' + percentage + '" />';
+  };
+
+  // var slideshow = remark.create({
+  // Set the slideshow display ratio
+  // Default: '4:3'
+  // Alternatives: '16:9', ...
+  // {
+  // ratio: '16:9',
+  // });
+
+  var slideshow = remark.create(options, renderMath);
+
+
+</script>
+</body>
+
+</html>
