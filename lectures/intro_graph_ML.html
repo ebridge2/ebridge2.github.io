@@ -40,29 +40,215 @@ name:talk
 ### [Additional Content](#extra)
 
 ---
+name:whyhave
+
+### Outline
+
+- Basics of Graph Data
+  - Why do we have special approaches for networks?
+  - [What is a network?](#graphs)
+  - [What different types of networks are there?](#types)
+- [Random Graph Models](#models)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### [Additional Content](#extra)
+
+---
+
+### What is the traditional framework for learning in science?
+
+- Most data tends to be in a ubiquitous format: $n$ observations with $d$ features/dimensions
+  - We have lots of algorithms that allow us to learn from this data across different languages
+  - $\texttt{sklearn}$ in $\texttt{python}$, $\texttt{keras}$ in $\texttt{R}$, etc.
+<br>
+<br>
+<br>
+
+| Person | Biological Sex | Height | Age |
+| --- | --- | --- | --- |
+| Person $1$ | Male | $5'9"$ | $28$ |
+| Person $2$ | Female | $5'5"$ | $24$ |
+| ... | ... | ... | ... |
+
+---
+
+### What is the traditional framework for learning in science?
+
+- Most data tends to be in a ubiquitous format: $n$ observations with $d$ features/dimensions
+  - We have lots of algorithms that allow us to learn from this data across different languages
+  - $\texttt{sklearn}$ in $\texttt{python}$, $\texttt{keras}$ in $\texttt{R}$, etc.
+- Devise techniques that allow us to calculate useful quantities about each .ye[observation]
+
+| Person | Biological Sex | Height | Age |
+| --- | --- | --- | --- |
+| Person $1$ | Male | $5'9"$ | $28$ |
+| Person $2$ | Female | $5'5"$ | $24$ |
+| ... | ... | ... | ... |
+
+---
+
+### Coin flip example
+
+- Coin flip experiment: have a coin with probability of landing on heads of $p$
+- .ye[Question]: If I flip the coin $15$ times and it lands on heads $6$, can you estimate the probability of landing on heads?
+- Anybody? Why is it what it is?
+
+---
+
+### Coin flip example
+
+- Coin flip experiment: have a coin with probability of landing on heads of $p$
+- Question: If I flip the coin $15$ times and it lands on heads $6$, can you estimate the probability of landing on heads?
+- .ye[Intuitive answer]: $\frac{6}{15}$
+
+---
+
+### Coin flip example
+
+- Coin flip experiment: have a coin with probability of landing on heads of $p$
+- Question: If I flip the coin $15$ times and it lands on heads $6$, can you estimate the probability of landing on heads?
+
+##### Rigorous answer
+
+$\mathbf{x}_i \sim \text{Bern}(p)$ $i.i.d$ heads (value $1$) and tails (value $0$)
+
+---
+
+### Coin flip example
+
+- Coin flip experiment: have a coin with probability of landing on heads of $p$
+- Question: If I flip the coin $15$ times and it lands on heads $6$, can you estimate the probability of landing on heads?
+
+##### Rigorous answer
+
+$\mathbf{x}_i \sim \text{Bern}(p)$ $i.i.d$
+
+$\mathcal L (x\_1, ..., x\_{15}) = \prod\_{i = 1}^{15} p^{x\_i}(1 - p)^{x\_i}$
+
+---
+
+### Coin flip example
+
+- Coin flip experiment: have a coin with probability of landing on heads of $p$
+- Question: If I flip the coin $15$ times and it lands on heads $6$, can you estimate the probability of landing on heads?
+
+##### Rigorous answer
+
+$\mathbf{x}_i \sim \text{Bern}(p)$ $i.i.d$
+
+$\mathcal L (x\_1, ..., x\_{15}) = \prod\_{i = 1}^{15} p^{x\_i}(1 - p)^{x\_i}$
+
+take derivative and set equal to zero $\Rightarrow \hat p = \frac{\sum\_{i = 1}^{15}x\_i}{15}$ is the MLE
+
+---
+
+### Coin flip example
+
+- Coin flip experiment: have a coin with probability of landing on heads of $p$
+- Question: If I flip the coin $15$ times and it lands on heads $6$, can you estimate the probability of landing on heads?
+
+##### Rigorous answer
+
+$\mathbf{x}_i \sim \text{Bern}(p)$ $i.i.d$
+
+$\mathcal L (x\_1, ..., x\_{15}) = \prod\_{i = 1}^{15} p^{x\_i}(1 - p)^{x\_i}$
+
+take derivative and set equal to zero $\Rightarrow \hat p = \frac{\sum\_{i = 1}^{15}x\_i}{15}$ is the MLE
+
+check that we found a maximum (second derivative, check extrema)
+
+---
+
+### Coin flip example
+
+- Coin flip experiment: have a coin with probability of landing on heads of $p$
+- Question: If I flip the coin $15$ times and it lands on heads $6$, can you estimate the probability of landing on heads?
+- Intuitive and rigorous answers align
+  - Statistics allows us to be rigorous about things we find intuitive
+
+---
+
+### Coin flip example
+
+- Coin flip experiment: have a coin with probability of landing on heads of $p$
+- Question: If I flip the coin $15$ times and it lands on heads $6$, can you estimate the probability of landing on heads?
+- Intuitive and rigorous answers align
+  - Statistics allows us to be rigorous about things we find intuitive
+  - Statistics can also allow us to be rigorous about things that are more complicated or unintuitive
+
+---
+
 name:graphs
 
 ### Outline
 
 - Basics of Graph Data
+  - [Why do we have special approaches for networks?](#whyhave)
   - What is a network?
-  - [Matrix Representations](#matrix)
-  - [Summary Statistics](#summary)
+  - [What different types of networks are there?](#types)
 - [Random Graph Models](#models)
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
 ### [Additional Content](#extra)
 
+
 ---
-name:matrix
+
+### What is a network?
+
+- Network/Graph $G = (\mathcal V, \mathcal E)$
+  - $\mathcal V$ are vertices/nodes
+  - $\mathcal E$ are edges: connect one vertex/node to another
+
+<center>![:scale 100%](images/honml/ny_ex.png)</center>
+
+---
+
+### Layout plots
+
+- Provide a visualization of the nodes and edges in the network in some arbitrary space
+
+<center>![:scale 100%](images/honml/ny_ex_layout.png)</center>
+
+---
+
+### Adjacency matrices
+
+- $A$ is an $n \\times n$ adjacency matrix for a network with $n$ nodes
+$$\\begin{aligned}
+a\_{ij} = \\begin{cases}1, & e\_{ij} \in \mathcal E \\\\ 0, & e\_{ij} \not\in \mathcal E\end{cases}
+\\end{aligned}$$
+
+<center>![:scale 100%](images/honml/nyc_adj.png)</center>
+
+---
+
+### Paths describe .ye[edges of travel] from one node to the next
+
+- Path from $i$ to $j$: sequence of edges $e\_{i'j'}$ from node $i$ and ending at node $j$
+- What's a path from Staten Island  (SI) to Bronx (BX)?
+
+
+<center>![:scale 100%](images/honml/nyc_layoutonly.png)</center>
+
+---
+
+### Two paths from SI to BX
+
+<center>![:scale 100%](images/honml/si_bx_paths.png)</center>
+
+---
+
+name:types
 
 ### Outline
 
 - Basics of Graph Data
+  - [Why do we have special approaches for networks?](#whyhave)
   - [What is a network?](#graphs)
-  - Matrix Representations
-  - [Summary Statistics](#summary)
+  - What different types of networks are there?
 - [Random Graph Models](#models)
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
@@ -70,21 +256,67 @@ name:matrix
 ### [Additional Content](#extra)
 
 ---
-name:summary
 
-### Outline
+### Directed networks
 
-- Basics of Graph Data
-  - [What is a network?](#graphs)
-  - [Matrix Representations](#matrix)
-  - Summary Statistics
-- [Random Graph Models](#models)
-- [Estimating Parameters for Networks](#est)
-- [Applications](#est)
-
-### [Additional Content](#extra)
+- Edges aren't necessarily "symmetric"
+  - The lanes of the Brooklyn bridge are out from BK to MH
+  - There is an edge from MH to BK, but there is no edge from BK to MH
+- .ye[asymmetric] adjacency matrix
+<center>![:scale 100%](images/honml/nyc_dir.png)</center>
 
 ---
+
+### Networks with self-loops
+
+- .ye[self-loops] allow nodes to connect back to themselves
+  - A bridge from a point in SI to another point within SI (crossing a creek?)
+- .ye[non-hollow] adjacency matrix
+
+<center>![:scale 100%](images/honml/nyc_sl.png)</center>
+
+---
+
+### Networks with weights
+
+- For every edge, a .ye[weight] $w\_{ij}$ indices information about the "strength" of the edge
+  - What is the level of traffic congestion for each bridge?
+- .ye[non-binary] adjacency matrix
+<center>![:scale 100%](images/honml/nyc_weight.png)</center>
+
+---
+
+### Simple networks
+
+- undirected, unweighted, loopless
+  - symmetric, binary, hollow adjacency matrix
+
+---
+
+### Degrees
+
+# TODO
+
+---
+
+### Drosophila connectome
+
+- neuron: functional "unit" of the brain
+- edge: "synapses"
+  - do two neurons communicate with one another?
+
+<center>![:scale 100%](images/honml/dros_con.png)</center>
+
+---
+
+### Attributes for network data
+
+- .ye[attributes] describe characteristics of the nodes or edges in the network
+
+# TODO
+
+---
+
 name:models
 
 ### Outline
@@ -109,24 +341,149 @@ name:models
 ### [Additional Content](#extra)
 
 ---
-name:models
 
-### Outline
+### Back to coin flips
 
-- [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - Why do we use Random Graph Models?
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
-  - [Stochastic Block Models](#sbm)
-  - [RDPGs](#rdpg)
-  - [Properties of Random Networks](#props)
-  - [Degree-Corrected Stochastic Block Models](#dcsbm)
-  - [Positive Semi-Definiteness](#psd)
-- [Estimating Parameters for Networks](#est)
-- [Applications](#est)
+- Let's imagine a game of flipping a coin
+  - You win if it lands on heads less than $5$ times, and if it lands on heads more than $5$ times, your friend wins
 
-### [Additional Content](#extra)
+---
+
+### Back to coin flips
+
+- Let's imagine a game of flipping a coin
+  - You win if it lands on heads less than $5$ times, and if it lands on heads more than $5$ times, your friend wins
+- Outcome: $9$ heads
+- Was it rigged? Is the coin biased?
+
+---
+
+### Making the coin flip experiment more formal
+
+- Model: $\mathbf x\_i \sim \\text{Bern}(p)$ $i.i.d.$
+- Question: is $p > 0.5$?
+- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$?
+
+---
+
+### Making the coin flip experiment more formal
+
+- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$?
+- Null: $\\sum\_{i = 1}^{10} \\mathbf x\_i \sim \\text{Binomial}(10, 0.5)$
+- $p$-value: $p = \\sum_{k = 9}^{10} \\binom{10}{k}p^{k}(1 - p)^{10 - k}$
+
+
+---
+
+### Making the coin flip experiment more formal
+
+- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$?
+- Null: $\\sum\_{i = 1}^{10} \\mathbf x\_i \sim \\text{Binomial}(10, 0.5)$
+- $p$-value: $p = \\sum_{k = 9}^{10} \\binom{10}{k}p^{k}(1 - p)^{10 - k}$
+- .ye[What did the model let us do?]
+
+---
+
+### Making the coin flip experiment more formal
+
+- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$?
+- Null: $\\sum\_{i = 1}^{10} \\mathbf x\_i \sim \\text{Binomial}(10, 0.5)$
+- $p$-value: $p = \\sum_{k = 9}^{10} \\binom{10}{k}p^{k}(1 - p)^{10 - k}$
+- .ye[What did the model let us do?]
+  - Get really specific and precise about this tangible concept ($9$ heads in $10$ flips seems like an awful lot)
+
+---
+
+### Why do we use random graph models?
+
+- Networks are fundamentally different from $n$ observation, $d$ feature framework
+  - Collection of nodes and edges, not observations with features
+
+---
+
+### Why do we use random graph models?
+
+- Networks are fundamentally different from $n$ observation, $d$ feature framework
+  - Collection of nodes and edges, not observations with features
+- .ye[All of the machinery built for tabular data will not natively work with a network]
+
+---
+
+### Approach 1: nodes are observations, edges are features
+
+- .ye[Features] in traditional machine learning describe each observation
+  - isolate information about a particular observation
+
+| Person | Biological Sex | Height | Age |
+| --- | --- | --- | --- |
+| Person $1$ | Male | $5'9"$ | $28$ |
+| Person $2$ | Female | $5'5"$ | $24$ |
+| ... | ... | ... | ... |
+
+---
+
+### Approach 1: nodes are observations, edges are features
+
+- .ye[Features] in traditional machine learning describe each observation
+- Edges define .ye[relationships amongst the nodes]
+  - the edges do not inherently isolate information about each node, so they aren't features for observations
+
+<center>![:scale 100%](images/honml/nyc_adj.png)</center>
+
+---
+
+### ~~Approach 1: nodes are observations, edges are features~~
+
+- .ye[Features] in traditional machine learning describe each observation
+- Edges define .ye[relationships amongst the nodes]
+  - the edges do not inherently isolate information about each node, so they aren't features for observations
+
+<center>![:scale 100%](images/honml/nyc_adj.png)</center>
+
+---
+
+### Approach 2: treat all possible adjacency matrices like a coin flip
+
+- $\mathbf{x}\_i \sim \text{Bern}(p)$
+  - Affix a probability ($p$) to an outcome of $1$, and $1 - p$ to an outcome of $0$
+- There are a finite number of entries in an adjacency matrix, taking finitely many values
+  - There are a finite number of adjacency matrices for $n$ node networks
+
+---
+
+### Approach 2: treat all possible adjacency matrices like a coin flip
+
+- $\mathbf{x}\_i \sim \text{Bern}(p)$
+  - Affix a probability ($p$) to an outcome of $1$, and $1 - p$ to an outcome of $0$
+- There are a finite number of entries in an adjacency matrix, taking finitely many values
+  - There are a finite number of adjacency matrices for $n$ node networks
+- What if we just affix a probability to each possible network?
+
+---
+
+### Number of possible $2$ node adjacency matrices
+
+$$\\begin{aligned} \\begin{bmatrix} 0 & 1 \\\\ 1 & 0\\end{bmatrix} \\text{ or } \\begin{bmatrix} 0 & 0 \\\\ 0 & 0\\end{bmatrix}\\end{aligned}$$
+
+---
+
+### Number of possible $3$ node adjacency matrices
+
+$$\\begin{aligned} \\begin{bmatrix} 0 & 1 & 1\\\\ 1 & 0 & 1 \\\\ 1 & 1 & 0\\end{bmatrix} \\text{ or } \\begin{bmatrix} 0 & 1 & 0\\\\ 1 & 0 & 1 \\\\ 0 & 1 & 0\\end{bmatrix} \\text{ or }\\begin{bmatrix} 0 & 0 & 1\\\\0 & 0 & 1 \\\\ 1 & 1 & 0\\end{bmatrix} \\text{ or }\\end{aligned}$$
+
+$$\\begin{aligned} \\begin{bmatrix} 0 & 1 & 1\\\\ 1 & 0 & 0 \\\\ 1 & 0 & 0\\end{bmatrix} \\text{ or } \\begin{bmatrix} 0 & 0 & 1\\\\ 0 & 0 & 0 \\\\ 1 & 0 & 0\\end{bmatrix} \\text{ or }\\begin{bmatrix} 0 & 0 & 0\\\\0 & 0 & 1 \\\\ 0 & 1 & 0\\end{bmatrix} \\text{ or }\\end{aligned}$$
+
+$$\\begin{aligned} \\begin{bmatrix} 0 & 1 & 0\\\\ 1 & 0 & 0 \\\\ 0 & 0 & 0\\end{bmatrix} \\text{ or } \\begin{bmatrix} 0 & 0 & 0\\\\ 0 & 0 & 0 \\\\ 0 & 0 & 0\\end{bmatrix}.\\end{aligned}$$
+
+---
+
+
+### ~~Approach 2: treat all possible adjacency matrices like a coin flip~~
+
+- Number of possible adjacency matrices with $n$ nodes?
+  - $2^{\binom{n}{2}}$
+  - When $n = 50$, this is well over the number of atoms in the universe
+- Good luck keeping track of all of that!
 
 ---
 
@@ -150,6 +507,61 @@ name:ier
 ### [Additional Content](#extra)
 
 ---
+
+### Approach 2.5: Treat nodes like coin flips
+
+##### Coin flip experiment
+  - Outcomes: $x$ is heads ($1$) or tails ($0$)
+- Each flip $\\mathbf x\_i \sim \text{Bern}(p)$ $i.i.d.$
+  - $p$ gives the probability of heads ($1$) and $1-p$ gives the probability of tails ($0$)
+
+---
+
+### Approach 2.5: Treat nodes like coin flips
+##### Coin flip experiment
+  - Outcomes: $x$ is heads ($1$) or tails ($0$)
+- Each flip $\\mathbf x\_i \sim \text{Bern}(p)$ $i.i.d.$
+  - $p$ gives the probability of heads ($1$) and $1-p$ gives the probability of tails ($0$)
+##### Network experiment
+  - Outcomes: Adjacency matrices $A$, where each entry $a_{ij}$ is $0$ or $1$
+- $\\mathbf{a}\_{ij} \\sim \\text{Bern}(p\_{ij})$ independently
+  - $p\_{ij}$ gives the probability of edge ($a\_{ij} = 1$) and $1 - p\_{ij}$ gives the probability of no edge ($a\_{ij} = 0$)
+
+---
+
+### Independent Erdös Rényi Model
+
+- $\\mathbf{A} \\sim IER\_n(P)$
+- $P$ is an $n \\times n$ probability matrix
+  - For each $\\mathbf{a}\_{ij} \\sim \\text{Bern}(p\_{ij})$ independently
+- Equipped with the usual properties: $\\mathbb{E}[\\mathbf{a}\_{ij}] = p\_{ij}$, variance, etc.
+  - $\\mathbb{E}[\\mathbf{A}] = P$
+
+
+---
+
+### Advantages of the Independent Erdös Rényi Model
+
+- Can get a very precise description: any network structure is admissable
+
+<center>![:scale 100%](images/honml/smiley.png)</center>
+
+---
+
+### Disadvantages of the Independent Erdös Rényi Model
+
+- Let's say we have a network, how do we learn about $P$ in an $IER_n(P)$ networks?
+
+---
+
+### Disadvantages of the Independent Erdös Rényi Model
+
+- Let's say we have a network, how do we learn about $P$ in an $IER_n(P)$ network?
+  - An observed network $A$ has a single observation $a\_{ij}$ of each $\\textbf{a}\_{ij}$
+  - Learning about $p\_{ij}$ would be based on a single zero or one (only one entry for a single adjacency matrix)
+  
+---
+
 name:er
 
 ### Outline
@@ -170,6 +582,21 @@ name:er
 ### [Additional Content](#extra)
 
 ---
+
+### Erdös Rényi Random Network Model
+
+- What if we assume every $p\_{ij} = p$?
+
+---
+
+### Erdös Rényi Random Network Model
+
+- What if we assume every $p\_{ij} = p$?
+- $\\mathbf A \\sim ER\_n(p)$ means that for every $\\mathbf a\_{ij} \\sim \text{Bern}(p)$ $i.i.d.$
+  - No structure at all: every node (regardless of any attributes about it) have probability $p$
+
+---
+
 name:sbm
 
 ### Outline
@@ -190,6 +617,115 @@ name:sbm
 ### [Additional Content](#extra)
 
 ---
+
+### Community assignment vector
+
+- Nodes might not be structureless, but the structure might be simple enough to not have to resort to the $IER_n(P)$ case
+- What if we added a single attribute to each node, and allowed the nodes to be in similar "groups"?
+  - learn about nodes within groups, rather than learning about edges one at a time
+
+---
+
+### Community assignment vector
+
+- .ye[Community assignment vector] $\\vec z$
+  - Each element $z\_i$ for a node $i$ takes one of $K$ possible values
+  - The value $z\_i$ is called the .ye[community] of node $i$
+
+<center>![:scale 100%](images/honml/comm_vec.png)</center>
+
+---
+
+### Block matrix
+
+- .ye[Block matrix] $B$: assigns probabilities to edges belonging to different pairs of communities
+  - If there are $K$ communities, $B$ is a $K \\times K$ matrix
+
+<center>![:scale 100%](images/honml/block_mtx.png)</center>
+
+---
+
+### Stochastic block model (SBM)
+
+- $\\mathbf A \\sim SBM\_n(\\vec z, B)$
+  - $\\mathbf a\_{ij}; z\_i = k, z\_i = l \\sim \text{Bern}(b\_{kl})$ $ind.$
+  - block matrix defines the edge probabilities, given the community assignments
+
+
+---
+
+### Stochastic block model (SBM)
+
+- $\\mathbf A \\sim SBM\_n(\\vec z, B)$
+  - $\\mathbf a\_{ij}; z\_i = k, z\_i = l \\sim \text{Bern}(b\_{kl})$ $ind.$
+  - edges are .ye[correlated] base on whether (or not) they are in the same community
+  - once we know the community assignments, the edges are otherwise independent
+
+<center>![:scale 100%](images/honml/sbm_sim.png)</center>
+
+---
+
+### How do we get a probability matrix for an SBM?
+
+$P = \color{yellow}{CB}$ $C^{\\top}$
+
+- $C$: one-hot encoding of the community assignment vector $\\vec z$
+  - $C$ is a $n \\times K$ matrix, and:
+$$\\begin{aligned}c\_{ik} = \\begin{cases}1, & z\_i = k \\\\ 0, & z\_i \\neq k\\end{cases}\\end{aligned}$$
+
+- $CB$ is a $n \\times K$ matrix times a $K \\times K$ matrix, so $n \\times K$
+
+$$CB = \\begin{aligned} \\begin{bmatrix}c\_{11} & ... & c\_{1K} \\\\ & \\vdots & \\\\ c\_{n1} & ... & c\_{nK} \\end{bmatrix} \\begin{bmatrix}b\_{11} & ... & b\_{1K} \\\\ \\vdots & \\ddots & \\vdots \\\\ b\_{K1} & ... & b\_{KK}\\end{bmatrix}\\end{aligned}$$
+
+---
+
+### Breaking down the probability matrix for an SBM
+
+$P = \\color{yellow}{CB}$ $C^{\\top}$
+
+
+- $(CB)\_{ik} = \\sum\_{l = 1}^{K}c\_{il} b\_{lk}$
+But:
+$$\\begin{aligned}c\_{il} = \\begin{cases}1, & z\_l = k\\\\ 0,& z\_l \\neq k\\end{cases}\\end{aligned}$$
+- so $(CB)\_{ik} = b\_{z\_i k}$
+
+---
+
+### Breaking down the probability matrix for an SBM
+
+$P = \\color{yellow}{CB}$ $C^{\\top}$
+
+- each row is a node, and the columns entries are the probabilities that the community of node $i$ connect with any of the other communities given by $k$
+
+$$\\begin{aligned}CB = \\begin{bmatrix}b\_{z\_{1}1} & ... & b\_{z\_{1} K} \\\\  & \\vdots & \\\\ b\_{z\_n 1} & ... & b\_{z\_n K}\\end{bmatrix}\\end{aligned}$$
+
+---
+
+### Breaking down the probability matrix for an SBM
+
+$P = \\color{yellow}{CBC}^{\\top}$
+
+Right-multiply ${CB}$ by $C^{\\top}$:
+
+$$\\begin{aligned}CBC^{\\top} = \\begin{bmatrix}b\_{z\_{1}1} & ... & b\_{z\_{1} K} \\\\  & \\vdots & \\\\ b\_{z\_n 1} & ... & b\_{z\_n K}\\end{bmatrix}\\end{aligned}\\begin{bmatrix} c\_{11} & ... & c\_{n1} \\\\ \\vdots & & \\vdots \\\\ c\_{1K} & ... & c\_{nK}  \\end{bmatrix}$$
+
+$(CBC^{\\top})\_{ij} = \\sum\_{l = 1}^{K}b\_{z\_{i}l}c\_{jl}$
+
+Since $c\_{jl} = 1$ when $z\_{j} = l$ and $0$ otherwise:
+
+$(CBC^{\\top})\_{ij} = b\_{z\_{i} z\_{j}}$
+
+---
+
+### Breaking down the probability matrix for an SBM
+
+$$\\begin{aligned}P = {CBC}^{\\top} = \\begin{bmatrix} b\_{z\_{1}z\_{1}} & ... & b\_{z\_{1} z\_{n}} \\\\ \\vdots & \\ddots & \\vdots \\\\ b\_{z\_{n}z\_{1}} & ... & b\_{z\_{n} z\_{n}} \\end{bmatrix} \\end{aligned}$$
+
+- Note that if $\\mathbf a\_{ij}; z\_i = k, z\_j = l \\sim \\text{Bern}(b\_{kl})$, we want $p\_{ij} = b\_{kl}$
+  - $p\_{ij} = b\_{z\_i z\_j}$
+
+---
+
 name:rdpg
 
 ### Outline
@@ -210,6 +746,11 @@ name:rdpg
 ### [Additional Content](#extra)
 
 ---
+
+### Latent position matrix
+
+---
+
 name:props
 
 ### Outline
