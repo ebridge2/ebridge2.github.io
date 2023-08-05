@@ -1055,7 +1055,7 @@ $$R = QQ^\\top$$
 $$P = XX^\\top$$
   - the latent position matrix $X$ is the square-root matrix for $P$
 ---
-
+name:psd_bm
 ### PSDness and block models
 
 - Remember that:
@@ -1077,12 +1077,22 @@ DCSBM: $P = (\\Theta C \\sqrt B) (\\Theta C \\sqrt B)^\\top = XX^\\top$ where $X
 
 ### PSDness (the $2 \\times 2$ case)
 
-If $R$ is a $2 \\times 2$ real matrix, $B$ is PSD if:
-1. $b\_{11} > 0$, and:
-2. $det(B) > 0$.
+If $B$ is a $2 \\times 2$ real matrix, $B$ is PSD if:
+1. $b\_{11} \\geq 0$
+  - always satisfied, since block matrices have probabilities
+  - valid probabilities cannot be negative
+
+---
+
+### PSDness (the $2 \\times 2$ case)
+
+If $B$ is a $2 \\times 2$ real matrix, $B$ is PSD if:
+1. $b\_{11} \\geq 0$, and:
+2. $det(B) \\geq 0$.
 
 $$B = \\begin{bmatrix}b\_{11} & b\_{12} \\\\ b\_{21} & b\_{22} \\end{bmatrix}$$
-Determinant: $det(B) = b\_{11}b\_{22} - b\_{12}b\_{21}$
+The determinant $det(B) = b\_{11}b\_{22} - b\_{12}b\_{21}$
+- condition 2 is equivalent to $b\_{11} b\_{22} \\geq b\_{12}b\_{21}$
 
 ---
 
@@ -1093,12 +1103,56 @@ $$B = \\begin{bmatrix}b\_{11} & b\_{12} \\\\ b\_{21} & b\_{22} \\end{bmatrix}$$
   - .ye[homophilic]: like goes with like
   - within-community connections ($b\_{kk}$) are more probable than between-community connections ($b\_{kl}$ where $k \neq l$)
 
+--
+- homophilic block matrices are PSD as $b\_{11}b\_{22} > b\_{12}b\_{21}$ (condition $2$ satisfied)
+
+--
+  - $b\_{11}$ and $b\_{22}$ are each greater than $b\_{12}$ and $b\_{21}$
+
 ---
 
 ### Homophilic block matrix example
 
 <center>![:scale 100%](images/honml/homo_block_mtx.png)</center>
 
+---
+
+#### Block Models with PSD block matrices and RDPGs
+
+If $\\mathbf A^{(1)}$ and $\\mathbf A^{(2)}$ are random networks with probability matrices $P^{(1)}$ and $P^{(2)}$, we call them .ye[stochastically equivalent] if $P^{(1)} = P^{(2)}$
+  - .ye[stochastically equivalent]: two random quantities are equal in terms of the parameters that govern them (for networks, probability matrices)
+
+---
+
+#### Block Models with PSD block matrices and RDPGs
+
+If $\\mathbf A^{(1)}$ and $\\mathbf A^{(2)}$ are random networks with probability matrices $P^{(1)}$ and $P^{(2)}$, we call them .ye[stochastically equivalent] if $P^{(1)} = P^{(2)}$
+
+Recall that if [$B$ is PSD](#psd_bm), for a random network $\\mathbf A^{(1)} \\sim SBM_n(\\vec z, B)$ that:
+
+SBM: $P^{(1)} = (C\\sqrt B)(C\\sqrt B)^\\top = XX^\\top$ where $X = C\\sqrt B$
+
+--
+ 
+RDPG: $\\mathbf A^{(2)} \\sim RDPG\_n(X)$ where $X = C\\sqrt B$
+  - $A^{(1)}$ (an SBM) is stochastically equivalent to $A^{(2)}$ (an RDPG)
+
+--
+  - .ye[SBMs (and DCSBMs) with PSD block matrices are stochastically equivalent to some RDPG]
+
+
+---
+
+#### Block Models with PSD block matrices and RDPGs
+- SBMs (and DCSBMs) with PSD block matrices are stochastically equivalent to some RDPG]
+- PSD matrices are very intuitive and easy to work with
+  - lots of linear algebra tricks and manipulations are designed for PSD matrices
+
+--
+
+##### Focus for second half
+
+- develop techniques for RDPGs, and then they "work" for RDPGs and block models with PSD block matrices
 
 ---
 
