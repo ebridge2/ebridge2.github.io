@@ -45,7 +45,7 @@ name:whyhave
 ### Outline
 
 - Basics of Graph Data
-  - Why do we have special approaches for networks?
+  - Why do we use statistics?
   - [What is a network?](#graphs)
   - [What different types of networks are there?](#types)
 - [Random Graph Models](#models)
@@ -122,7 +122,7 @@ $\mathbf{x}_i \sim \text{Bern}(p)$ $i.i.d$ heads (value $1$) and tails (value $0
 
 ##### Rigorous answer
 
-$\mathbf{x}_i \sim \text{Bern}(p)$ $i.i.d$
+$\mathbf{x}_i \sim \text{Bern}(p)$ $i.i.d$ heads (value $1$) and tails (value $0$)
 
 $\mathcal L (x\_1, ..., x\_{15}) = \prod\_{i = 1}^{15} p^{x\_i}(1 - p)^{x\_i}$
 
@@ -135,11 +135,12 @@ $\mathcal L (x\_1, ..., x\_{15}) = \prod\_{i = 1}^{15} p^{x\_i}(1 - p)^{x\_i}$
 
 ##### Rigorous answer
 
-$\mathbf{x}_i \sim \text{Bern}(p)$ $i.i.d$
+$\mathbf{x}_i \sim \text{Bern}(p)$ $i.i.d$ heads (value $1$) and tails (value $0$)
 
 $\mathcal L (x\_1, ..., x\_{15}) = \prod\_{i = 1}^{15} p^{x\_i}(1 - p)^{x\_i}$
 
-take derivative and set equal to zero $\Rightarrow \hat p = \frac{\sum\_{i = 1}^{15}x\_i}{15}$ is the MLE
+take derivative of $\\ell = \\log(\\mathcal L)$ and set equal to zero
+$\Rightarrow \hat p = \frac{\sum\_{i = 1}^{15}x\_i}{15}$ is the MLE
 
 ---
 
@@ -150,11 +151,12 @@ take derivative and set equal to zero $\Rightarrow \hat p = \frac{\sum\_{i = 1}^
 
 ##### Rigorous answer
 
-$\mathbf{x}_i \sim \text{Bern}(p)$ $i.i.d$
+$\mathbf{x}_i \sim \text{Bern}(p)$ $i.i.d$ heads (value $1$) and tails (value $0$)
 
 $\mathcal L (x\_1, ..., x\_{15}) = \prod\_{i = 1}^{15} p^{x\_i}(1 - p)^{x\_i}$
 
-take derivative and set equal to zero $\Rightarrow \hat p = \frac{\sum\_{i = 1}^{15}x\_i}{15}$ is the MLE
+take derivative of $\\ell = \\log(\\mathcal L)$ and set equal to zero
+$\Rightarrow \hat p = \frac{\sum\_{i = 1}^{15}x\_i}{15}$ is the MLE
 
 check that we found a maximum (second derivative, check extrema)
 
@@ -192,7 +194,6 @@ name:graphs
 - [Applications](#est)
 
 ### [Additional Content](#extra)
-
 
 ---
 
@@ -518,6 +519,7 @@ name:ier
   - Outcomes: $x$ is heads ($1$) or tails ($0$)
 - Each flip $\\mathbf x\_i \sim \text{Bern}(p)$ $i.i.d.$
   - $p$ gives the probability of heads ($1$) and $1-p$ gives the probability of tails ($0$)
+
 ##### Network experiment
   - Outcomes: Adjacency matrices $A$, where each entry $a_{ij}$ is $0$ or $1$
 - $\\mathbf{a}\_{ij} \\sim \\text{Bern}(p\_{ij})$ independently
@@ -546,13 +548,13 @@ name:ier
 
 ### Disadvantages of the Independent Erdös Rényi Model
 
-- Let's say we have a network, how do we learn about $P$ in an $IER_n(P)$ networks?
+- Let's say we have a network, how do we learn about $P$ if we assume the network is $IER_n(P)$?
 
 ---
 
 ### Disadvantages of the Independent Erdös Rényi Model
 
-- Let's say we have a network, how do we learn about $P$ in an $IER_n(P)$ network?
+- Let's say we have a network, how do we learn about $P$ if we assume the network is $IER_n(P)$?
   - An observed network $A$ has a single observation $a\_{ij}$ of each $\\textbf{a}\_{ij}$
   - Learning about $p\_{ij}$ would be based on a single zero or one (only one entry for a single adjacency matrix)
   
@@ -589,7 +591,7 @@ name:er
 
 - What if we assume every $p\_{ij} = p$?
 - $\\mathbf A \\sim ER\_n(p)$ means that for every $\\mathbf a\_{ij} \\sim \text{Bern}(p)$ $i.i.d.$
-  - No structure at all: every node (regardless of any attributes about it) have probability $p$
+  - No structure at all: every node (regardless of any attributes about it) has probability $p$
 
 ---
 
@@ -614,7 +616,7 @@ name:sbm
 
 ---
 
-### Community assignment vector
+### What is the motivation for the Stochastic Block Model?
 
 - Nodes might not be structureless, but the structure might be simple enough to not have to resort to the $IER_n(P)$ case
 - What if we added a single attribute to each node, and allowed the nodes to be in similar "groups"?
@@ -647,6 +649,7 @@ name:sbm
   - $\\mathbf a\_{ij}; z\_i = k, z\_i = l \\sim \text{Bern}(b\_{kl})$ $ind.$
   - block matrix defines the edge probabilities, given the community assignments
 
+<center>![:scale 100%](images/honml/sbm_sim.png)</center>
 
 ---
 
@@ -654,7 +657,7 @@ name:sbm
 
 - $\\mathbf A \\sim SBM\_n(\\vec z, B)$
   - $\\mathbf a\_{ij}; z\_i = k, z\_i = l \\sim \text{Bern}(b\_{kl})$ $ind.$
-  - edges are .ye[correlated] base on whether (or not) they are in the same community
+  - edges are .ye[correlated] based on the communities of their incident nodes $i$ and $j$
   - once we know the community assignments, the edges are otherwise independent
 
 <center>![:scale 100%](images/honml/sbm_sim.png)</center>
@@ -671,7 +674,17 @@ $$\\begin{aligned}c\_{ik} = \\begin{cases}1, & z\_i = k \\\\ 0, & z\_i \\neq k\\
 
 - $CB$ is a $n \\times K$ matrix times a $K \\times K$ matrix, so $n \\times K$
 
-$$CB = \\begin{aligned} \\begin{bmatrix}c\_{11} & ... & c\_{1K} \\\\ & \\vdots & \\\\ c\_{n1} & ... & c\_{nK} \\end{bmatrix} \\begin{bmatrix}b\_{11} & ... & b\_{1K} \\\\ \\vdots & \\ddots & \\vdots \\\\ b\_{K1} & ... & b\_{KK}\\end{bmatrix}\\end{aligned}$$
+$$CB = \\begin{aligned} \\begin{bmatrix}c\_{11} & ... & c\_{1K} \\\\ & \\vdots & \\\\ c\_{n1} & ... & c\_{nK} \\end{bmatrix} \\begin{bmatrix}b\_{11} & ... & b\_{1K} \\\\ \\vdots & \\ddots & \\vdots \\\\ b\_{K1} & \\cdots & b\_{KK}\\end{bmatrix}\\end{aligned}$$
+
+---
+
+### Matrix Multiplication (Revisited)
+
+Matrix product $$AB$$ is defined, if $A$ has $n$ rows and $m$ columns, and $B$ has $m$ rows with $w$ columns, to be:
+
+$$AB = \\begin{bmatrix} \color{yellow}{a\_{11}} & \\cdots & \color{yellow}{a\_{1m}} \\\\ \\vdots & \\ddots & \\vdots \\\\ a\_{n1} & \\cdots & a\_{nm} \\end{bmatrix} \\begin{bmatrix} \color{yellow}{b\_{11}} & \\cdots & b\_{1w} \\\\ \\vdots & \\ddots & \\vdots \\\\ \color{yellow}{b\_{m1}} & \\cdots & b\_{mw} \\end{bmatrix}$$
+- $(AB)\_{11} = \\sum\_{d = 1}^m a\_{1d} b\_{d1}$, inner product of the first row of $A$ and the first column of $B$
+- In general, $(AB)\_{ij} = \\sum\_{d = 1}^m a\_{id} b\_{dj}$
 
 ---
 
@@ -679,6 +692,7 @@ $$CB = \\begin{aligned} \\begin{bmatrix}c\_{11} & ... & c\_{1K} \\\\ & \\vdots &
 
 $P = \\color{yellow}{CB}$ $C^{\\top}$
 
+$$CB = \\begin{aligned} \\begin{bmatrix}c\_{11} & ... & c\_{1K} \\\\ & \\vdots & \\\\ c\_{n1} & ... & c\_{nK} \\end{bmatrix} \\begin{bmatrix}b\_{11} & ... & b\_{1K} \\\\ \\vdots & \\ddots & \\vdots \\\\ b\_{K1} & \\cdots & b\_{KK}\\end{bmatrix}\\end{aligned}$$
 
 - $(CB)\_{ik} = \\sum\_{l = 1}^{K}c\_{il} b\_{lk}$
 But:
@@ -693,7 +707,7 @@ $P = \\color{yellow}{CB}$ $C^{\\top}$
 
 - each row is a node, and the columns entries are the probabilities that the community of node $i$ connect with any of the other communities given by $k$
 
-$$\\begin{aligned}CB = \\begin{bmatrix}b\_{z\_{1}1} & ... & b\_{z\_{1} K} \\\\  & \\vdots & \\\\ b\_{z\_n 1} & ... & b\_{z\_n K}\\end{bmatrix}\\end{aligned}$$
+$$\\begin{aligned}CB = \\begin{bmatrix}b\_{z\_{1}1} & \\cdots & b\_{z\_{1} K} \\\\  & \\vdots & \\\\ b\_{z\_n 1} & \\cdots & b\_{z\_n K}\\end{bmatrix}\\end{aligned}$$
 
 ---
 
@@ -703,7 +717,7 @@ $P = \\color{yellow}{CBC}^{\\top}$
 
 Right-multiply ${CB}$ by $C^{\\top}$:
 
-$$\\begin{aligned}CBC^{\\top} = \\begin{bmatrix}b\_{z\_{1}1} & ... & b\_{z\_{1} K} \\\\  & \\vdots & \\\\ b\_{z\_n 1} & ... & b\_{z\_n K}\\end{bmatrix}\\end{aligned}\\begin{bmatrix} c\_{11} & ... & c\_{n1} \\\\ \\vdots & & \\vdots \\\\ c\_{1K} & ... & c\_{nK}  \\end{bmatrix}$$
+$$\\begin{aligned}CBC^{\\top} = \\begin{bmatrix}b\_{z\_{1}1} & \\cdots & b\_{z\_{1} K} \\\\  & \\vdots & \\\\ b\_{z\_n 1} & \\cdots & b\_{z\_n K}\\end{bmatrix}\\end{aligned}\\begin{bmatrix} c\_{11} &  & c\_{n1} \\\\ \\vdots  & \\cdots &  \\vdots \\\\ c\_{1K} & & c\_{nK}  \\end{bmatrix}$$
 
 $(CBC^{\\top})\_{ij} = \\sum\_{l = 1}^{K}b\_{z\_{i}l}c\_{jl}$
 
@@ -713,12 +727,18 @@ $(CBC^{\\top})\_{ij} = b\_{z\_{i} z\_{j}}$
 
 ---
 
+---
+
 ### Breaking down the probability matrix for an SBM
 
-$$\\begin{aligned}P = {CBC}^{\\top} = \\begin{bmatrix} b\_{z\_{1}z\_{1}} & ... & b\_{z\_{1} z\_{n}} \\\\ \\vdots & \\ddots & \\vdots \\\\ b\_{z\_{n}z\_{1}} & ... & b\_{z\_{n} z\_{n}} \\end{bmatrix} \\end{aligned}$$
+$$\\begin{aligned}P = {CBC}^{\\top} = \\begin{bmatrix} b\_{z\_{1}z\_{1}} & \\cdots & b\_{z\_{1} z\_{n}} \\\\ \\vdots & \\ddots & \\vdots \\\\ b\_{z\_{n}z\_{1}} & \\cdots & b\_{z\_{n} z\_{n}} \\end{bmatrix} \\end{aligned}$$
 
 - Note that if $\\mathbf a\_{ij}; z\_i = k, z\_j = l \\sim \\text{Bern}(b\_{kl})$, we want $p\_{ij} = b\_{kl}$
-  - $p\_{ij} = b\_{z\_i z\_j}$
+  - This gives us that $p\_{ij} = b\_{z\_i z\_j}$
+--
+
+- Therefore, we could equivalently write the model $\\mathbf A \\sim SBM\_n(\\vec z, B)$ as:
+  - $\\mathbf a\_{ij} \\sim \text{Bern}(b\_{z\_i z\_j})$ $ind.$
 
 ---
 
@@ -745,6 +765,52 @@ name:rdpg
 
 ### Latent position matrix
 
+- For each node $i$, a .ye[latent position vector] $\\vec x_i$ is a $d$-dimensional vector
+- The .ye[latent position matrix] just stacks these latent position vectors into a $n \\times d$ matrix
+
+$$X = \\begin{bmatrix} \\leftarrow & \\vec x_1^\\top & \\rightarrow \\\\ & \\vdots & \\\\ \\leftarrow & \\vec x_n^\\top & \\rightarrow \\end{bmatrix}$$
+- $d$ is called the .ye[latent dimensionality]
+- What do you notice about this arrangement of the latent positions?
+
+---
+
+### Latent position matrix
+
+- For each node $i$, a latent position vector $\\vec x_i$ is a $d$-dimensional vector
+- The latent position matrix just stacks these latent position vectors into a $n \\times d$ matrix
+
+$$X = \\begin{bmatrix} \\leftarrow & \\vec x_1^\\top & \\rightarrow \\\\ & \\vdots & \\\\ \\leftarrow & \\vec x_n^\\top & \\rightarrow \\end{bmatrix}$$
+- $d$ is called the latent dimensionality
+- .ye[Key observation]: the latent position matrix is tabular
+
+---
+
+### Example of a latent position matrix
+
+<center>![:scale 100%](images/honml/lpm_sim.png)</center>
+
+---
+
+### Random Dot Product Graph Model (RDPG)
+
+- $\\mathbf A \\sim RDPG_n(X)$
+  - $\\mathbf a\_{ij} ; \\vec x\_i = \\vec x, \\vec x\_j  = \\vec y \sim \\text{Bern}(\\vec x^\\top \\vec y)$ $ind.$
+  - edges are .ye[correlated] based on the latent positions of their incident nodes $i$ and $j$
+  once we know the latent positions of the nodes, the edges are otherwise independent
+
+<center>![:scale 100%](images/honml/rdpg_sim.png)</center>
+
+---
+
+### Probability matrix for an $RDPG_n(X)$ network
+
+- $P = XX^\\top$
+$$P = \\begin{bmatrix} \\leftarrow & \\vec x_1^\\top & \\rightarrow \\\\ & \\vdots & \\\\ \\leftarrow & \\vec x_n^\\top & \\rightarrow \\end{bmatrix}\\begin{bmatrix} \\uparrow & & \\uparrow \\\\ \\vec x_1 & \\cdots & \\vec x_n\\\\ \\downarrow &  & \\downarrow \\end{bmatrix}$$
+- $\\Rightarrow p\_{ij} = \\vec x_i^\\top \\vec x_j$
+
+--
+- so $\\mathbf A \\sim RDPG\_n(X)$ is equivalent to:
+  - $\\mathbf a\_{ij} \\sim \text{Bern}(\\vec x\_i^\\top \\vec x_j)$ $ind.$
 ---
 
 name:props
@@ -767,6 +833,129 @@ name:props
 ### [Additional Content](#extra)
 
 ---
+
+name:ev_aij
+### Properties of Random Networks
+
+- Just like networks themselves, random networks can be described using properties
+  - Instead of describing realized properties, the properties are now random
+  - E.g., random densities, etc.
+
+--
+- Note that if $\\mathbf a\_{ij} \\sim \text{Bern}(p\_{ij})$, that by LOTUS:
+
+$$\\mathbb E[\\mathbf a\_{ij}] = 0 \\cdot (1 - p\_{ij}) + 1 \\cdot p\_{ij}$$
+
+---
+
+### Random Network Expected Degree
+
+- networks have degrees $d\_i$ for each node $i$, random networks have random degrees $\\mathbf d\_i$
+- Network degree: $d\_i = \\sum\_{j \\neq i} a\_{ij}$
+- Random network degree: $\\mathbf d\_i = \\sum\_{j \\neq i} \\mathbf a\_{ij}$
+
+--
+  - No longer a scalar: it has a distribution (it is random)
+---
+
+name:ev_di
+### Expected Node Degree
+
+- .ye[expected node degree]: $\\mathbb E[\\mathbb d\_i]$
+
+--
+- can use basic properties of expected values (linearity):
+$$\\begin{aligned}\\mathbb E[\\mathbb d\_i] &= \\mathbb E \\big[\\sum\_{j \\neq i} \\mathbf a\_{ij} \\big] \\\\ &= \\sum\_{j \\neq i}\\mathbb E[\\mathbf a\_{ij}] \\\\ &= \\sum\_{j \\neq i} p\_{ij},\\end{aligned}$$
+where we plugged in the result from [here](#ev_aij)
+
+---
+
+### Expected Node Degree (SBM)
+
+- If $\\mathbf A \\sim SBM\_n(\\vec z, B)$, we get a special result
+- Let's consider the expected degree of a node $i$, if it is in a particular community $k$:
+
+$$\\mathbb E[\\mathbf d\_i; z\_i = k] = \\sum\_{j \\neq i} \\mathbb E[\\mathbf a\_{ij}; \\vec z\_i = k]$$
+
+--
+- Recall: $p\_{ij} = b\_{z\_i z\_j}$, where we know that $z\_i = k$
+  - $\\Rightarrow \\mathbb E[\\mathbf a\_{ij}; \\vec z\_i = k]$ can be written of the form $b\_{k z\_j}$
+ 
+---
+
+### Expected Node Degree (SBM)
+
+- $\\Rightarrow \\mathbb E[\\mathbf a\_{ij}; \\vec z\_i = k]$ can be written of the form $b\_{k z\_j}$
+- $z\_{j}$ could be any of the $K$ communities, so:
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j \\neq i} \\sum\_{l = 1}^K \\mathbb 1\_{ \\{z\_j = l\\} }b\_{k z\_j} \\\\ &= \\sum\_{j : j \\neq i, z\_{j} = k} b\_{kk} + \\sum\_{l \\neq k}\\sum\_{j : z\_{j} = l}b\_{kl}\\end{aligned}$$
+  - We are summing a fixed value for each node, depending on which community it is in
+
+---
+
+### Expected Node Degree (SBM)
+
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j : j \\neq i, z\_{j} = k} b\_{kk} + \\sum\_{l \\neq k}\\sum\_{j : z\_{j} = l}b\_{kl}\\end{aligned}$$
+
+--
+- If $n\_k = \\sum\_{j = 1}^n \\mathbb 1\_{ \\{ z\_j = k\\}}$ are the counts for each community, we get:
+$$\\mathbb E[\\mathbf d\_i; z\_i = k] = (n\_k - 1) b\_{kk} + \\sum\_{l \\neq k} n\_{l} b\_{kl}$$
+  - $(n\_k - 1)$: we summed over all of the nodes in community $k$, except for node $i$
+  - $n\_l$: we summed over all of the nodes in communities $l \\neq k$
+
+---
+name:deg_hom_sbm
+### Expected Node Degree (SBM)
+
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j : j \\neq i, z\_{j} = k} b\_{kk} + \\sum\_{l \\neq k}\\sum\_{j : z\_{j} = l}b\_{kl}\\end{aligned}$$
+
+- If $n\_k = \\sum\_{j = 1}^n \\mathbb 1\_{ \\{ z\_j = k\\}}$ are the counts for each community, we get:
+$$\\mathbb E[\\mathbf d\_i; z\_i = k] = (n\_k - 1) b\_{kk} + \\sum\_{l \\neq k} n\_{l} b\_{kl}$$
+  - The node degrees for an SBM are .ye[homogenous (the same) within the same community]
+  - no dependence of $\\mathbb E[\\mathbf d\_i; z\_i = k]$ on $i$ itself
+
+---
+
+### Expected values of matrices
+
+- If $\\mathbf X$ is a random $n \\times m$ matrix with entries $\\mathbf x\_{ij}$ which are random, then:
+$$\\mathbb E[\\mathbf X] = \\begin{bmatrix} \\mathbb E[\\mathbf x\_{11}] & \\cdots & \\mathbb E[\\mathbf x\_{1m}] \\\\ \\vdots & \\ddots & \\vdots \\\\ \\mathbb E[\\mathbf x\_{n1}] & \\cdots & \\mathbb E[\\mathbf x\_{nm}]\\end{bmatrix}$$
+
+---
+
+### Random degree matrix
+
+- Recall the [degree matrix](#deg) for an $n$ node network $A$ with node degrees $d\_i$:
+$$D = \\begin{bmatrix} d\_1 & &  \\\\  & \\ddots &  \\\\  & & d\_n\\end{bmatrix}$$
+- The .ye[random degree matrix] is of a random matrix $\\mathbf A$ with random degrees $\\mathbf d\_i$:
+$$\\mathbf D = \\begin{bmatrix} \\mathbf d\_1 & &  \\\\  & \\ddots &  \\\\  & & \\mathbf d\_n\\end{bmatrix}$$
+
+---
+
+##### Expected degree matrix
+
+- The .ye[expected degree matrix] is of a random matrix $\\mathbf A$ with random degrees $\\mathbf d\_i$:
+$$\\mathcal D = \\mathbb E[\\mathbf D] = \\begin{bmatrix} \\mathbb E[\\mathbf d\_1] &  & \\\\ & \\ddots & \\\\ & &  \\mathbb E[\\mathbf d\_n]\\end{bmatrix}$$
+
+##### Expected value of random network
+
+- Since $\\mathbb E[\\mathbf X]$ is the matrix with entries $\\mathbb E[\\mathbf x\_{ij}]$, that:
+$$\\mathbb E[\\mathbf A] = P$$
+  - since $\\mathbb E[\\mathbf a\_{ij}] = p\_{ij}$
+
+---
+
+### Population network Laplacian
+
+- Remember the [network Laplacian](#dad_lapl) is $L = D^{-\\frac{1}{2}} A D^{-\\frac{1}{2}}$
+  - has entries $l\_{ij} = \frac{a\_{ij}}{\\sqrt{d\_i} \\sqrt{d\_j}}$
+  - to calculate, $d\_i > 0$ for all $i$, or equivalently, $a\_{ij} = 1$ for at least one $j$ for every node $i$
+- The .ye[population network Laplacian] is:
+$$\\mathcal L = \\mathcal D^{-\\frac{1}{2}}P \\mathcal D^{-\\frac{1}{2}}$$
+  - has entries $\\ell\_{ij} = \\frac{p\_{ij}}{\\sqrt{\\mathbb E[d\_{i}] \\sqrt{\\mathbb E[d\_{j}]}}}$
+  - To calculate, $\\mathbb E[\\mathbb d\_i] > 0$ for all $i$, or equivalently, $p\_{ij} > 0$ for at least one $j$ for every node $i$
+
+
+---
 name:dcsbm
 
 ### Outline
@@ -787,6 +976,50 @@ name:dcsbm
 ### [Additional Content](#extra)
 
 ---
+
+### Degree-correction factors
+
+- recall: node degrees in an SBM are [homogeneous within community](#deg_hom_sbm): all have the same node degree
+  - not realistic: most real networks will have some nodes that have more connections than others
+  - if we had an academics where the nodes were academics and the edges were whether they had a paper together, we would expect some people to collaborate more than others
+
+--
+- .ye[Degree-correction factor] $\\theta\_i$ indicates "node importance"
+
+<center>![:scale 100%](images/honml/deg_cor_ex.png)</center>
+
+---
+
+### Degree-correction vector/matrix
+
+- .ye[Degree-correction vector] $\\vec \\theta$ is a length-$n$ vector of degree-correction factors for each node
+$$\\vec \\theta = \\begin{bmatrix} \\theta\_1 \\\\ \\vdots \\\\ \\theta\_n \\end{bmatrix}$$
+- .ye[Degree-correction matrix] $\\Theta$ is a $n \\times n$ diagonal matrix of degree-correction factors
+$$\\Theta = \\begin{bmatrix} \\theta\_1 & & \\\\ & \\ddots & \\\\ & & \\theta\_n \\end{bmatrix}$$
+
+---
+
+### Degree-corrected SBM (DCSBM)
+
+- $\\mathbf A \\sim DCSBM\_n(\\vec \\theta, \\vec z, B)$
+  - $\\mathbf a\_{ij}; \\theta\_i, \\theta\_j, z\_i, z\_j \sim \\text{Bern}(\\theta\_i\\theta\_j b\_{z\_i z\_j})$ $ind.$
+  - edges are .ye[correlated] by the degree-correction factors, as well as their community assignments
+
+--
+- $p\_{ij} = \\theta\_i\\theta\_j b\_{z\_i z\_j}$
+  - $\\theta\_i$ is bigger: more edges (than in an SBM) for node $i$
+  - $\\theta\_i$ is smaller: fewer edges (than in an SBM) for node $i$
+- Probability matrix $P = \\Theta C B C^\\top \\Theta^\\top$
+
+---
+
+### DCSBM Example
+
+
+<center>![:scale 100%](images/honml/dcsbm_sim.png)</center>
+
+---
+
 name:psd
 
 ### Outline
@@ -805,6 +1038,67 @@ name:psd
 - [Applications](#est)
 
 ### [Additional Content](#extra)
+
+---
+
+### The concept of positive semi-definiteness
+
+A matrix with real entries $R$ is positive semi-definite (PSD) if for some other matrix $Q$ with real entries, we can write:
+
+$$R = QQ^\\top$$
+
+- scary name; simple meaning
+  - $Q$ is called the .ye[square-root matrix] for $R$, and is often written as $\\sqrt R$
+
+--
+- The probability matrix for an $RDPG\_n(X)$ network is PSD:
+$$P = XX^\\top$$
+  - the latent position matrix $X$ is the square-root matrix for $P$
+---
+
+### PSDness and block models
+
+- Remember that:
+  - If $\\mathbf A \\sim SBM\_n(\\vec z, B)$, that $P = C B C^\\top$
+  - If $\\mathbf A \\sim DCSBM\_n(\\vec \\theta, \\vec z, B)$, that $P = \\Theta C B C^\\top \\Theta^\\top$
+
+--
+- These *almost* look like the condition for positive semi-definiteness: 
+  - if $B$ has a square-root matrix $\\sqrt B$, then:
+
+SBM: $P = (C\\sqrt B)(C\\sqrt B)^\\top = XX^\\top$ where $X = C\\sqrt B$
+
+DCSBM: $P = (\\Theta C \\sqrt B) (\\Theta C \\sqrt B)^\\top = XX^\\top$ where $X = \\Theta C \\sqrt B$
+
+--
+  - .ye[if $B$ is PSD, the probability matrix of the block model is PSD]
+
+---
+
+### PSDness (the $2 \\times 2$ case)
+
+If $R$ is a $2 \\times 2$ real matrix, $B$ is PSD if:
+1. $b\_{11} > 0$, and:
+2. $det(B) > 0$.
+
+$$B = \\begin{bmatrix}b\_{11} & b\_{12} \\\\ b\_{21} & b\_{22} \\end{bmatrix}$$
+Determinant: $det(B) = b\_{11}b\_{22} - b\_{12}b\_{21}$
+
+---
+
+### Homophilic block matrices
+
+$$B = \\begin{bmatrix}b\_{11} & b\_{12} \\\\ b\_{21} & b\_{22} \\end{bmatrix}$$
+- A block matrix $B$ is called .ye[homophilic] if the on-diagonal entries $b\_{kk}$ exceed the off-diagonal entries $b\_{kl}$ for all $k \neq l$
+  - .ye[homophilic]: like goes with like
+  - within-community connections ($b\_{kk}$) are more probable than between-community connections ($b\_{kl}$ where $k \neq l$)
+
+---
+
+### Homophilic block matrix example
+
+<center>![:scale 100%](images/honml/homo_block_mtx.png)</center>
+
 
 ---
 
@@ -847,7 +1141,7 @@ Adding causal assumptions, a CI test is equivalent to a causal conditional discr
   var options = {};
   var renderMath = function () {
     renderMathInElement(document.body);
-    // or if you want to use $...$ for math,
+    // or if you want to use $\\cdots$ for math,
     renderMathInElement(document.body, {
       delimiters: [ // mind the order of delimiters(!?)
         { left: "$$", right: "$$", display: true },
@@ -866,7 +1160,7 @@ Adding causal assumptions, a CI test is equivalent to a causal conditional discr
   // var slideshow = remark.create({
   // Set the slideshow display ratio
   // Default: '4:3'
-  // Alternatives: '16:9', ...
+  // Alternatives: '16:9', \\cdots
   // {
   // ratio: '16:9',
   // });
