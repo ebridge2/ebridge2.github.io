@@ -217,10 +217,11 @@ name:graphs
 
 ### Adjacency matrices
 
-- $A$ is an $n \\times n$ adjacency matrix for a network with $n$ nodes
+- $A$ is an $n \\times n$ .ye[adjacency matrix] for a network with $n$ nodes
 $$\\begin{aligned}
 a\_{ij} = \\begin{cases}1, & e\_{ij} \in \mathcal E \\\\ 0, & e\_{ij} \not\in \mathcal E\end{cases}
 \\end{aligned}$$
+- The .ye[incident nodes] of an adjacency $a\_{ij}$ are $i$ and $j$
 
 <center>![:scale 100%](images/honml/nyc_adj.png)</center>
 
@@ -293,28 +294,145 @@ name:types
   - symmetric, binary, hollow adjacency matrix
 
 ---
-
+name:degree
 ### Degrees
 
-# TODO
+- node degree $degree(i)$: the number of nodes that $i$ has edges to
+- Degree of SI: 1
+
+<center>![:scale 100%](images/honml/nyc_layout.png)</center>
 
 ---
 
-### Drosophila connectome
+### Calculating node degrees
+
+$$d\_i = degree(i) = \\sum\_{j = 1}^n a\_{ij}$$ 
+  - Sum the adjacency matrix column-wise
+- since the network is simple (loopless), $a\_{ii} = 0$
+  - For simple networks, we can write $d\_i = \\sum\_{j \neq i}a\_{ij}$
+
+<center>![:scale 100%](images/honml/nyc_deg.png)</center>
+
+---
+
+### Degree matrix
+
+- The .ye[degree matrix] $D$ is the matrix with node degrees on the diagonal, and $0$ otherwise:
+
+$$D = \\begin{bmatrix}d\_1 & 0 & \\cdots & 0 \\\\ 0 & \\ddots & \\ddots & \\vdots \\\\ \\vdots & \\ddots & \\ddots & 0 \\\\ 0 & \\cdots & 0 & d\_n\\end{bmatrix}$$
+
+---
+
+### Degree matrix
+
+- The .ye[degree matrix] $D$ is the matrix with node degrees on the diagonal, and $0$ otherwise:
+
+$$\\begin{aligned}D &= \\begin{bmatrix}d\_1 & 0 & \\cdots & 0 \\\\ 0 & \\ddots & \\ddots & \\vdots \\\\ \\vdots & \\ddots & \\ddots & 0 \\\\ 0 & \\cdots & 0 & d\_n\\end{bmatrix} \\\\ &= \\begin{bmatrix}d\_1 & & \\\\ & \\ddots & \\\\ & & d\_n \\end{bmatrix}\\end{aligned}$$
+
+---
+
+### Degree matrix
+
+- For the New York example, it looks like this:
+<center>![:scale 100%](images/honml/nyc_deg_mtx.png)</center>
+
+
+---
+### Network laplacian
+
+- as long as all $d\_i > 0$, we can take the reciprocal of the degree matrix
+
+$$D^{-1} = \\begin{bmatrix}\\frac{1}{d\_1} & & \\\\ & \\ddots & \\\\ & & \\frac{1}{d\_n}\\end{bmatrix}$$
+
+--
+
+- we can also take the square root:
+$$D^{-\\frac{1}{2}} = \\begin{bmatrix}\\frac{1}{\\sqrt{d\_1}} & & \\\\ & \\ddots & \\\\ & & \\frac{1}{\\sqrt{d\_n}}\\end{bmatrix}$$
+
+---
+name:net_lapl
+### Network laplacian
+
+- The .ye[network Laplacian] is defined as:
+$$L = D^{-\\frac{1}{2}}A D^{-\\frac{1}{2}}$$
+
+--
+
+$$\\begin{aligned}L &= \\begin{bmatrix}
+\\frac{1}{\\sqrt{d\_1}} & & \\\\
+ & \\ddots & \\\\ & & \\frac{1}{\\sqrt{d\_n}}\\end{bmatrix}
+ \\begin{bmatrix}a\_{11} & \\cdots & a\_{1n} \\\\ \\vdots & \\ddots & \\vdots \\\\ a\_{n1} & \\cdots & a\_{nn}\\end{bmatrix}
+ \\begin{bmatrix}\\frac{1}{\\sqrt{d\_1}} & & \\\\ & \\ddots & \\\\ & & \\frac{1}{\\sqrt{d\_n}}\\end{bmatrix} \\\\ 
+ &= 
+ \\begin{bmatrix} \\frac{a\_{11}}{d\_1} & \\cdots & \\frac{a\_{1n}}{\\sqrt{d\_1}\\sqrt{d\_n}} \\\\ \\vdots & \\ddots & \\vdots \\\\ \\frac{a\_{11}}{\\sqrt{d\_n}\\sqrt{d\_1}} & \\cdots & \\frac{a\_{nn}}{d\_n}\\end{bmatrix}\\end{aligned}$$
+
+---
+name:net_lapl
+### Network laplacian
+
+- The .ye[network Laplacian] is defined as:
+$$L = D^{-\\frac{1}{2}}A D^{-\\frac{1}{2}}$$
+- the entries $l\_{ij} = \\frac{a\_{ij}}{\\sqrt{d\_i} \\sqrt{d\_j}}$
+
+--
+  - similar to the adjacency matrix, but "normalized" by the degrees of incident nodes for every edge
+
+---
+
+### Diffusion connectome
+
 
 - neuron: functional "unit" of the brain
-- edge: "synapses"
-  - do two neurons communicate with one another?
+  - axon: "projection" from the center (cell body) of the neuron
 
-<center>![:scale 100%](images/honml/dros_con.png)</center>
+--
+- synapse: junction of the brain that bridges two neurons
+  - the neurons can "communicate" through the synapses
+
+<center>![:scale 100%](images/honml/neuron_synapse.png)</center>
+
+---
+
+### Diffusion connectome
+
+- cannot see synapses and neurons without microscopy
+  - microscopy requires sections of the brain (illegal)
+
+--
+- the brain is highly optimized
+  - the axons tend to be "bundled together" in "fiber tracts"
+  - we can see these with MRI
+
+<center>![:scale 100%](images/honml/fiber_tract.png)</center>
+
+---
+
+### Diffusion connectome
+
+- brain area: collection of neurons with similar function
+- measure which brain areas are connected with other brain areas
+  - idea: if there is an axonal fiber tract, neurons from these brain areas can communicate
+
+<center>![:scale 100%](images/honml/muse.png)</center>
+
+---
+
+### Diffusion connectome
+
+- nodes: brain areas
+- edges: does an axonal fiber tract link from one brain area to the other?
+
+<center>![:scale 100%](images/honml/diffusion_connectome.png)</center>
 
 ---
 
 ### Attributes for network data
 
 - .ye[attributes] describe characteristics of the nodes or edges in the network
+- Diffusion connectome: left and right hemisphere
 
-# TODO
+<center>![:scale 100%](images/honml/diffusion_hemisphere.png)</center>
+
 
 ---
 
@@ -724,8 +842,6 @@ $(CBC^{\\top})\_{ij} = \\sum\_{l = 1}^{K}b\_{z\_{i}l}c\_{jl}$
 Since $c\_{jl} = 1$ when $z\_{j} = l$ and $0$ otherwise:
 
 $(CBC^{\\top})\_{ij} = b\_{z\_{i} z\_{j}}$
-
----
 
 ---
 
@@ -1144,44 +1260,22 @@ RDPG: $\\mathbf A^{(2)} \\sim RDPG\_n(X)$ where $X = C\\sqrt B$
 ---
 
 #### Block Models with PSD block matrices and RDPGs
-- SBMs (and DCSBMs) with PSD block matrices are stochastically equivalent to some RDPG]
+- SBMs (and DCSBMs) with PSD block matrices are stochastically equivalent to some RDPG
 - PSD matrices are very intuitive and easy to work with
   - lots of linear algebra tricks and manipulations are designed for PSD matrices
 
---
-
-##### Focus for second half
-
-- develop techniques for RDPGs, and then they "work" for RDPGs and block models with PSD block matrices
-
 ---
 
-### Example of complicated LaTeX
+#### Focus for second section
 
-Related: Conditional independence (CI) testing
+- develop techniques for RDPGs
+- All techniques for RDPGs "work" for RDPGs and block models with PSD block matrices
+  - they work more generally with non PSD block matrices (advanced; unintuitive)
 
-$H\_0 : F\_{Y\_i, V\_i | x} = F\_{Y\_i | x}F\_{V\_i | x}$ against $H\_A : F\_{Y\_i, V\_i | x} \neq F\_{Y\_i | x}F\_{V\_i | x}$
-- if $V\_i$ is nominal, this is a conditional discrepancy test
-
-##### Remark (known)
-
-If $V\_i$ is nominal, a CI test is equivalent to a conditional discrepancy test.
-
-##### Corollary
-
-Adding causal assumptions, a CI test is equivalent to a causal conditional discrepancy test.
-
----
-
-### Example of images
-
-- Impossible to verify: condition about $P(T_i = t | X_i = x) > 0$
-  - we can modify the data to .ye[approximate] positivity
-- Vector matching: exclude covariate levels that are "impossible"
-  - .ye[propensity trimming] to $K \geq 2$ exposures
-
-<center>![:scale 100%](images/causal/vm.png)</center>
-
+#### Key application
+- the latent position matrix for RDPGs is tabular: $X$ is $n \\times d$
+  - Nodes are like "observations"
+  - latent dimensions of nodes are like "features"
 
 </textarea>
 <!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script> -->
