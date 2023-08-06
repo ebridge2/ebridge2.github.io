@@ -306,7 +306,7 @@ name:degree
 
 ### Calculating node degrees
 
-$$d\_i = degree(i) = \\sum\_{j = 1}^n a\_{ij}$$ 
+$$d\_i = degree(i) = \\sum\_{j = 1}^n a\_{ij}$$
   - Sum the adjacency matrix column-wise
 - since the network is simple (loopless), $a\_{ii} = 0$
   - For simple networks, we can write $d\_i = \\sum\_{j \neq i}a\_{ij}$
@@ -362,8 +362,8 @@ $$\\begin{aligned}L &= \\begin{bmatrix}
 \\frac{1}{\\sqrt{d\_1}} & & \\\\
  & \\ddots & \\\\ & & \\frac{1}{\\sqrt{d\_n}}\\end{bmatrix}
  \\begin{bmatrix}a\_{11} & \\cdots & a\_{1n} \\\\ \\vdots & \\ddots & \\vdots \\\\ a\_{n1} & \\cdots & a\_{nn}\\end{bmatrix}
- \\begin{bmatrix}\\frac{1}{\\sqrt{d\_1}} & & \\\\ & \\ddots & \\\\ & & \\frac{1}{\\sqrt{d\_n}}\\end{bmatrix} \\\\ 
- &= 
+ \\begin{bmatrix}\\frac{1}{\\sqrt{d\_1}} & & \\\\ & \\ddots & \\\\ & & \\frac{1}{\\sqrt{d\_n}}\\end{bmatrix} \\\\
+ &=
  \\begin{bmatrix} \\frac{a\_{11}}{d\_1} & \\cdots & \\frac{a\_{1n}}{\\sqrt{d\_1}\\sqrt{d\_n}} \\\\ \\vdots & \\ddots & \\vdots \\\\ \\frac{a\_{11}}{\\sqrt{d\_n}\\sqrt{d\_1}} & \\cdots & \\frac{a\_{nn}}{d\_n}\\end{bmatrix}\\end{aligned}$$
 
 ---
@@ -1156,6 +1156,134 @@ name:psd
 ### [Additional Content](#extra)
 
 ---
+
+### The concept of positive semi-definiteness
+
+A matrix with real entries $R$ is positive semi-definite (PSD) if for some other matrix $Q$ with real entries, we can
+write:
+
+$$R = QQ^\\top$$
+
+- scary name; simple meaning
+- $Q$ is called the .ye[square-root matrix] for $R$, and is often written as $\\sqrt R$
+
+--
+- The probability matrix for an $RDPG\_n(X)$ network is PSD:
+$$P = XX^\\top$$
+- the latent position matrix $X$ is the square-root matrix for $P$
+---
+name:psd_bm
+### PSDness and block models
+
+- Remember that:
+- If $\\mathbf A \\sim SBM\_n(\\vec z, B)$, that $P = C B C^\\top$
+- If $\\mathbf A \\sim DCSBM\_n(\\vec \\theta, \\vec z, B)$, that $P = \\Theta C B C^\\top \\Theta^\\top$
+
+--
+- These *almost* look like the condition for positive semi-definiteness:
+- if $B$ has a square-root matrix $\\sqrt B$, then:
+
+SBM: $P = (C\\sqrt B)(C\\sqrt B)^\\top = XX^\\top$ where $X = C\\sqrt B$
+
+DCSBM: $P = (\\Theta C \\sqrt B) (\\Theta C \\sqrt B)^\\top = XX^\\top$ where $X = \\Theta C \\sqrt B$
+
+--
+- .ye[if $B$ is PSD, the probability matrix of the block model is PSD]
+
+---
+
+### PSDness (the $2 \\times 2$ case)
+
+If $B$ is a $2 \\times 2$ real matrix, $B$ is PSD if:
+1. $b\_{11} \\geq 0$
+- always satisfied, since block matrices have probabilities
+- valid probabilities cannot be negative
+
+---
+
+### PSDness (the $2 \\times 2$ case)
+
+If $B$ is a $2 \\times 2$ real matrix, $B$ is PSD if:
+1. $b\_{11} \\geq 0$, and:
+2. $det(B) \\geq 0$.
+
+$$B = \\begin{bmatrix}b\_{11} & b\_{12} \\\\ b\_{21} & b\_{22} \\end{bmatrix}$$
+The determinant $det(B) = b\_{11}b\_{22} - b\_{12}b\_{21}$
+- condition 2 is equivalent to $b\_{11} b\_{22} \\geq b\_{12}b\_{21}$
+
+---
+
+### Homophilic block matrices
+
+$$B = \\begin{bmatrix}b\_{11} & b\_{12} \\\\ b\_{21} & b\_{22} \\end{bmatrix}$$
+- A block matrix $B$ is called .ye[homophilic] if the on-diagonal entries $b\_{kk}$ exceed the off-diagonal entries
+$b\_{kl}$ for all $k \neq l$
+- .ye[homophilic]: like goes with like
+- within-community connections ($b\_{kk}$) are more probable than between-community connections ($b\_{kl}$ where $k \neq
+l$)
+
+--
+- homophilic block matrices are PSD as $b\_{11}b\_{22} > b\_{12}b\_{21}$ (condition $2$ satisfied)
+
+--
+- $b\_{11}$ and $b\_{22}$ are each greater than $b\_{12}$ and $b\_{21}$
+
+---
+
+### Homophilic block matrix example
+
+<center>![:scale 100%](images/honml/homo_block_mtx.png)</center>
+
+---
+
+#### Block Models with PSD block matrices and RDPGs
+
+If $\\mathbf A^{(1)}$ and $\\mathbf A^{(2)}$ are random networks with probability matrices $P^{(1)}$ and $P^{(2)}$, we
+call them .ye[stochastically equivalent] if $P^{(1)} = P^{(2)}$
+- .ye[stochastically equivalent]: two random quantities are equal in terms of the parameters that govern them (for
+networks, probability matrices)
+
+---
+
+#### Block Models with PSD block matrices and RDPGs
+
+If $\\mathbf A^{(1)}$ and $\\mathbf A^{(2)}$ are random networks with probability matrices $P^{(1)}$ and $P^{(2)}$, we
+call them .ye[stochastically equivalent] if $P^{(1)} = P^{(2)}$
+
+Recall that if [$B$ is PSD](#psd_bm), for a random network $\\mathbf A^{(1)} \\sim SBM_n(\\vec z, B)$ that:
+
+SBM: $P^{(1)} = (C\\sqrt B)(C\\sqrt B)^\\top = XX^\\top$ where $X = C\\sqrt B$
+
+--
+
+RDPG: $\\mathbf A^{(2)} \\sim RDPG\_n(X)$ where $X = C\\sqrt B$
+- $A^{(1)}$ (an SBM) is stochastically equivalent to $A^{(2)}$ (an RDPG)
+
+--
+- .ye[SBMs (and DCSBMs) with PSD block matrices are stochastically equivalent to some RDPG]
+
+
+---
+
+#### Block Models with PSD block matrices and RDPGs
+- SBMs (and DCSBMs) with PSD block matrices are stochastically equivalent to some RDPG
+- PSD matrices are very intuitive and easy to work with
+- lots of linear algebra tricks and manipulations are designed for PSD matrices
+
+---
+
+#### Focus for second section
+
+- develop techniques for RDPGs
+- All techniques for RDPGs "work" for RDPGs and block models with PSD block matrices
+- they work more generally with non PSD block matrices (advanced; unintuitive)
+
+#### Key application
+- the latent position matrix for RDPGs is tabular: $X$ is $n \\times d$
+- Nodes are like "observations"
+- latent dimensions of nodes are like "features"
+
+---
 name:est
 
 ### Outline
@@ -1163,7 +1291,7 @@ name:est
 - [Basics of Graph Data](#graphs)
 - [Random Graph Models](#models)
 - Estimating Parameters for Networks
-  - Network Representations
+  - Estimating Network Representations
   - [Adjacency Spectral Embedding](#ase)
   - [Laplacian Spectral Embedding](#lse)
 - [Applications](#apps)
@@ -1172,9 +1300,14 @@ name:est
 
 ---
 
-### Why?
+### Learning Representations of Networks
 
-Figure 4.1
+- In practice, we never observe probability matrices $P$
+- We observe adjacency matrices $A$
+- We want to estimate $\hat P$ from $A$
+
+![:scale 100%](images/honml/network_reps.png)
+
 
 ---
 name:ase
@@ -1193,7 +1326,247 @@ name:ase
 
 ---
 
-### Adjacency Spectral Embedding
+### Latent Positions from Probability Matrix
+
+- Suppose we have a probability matrix $P$
+    - Assume symmetric (undirected)
+
+--
+
+- If $P$ is PSD, then $P = XX^\\top$ for some $X$ with $X=\\sqrt P$.
+    - Recall: PSD means you can take square roots.
+
+--
+
+- Assume $X$ has $n$ rows and $d$ columns
+    - $n$ nodes, $d$ latent dimensions
+    - none of the columns are redundant (the rank of $X$ is $d$).
+    - entries are $\mathbb R$
+
+---
+
+### .ye[Eigendecomposition] ($\texttt{evd}$) of Symmetric Matrix
+
+- Recall that if $R$ is a symmetric matrix, then $R$ has an $\texttt{evd}$:
+
+--
+
+$$R = Q\Lambda Q^\top$$
+- $\Lambda$ : diagonal matrix of the ordered (in decreasing order) eigenvalues of $R$
+- $Q$ : the matrix whose columns are eigenvectors of $R$.
+- If $R$ is rank $d$, $\Lambda$ has $d$ non-zero eigenvalues; $n-d$ zero eigenvalues.
+
+---
+
+### $\texttt{evd}$ of Symmetric + PSD Matrix
+
+- Assume $R$ is also PSD with rank $d$.
+--
+
+- Then $R$ has $d$ non-negative eigenvalues
+  - $\lambda_1 > \lambda_2 > \cdots > \lambda_d \geq 0$
+--
+
+- With keeping $d$ non-zero eigenvalues
+  - $Q_d$ : $n\times d$ matrix w/ first $d$ eigenvectors of $R$
+  - $\Lambda_d$ : $d\times d$ diagonal matrix w/ first $d$ eigenvalues of $R$
+  $$Q_d = \\begin{bmatrix}
+  \\uparrow & & \\uparrow \\\\
+  \\vec{q\_1} & ... & \\vec{q\_d} \\\\
+  \\downarrow & & \\downarrow
+  \\end{bmatrix},\Lambda_d = \\begin{bmatrix}
+  \\lambda_1 & & \\\\
+  & \ddots & \\\\
+  & & \\lambda_d
+  \\end{bmatrix}$$
+- Decompose $R$ by
+$$
+R = Q_d\Lambda_d Q_d
+$$
+
+---
+
+### $\texttt{evd}$ of Probability Matrix $P$
+
+- Let $P$ be PSD matrix with rank $d$.
+
+--
+- We can obtain latent positions of $P$ by $\texttt{evd}$($P$)
+
+$$
+P = Q_d \Lambda_d Q_d^\top = (Q_d \sqrt{\Lambda_d})(Q_d \sqrt{\Lambda_d})^\top = XX^\top
+$$
+
+--
+with
+
+$$
+X = Q_d \sqrt{\Lambda_d} = \sqrt{P}
+$$
+
+--
+and
+
+$$\sqrt{\Lambda_d} = \\begin{bmatrix}
+\\sqrt\\lambda_1 & & \\\\
+& \ddots & \\\\
+& & \\sqrt\\lambda_d
+\\end{bmatrix}$$
+---
+
+### Limitations of Eigendecomposition
+
+- In practice, we never observe $P$, but observe the adjacency matrix $A$.
+- So let's compute $\texttt{evd}$($A$)!
+
+--
+- If $A$ is PSD, then $\texttt{evd}$($A$) gives us _real_ latent positions of $A$.
+
+--
+- But what happens when $A$ is not PSD?
+
+---
+
+### Limitations of Eigendecomposition
+
+- Consider the following adjacency matrix:
+
+$$
+\\begin{aligned}
+A &= \\begin{bmatrix}
+0 & 1 \\\\
+1 & 0
+\\end{bmatrix}
+\\end{aligned}
+$$
+
+--
+
+- $A$ is not PSD - it has eigenvalues $1$ and $-1$.
+$$\Lambda = \\begin{bmatrix}
+1 & \\\\
+& -1
+\\end{bmatrix}$$
+
+--
+- When we compute square root of $\Lambda$, we get a non-real matrix!
+$$\sqrt\Lambda = \\begin{bmatrix}
+1 & \\\\
+& i
+\\end{bmatrix}$$
+--
+
+$\implies$ Results in non-real latent positions!
+
+---
+
+### .ye[Singular Value Decomposition] ($\texttt{svd}$) of Symmetric Matrices
+
+- Recall that if $R$ is a symmetric matrix, then $R$ has the $\texttt{svd}$:
+--
+$$R = U \\Sigma U^\\top$$
+- $\Sigma$ : diagonal matrix of the ordered (in decreasing order) singular values of $R$
+- $U$ : the matrix whose columns are singular values of $R$.
+    - Singular values are always real and non-negative
+--
+- If $R$ is rank $d$, $\Sigma$ has $d$ non-zero SVs; $n-d$ zero SVs
+--
+
+- Taking the $d$ non-zero singular values:
+$$R = U_d \\Sigma_d U_d^\\top$$
+
+---
+
+### $\texttt{svd}$ of Probability Matrix $P$
+
+- Taking $\texttt{svd}$ of $P$:
+$$
+P = XX^\\top, X = U_d \\sqrt{\\Sigma_d}
+$$
+- Again, in practice, we never observe $P$, but observe the adjacency matrix $A$.
+
+--
+- Applying $\texttt{svd}$ to $A$ while keeping $d$ number of singular values/vectors:
+$$\hat X = U_d \sqrt{\Sigma_d}$$
+- Gives us an estimate of the probability matrix $P$.
+$$\hat P = \hat X \hat X^\top$$
+--
+
+- This is called the .ye[adjacency spectral embedding].
+
+---
+
+### Rotational non-identifiability
+
+- .ye[Non-identifiability]: multiple solutions to the same problem
+- Many "reasonable" latent positions $X$ produce same $P$
+
+--
+- .ye[Rotational non-identifiability]: rotation of latent positions
+  - $X$ and $XW$ produce same $P$ for any rotational (orthogonal) matrix $W$
+  - $X$ and $XW$ are _rotationally equivalent_
+
+--
+
+$$
+P = XW(XW)^\top = XWW^\top X^\top = XI_dX^\top = XX^\top
+$$
+
+---
+
+### ASE Example - Sampling from SBMs
+
+- Suppose we have SBM with $n = 100$ nodes and $K = 2$ communities.
+
+<center>
+  <img src="images/honml/ase_sbm_ex.png" style="background-color:white; width:100%" />
+</center>
+
+---
+
+### ASE Example - True vs Estimated Probability Matrices
+
+<center>
+  <img src="images/honml/ase_result.png" style="background-color:white; width:80%" />
+</center>
+---
+
+### ASE Example - Estimated Latent Positions
+
+<center>
+  <img src="images/honml/ase_permuted.png" style="background-color:white; width:90%" />
+</center>
+
+---
+
+### Visualization of Rotational Non-identifiability
+
+<br>
+
+<center>
+  <img src="images/honml/rotation.png" style="background-color:white; width:100%" />
+</center>
+
+---
+
+### Why use $\texttt{ase}$ at all?
+
+1. $\texttt{ase}$ tabularizes your adjacency matrix
+  - a.k.a latent positions
+  - $n\times d$ real matrix, where $d$ was the number of dimensions that you selected
+  to embed into
+
+--
+2. $\texttt{ase}$ decouples the dependencies of the random network
+  - Want to study $P$ which encodes structure of networks
+  - Let's study $X$ latent positions, which also encodes same structure
+
+--
+3. If we assume $A$ is a random variable,
+  - theoretical results $\implies$ as our networks get larger (more data), our estimates of $P$ get better
+  - $\hat X$ is a useful surrogate for studying $X$
+  - can be useful even under model misspecification
+
 
 ---
 name:lse
@@ -1212,7 +1585,31 @@ name:lse
 
 ---
 
-### Laplacian Spectral Embedding
+### Laplacian Spectral Embedding (LSE)
+
+- Remember the [network Laplacian](#dad_lapl) is $L = D^{-\\frac{1}{2}} A D^{-\\frac{1}{2}}$
+--
+
+- .ye[Laplacian spectral embedding] is applying $\texttt{svd}$ to $L$
+  - keep $d$ number of singular values/vectors:
+
+$$L = XX^\\top, X = U_d \\sqrt{\\Sigma_d}$$
+
+- Here, $X$ is the .ye[latent positions of the network Laplacian]
+--
+
+- Conceptually, think of it as  $\texttt{ase}(L)$
+
+---
+
+### ASE vs LSE
+
+<center>
+  <img src="images/honml/dcsbm_lse.png" style="background-color:white; width:60%" />
+</center>
+--
+
+- $\texttt{lse}$ preserves within-community structure with degree-corrections
 
 ---
 name:apps
@@ -1246,12 +1643,117 @@ name:comm
 
 ### What is community detection?
 
-- Why is it useful
-- What can we do with it?
-- How do we do it?
+- Goal: find groups of nodes that are "similar" to each other than to all other nodes.
+- Note: community means same thing as clusters
+
+--
+
+##### Procedure for spectral clustering
+1. Learn representations of your network
+  - Embed using $\texttt{ase}$ or $\texttt{lse}$ in $d$ dimensions
+--
+
+2. Cluster the representations
+  - e.g. k-means
+--
+
+3. Analyze the clusters
 
 ---
 
+### Example - Sampling from DCSBM
+
+- Consider a DCSBM$_n$ with $n = 300$ nodes and $K = 3$ communities.
+- Randomly shuffle the ordering of nodes.
+
+<center>
+  <img src="images/honml/comm_detect_ex.png" style="background-color:white; width:100%" />
+</center>
+
+--
+
+- Can you find the communities?
+
+---
+
+### Example - Latent Positions from $\texttt{ase}$
+
+- Estimate latent positions $\hat X$ from $\texttt{ase}$ of sampled adjacency matrix
+- Label latent positions by apriori known communities
+
+<center>
+  <img src="images/honml/comm_detect_embed.png" style="background-color:white; width:100%" />
+</center>
+
+--
+
+- $\hat X$ retains the community structure
+
+---
+
+### Clustering with Unknown Number of Communities
+
+- In real data, number of communities are not obvious.
+- How do we find "optimal" number of communities?
+
+--
+
+##### Procedure
+1. Learn representations of your network
+  - Embed using $\texttt{ase}$ or $\texttt{lse}$ in $d$ dimensions
+--
+
+2. For $k\in\{2, 3, \ldots, K\}$ number of communities
+  1. Cluster the representations into $k$ communities
+  2. Compute silhouette score
+--
+
+3. Choose $k$ that has the highest silhouette score
+
+---
+
+### Example
+
+<center>
+  <img src="images/honml/comm_detect_kmclust.png" style="background-color:white; width:100%" />
+</center>
+
+---
+
+### Other Practical Considerations
+
+- Choice of embedding dimension $d$
+  - Different $d$ can give different clustering results
+
+--
+- Choice of clustering algorithm
+  - Gaussian mixture models ($\texttt{gmm}$) can give better results
+
+---
+
+### [Two-Truths of Spectral Clustering](https://doi.org/10.1073/pnas.1814462116)
+
+- Averaged from 100s human brain networks
+- Embed using $\texttt{ase}$ or $\texttt{lse}$
+- Cluster using $\texttt{gmm}$
+
+---
+
+### [Two-Truths of Spectral Clustering](https://doi.org/10.1073/pnas.1814462116)
+
+<center>
+  <img src="images/honml/twotruths.png" style="background-color:white; width:70%" />
+</center>
+
+
+| Clusters | $\texttt{gmm}$ o $\texttt{ase}$ | $\texttt{gmm}$ o $\texttt{lse}$|
+| ---| --- | --- |
+| 1 | <span style="color:#00bfc4"> right GM </span>, <span style="color:#f8766d"> left GM </span> | <span style="color:#00bfc4"> right GM </span>,<span style="color:#c77cff"> right WM </span> |
+| 2 | <span style="color:#c77cff"> right WM </span> , <span style="color:#7cae00"> left WM </span>  | <span style="color:#f8766d"> left GM </span>, <span style="color:#7cae00"> left WM </span> |
+- WM = white matter; dense connections
+- GM = gray matter; sparse connections
+
+---
 name:2samp
 
 ### Outline
@@ -1269,136 +1771,81 @@ name:2samp
 
 ### What is two-sample hypothesis testing?
 
-- Why is it useful
-- What can we do with it?
-- How do we do it?
-
----
-
-###
-
----
-
-
-### The concept of positive semi-definiteness
-
-A matrix with real entries $R$ is positive semi-definite (PSD) if for some other matrix $Q$ with real entries, we can write:
-
-$$R = QQ^\\top$$
-
-- scary name; simple meaning
-  - $Q$ is called the .ye[square-root matrix] for $R$, and is often written as $\\sqrt R$
-
+- Given two networks:
+  - Are they the "same"? (null hypothesis $H_0$)
+  - Are they "different"? (alternate hypothesis $H_A$)
 --
-- The probability matrix for an $RDPG\_n(X)$ network is PSD:
-$$P = XX^\\top$$
-  - the latent position matrix $X$ is the square-root matrix for $P$
----
-name:psd_bm
-### PSDness and block models
 
-- Remember that:
-  - If $\\mathbf A \\sim SBM\_n(\\vec z, B)$, that $P = C B C^\\top$
-  - If $\\mathbf A \\sim DCSBM\_n(\\vec \\theta, \\vec z, B)$, that $P = \\Theta C B C^\\top \\Theta^\\top$
-
---
-- These *almost* look like the condition for positive semi-definiteness: 
-  - if $B$ has a square-root matrix $\\sqrt B$, then:
-
-SBM: $P = (C\\sqrt B)(C\\sqrt B)^\\top = XX^\\top$ where $X = C\\sqrt B$
-
-DCSBM: $P = (\\Theta C \\sqrt B) (\\Theta C \\sqrt B)^\\top = XX^\\top$ where $X = \\Theta C \\sqrt B$
-
---
-  - .ye[if $B$ is PSD, the probability matrix of the block model is PSD]
+- Assumptions
+  - Same number of nodes in both networks
+  - One-to-one correspondence of nodes between both network
 
 ---
 
-### PSDness (the $2 \\times 2$ case)
+### What specific tests under SBMs?
 
-If $B$ is a $2 \\times 2$ real matrix, $B$ is PSD if:
-1. $b\_{11} \\geq 0$
-  - always satisfied, since block matrices have probabilities
-  - valid probabilities cannot be negative
+- Assume our data comes from SBMs (model assumption)
+- We want to test
 
----
-
-### PSDness (the $2 \\times 2$ case)
-
-If $B$ is a $2 \\times 2$ real matrix, $B$ is PSD if:
-1. $b\_{11} \\geq 0$, and:
-2. $det(B) \\geq 0$.
-
-$$B = \\begin{bmatrix}b\_{11} & b\_{12} \\\\ b\_{21} & b\_{22} \\end{bmatrix}$$
-The determinant $det(B) = b\_{11}b\_{22} - b\_{12}b\_{21}$
-- condition 2 is equivalent to $b\_{11} b\_{22} \\geq b\_{12}b\_{21}$
+$$\being{aligned} H_0&: B^{(1)} = B^{(2)} \\ H_A&: B^{(1)} \neq B^{(2)}\end{aligned}$$
 
 ---
 
-### Homophilic block matrices
+### Example - Traffic Patterns
 
-$$B = \\begin{bmatrix}b\_{11} & b\_{12} \\\\ b\_{21} & b\_{22} \\end{bmatrix}$$
-- A block matrix $B$ is called .ye[homophilic] if the on-diagonal entries $b\_{kk}$ exceed the off-diagonal entries $b\_{kl}$ for all $k \neq l$
-  - .ye[homophilic]: like goes with like
-  - within-community connections ($b\_{kk}$) are more probable than between-community connections ($b\_{kl}$ where $k \neq l$)
-
---
-- homophilic block matrices are PSD as $b\_{11}b\_{22} > b\_{12}b\_{21}$ (condition $2$ satisfied)
-
---
-  - $b\_{11}$ and $b\_{22}$ are each greater than $b\_{12}$ and $b\_{21}$
+<center>
+  <img src="images/honml/twosamp_sbm_ex.png" style="background-color:white; width:100%" />
+</center>
 
 ---
 
-### Homophilic block matrix example
+### Example - Traffic Patterns
 
-<center>![:scale 100%](images/honml/homo_block_mtx.png)</center>
-
----
-
-#### Block Models with PSD block matrices and RDPGs
-
-If $\\mathbf A^{(1)}$ and $\\mathbf A^{(2)}$ are random networks with probability matrices $P^{(1)}$ and $P^{(2)}$, we call them .ye[stochastically equivalent] if $P^{(1)} = P^{(2)}$
-  - .ye[stochastically equivalent]: two random quantities are equal in terms of the parameters that govern them (for networks, probability matrices)
+<center>
+  <img src="images/honml/twosamp_sbm_pvals.png" style="background-color:white; width:100%" />
+</center>
 
 ---
 
-#### Block Models with PSD block matrices and RDPGs
+### Multiple Comparisons Problem
 
-If $\\mathbf A^{(1)}$ and $\\mathbf A^{(2)}$ are random networks with probability matrices $P^{(1)}$ and $P^{(2)}$, we call them .ye[stochastically equivalent] if $P^{(1)} = P^{(2)}$
-
-Recall that if [$B$ is PSD](#psd_bm), for a random network $\\mathbf A^{(1)} \\sim SBM_n(\\vec z, B)$ that:
-
-SBM: $P^{(1)} = (C\\sqrt B)(C\\sqrt B)^\\top = XX^\\top$ where $X = C\\sqrt B$
-
---
- 
-RDPG: $\\mathbf A^{(2)} \\sim RDPG\_n(X)$ where $X = C\\sqrt B$
-  - $A^{(1)}$ (an SBM) is stochastically equivalent to $A^{(2)}$ (an RDPG)
-
---
-  - .ye[SBMs (and DCSBMs) with PSD block matrices are stochastically equivalent to some RDPG]
-
+<center>
+  <img src="images/honml/twosampsbm_mc.png" style="background-color:white; width:100%" />
+</center>
 
 ---
 
-#### Block Models with PSD block matrices and RDPGs
-- SBMs (and DCSBMs) with PSD block matrices are stochastically equivalent to some RDPG
-- PSD matrices are very intuitive and easy to work with
-  - lots of linear algebra tricks and manipulations are designed for PSD matrices
+### Other interesting tests?
+
+1. Are the latent positions from two networks different?
+
+  $$H_0: X = YW ;\ H_A: X \neq YW$$
+
+2. Are the _distributions_ of latent positions from two networks different?
+
+  $$H_0: F_X = F_Y ;\ H_A: F_X \neq F_YW$$
+
+3. Which latent positions are different from two networks?
+
+  $$H_0: X_i = Y_iW ;\ H_A: X_i \neq Y_iW$$
 
 ---
 
-#### Focus for second section
+name:extra
 
-- develop techniques for RDPGs
-- All techniques for RDPGs "work" for RDPGs and block models with PSD block matrices
-  - they work more generally with non PSD block matrices (advanced; unintuitive)
+### Outline
 
-#### Key application
-- the latent position matrix for RDPGs is tabular: $X$ is $n \\times d$
-  - Nodes are like "observations"
-  - latent dimensions of nodes are like "features"
+- [Basics of Graph Data](#graphs)
+- [Random Graph Models](#models)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#apps)
+  - [Community Detection](#comm)
+  - [Two-Sample Hypothesis Testing](#2samp)
+
+### Additional Content
+
+---
+
 
 </textarea>
 <!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script> -->
