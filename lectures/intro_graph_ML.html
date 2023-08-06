@@ -33,7 +33,7 @@ name:talk
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- [Random Graph Models](#models)
+- [Random Network Models](#models)
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
@@ -48,7 +48,7 @@ name:whyhave
   - Why do we use statistics?
   - [What is a network?](#graphs)
   - [What different types of networks are there?](#types)
-- [Random Graph Models](#models)
+- [Random Network Models](#models)
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
@@ -189,7 +189,7 @@ name:graphs
   - [Why do we use statistics?](#whyhave)
   - What is a network?
   - [What different types of networks are there?](#types)
-- [Random Graph Models](#models)
+- [Random Network Models](#models)
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
@@ -264,7 +264,7 @@ name:types
   - [Why do we use statistics?](#whyhave)
   - [What is a network?](#graphs)
   - What different types of networks are there?
-- [Random Graph Models](#models)
+- [Random Network Models](#models)
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
@@ -475,10 +475,10 @@ name:models
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - Why do we use Random Graph Models?
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - Why do we use Random Network Models?
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - [Erdös Rényi Random Networks](#er)
   - [Stochastic Block Models](#sbm)
   - [RDPGs](#rdpg)
   - [Properties of Random Networks](#props)
@@ -549,14 +549,14 @@ name:models
 
 ---
 
-### Why do we use random graph models?
+### Why do we use random network models?
 
 - Networks are fundamentally different from $n$ observation, $d$ feature framework
   - Collection of nodes and edges, not observations with features
 
 ---
 
-### Why do we use random graph models?
+### Why do we use random network models?
 
 - Networks are fundamentally different from $n$ observation, $d$ feature framework
   - Collection of nodes and edges, not observations with features
@@ -579,7 +579,7 @@ name:models
 
 ### Approach 1: nodes are observations, edges are features
 
-- .Features in traditional machine learning describe each observation
+- Features in traditional machine learning describe each observation
 - Edges define .ye[relationships amongst the nodes]
   - the edges do not inherently isolate information about each node, so they aren't features for observations
 
@@ -635,7 +635,7 @@ $$\\begin{aligned} \\begin{bmatrix} 0 & 1 & 0\\\\ 1 & 0 & 0 \\\\ 0 & 0 & 0\\end{
 
 ### ~~Approach 2: treat all possible adjacency matrices like a coin flip~~
 
-- Number of possible adjacency matrices for simple netweorks with $n$ nodes?
+- Number of possible adjacency matrices for simple networks with $n$ nodes?
   - $2^{\binom{n}{2}}$
   - When $n = 50$, this is well over the number of atoms in the universe
 - Good luck keeping track of all of that!
@@ -647,10 +647,10 @@ name:ier
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - Inhomogeneous Erdös Rényi Random Graphs
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - Inhomogeneous Erdös Rényi Random Networks
+  - [Erdös Rényi Random Networks](#er)
   - [Stochastic Block Models](#sbm)
   - [RDPGs](#rdpg)
   - [Properties of Random Networks](#props)
@@ -663,7 +663,7 @@ name:ier
 
 ---
 
-### Approach 2.5: Treat nodes like coin flips
+### Approach 2.5: Treat edges like coin flips
 
 ##### Coin flip experiment
   - Outcomes: $x$ is heads ($1$) or tails ($0$)
@@ -672,7 +672,7 @@ name:ier
 
 ---
 
-### Approach 2.5: Treat nodes like coin flips
+### Approach 2.5: Treat edges like coin flips
 ##### Coin flip experiment
   - Outcomes: $x$ is heads ($1$) or tails ($0$)
 - Each flip $\\mathbf x\_i \sim \text{Bern}(p)$ $i.i.d.$
@@ -691,7 +691,6 @@ name:ier
 - $P$ is an $n \\times n$ probability matrix
   - For each $\\mathbf{a}\_{ij} \\sim \\text{Bern}(p\_{ij})$ independently
 - Equipped with the usual properties: $\\mathbb{E}[\\mathbf{a}\_{ij}] = p\_{ij}$, variance, etc.
-  - $\\mathbb{E}[\\mathbf{A}] = P$
 
 
 ---
@@ -723,10 +722,10 @@ name:er
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - Erdös Rényi Random Graphs
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - Erdös Rényi Random Networks
   - [Stochastic Block Models](#sbm)
   - [RDPGs](#rdpg)
   - [Properties of Random Networks](#props)
@@ -749,7 +748,7 @@ name:er
 
 - What if we assume every $p\_{ij} = p$?
 - $\\mathbf A \\sim ER\_n(p)$ means that for every $\\mathbf a\_{ij} \\sim \text{Bern}(p)$ $i.i.d.$
-  - No structure at all: every node (regardless of any attributes about it) has probability $p$
+  - No structure at all: every edge (regardless of any attributes about the nodes) has probability $p$
 
 <center>![:scale 100%](images/honml/p1/er.png)</center>
 
@@ -760,10 +759,10 @@ name:sbm
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - [Erdös Rényi Random Networks](#er)
   - Stochastic Block Models
   - [RDPGs](#rdpg)
   - [Properties of Random Networks](#props)
@@ -780,7 +779,7 @@ name:sbm
 
 - Nodes might not be structureless, but the structure might be simple enough to not have to resort to the $IER_n(P)$ case
 - What if we added a single attribute to each node, and allowed the nodes to be in similar "groups"?
-  - learn about nodes within groups, rather than learning about edges one at a time
+  - learn about edges for nodes within groups, rather than learning about edges one at a time
 
 
 ---
@@ -826,7 +825,7 @@ name:sbm
 ### Stochastic block model (SBM)
 
 - $\\mathbf A \\sim SBM\_n(\\vec z, B)$
-  - $\\mathbf a\_{ij}; z\_i = k, z\_i = l \\sim \text{Bern}(b\_{kl})$ $ind.$
+  - $\\mathbf a\_{ij}; z\_i = k, z\_j = l \\sim \text{Bern}(b\_{kl})$ $ind.$
   - block matrix defines the edge probabilities, given the community assignments
 
 <center>![:scale 50%](images/honml/p1/sbm_sim.png)</center>
@@ -836,7 +835,7 @@ name:sbm
 ### Stochastic block model (SBM)
 
 - $\\mathbf A \\sim SBM\_n(\\vec z, B)$
-  - $\\mathbf a\_{ij}; z\_i = k, z\_i = l \\sim \text{Bern}(b\_{kl})$ $ind.$
+- $\\mathbf a\_{ij}; z\_i = k, z\_j = l \\sim \text{Bern}(b\_{kl})$ $ind.$
   - edges are .ye[correlated] based on the communities of their incident nodes $i$ and $j$
   - once we know the community assignments, the edges are otherwise independent
 
@@ -877,7 +876,12 @@ $$CB = \\begin{aligned} \\begin{bmatrix}c\_{11} & ... & c\_{1K} \\\\ & \\vdots &
 - $(CB)\_{ik} = \\sum\_{l = 1}^{K}c\_{il} b\_{lk}$
 But:
 $$\\begin{aligned}c\_{il} = \\begin{cases}1, & z\_l = k\\\\ 0,& z\_l \\neq k\\end{cases}\\end{aligned}$$
-- so $(CB)\_{ik} = b\_{z\_i k}$
+
+--
+- so $(CB)\_{ik} = c\_{iz\_i} b\_{z\_i k} + \\sum\_{l \\neq z\_i} c\_{il} b\_{lk} = 1 b\_{z\_ik} + 0$
+
+--
+- ... so $(CB)\_{ik} = b\_{z\_i k}$
 
 ---
 
@@ -933,10 +937,10 @@ name:rdpg
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - [Erdös Rényi Random Networks](#er)
   - [Stochastic Block Models](#sbm)
   - RDPGs
   - [Properties of Random Networks](#props)
@@ -1018,10 +1022,10 @@ name:props
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - [Erdös Rényi Random Networks](#er)
   - [Stochastic Block Models](#sbm)
   - [RDPGs](#rdpg)
   - Properties of Random Networks
@@ -1039,12 +1043,12 @@ name:ev_aij
 
 - Just like networks themselves, random networks can be described using properties
   - Instead of describing realized properties, the properties are now random
-  - E.g., random densities, etc.
+  - E.g., random degrees, etc.
 
 --
 - Note that if $\\mathbf a\_{ij} \\sim \text{Bern}(p\_{ij})$, that by LOTUS:
 
-$$\\begin{aligned}\\mathbb E[\\mathbf a\_{ij}] &= 0 \\cdot (1 - p\_{ij}) + 1 \\cdot p\_{ij} \\\\ &= p\_{ij}\\end{aligned}$$
+$$\\begin{aligned}\\mathbb E[\\mathbf a\_{ij}] &= \\sum\_{a \\in \\{0, 1\\}}a \cdot \\mathbb P(\\mathbf a\_{ij} = a) \\\\ &=0 \\cdot (1 - p\_{ij}) + 1 \\cdot p\_{ij} \\\\ &= p\_{ij}\\end{aligned}$$
 
 ---
 
@@ -1061,11 +1065,11 @@ $$\\begin{aligned}\\mathbb E[\\mathbf a\_{ij}] &= 0 \\cdot (1 - p\_{ij}) + 1 \\c
 name:ev_di
 ### Expected Node Degree
 
-- .ye[expected node degree]: $\\mathbb E[\\mathbb d\_i]$
+- .ye[expected node degree]: $\\mathbb E[\\mathbf d\_i]$
 
 --
 - can use basic properties of expected values (linearity):
-$$\\begin{aligned}\\mathbb E[\\mathbb d\_i] &= \\mathbb E \\big[\\sum\_{j \\neq i} \\mathbf a\_{ij} \\big] \\\\ &= \\sum\_{j \\neq i}\\mathbb E[\\mathbf a\_{ij}] \\\\ &= \\sum\_{j \\neq i} p\_{ij},\\end{aligned}$$
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i] &= \\mathbb E \\big[\\sum\_{j \\neq i} \\mathbf a\_{ij} \\big] \\\\ &= \\sum\_{j \\neq i}\\mathbb E[\\mathbf a\_{ij}] \\\\ &= \\sum\_{j \\neq i} p\_{ij},\\end{aligned}$$
 where we plugged in the result from [here](#ev_aij)
 
 ---
@@ -1086,37 +1090,45 @@ $$\\mathbb E[\\mathbf d\_i; z\_i = k] = \\sum\_{j \\neq i} \\mathbb E[\\mathbf a
 ### Expected Node Degree (SBM)
 
 - $\\Rightarrow \\mathbb E[\\mathbf a\_{ij}; \\vec z\_i = k]$ can be written of the form $b\_{k z\_j}$
-- $z\_{j}$ could be any of the $K$ communities, so:
-$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j \\neq i} \\sum\_{l = 1}^K \\mathbb 1\_{ \\{z\_j = l\\} }b\_{k z\_j}\\end{aligned}$$
 - $\\mathbb 1\_{\\{z\_j = l\\}} = \\begin{cases} 1, & z\_{j} = l \\\\ 0, & z\_{j} \\neq l\\end{cases}$
----
-
-### Expected Node Degree (SBM)
-
-- $\\Rightarrow \\mathbb E[\\mathbf a\_{ij}; \\vec z\_i = k]$ can be written of the form $b\_{k z\_j}$
-- $z\_{j}$ could be any of the $K$ communities, so:
-$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j \\neq i} \\sum\_{l = 1}^K \\mathbb 1\_{ \\{z\_j = l\\} }b\_{k z\_j} \\\\ &= \\sum\_{j : j \\neq i, z\_{j} = k} b\_{kk} + \\sum\_{l \\neq k}\\sum\_{j : z\_{j} = l}b\_{kl}\\end{aligned}$$
-  - We are summing a fixed value for each node, depending on which community it is in
-
----
-
-### Expected Node Degree (SBM)
-
-$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j : j \\neq i, z\_{j} = k} b\_{kk} + \\sum\_{l \\neq k}\\sum\_{j : z\_{j} = l}b\_{kl}\\end{aligned}$$
+$$b\_{kz\_j} = \\sum\_{l = 1}^K \\mathbb 1\_{\\{z\_j = l\\}}b\_{k l}$$
 
 --
-- If $n\_k = \\sum\_{j = 1}^n \\mathbb 1\_{ \\{ z\_j = k\\}}$ are the counts for each community, we get:
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j \\neq i} \\sum\_{l = 1}^K \\mathbb 1\_{ \\{z\_j = l\\} }b\_{k l}\\end{aligned}$$
+---
+
+### Expected Node Degree (SBM)
+
+- $\\Rightarrow \\mathbb E[\\mathbf a\_{ij}; \\vec z\_i = k]$ can be written of the form $\\sum\_{l = 1}^K\\mathbb 1\_{\\{z\_j = l\\}}b\_{k l}$
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j \\neq i} \\sum\_{l = 1}^K \\mathbb 1\_{ \\{z\_j = l\\} }b\_{k l} \\\\ &= \\sum\_{l = 1}^K \\sum\_{j \\neq i} \\mathbb 1\_{\\{z\_j = l\\}}b\_{kl} \\\\ &= \\sum\_{l = 1}^K \\sum\_{j : j \\neq i, z\_j = l} b\_{kl}\\end{aligned}$$
+
+---
+
+### Expected Node Degree (SBM)
+
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{l = 1}^K \\sum\_{j : j \\neq i, z\_j = l} b\_{kl}\\\\ &= \\sum\_{j : j \\neq i, z\_{j} = k} b\_{kk} + \\sum\_{l \\neq k}\\sum\_{j : z\_{j} = l}b\_{kl}\\end{aligned}$$
+
+--
+- We are summing a fixed value (block probabilities) for each node, depending on which community it is in
+
+--
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= b\_{kk}\\sum\_{j : j \\neq i, z\_j = k}1 + \\sum\_{l \\neq k} b\_{kl} \\sum\_{j : z\_j = l}1\\end{aligned}$$
+---
+
+### Expected Node Degree (SBM)
+
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= b\_{kk}\\sum\_{j : j \\neq i, z\_j = k}1 + \\sum\_{l \\neq k} b\_{kl} \\sum\_{j : z\_j = l}1\\end{aligned}$$
+
+--
+- If $n\_l = \\sum\_{j : z\_j = l} 1$ are the counts for each community, we get:
 $$\\mathbb E[\\mathbf d\_i; z\_i = k] = (n\_k - 1) b\_{kk} + \\sum\_{l \\neq k} n\_{l} b\_{kl}$$
   - $(n\_k - 1)$: we summed over all of the nodes in community $k$, except for node $i$
-  - $n\_l$: we summed over all of the nodes in communities $l \\neq k$
+  - $n\_l$: we summed over all of the nodes in communities $l \\neq k$ (so node $i$ is not a part of them)
 
 ---
 name:deg_hom_sbm
 ### Expected Node Degree (SBM)
 
-$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j : j \\neq i, z\_{j} = k} b\_{kk} + \\sum\_{l \\neq k}\\sum\_{j : z\_{j} = l}b\_{kl}\\end{aligned}$$
-
-- If $n\_k = \\sum\_{j = 1}^n \\mathbb 1\_{ \\{ z\_j = k\\}}$ are the counts for each community, we get:
 $$\\mathbb E[\\mathbf d\_i; z\_i = k] = (n\_k - 1) b\_{kk} + \\sum\_{l \\neq k} n\_{l} b\_{kl}$$
   - The node degrees for an SBM are .ye[homogenous (the same) within the same community]
   - no dependence of $\\mathbb E[\\mathbf d\_i; z\_i = k]$ on $i$ itself
@@ -1134,14 +1146,14 @@ $$\\mathbb E[\\mathbf X] = \\begin{bmatrix} \\mathbb E[\\mathbf x\_{11}] & \\cdo
 
 - Recall the [degree matrix](#deg) for an $n$ node network $A$ with node degrees $d\_i$:
 $$D = \\begin{bmatrix} d\_1 & &  \\\\  & \\ddots &  \\\\  & & d\_n\\end{bmatrix}$$
-- The .ye[random degree matrix] is of a random matrix $\\mathbf A$ with random degrees $\\mathbf d\_i$:
+- The .ye[random degree matrix] of a random matrix $\\mathbf A$ with random degrees $\\mathbf d\_i$:
 $$\\mathbf D = \\begin{bmatrix} \\mathbf d\_1 & &  \\\\  & \\ddots &  \\\\  & & \\mathbf d\_n\\end{bmatrix}$$
 
 ---
 
 ##### Expected degree matrix
 
-- The .ye[expected degree matrix] is of a random matrix $\\mathbf A$ with random degrees $\\mathbf d\_i$:
+- The .ye[expected degree matrix] of a random matrix $\\mathbf A$ with random degrees $\\mathbf d\_i$:
 $$\\mathcal D = \\mathbb E[\\mathbf D] = \\begin{bmatrix} \\mathbb E[\\mathbf d\_1] &  & \\\\ & \\ddots & \\\\ & &  \\mathbb E[\\mathbf d\_n]\\end{bmatrix}$$
 
 --
@@ -1173,10 +1185,10 @@ name:dcsbm
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - [Erdös Rényi Random Networks](#er)
   - [Stochastic Block Models](#sbm)
   - [RDPGs](#rdpg)
   - [Properties of Random Networks](#props)
@@ -1262,10 +1274,10 @@ name:psd
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - [Erdös Rényi Random Networks](#er)
   - [Stochastic Block Models](#sbm)
   - [RDPGs](#rdpg)
   - [Properties of Random Networks](#props)
