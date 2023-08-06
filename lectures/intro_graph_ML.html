@@ -1243,6 +1243,20 @@ $$\\Theta = \\begin{bmatrix} \\theta\_1 & & \\\\ & \\ddots & \\\\ & & \\theta\_n
 
 ---
 
+### Degree-correction factor allows degree heterogeneities
+
+- Working through the [same math we did for the SBM](#deg_hom_sbm), we instead get:
+
+$$\\mathbb E[\\mathbb d\_i; z\_i = k] = \\theta\_i \\bigg(\\sum\_{l \\neq k}\\bigg[n\_l b\_{kl}\\sum\_{j : z\_j = l} \\theta\_j\\bigg] + (n\_k - 1)b\_{kk} \\sum\_{j \\neq i : z\_j = k}\\theta\_j\\bigg)$$
+
+(Handout page 64)
+
+--
+- $\\theta\_i$ "degree-corrects" the degrees of each node
+  - higher $\\theta\_i$: higher degree (than other nodes in the same community)
+  - lower $\\theta\_i$: lower degree (than other nodes in the same community)
+---
+
 name:psd
 
 ### Outline
