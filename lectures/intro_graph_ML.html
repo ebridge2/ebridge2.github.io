@@ -33,7 +33,7 @@ name:talk
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- [Random Graph Models](#models)
+- [Random Network Models](#models)
 - [Estimating Parameters for Networks](#est)
 - [Applications](#apps)
 
@@ -48,7 +48,7 @@ name:whyhave
   - Why do we use statistics?
   - [What is a network?](#graphs)
   - [What different types of networks are there?](#types)
-- [Random Graph Models](#models)
+- [Random Network Models](#models)
 - [Estimating Parameters for Networks](#est)
 - [Applications](#apps)
 
@@ -186,10 +186,10 @@ name:graphs
 ### Outline
 
 - Basics of Graph Data
-  - [Why do we have special approaches for networks?](#whyhave)
+  - [Why do we use statistics?](#whyhave)
   - What is a network?
   - [What different types of networks are there?](#types)
-- [Random Graph Models](#models)
+- [Random Network Models](#models)
 - [Estimating Parameters for Networks](#est)
 - [Applications](#apps)
 
@@ -203,7 +203,7 @@ name:graphs
   - $\mathcal V$ are vertices/nodes
   - $\mathcal E$ are edges: connect one vertex/node to another
 
-<center>![:scale 100%](images/honml/ny_ex.png)</center>
+<center>![:scale 100%](images/honml/p1/ny_ex.png)</center>
 
 ---
 
@@ -211,7 +211,7 @@ name:graphs
 
 - Provide a visualization of the nodes and edges in the network in some arbitrary space
 
-<center>![:scale 100%](images/honml/ny_ex_layout.png)</center>
+<center>![:scale 100%](images/honml/p1/ny_ex_layout.png)</center>
 
 ---
 
@@ -223,7 +223,19 @@ a\_{ij} = \\begin{cases}1, & e\_{ij} \in \mathcal E \\\\ 0, & e\_{ij} \not\in \m
 \\end{aligned}$$
 - The .ye[incident nodes] of an adjacency $a\_{ij}$ are $i$ and $j$
 
-<center>![:scale 100%](images/honml/nyc_adj.png)</center>
+<center>![:scale 70%](images/honml/p1/nyc_adj.png)</center>
+
+---
+
+### Adjacency matrices
+
+- $A$ is an $n \\times n$ .ye[adjacency matrix] for a network with $n$ nodes
+$$\\begin{aligned}
+a\_{ij} = \\begin{cases}1, & e\_{ij} \in \mathcal E \\\\ 0, & e\_{ij} \not\in \mathcal E\end{cases}
+\\end{aligned}$$
+- if $a\_{ij} = 1$, nodes $i$ and $j$ are .ye[neighbors] (edge between them)
+
+<center>![:scale 70%](images/honml/p1/nyc_adj.png)</center>
 
 ---
 
@@ -233,13 +245,14 @@ a\_{ij} = \\begin{cases}1, & e\_{ij} \in \mathcal E \\\\ 0, & e\_{ij} \not\in \m
 - What's a path from Staten Island  (SI) to Bronx (BX)?
 
 
-<center>![:scale 100%](images/honml/nyc_layoutonly.png)</center>
+<center>![:scale 40%](images/honml/p1/nyc_layoutonly.png)</center>
 
 ---
 
 ### Two paths from SI to BX
-
-<center>![:scale 100%](images/honml/si_bx_paths.png)</center>
+<br>
+<br>
+<center>![:scale 100%](images/honml/p1/si_bx_paths.png)</center>
 
 ---
 
@@ -248,10 +261,10 @@ name:types
 ### Outline
 
 - Basics of Graph Data
-  - [Why do we have special approaches for networks?](#whyhave)
+  - [Why do we use statistics?](#whyhave)
   - [What is a network?](#graphs)
   - What different types of networks are there?
-- [Random Graph Models](#models)
+- [Random Network Models](#models)
 - [Estimating Parameters for Networks](#est)
 - [Applications](#apps)
 
@@ -265,7 +278,7 @@ name:types
   - The lanes of the Brooklyn bridge are out from BK to MH
   - There is an edge from MH to BK, but there is no edge from BK to MH
 - .ye[asymmetric] adjacency matrix
-<center>![:scale 100%](images/honml/nyc_dir.png)</center>
+<center>![:scale 100%](images/honml/p1/nyc_dir.png)</center>
 
 ---
 
@@ -275,7 +288,7 @@ name:types
   - A bridge from a point in SI to another point within SI (crossing a creek?)
 - .ye[non-hollow] adjacency matrix
 
-<center>![:scale 100%](images/honml/nyc_sl.png)</center>
+<center>![:scale 50%](images/honml/p1/nyc_sl.png)</center>
 
 ---
 
@@ -284,7 +297,7 @@ name:types
 - For every edge, a .ye[weight] $w\_{ij}$ indices information about the "strength" of the edge
   - What is the level of traffic congestion for each bridge?
 - .ye[non-binary] adjacency matrix
-<center>![:scale 100%](images/honml/nyc_weight.png)</center>
+<center>![:scale 100%](images/honml/p1/nyc_weight.png)</center>
 
 ---
 
@@ -298,9 +311,9 @@ name:degree
 ### Degrees
 
 - node degree $degree(i)$: the number of nodes that $i$ has edges to
-- Degree of SI: 1
+- Degree of BK: 2
 
-<center>![:scale 100%](images/honml/nyc_layout.png)</center>
+<center>![:scale 50%](images/honml/p1/nyc_deg_layout.png)</center>
 
 ---
 
@@ -311,7 +324,7 @@ $$d\_i = degree(i) = \\sum\_{j = 1}^n a\_{ij}$$
 - since the network is simple (loopless), $a\_{ii} = 0$
   - For simple networks, we can write $d\_i = \\sum\_{j \neq i}a\_{ij}$
 
-<center>![:scale 100%](images/honml/nyc_deg.png)</center>
+<center>![:scale 70%](images/honml/p1/nyc_deg.png)</center>
 
 ---
 
@@ -334,7 +347,8 @@ $$\\begin{aligned}D &= \\begin{bmatrix}d\_1 & 0 & \\cdots & 0 \\\\ 0 & \\ddots &
 ### Degree matrix
 
 - For the New York example, it looks like this:
-<center>![:scale 100%](images/honml/nyc_deg_mtx.png)</center>
+
+<center>![:scale 100%](images/honml/p1/nyc_deg_mtx.png)</center>
 
 
 ---
@@ -385,11 +399,17 @@ $$L = D^{-\\frac{1}{2}}A D^{-\\frac{1}{2}}$$
 - neuron: functional "unit" of the brain
   - axon: "projection" from the center (cell body) of the neuron
 
---
+<center>![:scale 80%](images/honml/p1/neuron.png)</center>
+---
+
+### Diffusion connectome
+
+- neuron: functional "unit" of the brain
+  - axon: "projection" from the center (cell body) of the neuron
 - synapse: junction of the brain that bridges two neurons
   - the neurons can "communicate" through the synapses
 
-<center>![:scale 100%](images/honml/neuron_synapse.png)</center>
+<center>![:scale 80%](images/honml/p1/neuron_synapse.png)</center>
 
 ---
 
@@ -403,8 +423,9 @@ $$L = D^{-\\frac{1}{2}}A D^{-\\frac{1}{2}}$$
   - the axons tend to be "bundled together" in "fiber tracts"
   - we can see these with MRI
 
-<center>![:scale 100%](images/honml/fiber_tract.png)</center>
+<center>![:scale 40%](images/honml/p1/muse.jpeg)</center>
 
+(Source: Muse)
 ---
 
 ### Diffusion connectome
@@ -413,8 +434,9 @@ $$L = D^{-\\frac{1}{2}}A D^{-\\frac{1}{2}}$$
 - measure which brain areas are connected with other brain areas
   - idea: if there is an axonal fiber tract, neurons from these brain areas can communicate
 
-<center>![:scale 100%](images/honml/muse.png)</center>
+<center>![:scale 40%](images/honml/p1/conn_brain_area.png)</center>
 
+(Source: Schiffler 2017)
 ---
 
 ### Diffusion connectome
@@ -422,7 +444,19 @@ $$L = D^{-\\frac{1}{2}}A D^{-\\frac{1}{2}}$$
 - nodes: brain areas
 - edges: does an axonal fiber tract link from one brain area to the other?
 
-<center>![:scale 100%](images/honml/diffusion_connectome.png)</center>
+<center>![:scale 100%](images/honml/p1/diffusion_connectome.png)</center>
+
+(Source: Schiffler 2017/me)
+---
+
+### Attributes for network data
+
+- .ye[attributes] describe characteristics of the nodes or edges in the network
+- Diffusion connectome: left and right hemisphere
+  - What do you notice?
+
+<center>![:scale 100%](images/honml/p1/diffusion_labels.png)</center>
+
 
 ---
 
@@ -430,9 +464,9 @@ $$L = D^{-\\frac{1}{2}}A D^{-\\frac{1}{2}}$$
 
 - .ye[attributes] describe characteristics of the nodes or edges in the network
 - Diffusion connectome: left and right hemisphere
+  - homophily (like with like): .ye[More *within-hemisphere* connections than *between hemisphere*]
 
-<center>![:scale 100%](images/honml/diffusion_hemisphere.png)</center>
-
+<center>![:scale 100%](images/honml/p1/diffusion_labels.png)</center>
 
 ---
 
@@ -441,10 +475,10 @@ name:models
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - Why do we use Random Graph Models?
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - Why do we use Random Network Models?
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - [Erdös Rényi Random Networks](#er)
   - [Stochastic Block Models](#sbm)
   - [RDPGs](#rdpg)
   - [Properties of Random Networks](#props)
@@ -477,46 +511,52 @@ name:models
 
 - Model: $\mathbf x\_i \sim \\text{Bern}(p)$ $i.i.d.$
 - Question: is $p > 0.5$?
-- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$?
+- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$ when the number of heads is $9$?
 
 ---
 
 ### Making the coin flip experiment more formal
 
-- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$?
-- Null: $\\sum\_{i = 1}^{10} \\mathbf x\_i \sim \\text{Binomial}(10, 0.5)$
-- $p$-value: $p = \\sum_{k = 9}^{10} \\binom{10}{k}p^{k}(1 - p)^{10 - k}$
+- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$ when the number of heads is $9$?
 
 
 ---
 
 ### Making the coin flip experiment more formal
 
-- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$?
+- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$ when the number of heads is $9$?
 - Null: $\\sum\_{i = 1}^{10} \\mathbf x\_i \sim \\text{Binomial}(10, 0.5)$
-- $p$-value: $p = \\sum_{k = 9}^{10} \\binom{10}{k}p^{k}(1 - p)^{10 - k}$
+- $p$-value $= \\sum_{k = 9}^{10} \\binom{10}{k} 0.5^{k}(1 - 0.5)^{10 - k} = .011$
+
+---
+
+### Making the coin flip experiment more formal
+
+- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$ when the number of heads is $9$?
+- Null: $\\sum\_{i = 1}^{10} \\mathbf x\_i \sim \\text{Binomial}(10, 0.5)$
+- $p$-value $= \\sum_{k = 9}^{10} \\binom{10}{k} 0.5^{k}(1 - 0.5)^{10 - k} = .011$
 - .ye[What did the model let us do?]
 
 ---
 
 ### Making the coin flip experiment more formal
 
-- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$?
+- With $H\_0 : p = 0.5$ and $H\_A : p > 0.5$, do we have evidence to reject $H\_0$ when the number of heads is $9$?
 - Null: $\\sum\_{i = 1}^{10} \\mathbf x\_i \sim \\text{Binomial}(10, 0.5)$
-- $p$-value: $p = \\sum_{k = 9}^{10} \\binom{10}{k}p^{k}(1 - p)^{10 - k}$
+- $p$-value $= \\sum_{k = 9}^{10} \\binom{10}{k} 0.5^{k}(1 - 0.5)^{10 - k} = .011$
 - .ye[What did the model let us do?]
   - Get really specific and precise about this tangible concept ($9$ heads in $10$ flips seems like an awful lot)
 
 ---
 
-### Why do we use random graph models?
+### Why do we use random network models?
 
 - Networks are fundamentally different from $n$ observation, $d$ feature framework
   - Collection of nodes and edges, not observations with features
 
 ---
 
-### Why do we use random graph models?
+### Why do we use random network models?
 
 - Networks are fundamentally different from $n$ observation, $d$ feature framework
   - Collection of nodes and edges, not observations with features
@@ -539,21 +579,21 @@ name:models
 
 ### Approach 1: nodes are observations, edges are features
 
-- .ye[Features] in traditional machine learning describe each observation
+- Features in traditional machine learning describe each observation
 - Edges define .ye[relationships amongst the nodes]
   - the edges do not inherently isolate information about each node, so they aren't features for observations
 
-<center>![:scale 100%](images/honml/nyc_adj.png)</center>
+<center>![:scale 80%](images/honml/p1/nyc_adj.png)</center>
 
 ---
 
 ### ~~Approach 1: nodes are observations, edges are features~~
 
-- .ye[Features] in traditional machine learning describe each observation
+- Features in traditional machine learning describe each observation
 - Edges define .ye[relationships amongst the nodes]
   - the edges do not inherently isolate information about each node, so they aren't features for observations
 
-<center>![:scale 100%](images/honml/nyc_adj.png)</center>
+<center>![:scale 80%](images/honml/p1/nyc_adj.png)</center>
 
 ---
 
@@ -562,7 +602,7 @@ name:models
 - $\mathbf{x}\_i \sim \text{Bern}(p)$
   - Affix a probability ($p$) to an outcome of $1$, and $1 - p$ to an outcome of $0$
 - There are a finite number of entries in an adjacency matrix, taking finitely many values
-  - There are a finite number of adjacency matrices for $n$ node networks
+  - There are a finite number of adjacency matrices for $n$ node simple networks
 
 ---
 
@@ -571,7 +611,7 @@ name:models
 - $\mathbf{x}\_i \sim \text{Bern}(p)$
   - Affix a probability ($p$) to an outcome of $1$, and $1 - p$ to an outcome of $0$
 - There are a finite number of entries in an adjacency matrix, taking finitely many values
-  - There are a finite number of adjacency matrices for $n$ node networks
+  - There are a finite number of adjacency matrices for $n$ node simple networks
 - What if we just affix a probability to each possible network?
 
 ---
@@ -595,7 +635,7 @@ $$\\begin{aligned} \\begin{bmatrix} 0 & 1 & 0\\\\ 1 & 0 & 0 \\\\ 0 & 0 & 0\\end{
 
 ### ~~Approach 2: treat all possible adjacency matrices like a coin flip~~
 
-- Number of possible adjacency matrices with $n$ nodes?
+- Number of possible adjacency matrices for simple networks with $n$ nodes?
   - $2^{\binom{n}{2}}$
   - When $n = 50$, this is well over the number of atoms in the universe
 - Good luck keeping track of all of that!
@@ -607,10 +647,10 @@ name:ier
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - Inhomogeneous Erdös Rényi Random Graphs
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - Inhomogeneous Erdös Rényi Random Networks
+  - [Erdös Rényi Random Networks](#er)
   - [Stochastic Block Models](#sbm)
   - [RDPGs](#rdpg)
   - [Properties of Random Networks](#props)
@@ -623,7 +663,7 @@ name:ier
 
 ---
 
-### Approach 2.5: Treat nodes like coin flips
+### Approach 2.5: Treat edges like coin flips
 
 ##### Coin flip experiment
   - Outcomes: $x$ is heads ($1$) or tails ($0$)
@@ -632,7 +672,7 @@ name:ier
 
 ---
 
-### Approach 2.5: Treat nodes like coin flips
+### Approach 2.5: Treat edges like coin flips
 ##### Coin flip experiment
   - Outcomes: $x$ is heads ($1$) or tails ($0$)
 - Each flip $\\mathbf x\_i \sim \text{Bern}(p)$ $i.i.d.$
@@ -651,7 +691,6 @@ name:ier
 - $P$ is an $n \\times n$ probability matrix
   - For each $\\mathbf{a}\_{ij} \\sim \\text{Bern}(p\_{ij})$ independently
 - Equipped with the usual properties: $\\mathbb{E}[\\mathbf{a}\_{ij}] = p\_{ij}$, variance, etc.
-  - $\\mathbb{E}[\\mathbf{A}] = P$
 
 
 ---
@@ -660,7 +699,7 @@ name:ier
 
 - Can get a very precise description: any network structure is admissable
 
-<center>![:scale 100%](images/honml/smiley.png)</center>
+<center>![:scale 100%](images/honml/p1/smiley.png)</center>
 
 ---
 
@@ -683,10 +722,10 @@ name:er
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - Erdös Rényi Random Graphs
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - Erdös Rényi Random Networks
   - [Stochastic Block Models](#sbm)
   - [RDPGs](#rdpg)
   - [Properties of Random Networks](#props)
@@ -709,7 +748,9 @@ name:er
 
 - What if we assume every $p\_{ij} = p$?
 - $\\mathbf A \\sim ER\_n(p)$ means that for every $\\mathbf a\_{ij} \\sim \text{Bern}(p)$ $i.i.d.$
-  - No structure at all: every node (regardless of any attributes about it) has probability $p$
+  - No structure at all: every edge (regardless of any attributes about the nodes) has probability $p$
+
+<center>![:scale 100%](images/honml/p1/er.png)</center>
 
 ---
 
@@ -718,10 +759,10 @@ name:sbm
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - [Erdös Rényi Random Networks](#er)
   - Stochastic Block Models
   - [RDPGs](#rdpg)
   - [Properties of Random Networks](#props)
@@ -738,7 +779,27 @@ name:sbm
 
 - Nodes might not be structureless, but the structure might be simple enough to not have to resort to the $IER_n(P)$ case
 - What if we added a single attribute to each node, and allowed the nodes to be in similar "groups"?
-  - learn about nodes within groups, rather than learning about edges one at a time
+  - learn about edges for nodes within groups, rather than learning about edges one at a time
+
+
+---
+
+### Stochastic block model (working example)
+
+- Group of $100$ students, in one of two schools
+- Nodes: students
+- Edges: are a pair of students friends?
+- Attributes: which school does the student attend?
+
+---
+
+### Stochastic block model (working example)
+
+- Group of $100$ students, in one of two schools
+- Nodes: students
+- Edges: are a pair of students friends?
+- Attributes: which school does the student attend?
+  - expected: ability to model that students in the same school are (in general) more likely to be friends
 
 ---
 
@@ -748,7 +809,7 @@ name:sbm
   - Each element $z\_i$ for a node $i$ takes one of $K$ possible values
   - The value $z\_i$ is called the .ye[community] of node $i$
 
-<center>![:scale 100%](images/honml/comm_vec.png)</center>
+<center>![:scale 45%](images/honml/p1/comm_vec.png)</center>
 
 ---
 
@@ -757,28 +818,28 @@ name:sbm
 - .ye[Block matrix] $B$: assigns probabilities to edges belonging to different pairs of communities
   - If there are $K$ communities, $B$ is a $K \\times K$ matrix
 
-<center>![:scale 100%](images/honml/block_mtx.png)</center>
+<center>![:scale 50%](images/honml/p1/block_mtx.png)</center>
 
 ---
 
 ### Stochastic block model (SBM)
 
 - $\\mathbf A \\sim SBM\_n(\\vec z, B)$
-  - $\\mathbf a\_{ij}; z\_i = k, z\_i = l \\sim \text{Bern}(b\_{kl})$ $ind.$
+  - $\\mathbf a\_{ij}; z\_i = k, z\_j = l \\sim \text{Bern}(b\_{kl})$ $ind.$
   - block matrix defines the edge probabilities, given the community assignments
 
-<center>![:scale 100%](images/honml/sbm_sim.png)</center>
+<center>![:scale 50%](images/honml/p1/sbm_sim.png)</center>
 
 ---
 
 ### Stochastic block model (SBM)
 
 - $\\mathbf A \\sim SBM\_n(\\vec z, B)$
-  - $\\mathbf a\_{ij}; z\_i = k, z\_i = l \\sim \text{Bern}(b\_{kl})$ $ind.$
+- $\\mathbf a\_{ij}; z\_i = k, z\_j = l \\sim \text{Bern}(b\_{kl})$ $ind.$
   - edges are .ye[correlated] based on the communities of their incident nodes $i$ and $j$
   - once we know the community assignments, the edges are otherwise independent
 
-<center>![:scale 100%](images/honml/sbm_sim.png)</center>
+<center>![:scale 50%](images/honml/p1/sbm_sim.png)</center>
 
 ---
 
@@ -815,7 +876,12 @@ $$CB = \\begin{aligned} \\begin{bmatrix}c\_{11} & ... & c\_{1K} \\\\ & \\vdots &
 - $(CB)\_{ik} = \\sum\_{l = 1}^{K}c\_{il} b\_{lk}$
 But:
 $$\\begin{aligned}c\_{il} = \\begin{cases}1, & z\_l = k\\\\ 0,& z\_l \\neq k\\end{cases}\\end{aligned}$$
-- so $(CB)\_{ik} = b\_{z\_i k}$
+
+--
+- so $(CB)\_{ik} = c\_{iz\_i} b\_{z\_i k} + \\sum\_{l \\neq z\_i} c\_{il} b\_{lk} = 1 b\_{z\_ik} + 0$
+
+--
+- ... so $(CB)\_{ik} = b\_{z\_i k}$
 
 ---
 
@@ -858,15 +924,23 @@ $$\\begin{aligned}P = {CBC}^{\\top} = \\begin{bmatrix} b\_{z\_{1}z\_{1}} & \\cdo
 
 ---
 
+### Probability matrix for SBM example
+<br>
+<br>
+<center>![:scale 100%](images/honml/p1/deriving_pmtx.png)</center>
+
+
+---
+
 name:rdpg
 
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - [Erdös Rényi Random Networks](#er)
   - [Stochastic Block Models](#sbm)
   - RDPGs
   - [Properties of Random Networks](#props)
@@ -903,7 +977,10 @@ $$X = \\begin{bmatrix} \\leftarrow & \\vec x_1^\\top & \\rightarrow \\\\ & \\vdo
 
 ### Example of a latent position matrix
 
-<center>![:scale 100%](images/honml/lpm_sim.png)</center>
+<br>
+<br>
+<center>![:scale 50%](images/honml/p1/lpm.png)</center>
+
 
 ---
 
@@ -912,9 +989,19 @@ $$X = \\begin{bmatrix} \\leftarrow & \\vec x_1^\\top & \\rightarrow \\\\ & \\vdo
 - $\\mathbf A \\sim RDPG_n(X)$
   - $\\mathbf a\_{ij} ; \\vec x\_i = \\vec x, \\vec x\_j  = \\vec y \sim \\text{Bern}(\\vec x^\\top \\vec y)$ $ind.$
   - edges are .ye[correlated] based on the latent positions of their incident nodes $i$ and $j$
-  once we know the latent positions of the nodes, the edges are otherwise independent
 
-<center>![:scale 100%](images/honml/rdpg_sim.png)</center>
+<center>![:scale 50%](images/honml/p1/rdpg_sim.png)</center>
+
+---
+
+### Random Dot Product Graph Model (RDPG)
+
+- $\\mathbf A \\sim RDPG_n(X)$
+  - $\\mathbf a\_{ij} ; \\vec x\_i = \\vec x, \\vec x\_j  = \\vec y \sim \\text{Bern}(\\vec x^\\top \\vec y)$ $ind.$
+  - once we know the latent positions of the nodes, the edges are otherwise independent
+
+<center>![:scale 50%](images/honml/p1/rdpg_sim.png)</center>
+
 
 ---
 
@@ -927,6 +1014,7 @@ $$P = \\begin{bmatrix} \\leftarrow & \\vec x_1^\\top & \\rightarrow \\\\ & \\vdo
 --
 - so $\\mathbf A \\sim RDPG\_n(X)$ is equivalent to:
   - $\\mathbf a\_{ij} \\sim \text{Bern}(\\vec x\_i^\\top \\vec x_j)$ $ind.$
+
 ---
 
 name:props
@@ -934,10 +1022,10 @@ name:props
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - [Erdös Rényi Random Networks](#er)
   - [Stochastic Block Models](#sbm)
   - [RDPGs](#rdpg)
   - Properties of Random Networks
@@ -955,12 +1043,12 @@ name:ev_aij
 
 - Just like networks themselves, random networks can be described using properties
   - Instead of describing realized properties, the properties are now random
-  - E.g., random densities, etc.
+  - E.g., random degrees, etc.
 
 --
 - Note that if $\\mathbf a\_{ij} \\sim \text{Bern}(p\_{ij})$, that by LOTUS:
 
-$$\\mathbb E[\\mathbf a\_{ij}] = 0 \\cdot (1 - p\_{ij}) + 1 \\cdot p\_{ij}$$
+$$\\begin{aligned}\\mathbb E[\\mathbf a\_{ij}] &= \\sum\_{a \\in \\{0, 1\\}}a \cdot \\mathbb P(\\mathbf a\_{ij} = a) \\\\ &=0 \\cdot (1 - p\_{ij}) + 1 \\cdot p\_{ij} \\\\ &= p\_{ij}\\end{aligned}$$
 
 ---
 
@@ -977,11 +1065,11 @@ $$\\mathbb E[\\mathbf a\_{ij}] = 0 \\cdot (1 - p\_{ij}) + 1 \\cdot p\_{ij}$$
 name:ev_di
 ### Expected Node Degree
 
-- .ye[expected node degree]: $\\mathbb E[\\mathbb d\_i]$
+- .ye[expected node degree]: $\\mathbb E[\\mathbf d\_i]$
 
 --
 - can use basic properties of expected values (linearity):
-$$\\begin{aligned}\\mathbb E[\\mathbb d\_i] &= \\mathbb E \\big[\\sum\_{j \\neq i} \\mathbf a\_{ij} \\big] \\\\ &= \\sum\_{j \\neq i}\\mathbb E[\\mathbf a\_{ij}] \\\\ &= \\sum\_{j \\neq i} p\_{ij},\\end{aligned}$$
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i] &= \\mathbb E \\big[\\sum\_{j \\neq i} \\mathbf a\_{ij} \\big] \\\\ &= \\sum\_{j \\neq i}\\mathbb E[\\mathbf a\_{ij}] \\\\ &= \\sum\_{j \\neq i} p\_{ij},\\end{aligned}$$
 where we plugged in the result from [here](#ev_aij)
 
 ---
@@ -996,35 +1084,51 @@ $$\\mathbb E[\\mathbf d\_i; z\_i = k] = \\sum\_{j \\neq i} \\mathbb E[\\mathbf a
 --
 - Recall: $p\_{ij} = b\_{z\_i z\_j}$, where we know that $z\_i = k$
   - $\\Rightarrow \\mathbb E[\\mathbf a\_{ij}; \\vec z\_i = k]$ can be written of the form $b\_{k z\_j}$
- 
+   
 ---
 
 ### Expected Node Degree (SBM)
 
 - $\\Rightarrow \\mathbb E[\\mathbf a\_{ij}; \\vec z\_i = k]$ can be written of the form $b\_{k z\_j}$
-- $z\_{j}$ could be any of the $K$ communities, so:
-$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j \\neq i} \\sum\_{l = 1}^K \\mathbb 1\_{ \\{z\_j = l\\} }b\_{k z\_j} \\\\ &= \\sum\_{j : j \\neq i, z\_{j} = k} b\_{kk} + \\sum\_{l \\neq k}\\sum\_{j : z\_{j} = l}b\_{kl}\\end{aligned}$$
-  - We are summing a fixed value for each node, depending on which community it is in
+- $\\mathbb 1\_{\\{z\_j = l\\}} = \\begin{cases} 1, & z\_{j} = l \\\\ 0, & z\_{j} \\neq l\\end{cases}$
+$$b\_{kz\_j} = \\sum\_{l = 1}^K \\mathbb 1\_{\\{z\_j = l\\}}b\_{k l}$$
+
+--
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j \\neq i} \\sum\_{l = 1}^K \\mathbb 1\_{ \\{z\_j = l\\} }b\_{k l}\\end{aligned}$$
+---
+
+### Expected Node Degree (SBM)
+
+- $\\Rightarrow \\mathbb E[\\mathbf a\_{ij}; \\vec z\_i = k]$ can be written of the form $\\sum\_{l = 1}^K\\mathbb 1\_{\\{z\_j = l\\}}b\_{k l}$
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j \\neq i} \\sum\_{l = 1}^K \\mathbb 1\_{ \\{z\_j = l\\} }b\_{k l} \\\\ &= \\sum\_{l = 1}^K \\sum\_{j \\neq i} \\mathbb 1\_{\\{z\_j = l\\}}b\_{kl} \\\\ &= \\sum\_{l = 1}^K \\sum\_{j : j \\neq i, z\_j = l} b\_{kl}\\end{aligned}$$
 
 ---
 
 ### Expected Node Degree (SBM)
 
-$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j : j \\neq i, z\_{j} = k} b\_{kk} + \\sum\_{l \\neq k}\\sum\_{j : z\_{j} = l}b\_{kl}\\end{aligned}$$
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{l = 1}^K \\sum\_{j : j \\neq i, z\_j = l} b\_{kl}\\\\ &= \\sum\_{j : j \\neq i, z\_{j} = k} b\_{kk} + \\sum\_{l \\neq k}\\sum\_{j : z\_{j} = l}b\_{kl}\\end{aligned}$$
 
 --
-- If $n\_k = \\sum\_{j = 1}^n \\mathbb 1\_{ \\{ z\_j = k\\}}$ are the counts for each community, we get:
+- We are summing a fixed value (block probabilities) for each node, depending on which community it is in
+
+--
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= b\_{kk}\\sum\_{j : j \\neq i, z\_j = k}1 + \\sum\_{l \\neq k} b\_{kl} \\sum\_{j : z\_j = l}1\\end{aligned}$$
+---
+
+### Expected Node Degree (SBM)
+
+$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= b\_{kk}\\sum\_{j : j \\neq i, z\_j = k}1 + \\sum\_{l \\neq k} b\_{kl} \\sum\_{j : z\_j = l}1\\end{aligned}$$
+
+--
+- If $n\_l = \\sum\_{j : z\_j = l} 1$ are the counts for each community, we get:
 $$\\mathbb E[\\mathbf d\_i; z\_i = k] = (n\_k - 1) b\_{kk} + \\sum\_{l \\neq k} n\_{l} b\_{kl}$$
   - $(n\_k - 1)$: we summed over all of the nodes in community $k$, except for node $i$
-  - $n\_l$: we summed over all of the nodes in communities $l \\neq k$
+  - $n\_l$: we summed over all of the nodes in communities $l \\neq k$ (so node $i$ is not a part of them)
 
 ---
 name:deg_hom_sbm
 ### Expected Node Degree (SBM)
 
-$$\\begin{aligned}\\mathbb E[\\mathbf d\_i; z\_i = k] &= \\sum\_{j : j \\neq i, z\_{j} = k} b\_{kk} + \\sum\_{l \\neq k}\\sum\_{j : z\_{j} = l}b\_{kl}\\end{aligned}$$
-
-- If $n\_k = \\sum\_{j = 1}^n \\mathbb 1\_{ \\{ z\_j = k\\}}$ are the counts for each community, we get:
 $$\\mathbb E[\\mathbf d\_i; z\_i = k] = (n\_k - 1) b\_{kk} + \\sum\_{l \\neq k} n\_{l} b\_{kl}$$
   - The node degrees for an SBM are .ye[homogenous (the same) within the same community]
   - no dependence of $\\mathbb E[\\mathbf d\_i; z\_i = k]$ on $i$ itself
@@ -1042,15 +1146,17 @@ $$\\mathbb E[\\mathbf X] = \\begin{bmatrix} \\mathbb E[\\mathbf x\_{11}] & \\cdo
 
 - Recall the [degree matrix](#deg) for an $n$ node network $A$ with node degrees $d\_i$:
 $$D = \\begin{bmatrix} d\_1 & &  \\\\  & \\ddots &  \\\\  & & d\_n\\end{bmatrix}$$
-- The .ye[random degree matrix] is of a random matrix $\\mathbf A$ with random degrees $\\mathbf d\_i$:
+- The .ye[random degree matrix] of a random matrix $\\mathbf A$ with random degrees $\\mathbf d\_i$:
 $$\\mathbf D = \\begin{bmatrix} \\mathbf d\_1 & &  \\\\  & \\ddots &  \\\\  & & \\mathbf d\_n\\end{bmatrix}$$
 
 ---
 
 ##### Expected degree matrix
 
-- The .ye[expected degree matrix] is of a random matrix $\\mathbf A$ with random degrees $\\mathbf d\_i$:
+- The .ye[expected degree matrix] of a random matrix $\\mathbf A$ with random degrees $\\mathbf d\_i$:
 $$\\mathcal D = \\mathbb E[\\mathbf D] = \\begin{bmatrix} \\mathbb E[\\mathbf d\_1] &  & \\\\ & \\ddots & \\\\ & &  \\mathbb E[\\mathbf d\_n]\\end{bmatrix}$$
+
+--
 
 ##### Expected value of random network
 
@@ -1062,11 +1168,13 @@ $$\\mathbb E[\\mathbf A] = P$$
 
 ### Population network Laplacian
 
-- Remember the [network Laplacian](#dad_lapl) is $L = D^{-\\frac{1}{2}} A D^{-\\frac{1}{2}}$
+- Remember the [network Laplacian](#net_lapl) is $L = D^{-\\frac{1}{2}} A D^{-\\frac{1}{2}}$
   - has entries $l\_{ij} = \frac{a\_{ij}}{\\sqrt{d\_i} \\sqrt{d\_j}}$
   - to calculate, $d\_i > 0$ for all $i$, or equivalently, $a\_{ij} = 1$ for at least one $j$ for every node $i$
+
+--
 - The .ye[population network Laplacian] is:
-$$\\mathcal L = \\mathcal D^{-\\frac{1}{2}}P \\mathcal D^{-\\frac{1}{2}}$$
+$$\\mathcal L = \\mathcal D^{-\\frac{1}{2}}P \\mathcal D^{-\\frac{1}{2}} = \\mathbb E[\\mathbf D]^{-\\frac{1}{2}} \\mathbb E[\\mathbf A] \\mathbb E[\\mathbf D]^{-\\frac{1}{2}}$$
   - has entries $\\ell\_{ij} = \\frac{p\_{ij}}{\\sqrt{\\mathbb E[d\_{i}] \\sqrt{\\mathbb E[d\_{j}]}}}$
   - To calculate, $\\mathbb E[\\mathbb d\_i] > 0$ for all $i$, or equivalently, $p\_{ij} > 0$ for at least one $j$ for every node $i$
 
@@ -1077,10 +1185,10 @@ name:dcsbm
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - [Erdös Rényi Random Networks](#er)
   - [Stochastic Block Models](#sbm)
   - [RDPGs](#rdpg)
   - [Properties of Random Networks](#props)
@@ -1093,16 +1201,27 @@ name:dcsbm
 
 ---
 
+### Academic network example
+
+- nodes: academics at a university
+- edges: have a pair of academics published a paper together?
+- communities: subject area (color)
+
+<center><img src="./images/honml/p1/scholar.png" alt="app-screen" height="250" /></center>
+
+(Source: [kbucha73](https://studentwork.prattsi.org/infovis/visualization/coauthorship-network-science/))
+
+--
+- the "big shots" have higher degrees than other people even though they are in the same community
+
+---
 ### Degree-correction factors
 
 - recall: node degrees in an SBM are [homogeneous within community](#deg_hom_sbm): all have the same node degree
   - not realistic: most real networks will have some nodes that have more connections than others
-  - if we had an academics where the nodes were academics and the edges were whether they had a paper together, we would expect some people to collaborate more than others
 
 --
 - .ye[Degree-correction factor] $\\theta\_i$ indicates "node importance"
-
-<center>![:scale 100%](images/honml/deg_cor_ex.png)</center>
 
 ---
 
@@ -1132,8 +1251,22 @@ $$\\Theta = \\begin{bmatrix} \\theta\_1 & & \\\\ & \\ddots & \\\\ & & \\theta\_n
 ### DCSBM Example
 
 
-<center>![:scale 100%](images/honml/dcsbm_sim.png)</center>
+<center>![:scale 90%](images/honml/p1/dcsbm_sim.png)</center>
 
+---
+
+### Degree-correction factor allows degree heterogeneities
+
+- Working through the [same math we did for the SBM](#deg_hom_sbm), we instead get:
+
+$$\\mathbb E[\\mathbb d\_i; z\_i = k] = \\theta\_i \\bigg(\\sum\_{l \\neq k}\\bigg[n\_l b\_{kl}\\sum\_{j : z\_j = l} \\theta\_j\\bigg] + (n\_k - 1)b\_{kk} \\sum\_{j \\neq i : z\_j = k}\\theta\_j\\bigg)$$
+
+(Handout page 64)
+
+--
+- $\\theta\_i$ "degree-corrects" the degrees of each node
+  - higher $\\theta\_i$: higher degree (than other nodes in the same community)
+  - lower $\\theta\_i$: lower degree (than other nodes in the same community)
 ---
 
 name:psd
@@ -1141,10 +1274,10 @@ name:psd
 ### Outline
 
 - [Basics of Graph Data](#graphs)
-- Random Graph Models
-  - [Why do we use Random Graph Models?](#models)
-  - [Inhomogeneous Erdös Rényi Random Graphs](#ier)
-  - [Erdös Rényi Random Graphs](#er)
+- Random Network Models
+  - [Why do we use Random Network Models?](#models)
+  - [Inhomogeneous Erdös Rényi Random Networks](#ier)
+  - [Erdös Rényi Random Networks](#er)
   - [Stochastic Block Models](#sbm)
   - [RDPGs](#rdpg)
   - [Properties of Random Networks](#props)
@@ -1231,8 +1364,9 @@ l$)
 ---
 
 ### Homophilic block matrix example
-
-<center>![:scale 100%](images/honml/homo_block_mtx.png)</center>
+<br>
+<br>
+<center>![:scale 50%](images/honml/p1/homo_block_mtx.png)</center>
 
 ---
 
@@ -1261,6 +1395,22 @@ RDPG: $\\mathbf A^{(2)} \\sim RDPG\_n(X)$ where $X = C\\sqrt B$
 
 --
 - .ye[SBMs (and DCSBMs) with PSD block matrices are stochastically equivalent to some RDPG]
+
+---
+
+#### Stochastic equivalence of SBMs and RDPGs example
+
+<br>
+<br>
+<center>![:scale 90%](images/honml/p1/psd_lpm.png)</center>
+
+---
+
+#### Stochastic equivalence of DCSBMs and RDPGs example
+
+<br>
+<br>
+<center>![:scale 90%](images/honml/p1/psd_dcsbm.png)</center>
 
 
 ---
