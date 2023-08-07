@@ -1452,12 +1452,15 @@ name:est
 
 ### Learning Representations of Networks
 
-- In practice, we never observe probability matrices $P$
-- We observe adjacency matrices $A$
-- We want to estimate $\hat P$ from $A$
+- Probability matrix $P$ tells us about structure of network
 
-![:scale 100%](images/honml/network_reps.png)
+--
+- But we never observe $P$! We observe adjacency matrices $A$.
 
+--
+- We want to estimate $\hat P$ from $A$ via representations of $A$
+
+![:scale 100%](images/honml/p2/network_reps.png)
 
 ---
 name:ase
@@ -1483,7 +1486,7 @@ name:ase
 
 --
 
-- If $P$ is PSD, then $P = XX^\\top$ for some $X$ with $X=\\sqrt P$.
+- If $P$ is PSD, then $P = XX^\\top$ with $X=\\sqrt P$.
     - Recall: PSD means you can take square roots.
 
 --
@@ -1492,6 +1495,10 @@ name:ase
     - $n$ nodes, $d$ latent dimensions
     - none of the columns are redundant (the rank of $X$ is $d$).
     - entries are $\mathbb R$
+
+--
+
+- What does it mean to take a square root of a matrix?
 
 ---
 
@@ -1514,7 +1521,7 @@ $$R = Q\Lambda Q^\top$$
 --
 
 - Then $R$ has $d$ non-negative eigenvalues
-  - $\lambda_1 > \lambda_2 > \cdots > \lambda_d \geq 0$
+  - $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_d > 0$
 --
 
 - With keeping $d$ non-zero eigenvalues
@@ -1531,7 +1538,7 @@ $$R = Q\Lambda Q^\top$$
   \\end{bmatrix}$$
 - Decompose $R$ by
 $$
-R = Q_d\Lambda_d Q_d
+R = Q_d\Lambda_d Q_d^\top
 $$
 
 ---
@@ -1574,20 +1581,23 @@ $$\sqrt{\Lambda_d} = \\begin{bmatrix}
 
 --
 - But what happens when $A$ is not PSD?
+    - Can happen even if $P$ is PSD.
 
 ---
 
 ### Limitations of Eigendecomposition
 
-- Consider the following adjacency matrix:
+- Consider the following probability and sampled adjacency matrix:
 
 $$
-\\begin{aligned}
-A &= \\begin{bmatrix}
+P = \\begin{bmatrix}
+0.5 & 0.5 \\\\
+0.5 & 0.5
+\\end{bmatrix},
+A = \\begin{bmatrix}
 0 & 1 \\\\
 1 & 0
 \\end{bmatrix}
-\\end{aligned}
 $$
 
 --
@@ -1606,7 +1616,7 @@ $$\sqrt\Lambda = \\begin{bmatrix}
 \\end{bmatrix}$$
 --
 
-$\implies$ Results in non-real latent positions!
+$\implies$ results in non-real latent positions!
 
 ---
 
@@ -1633,7 +1643,6 @@ $$R = U_d \\Sigma_d U_d^\\top$$
 $$
 P = XX^\\top, X = U_d \\sqrt{\\Sigma_d}
 $$
-- Again, in practice, we never observe $P$, but observe the adjacency matrix $A$.
 
 --
 - Applying $\texttt{svd}$ to $A$ while keeping $d$ number of singular values/vectors:
@@ -1646,65 +1655,114 @@ $$\hat P = \hat X \hat X^\top$$
 
 ---
 
-### Rotational non-identifiability
+### .ye[Adjacency] Spectral Embedding
 
-- .ye[Non-identifiability]: multiple solutions to the same problem
-- Many "reasonable" latent positions $X$ produce same $P$
-
---
-- .ye[Rotational non-identifiability]: rotation of latent positions
-  - $X$ and $XW$ produce same $P$ for any rotational (orthogonal) matrix $W$
-  - $X$ and $XW$ are _rotationally equivalent_
-
---
-
-$$
-P = XW(XW)^\top = XWW^\top X^\top = XI_dX^\top = XX^\top
-$$
+- “Adjacency” - operates on the adjacency matrix $A$
 
 ---
 
-### ASE Example - Sampling from SBMs
+### Adjacency .ye[Spectral] Embedding
+
+- “Adjacency” - operates on the adjacency matrix $A$
+- “Spectral” - intuition relies on the eigenvalues/eigenvectors of $P$
+
+---
+
+### Adjacency Spectral .ye[Embedding]
+
+- “Adjacency” - operates on the adjacency matrix $A$
+- “Spectral” - intuition relies on the eigenvalues/eigenvectors of $P$
+- “Embedding” - finds a mathematical structure contained in another (a tabular structure contained within the adjacency matrix).
+
+---
+
+### Adjacency Spectral Embedding
+
+- “Adjacency” - operates on the adjacency matrix $A$
+- “Spectral” - intuition relies on the eigenvalues/eigenvectors of $P$
+- “Embedding” - finds a mathematical structure contained in another (a tabular structure contained within the adjacency matrix).
+
+--
+
+##### Procedure
+
+1. Decompose $A= U\\Sigma U^\\top$ via $\texttt{svd}$
+2. Keep $d$ largest singular values, and obtain $U_d$ and $\Sigma_d$.
+3. Compute $\sqrt{\Sigma_d}$ where entries are $\sqrt{\sigma_i}$ for $1,\ldots,d$.
+4. Compute estimated latent positions $\hat X = U_d \sqrt{\Sigma_d}$.
+
+
+---
+
+### $\texttt{ase}$ Example - Sampling from SBMs
 
 - Suppose we have SBM with $n = 100$ nodes and $K = 2$ communities.
 
 <center>
-  <img src="images/honml/ase_sbm_ex.png" style="background-color:white; width:100%" />
+  <img src="images/honml/p2/ase_sbm_ex.png" style="background-color:white; width:100%" />
 </center>
 
 ---
 
-### ASE Example - True vs Estimated Probability Matrices
+### $\texttt{ase}$ Example - True vs Estimated Probability Matrices
 
 <center>
-  <img src="images/honml/ase_result.png" style="background-color:white; width:80%" />
+  <img src="images/honml/p2/ase_result.png" style="background-color:white; width:80%" />
 </center>
 ---
 
-### ASE Example - Estimated Latent Positions
+### $\texttt{ase}$ Example - Estimated Latent Positions
 
 <center>
-  <img src="images/honml/ase_permuted.png" style="background-color:white; width:90%" />
+  <img src="images/honml/p2/ase_permuted.png" style="background-color:white; width:90%" />
 </center>
+
+---
+
+### Non-identifiability of RDPG
+
+- .ye[Non-identifiability]: multiple solutions to the same problem
+  - Many "reasonable" latent positions $X$ produce same $P$
+
+--
+- .ye[Rotational non-identifiability]: rotation of latent positions
+- Given a rotation matrix $W$, and $Y=WX$:
+    - RDPG$_n(X)$ and RDPG$_n(Y)$ have same probability matrix $P$
+--
+  - $X$ and $Y$ are .ye[rotationally equivalent]
+
+--
+
+$$
+\\begin{aligned}
+P &= YY^\\top \\\\
+&= XW(XW)^\\top \\\\
+&= XWW^\\top X^\\top \\\\
+&= XI_dX^\\top \\\\
+&= XX^\\top
+\\end{aligned}
+$$
 
 ---
 
 ### Visualization of Rotational Non-identifiability
 
-<br>
 
 <center>
-  <img src="images/honml/rotation.png" style="background-color:white; width:100%" />
+  <img src="images/honml/p2/rotation.png" style="background-color:white; width:100%" />
 </center>
+
+--
+
+- Caveat: be careful when comparing different latent positions
 
 ---
 
 ### Why use $\texttt{ase}$ at all?
 
 1. $\texttt{ase}$ tabularizes your adjacency matrix
-  - a.k.a latent positions
-  - $n\times d$ real matrix, where $d$ was the number of dimensions that you selected
-  to embed into
+  - $n\times d$ real matrix, where $d$ was the number of dimensions that you selected to embed into
+  - explore the nodes using more traditional machine learning approaches
 
 --
 2. $\texttt{ase}$ decouples the dependencies of the random network
@@ -1716,7 +1774,6 @@ $$
   - theoretical results $\implies$ as our networks get larger (more data), our estimates of $P$ get better
   - $\hat X$ is a useful surrogate for studying $X$
   - can be useful even under model misspecification
-
 
 ---
 name:lse
@@ -1755,7 +1812,7 @@ $$L = XX^\\top, X = U_d \\sqrt{\\Sigma_d}$$
 ### ASE vs LSE
 
 <center>
-  <img src="images/honml/dcsbm_lse.png" style="background-color:white; width:60%" />
+  <img src="images/honml/p2/dcsbm_lse.png" style="background-color:white; width:60%" />
 </center>
 --
 
@@ -1794,11 +1851,20 @@ name:comm
 ### What is community detection?
 
 - Goal: find groups of nodes that are "similar" to each other than to all other nodes.
-- Note: community means same thing as clusters
+
+--
+- Let's suppose you have a network $A$ with $n$ nodes.
+
+--
+    - Assume $A\sim SBM_n$, but we don't know $\vec z$!
+--
+    - Community detection algorithms estimate $\vec z$.
+--
+- Note: In unsupervised learning, called clustering
 
 --
 
-##### Procedure for spectral clustering
+##### Procedure for community detection
 1. Learn representations of your network
   - Embed using $\texttt{ase}$ or $\texttt{lse}$ in $d$ dimensions
 --
@@ -1807,7 +1873,7 @@ name:comm
   - e.g. k-means
 --
 
-3. Analyze the clusters
+3. Evaluate your Clusters
 
 ---
 
@@ -1815,9 +1881,12 @@ name:comm
 
 - Consider a DCSBM$_n$ with $n = 300$ nodes and $K = 3$ communities.
 - Randomly shuffle the ordering of nodes.
+--
+
+<br>
 
 <center>
-  <img src="images/honml/comm_detect_ex.png" style="background-color:white; width:100%" />
+  <img src="images/honml/p2/comm_detect_ex.png" style="background-color:white; width:100%" />
 </center>
 
 --
@@ -1831,13 +1900,28 @@ name:comm
 - Estimate latent positions $\hat X$ from $\texttt{ase}$ of sampled adjacency matrix
 - Label latent positions by apriori known communities
 
+--
+
 <center>
-  <img src="images/honml/comm_detect_embed.png" style="background-color:white; width:100%" />
+  <img src="images/honml/p2/comm_detect_embed.png" style="background-color:white; width:100%" />
 </center>
 
 --
-
 - $\hat X$ retains the community structure
+
+---
+
+### Estimate communities with 3-means
+
+- Use 3-means clustering on $\hat X$
+- Evaluate clustering by visualizing classification
+
+--
+
+
+<center>
+  <img src="images/honml/p2/comm_detect_eval.png" style="background-color:white; width:100%" />
+</center>
 
 ---
 
@@ -1854,54 +1938,69 @@ name:comm
 --
 
 2. For $k\in\{2, 3, \ldots, K\}$ number of communities
-  1. Cluster the representations into $k$ communities
-  2. Compute silhouette score
+  1. Use k-means to cluster latent positions
+  2. Compute .ye[silhouette score]
 --
 
-3. Choose $k$ that has the highest silhouette score
+3. Choose $k$ that has the highest .ye[silhouette score]
 
 ---
 
 ### Example
 
 <center>
-  <img src="images/honml/comm_detect_kmclust.png" style="background-color:white; width:100%" />
+  <img src="images/honml/p2/comm_detect_kmclust.png" style="background-color:white; width:100%" />
 </center>
 
 ---
 
-### Other Practical Considerations
+### Practical Considerations
 
+- Choice of embeddings
+    - $\texttt{lse}$ can be robust to degree variations
+    - Can even consider non-spectral embeddings!
+        - node2vec
+--
 - Choice of embedding dimension $d$
-  - Different $d$ can give different clustering results
-
+    - Different $d$ can give different clustering results
 --
 - Choice of clustering algorithm
-  - Gaussian mixture models ($\texttt{gmm}$) can give better results
+    - Gaussian mixture models ($\texttt{gmm}$) can give better results
+    - Fuzzy clustering (soft clustering)
 
 ---
 
 ### [Two-Truths of Spectral Clustering](https://doi.org/10.1073/pnas.1814462116)
 
 - Averaged from 100s human brain networks
+  - Assume a 4-block SBM: {left, right} x {gray matter, white matter}
 - Embed using $\texttt{ase}$ or $\texttt{lse}$
-- Cluster using $\texttt{gmm}$
+- Estimate 2 communities using $\texttt{gmm}$
 
 ---
 
 ### [Two-Truths of Spectral Clustering](https://doi.org/10.1073/pnas.1814462116)
 
 <center>
-  <img src="images/honml/twotruths.png" style="background-color:white; width:70%" />
+  <img src="images/honml/p2/twotruths.png" style="background-color:white; width:65%" />
 </center>
-
 
 | Clusters | $\texttt{gmm}$ o $\texttt{ase}$ | $\texttt{gmm}$ o $\texttt{lse}$|
 | ---| --- | --- |
 | 1 | <span style="color:#00bfc4"> right GM </span>, <span style="color:#f8766d"> left GM </span> | <span style="color:#00bfc4"> right GM </span>,<span style="color:#c77cff"> right WM </span> |
 | 2 | <span style="color:#c77cff"> right WM </span> , <span style="color:#7cae00"> left WM </span>  | <span style="color:#f8766d"> left GM </span>, <span style="color:#7cae00"> left WM </span> |
-- WM = white matter; dense connections
-- GM = gray matter; sparse connections
+
+---
+
+### [Two-Truths of Spectral Clustering](https://doi.org/10.1073/pnas.1814462116)
+
+<center>
+  <img src="images/honml/p2/twotruths.png" style="background-color:white; width:65%" />
+</center>
+
+
+- Core-periphery: densely and sparsely connected within, densely connected across
+- Affinity: densely connected within, sparsely connected across
 
 ---
 name:2samp
@@ -1919,49 +2018,181 @@ name:2samp
 
 ---
 
-### What is two-sample hypothesis testing?
+### What is Two-sample Hypothesis Testing?
 
-- Given two networks:
+- Given two networks $A^{(1)}$ and $A^{(2)}$:
+--
+
   - Are they the "same"? (null hypothesis $H_0$)
+--
+
   - Are they "different"? (alternate hypothesis $H_A$)
 --
 
-- Assumptions
+
+##### General Strategy
+1. Assume a model for the networks
+2. Formulate a hypothesis test based on the model
+3. Compute a test statistic
+
+--
+
+##### Assumptions
   - Same number of nodes in both networks
   - One-to-one correspondence of nodes between both network
 
 ---
 
-### What specific tests under SBMs?
+### Example - Traffic Patterns
 
-- Assume our data comes from SBMs (model assumption)
-- We want to test
+- Goal: examine traffic pattern differences during the daytime (7AM-7PM) compared to night time (7PM-7AM).
 
-$$\being{aligned} H_0&: B^{(1)} = B^{(2)} \\ H_A&: B^{(1)} \neq B^{(2)}\end{aligned}$$
+--
+- 100 towns (nodes) from $K=3$ states
+  - 45 towns from NY
+  - 30 towns from NJ
+  - 25 towns from PA
+
+--
+- Measure the number of commuters from pairs of towns
+  - If more than 1,000 drivers regularly make this commute, we add an edge between the pair of towns
+
+--
+- We have two networks:
+  - the first network between 7 AM and 7 PM (covering the bulk of the work day)
+  - the second network between 7 PM and 7 AM (covering the bulk of night time)
 
 ---
 
 ### Example - Traffic Patterns
 
 <center>
-  <img src="images/honml/twosamp_sbm_ex.png" style="background-color:white; width:100%" />
+  <img src="images/honml/p2/twosamp_sbm_ex.png" style="background-color:white; width:100%" />
 </center>
 
 ---
 
-### Example - Traffic Patterns
+### Testing Whether Block Matrices are Different
+
+- Given block matrices $B^{(1)}$ and $B^{(2)}$
+
+$$
+B^{(1)} = \\begin{bmatrix}
+b^{(1)}\_{11} & b^{(1)}\_{12} & b^{(1)}\_{13} \\\\
+b^{(1)}\_{21} & b^{(1)}\_{22} & b^{(1)}\_{23} \\\\
+b^{(1)}\_{31} & b^{(1)}\_{32} & b^{(1)}\_{33}
+\\end{bmatrix},\;\;\; B^{(2)} = \\begin{bmatrix}
+b^{(2)}\_{11} & b^{(2)}\_{12} & b^{(2)}\_{13} \\\\
+b^{(2)}\_{21} & b^{(2)}\_{22} & b^{(2)}\_{23} \\\\
+b^{(2)}\_{31} & b^{(2)}\_{32} & b^{(2)}\_{33}
+\\end{bmatrix}
+$$
+
+--
+- First hypothesis:
+$$H_0: B^{(1)} = B^{(2)}; \ \ H_A: B^{(1)} \neq B^{(2)}$$
+
+---
+
+### Testing Whether Block Matrices are Different
+
+- Given block matrices $B^{(1)}$ and $B^{(2)}$
+
+$$
+B^{(1)} = \\begin{bmatrix}
+b^{(1)}\_{11} & b^{(1)}\_{12} & b^{(1)}\_{13} \\\\
+b^{(1)}\_{21} & b^{(1)}\_{22} & b^{(1)}\_{23} \\\\
+b^{(1)}\_{31} & b^{(1)}\_{32} & b^{(1)}\_{33}
+\\end{bmatrix},\;\;\; B^{(2)} = \\begin{bmatrix}
+b^{(2)}\_{11} & b^{(2)}\_{12} & b^{(2)}\_{13} \\\\
+b^{(2)}\_{21} & b^{(2)}\_{22} & b^{(2)}\_{23} \\\\
+b^{(2)}\_{31} & b^{(2)}\_{32} & b^{(2)}\_{33}
+\\end{bmatrix}
+$$
+
+- More concrete hypothesis:
+
+$$H\_{0, kl}: b\_{kl}^{(1)} = b^{(2)}\_{kl}; \ \ H\_{A, kl} : b\_{kl}^{(1)} \neq b^{(2)}\_{kl}$$
+
+--
+- Statements about matrices to statement about probabilities
+
+---
+
+### Fischer's Exact Test
+
+- For each $k$ and $l$ community pair, we can compute the $2\times 2$ contingency table:
+
+|  | night time |  day time|
+| ---| --- | --- |
+| Number of edges | a | b |
+| Number of non-edges | c  | d |
+
+--
+
+- Intuitively, tests whether proportion of edges is independent of time of day.
+
+--
+
+- Now we can compute the p-value for each $H\_{0, kl}$ hypothesis!
+
+--
+
+- What about multiple comparisons?
+
+---
+
+### Multiple Comparisons Problem
+
+- Suppose we have 5000 fair coins (equal probability of heads and tails)
+--
+
+- For each coin
+    - Flip the coin 500 times
+--
+    - Test $H_0^{(i)} : p^{(i)} = 0.5$ against $H_A^{(i)}: p^{(i)} \neq 0.5$
+--
+    - Compute the p-value of the hypothesis that the coin is fair
+
+--
 
 <center>
-  <img src="images/honml/twosamp_sbm_pvals.png" style="background-color:white; width:100%" />
+  <img src="images/honml/p2/twosampsbm_mc.png" style="background-color:white; width:100%" />
 </center>
 
 ---
 
 ### Multiple Comparisons Problem
 
+- .ye[Familywise error rate (FWER)]: probabiliy we incorrectly rejected the null
+
+--
+- Rescale p-values via .ye[Holm-Bonferroni] correction.
+    - No assumptions on dependence of hypothesis tests
+
+--
+
 <center>
-  <img src="images/honml/twosampsbm_mc.png" style="background-color:white; width:100%" />
+  <img src="images/honml/p2/twosampsbm_mc.png" style="background-color:white; width:100%" />
 </center>
+
+---
+
+### Example - Traffic Patterns
+
+- Hypothesis: $H\_{0, kl}: b\_{kl}^{(1)} = b^{(2)}\_{kl}; \ \ H\_{A, kl} : b\_{kl}^{(1)} \neq b^{(2)}\_{kl}$
+--
+
+- Take the minimum of the p-values for each $H\_{0, kl}$ hypothesis
+  - If the minimum p-value is less than 0.05, reject the null hypothesis
+
+--
+
+<center>
+  <img src="images/honml/p2/twosamp_sbm_pvals.png" style="background-color:white; width:100%" />
+</center>
+
+- Reject the null hypothesis
 
 ---
 
@@ -1970,14 +2201,22 @@ $$\being{aligned} H_0&: B^{(1)} = B^{(2)} \\ H_A&: B^{(1)} \neq B^{(2)}\end{alig
 1. Are the latent positions from two networks different?
 
   $$H_0: X = YW ;\ H_A: X \neq YW$$
+--
 
 2. Are the _distributions_ of latent positions from two networks different?
 
   $$H_0: F_X = F_Y ;\ H_A: F_X \neq F_YW$$
+--
 
 3. Which latent positions are different from two networks?
 
   $$H_0: X_i = Y_iW ;\ H_A: X_i \neq Y_iW$$
+
+---
+
+#### Focus for third section
+
+- coding examples for network analysis
 
 ---
 
@@ -1993,6 +2232,14 @@ name:extra
   - [Two-Sample Hypothesis Testing](#2samp)
 
 ### Additional Content
+
+- Code Example
+
+---
+
+### Code example
+
+[Google colab notebook](https://colab.research.google.com/drive/1TL7h5qDw24vvDJVAFc9RAgKyl1UYGdnl?usp=sharing)
 
 ---
 
