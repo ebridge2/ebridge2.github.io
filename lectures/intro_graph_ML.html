@@ -1409,7 +1409,7 @@ $IER_n(P)$ networks, probability matrices)
 
 #### Block Models with PSD block matrices and RDPGs
 
-If $\\mathbf A^{(1)}$ and $\\mathbf A^{(2)}$ are random networks with probability matrices $P^{(1)}$ and $P^{(2)}$, we
+If $\\mathbf A^{(1)}$ and $\\mathbf A^{(2)}$ are $IER_n(P)$ networks with probability matrices $P^{(1)}$ and $P^{(2)}$, we
 call them .ye[stochastically equivalent] if $P^{(1)} = P^{(2)}$
 
 Recall that if [$B$ is PSD](#psd_bm), for a random network $\\mathbf A^{(1)} \\sim SBM_n(\\vec z, B)$ that:
@@ -2371,7 +2371,9 @@ name:extra
 --
 - diffusion methods on networks
   - do .ye[not] analyze the network itself
-  - analyze the paths of diffusion through the network (the paths)
+
+--
+  - analyze the walks diffusing through the network
 
 ---
 
@@ -2457,7 +2459,7 @@ $$\\begin{aligned}
 &= \\begin{bmatrix}\\sum\_{i = 1}^n p\_{j1}x\_{j}^{(i)} \\\\ \\vdots \\\\ \\sum\_{i = 1}^n p\_{jn }x\_{j}^{(i)}\\end{bmatrix} \\\\
 &= \\begin{bmatrix}p\_{i1} \\\\ \\vdots \\\\ p\_{in}\\end{bmatrix}
 \\end{aligned}$$
-because $x\_i^{(t)} = 1$ is the only entry that is non-zero (other sum terms drop out)
+because $x\_i^{(i)} = 1$ is the only entry that is non-zero (other sum terms drop out)
 ---
 name:next_entry
 ##### The multinoulli distribution
