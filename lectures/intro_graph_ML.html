@@ -1202,7 +1202,7 @@ $$\\mathbb E[\\mathbf A] = P$$
 - The .ye[population network Laplacian] is:
 $$\\mathcal L = \\mathcal D^{-\\frac{1}{2}}P \\mathcal D^{-\\frac{1}{2}} = \\mathbb E[\\mathbf D]^{-\\frac{1}{2}} \\mathbb E[\\mathbf A] \\mathbb E[\\mathbf D]^{-\\frac{1}{2}}$$
   - has entries $\\ell\_{ij} = \\frac{p\_{ij}}{\\sqrt{\\mathbb E[d\_{i}]} \\sqrt{\\mathbb E[d\_{j}]}}$
-  - To calculate, $\\mathbb E[\\mathbb d\_i] > 0$ for all $i$, or equivalently, $p\_{ij} > 0$ for at least one $j$ for every node $i$
+  - To calculate, $\\mathbb E[\\mathbf d\_i] > 0$ for all $i$, or equivalently, $p\_{ij} > 0$ for at least one $j$ for every node $i$
 
 
 ---
@@ -1286,7 +1286,7 @@ $$\\Theta = \\begin{bmatrix} \\theta\_1 & & \\\\ & \\ddots & \\\\ & & \\theta\_n
 
 - Working through the [same math we did for the SBM](#deg_hom_sbm), we instead get:
 
-$$\\mathbb E[\\mathbb d\_i; z\_i = k] = \\theta\_i \\bigg(\\sum\_{l \\neq k}\\bigg[n\_l b\_{kl}\\sum\_{j : z\_j = l} \\theta\_j\\bigg] + (n\_k - 1)b\_{kk} \\sum\_{j \\neq i : z\_j = k}\\theta\_j\\bigg)$$
+$$\\mathbb E[\\mathbf d\_i; z\_i = k] = \\theta\_i \\bigg(\\sum\_{l \\neq k}\\bigg[n\_l b\_{kl}\\sum\_{j : z\_j = l} \\theta\_j\\bigg] + (n\_k - 1)b\_{kk} \\sum\_{j \\neq i : z\_j = k}\\theta\_j\\bigg)$$
 
 (Handout page 64)
 
@@ -1653,10 +1653,11 @@ $\implies$ results in non-real latent positions!
 
 - Recall that if $R$ is a $n\times n$ symmetric matrix, then $R$ has $\texttt{svd}$:
 --
-$$R = U \\Sigma U^\\top$$
+$$R = U \\Sigma V^\\top$$
 - $\Sigma$ : $n\times n$ diagonal matrix of the ordered (in decreasing order) singular values of $R$
 - $U$ : $n\times n$ the matrix whose columns are singular vectors of $R$.
     - Singular values are always real and non-negative
+    - symmetry: first $d$ columns of $V$ equal to first $d$ cols of $U$
 --
 - If $R$ is rank $d$, $\Sigma$ has $d$ non-zero SVs; $n-d$ zero SVs
 --
@@ -1714,7 +1715,7 @@ $$\hat P = \hat X \hat X^\top$$
 
 ##### Procedure
 
-1. Decompose $A= U\\Sigma U^\\top$ via $\texttt{svd}$
+1. Decompose $A= U\\Sigma V^\\top$ via $\texttt{svd}$
 2. Keep $d$ largest singular values, and obtain $U_d$ and $\Sigma_d$.
 3. Compute $\sqrt{\Sigma_d}$ where entries are $\sqrt{\sigma_i}$ for $1,\ldots,d$.
 4. Compute estimated latent positions $\hat X = U_d \sqrt{\Sigma_d}$.
