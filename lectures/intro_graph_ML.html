@@ -2329,9 +2329,6 @@ name:extra
 
 ---
 
-
----
-
 name:extra
 
 ### Outline
@@ -2350,7 +2347,7 @@ name:extra
 ### Random walks and diffusion methods
 
 - develop a stochastic process (random) that generates paths through the network
-  - "random walk": paths generated from the stochastic process
+  - "random walk": paths generated from the stochastic process, but with repeats
   - "diffusion": start somewhere in the network, and end somewhere (randomly)
 
 --
@@ -2427,7 +2424,7 @@ $$x\_j^{(i)} = \\begin{cases}1, & j = i \\\\ 0, & j \\neq i\\end{cases}$$
 - We'll define the probability vector from node $i$ to be:
 
 $$\\begin{aligned}
-\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\
+\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\ 
 &= \\begin{bmatrix} p\_{11} & \\cdots & p\_{1n} \\\\ \\vdots & \\ddots & \\vdots \\\\ p\_{n1} & \\cdots & p\_{nn}\\end{bmatrix}^{\\top}\\begin{bmatrix}x\_1^{(i)} \\\\ \\vdots \\\\ x\_n^{(i)}\\end{bmatrix} \\\\
 &= \\begin{bmatrix} p\_{11} & \\cdots & p\_{n1} \\\\ \\vdots & \\ddots & \\vdots \\\\ p\_{1n} & \\cdots & p\_{nn}\\end{bmatrix}\\begin{bmatrix}x\_1^{(i)} \\\\ \\vdots \\\\ x\_n^{(i)}\\end{bmatrix}\\end{aligned}$$
 
@@ -2438,7 +2435,7 @@ $$\\begin{aligned}
 Continuing, we get:
 
 $$\\begin{aligned}
-\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\
+\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\ 
 &= \\begin{bmatrix}\\sum\_{i = 1}^n p\_{j1}x\_{j}^{(i)} \\\\ \\vdots \\\\ \\sum\_{i = 1}^n p\_{jn }x\_{j}^{(i)}\\end{bmatrix} \\\\
 &= \\begin{bmatrix}p\_{i1} \\\\ \\vdots \\\\ p\_{in}\\end{bmatrix}
 \\end{aligned}$$
@@ -2475,7 +2472,7 @@ Let $\\mathbf s\_{t + 1} \\sim \text{Multinoulli}(\\vec p\_{s\_t})$
         Let p = transpose(P)* x.
         Let s[t] be a Multinoulli sample with probability vector p.
       Return the random walk s.
-
+    
 
 ---
 
@@ -2483,7 +2480,7 @@ Let $\\mathbf s\_{t + 1} \\sim \text{Multinoulli}(\\vec p\_{s\_t})$
 
 - Note that we have two networks we are dealing with
 1. The network: the object we are studying
-2. The GNN: the network that we are using implicitly as part of the algorithm
+2. The GNN: the network that we are using implicitly as part of the algorithm 
 - We will be studying a technique called $\\texttt{DeepWalk}$
 
 ---
@@ -2582,7 +2579,7 @@ $$W = \\begin{bmatrix} \\leftarrow & w^{(1)\\top} & \\rightarrow \\\\ & \\vdots 
 - To connect the input layer to the hidden nodes, we have an "embedding layer"
 - We take the product $W^\\top \\vec x^{(i)}$ to be the "embedding" of the node $i$
   - Since $W^\\top$ is $d \\times n$ dimensions and $\\vec x^{(i)}$ is an $n$-vector, the product is $d$-dimensional
-$$W^\\top = \\begin{bmatrix} \\uparrow & & \\uparrow \\\\ \\vec w^{(1)} & \\cdots & \\vec w^{(n)} \\\\ \\downarrow & & \\downarrow\\end{bmatrix}$$
+$$W^\\top = \\begin{bmatrix} \\uparrow & & \\uparrow \\\\ \\vec w^{(1)} & \\cdots & \\vec w^{(n)} \\\\ \\downarrow & & \\downarrow\\end{bmatrix}$$ 
 
 ---
 
