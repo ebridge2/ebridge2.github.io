@@ -241,7 +241,7 @@ a\_{ij} = \\begin{cases}1, & e\_{ij} \in \mathcal E \\\\ 0, & e\_{ij} \not\in \m
 
 ### Paths describe .ye[edges of travel] from one node to the next
 
-- Path from $i$ to $j$: sequence of edges $e\_{i'j'}$ from node $i$ and ending at node $j$
+- Path from $i$ to $j$: sequence of nodes (no repeats) and edges $e\_{i'j'}$ from node $i$ and ending at node $j$
 - What's a path from Staten Island  (SI) to Bronx (BX)?
 
 
@@ -1300,6 +1300,7 @@ name:psd
   - Positive Semi-Definiteness
 - [Estimating Parameters for Networks](#est)
 - [Applications](#apps)
+- [Code example](#code)
 
 ### [Graph Neural Networks](#extra)
 
@@ -1452,15 +1453,16 @@ name:est
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Graph Data](#whyhave)
 - [Random Graph Models](#models)
 - Estimating Parameters for Networks
   - Estimating Network Representations
   - [Adjacency Spectral Embedding](#ase)
   - [Laplacian Spectral Embedding](#lse)
 - [Applications](#apps)
+- [Code example](#code)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -1481,15 +1483,16 @@ name:ase
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Graph Data](#whyhave)
 - [Random Graph Models](#models)
 - Estimating Parameters for Networks
   - [Network Representations](#est)
   - Adjacency Spectral Embedding
   - [Laplacian Spectral Embedding](#lse)
 - [Applications](#apps)
+- [Code example](#code)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -1793,15 +1796,16 @@ name:lse
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Graph Data](#whyhave)
 - [Random Graph Models](#models)
 - Estimating Parameters for Networks
   - [Network Representations](#est)
   - [Adjacency Spectral Embedding](#ase)
   - Laplacian Spectral Embedding
 - [Applications](#apps)
+- [Code example](#code)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -1882,28 +1886,30 @@ name:apps
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Graph Data](#whyhave)
 - [Random Graph Models](#models)
 - [Estimating Parameters for Networks](#est)
 - Applications
   - [Community Detection](#comm)
   - [Two-Sample Hypothesis Testing](#2samp)
 
-### [Additional Content](#extra)
+- [Code example](#code)
 
+### [Graph Neural Networks](#extra)
 ---
 name:comm
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Graph Data](#whyhave)
 - [Random Graph Models](#models)
 - [Estimating Parameters for Networks](#est)
 - Applications
   - Community Detection
   - [Two-Sample Hypothesis Testing](#2samp)
+- [Code example](#code)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -2066,14 +2072,15 @@ name:2samp
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Graph Data](#whyhave)
 - [Random Graph Models](#models)
 - [Estimating Parameters for Networks](#est)
 - Applications
   - [Community Detection](#comm)
   - Two-Sample Hypothesis Testing
+- [Code example](#code)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -2306,20 +2313,18 @@ $$H_0: B^{(1)} = \alpha B^{(2)}; \ \ H_A: B^{(1)} \neq \alpha B^{(2)}$$
 
 ---
 
-name:extra
+name:code
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Graph Data](#whyhave)
 - [Random Graph Models](#models)
 - [Estimating Parameters for Networks](#est)
 - [Applications](#apps)
-  - [Community Detection](#comm)
-  - [Two-Sample Hypothesis Testing](#2samp)
-
-### Additional Content
-
 - Code Example
+
+
+### Graph Neural Networks
 
 ---
 
