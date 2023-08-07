@@ -1201,7 +1201,7 @@ $$\\mathbb E[\\mathbf A] = P$$
 --
 - The .ye[population network Laplacian] is:
 $$\\mathcal L = \\mathcal D^{-\\frac{1}{2}}P \\mathcal D^{-\\frac{1}{2}} = \\mathbb E[\\mathbf D]^{-\\frac{1}{2}} \\mathbb E[\\mathbf A] \\mathbb E[\\mathbf D]^{-\\frac{1}{2}}$$
-  - has entries $\\ell\_{ij} = \\frac{p\_{ij}}{\\sqrt{\\mathbb E[d\_{i}]} \\sqrt{\\mathbb E[d\_{j}]}}$
+  - has entries $\\ell\_{ij} = \\frac{p\_{ij}}{\\sqrt{\\mathbb E[\\mathbf d\_{i}]} \\sqrt{\\mathbb E[\\mathbf d\_{j}]}}$
   - To calculate, $\\mathbb E[\\mathbf d\_i] > 0$ for all $i$, or equivalently, $p\_{ij} > 0$ for at least one $j$ for every node $i$
 
 
@@ -1419,7 +1419,7 @@ SBM: $P^{(1)} = (C\\sqrt B)(C\\sqrt B)^\\top = XX^\\top$ where $X = C\\sqrt B$
 --
 
 RDPG: $\\mathbf A^{(2)} \\sim RDPG\_n(X)$ where $X = C\\sqrt B$
-- $A^{(1)}$ (an SBM) is stochastically equivalent to $A^{(2)}$ (an RDPG)
+- $\\mathbf A^{(1)}$ (an SBM) is stochastically equivalent to $\\mathbf A^{(2)}$ (an RDPG)
 
 --
 - .ye[SBMs (and DCSBMs) with PSD block matrices are stochastically equivalent to some RDPG]
