@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Hands on Graph Machine Learning</title>
+  <title>Hands on Network Machine Learning</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="fonts/quadon/quadon.css">
   <link rel="stylesheet" href="fonts/gentona/gentona.css">
@@ -17,7 +17,7 @@
 
 <!-- TODO add slide numbers & maybe slide name -->
 
-### Hands on Graph Machine Learning
+### Hands on Network Machine Learning
 
 ![:scale 40%](images/neurodata_blue.png)
 
@@ -32,19 +32,19 @@ name:talk
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Network Data](#graphs)
 - [Random Network Models](#models)
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 name:whyhave
 
 ### Outline
 
-- Basics of Graph Data
+- Basics of Network Data
   - Why do we use statistics?
   - [What is a network?](#graphs)
   - [What different types of networks are there?](#types)
@@ -52,7 +52,7 @@ name:whyhave
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -185,7 +185,7 @@ name:graphs
 
 ### Outline
 
-- Basics of Graph Data
+- Basics of Network Data
   - [Why do we use statistics?](#whyhave)
   - What is a network?
   - [What different types of networks are there?](#types)
@@ -193,15 +193,15 @@ name:graphs
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
 ### What is a network?
 
 - Network/Graph $G = (\mathcal V, \mathcal E)$
-  - $\mathcal V$ are vertices/nodes
-  - $\mathcal E$ are edges: connect one vertex/node to another
+  - $\mathcal V$ are nodes/vertices
+  - $\mathcal E$ are edges: connect one node/vertex to another
 
 <center>![:scale 100%](images/honml/p1/ny_ex.png)</center>
 
@@ -260,7 +260,7 @@ name:types
 
 ### Outline
 
-- Basics of Graph Data
+- Basics of Network Data
   - [Why do we use statistics?](#whyhave)
   - [What is a network?](#graphs)
   - What different types of networks are there?
@@ -268,7 +268,7 @@ name:types
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -352,7 +352,7 @@ $$\\begin{aligned}D &= \\begin{bmatrix}d\_1 & 0 & \\cdots & 0 \\\\ 0 & \\ddots &
 
 
 ---
-### Network laplacian
+### Network Laplacian
 
 - as long as all $d\_i > 0$, we can take the reciprocal of the degree matrix
 
@@ -365,7 +365,7 @@ $$D^{-\\frac{1}{2}} = \\begin{bmatrix}\\frac{1}{\\sqrt{d\_1}} & & \\\\ & \\ddots
 
 ---
 name:net_lapl
-### Network laplacian
+### Network Laplacian
 
 - The .ye[network Laplacian] is defined as:
 $$L = D^{-\\frac{1}{2}}A D^{-\\frac{1}{2}}$$
@@ -382,7 +382,7 @@ $$\\begin{aligned}L &= \\begin{bmatrix}
 
 ---
 name:net_lapl
-### Network laplacian
+### Network Laplacian
 
 - The .ye[network Laplacian] is defined as:
 $$L = D^{-\\frac{1}{2}}A D^{-\\frac{1}{2}}$$
@@ -390,6 +390,14 @@ $$L = D^{-\\frac{1}{2}}A D^{-\\frac{1}{2}}$$
 
 --
   - similar to the adjacency matrix, but "normalized" by the degrees of incident nodes for every edge
+
+---
+
+### Network Laplacian example
+
+<br>
+<br>
+<center>![:scale 100%](images/honml/p1/net_lapl_nyc.png)</center>
 
 ---
 
@@ -474,7 +482,7 @@ name:models
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Network Data](#graphs)
 - Random Network Models
   - Why do we use Random Network Models?
   - [Inhomogeneous Erdös Rényi Random Networks](#ier)
@@ -487,7 +495,7 @@ name:models
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -646,7 +654,7 @@ name:ier
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Network Data](#graphs)
 - Random Network Models
   - [Why do we use Random Network Models?](#models)
   - Inhomogeneous Erdös Rényi Random Networks
@@ -659,7 +667,7 @@ name:ier
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -721,7 +729,7 @@ name:er
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Network Data](#graphs)
 - Random Network Models
   - [Why do we use Random Network Models?](#models)
   - [Inhomogeneous Erdös Rényi Random Networks](#ier)
@@ -734,7 +742,7 @@ name:er
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -758,7 +766,7 @@ name:sbm
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Network Data](#graphs)
 - Random Network Models
   - [Why do we use Random Network Models?](#models)
   - [Inhomogeneous Erdös Rényi Random Networks](#ier)
@@ -771,7 +779,7 @@ name:sbm
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -936,7 +944,7 @@ name:rdpg
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Network Data](#graphs)
 - Random Network Models
   - [Why do we use Random Network Models?](#models)
   - [Inhomogeneous Erdös Rényi Random Networks](#ier)
@@ -949,7 +957,7 @@ name:rdpg
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -1021,7 +1029,7 @@ name:props
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Network Data](#graphs)
 - Random Network Models
   - [Why do we use Random Network Models?](#models)
   - [Inhomogeneous Erdös Rényi Random Networks](#ier)
@@ -1034,7 +1042,7 @@ name:props
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -1184,7 +1192,7 @@ name:dcsbm
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Network Data](#graphs)
 - Random Network Models
   - [Why do we use Random Network Models?](#models)
   - [Inhomogeneous Erdös Rényi Random Networks](#ier)
@@ -1197,7 +1205,7 @@ name:dcsbm
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -1237,13 +1245,13 @@ $$\\Theta = \\begin{bmatrix} \\theta\_1 & & \\\\ & \\ddots & \\\\ & & \\theta\_n
 ### Degree-corrected SBM (DCSBM)
 
 - $\\mathbf A \\sim DCSBM\_n(\\vec \\theta, \\vec z, B)$
-  - $\\mathbf a\_{ij}; \\theta\_i, \\theta\_j, z\_i, z\_j \sim \\text{Bern}(\\theta\_i\\theta\_j b\_{z\_i z\_j})$ $ind.$
+  - $\\mathbf a\_{ij} \sim \\text{Bern}(\\theta\_i\\theta\_j b\_{z\_i z\_j})$ $ind.$
   - edges are .ye[correlated] by the degree-correction factors, as well as their community assignments
 
 --
 - $p\_{ij} = \\theta\_i\\theta\_j b\_{z\_i z\_j}$
-  - $\\theta\_i$ is bigger: more edges (than in an SBM) for node $i$
-  - $\\theta\_i$ is smaller: fewer edges (than in an SBM) for node $i$
+  - $\\theta\_i$ is bigger: higher probability (than in an SBM) for node $i$
+  - $\\theta\_i$ is smaller: lower probability (than in an SBM) for node $i$
 - Probability matrix $P = \\Theta C B C^\\top \\Theta^\\top$
 
 ---
@@ -1273,7 +1281,7 @@ name:psd
 
 ### Outline
 
-- [Basics of Graph Data](#graphs)
+- [Basics of Network Data](#graphs)
 - Random Network Models
   - [Why do we use Random Network Models?](#models)
   - [Inhomogeneous Erdös Rényi Random Networks](#ier)
@@ -1286,7 +1294,7 @@ name:psd
 - [Estimating Parameters for Networks](#est)
 - [Applications](#est)
 
-### [Additional Content](#extra)
+### [Graph Neural Networks](#extra)
 
 ---
 
@@ -1406,7 +1414,6 @@ RDPG: $\\mathbf A^{(2)} \\sim RDPG\_n(X)$ where $X = C\\sqrt B$
 <br>
 <center>![:scale 90%](images/honml/p1/psd_dcsbm.png)</center>
 
-
 ---
 
 #### Block Models with PSD block matrices and RDPGs
@@ -1426,6 +1433,363 @@ RDPG: $\\mathbf A^{(2)} \\sim RDPG\_n(X)$ where $X = C\\sqrt B$
 - the latent position matrix for RDPGs is tabular: $X$ is $n \\times d$
   - Nodes are like "observations"
   - latent dimensions of nodes are like "features"
+
+---
+
+name:extra
+
+### Outline
+
+- [Basics of Network Data](#graphs)
+- [Random Network Models](#models)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### Graph Neural Networks
+ - Random walks and "diffusion" on networks
+ - [Skipgram network](#skip)
+
+---
+
+### Random walks and diffusion methods
+
+- develop a stochastic process (random) that generates paths through the network
+  - "random walk": paths generated from the stochastic process
+  - "diffusion": start somewhere in the network, and end somewhere (randomly)
+
+--
+- diffusion methods on networks
+  - do .ye[not] analyze the network itself
+  - analyze the paths of diffusion through the network (the paths)
+
+---
+
+### Finite-space markov chains
+
+- .ye[Finite-space markov chain]: random system where the possible events that can occur are finite
+  - for network data, the "events" are visits to nodes in the network
+  - If the network has $n$ nodes, the collection of possible events is $n$
+- .ye[Random walk] for network data of length $T$: $(s\_0, \\mathbf s\_1, ..., \\mathbf s\_T)$
+  - $\\mathbf s\_t$ is a node in the network (random)
+  - $s\_0$ is termed the source node for the random walk, and is usually fixed
+---
+
+### First-order markov chains
+
+- Random walk:  $(s_0, \\mathbf s\_1, ..., \\mathbf s\_T)$
+  - $\\mathbf s\_1, ..., \\mathbf s\_T$ are determined through an evolutionary (random) process
+- .ye[First-order markov chain]
+  - Imagine that we have walked the sequence $(s\_0, ..., s\_t)$
+
+--
+$$\\mathbb P(\\mathbf s\_{t + 1} | s\_{t}, ..., s\_0) = \\mathbb P(\\mathbf s\_{t+1} | s\_{t})$$
+- "The next node in the walk depends only on the current node that we are at"
+
+---
+
+### First-order markov chains with networks
+
+- $p\_{tt+1} = \\begin{cases}\\frac{1}{d\_t},& a\_{tt+1} = 1 \\\\ 0, & a\_{tt+1} = 0\\end{cases}$
+  - If we are at a node $t$, we choose the next node to visit in our walk randomly from the neighbors of node $t$
+
+--
+  - $t$ has $d\_t$ neighbors, so each neighbor has an equal chance of being visited
+- $p\_{tt+1}$: .ye[transition probability] from node $t$ to the next node $t+1$
+
+---
+
+### Transition probability matrix
+
+- $n \\times n$ matrix where the entries $p\_{ij}$ are the transition probabilities from $i$ to $j$
+
+<br>
+<center>![:scale 90%](images/honml/p1/tpm.png)</center>
+
+---
+
+### Transition example
+
+<br>
+<br>
+<center>![:scale 90%](images/honml/p1/trans_ex.png)</center>
+
+---
+
+### Obtaining a transition probability vector
+
+- To actually implement a random walk programmatically, we need to return to matrices
+- What we will do is use one-hot encodings of our current vectors
+  - If $s\_{t} = i$, we will let $\\vec x^{(i)}$ be the vector where:
+
+$$x\_j^{(i)} = \\begin{cases}1, & j = i \\\\ 0, & j \\neq i\\end{cases}$$
+
+- If we are at MH, $\\vec x^{(MH)} = \\begin{bmatrix}0 & 1 & 0 & 0 & 0\\end{bmatrix}^{\\top}$
+---
+
+### Obtaining a transition probability vector
+
+- We'll define the probability vector from node $i$ to be:
+
+$$\\begin{aligned}
+\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\ 
+&= \\begin{bmatrix} p\_{11} & \\cdots & p\_{1n} \\\\ \\vdots & \\ddots & \\vdots \\\\ p\_{n1} & \\cdots & p\_{nn}\\end{bmatrix}^{\\top}\\begin{bmatrix}x\_1^{(i)} \\\\ \\vdots \\\\ x\_n^{(i)}\\end{bmatrix} \\\\
+&= \\begin{bmatrix} p\_{11} & \\cdots & p\_{n1} \\\\ \\vdots & \\ddots & \\vdots \\\\ p\_{1n} & \\cdots & p\_{nn}\\end{bmatrix}\\begin{bmatrix}x\_1^{(i)} \\\\ \\vdots \\\\ x\_n^{(i)}\\end{bmatrix}\\end{aligned}$$
+
+---
+
+### Obtaining a transition probability vector
+
+Continuing, we get:
+
+$$\\begin{aligned}
+\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\ 
+&= \\begin{bmatrix}\\sum\_{i = 1}^n p\_{j1}x\_{j}^{(i)} \\\\ \\vdots \\\\ \\sum\_{i = 1}^n p\_{jn }x\_{j}^{(i)}\\end{bmatrix} \\\\
+&= \\begin{bmatrix}p\_{i1} \\\\ \\vdots \\\\ p\_{in}\\end{bmatrix}
+\\end{aligned}$$
+because $x\_i^{(t)} = 1$ is the only entry that is non-zero (other sum terms drop out)
+---
+name:next_entry
+##### The multinoulli distribution
+
+$\\mathbf x \\sim \text{Multinoulli}(\\vec p)$ if:
+1. $\\vec p$ is a probability vector ($\\sum\_{i = 1}^n p\_i = 1$)
+2. $\\mathbf x$ has realizations $x \\in \\{1, \\cdots, n\\}$ (it is *categorical*)
+3. $\\mathbb P(\\mathbb x = i) = p\_i$
+
+--
+
+##### Generating next entry of the random walk
+
+Let $\\mathbf s\_{t + 1} \\sim \text{Multinoulli}(\\vec p\_{s\_t})$
+
+---
+
+### Algorithm for generating random walks
+
+<br>
+
+    random_walk(P, s0):
+    """
+    P: the nxn transition probability matrix.
+    s0: the source node.
+    """
+      Let s[0] = s0.
+      For t from 1:T:
+        Let x[i] = 1 where i = s[t - 1], and 0 otherwise.
+        Let p = transpose(P)* x.
+        Let s[t] be a Multinoulli sample with probability vector p.
+      Return the random walk s.
+    
+
+---
+
+### Graph Neural Network Lexicon
+
+- Note that we have two networks we are dealing with
+1. The network: the object we are studying
+2. The GNN: the network that we are using implicitly as part of the algorithm 
+- We will be studying a technique called $\\texttt{DeepWalk}$
+
+---
+
+### Generating a "corpus" for our netework
+
+- $\\texttt{DeepWalk}$ was designed from natural language processing techniques
+  - most of the language around it uses NLP lingo
+- .ye[corpus]: a collection of text (e.g., from a stack of documents) that we learn from
+  - For $\\texttt{DeepWalk}$, we use random walks to construct a "corpus"
+
+---
+
+### Generating a "corpus" for our network
+
+<br>
+
+    generate_corpus(T, R):
+    """
+    T: the walk length.
+    R: the number of walks per node in the network.
+    """
+      For each source node i in 1:n:
+        For each walk r in 1:R:
+          Use the procedure developed to generate a random walk of length T,
+          starting at node i.
+      Return the collection of random walks.
+---
+
+name:skip
+
+### Outline
+
+- [Basics of Network Data](#graphs)
+- [Random Network Models](#models)
+- [Estimating Parameters for Networks](#est)
+- [Applications](#est)
+
+### Graph Neural Networks
+ - [Random walks and "diffusion" on networks](#extra)
+ - Skipgram network
+
+---
+### Skipgram GNN
+
+- Idea: the random walks hold properties about the networks
+  - Nodes that tend to have lots of shared neighbors will tend to be "closer" on random walks, in general
+- Goal: given a node $i$, predict the probability that another node $j$ is $\\omega$-close to it
+  - $\\omega$: the "window width"
+
+--
+- Nodes that are are given are called .ye[center nodes]
+  - Nodes that we want to predict are called .ye[context nodes]
+  - "Context": under what contexts (nearby nodes) does our center node tend to show up?
+---
+
+### Using the corpus to produce training samples
+
+- Center nodes: white
+- Context nodes: gray
+<center>![:scale 90%](images/honml/p1/skipgram_tr_samps.png)</center>
+
+---
+
+### The embedding process
+
+- The network itself is extremely simple
+  - Input layer: $n$ nodes (one for each node in the network)
+  - Hidden layer: $d$ nodes
+  - Output layer: $n$ nodes (one for each node in the network)
+
+---
+
+### Architecture of a skip-gram network
+
+<br>
+
+
+<center>![:scale 90%](images/honml/p1/skipgram_arch.png)</center>
+
+
+
+---
+
+### The embedding layer
+
+- To connect the input layer to the hidden nodes, we have an "embedding layer"
+  - The "embedding layer" describes a weight matrix $W$ which is $n \\times d$
+  - $\\vec x^{(i)}$ is $n$-dimensional
+$$W = \\begin{bmatrix} \\leftarrow & w^{(1)\\top} & \\rightarrow \\\\ & \\vdots & \\\\ \\leftarrow & \\vec w^{(n)\\top} & \\rightarrow \\end{bmatrix}$$
+
+---
+
+### The embedding layer
+
+- To connect the input layer to the hidden nodes, we have an "embedding layer"
+- We take the product $W^\\top \\vec x^{(i)}$ to be the "embedding" of the node $i$
+  - Since $W^\\top$ is $d \\times n$ dimensions and $\\vec x^{(i)}$ is an $n$-vector, the product is $d$-dimensional
+$$W^\\top = \\begin{bmatrix} \\uparrow & & \\uparrow \\\\ \\vec w^{(1)} & \\cdots & \\vec w^{(n)} \\\\ \\downarrow & & \\downarrow\\end{bmatrix}$$ 
+
+---
+
+### The embedding process
+
+$$\\begin{aligned}W^\\top \\vec x^{(i)} &= \\begin{bmatrix} \\uparrow & & \\uparrow \\\\ \\vec w^{(1)} & \\cdots & \\vec w^{(n)} \\\\ \\downarrow & & \\downarrow\\end{bmatrix}
+\\begin{bmatrix}x^{(i)}\_1 \\\\ \\vdots \\\\ x^{(i)}\_n\\end{bmatrix} \\\\
+&= \\begin{bmatrix}\\sum\_{j = 1}^n w^{(j)}\_1 x\_j^{(i)} \\\\ \\vdots \\\\ \\sum\_{j = 1}^n w^{(j)}\_d x\_j^{(i)}\\end{bmatrix}\\end{aligned}$$
+- Remember: $x\_j^{(i)} = 1$ only when $j = i$, and is zero otherwise (one-hot encoding)
+---
+
+### The embedding process
+
+$$\\begin{aligned}W^\\top \\vec x^{(i)} &= \\begin{bmatrix}\\sum\_{j = 1}^n w^{(j)}\_1 x\_j^{(i)} \\\\ \\vdots \\\\ \\sum\_{j = 1}^n w^{(j)}\_d x\_j^{(i)}\\end{bmatrix}\\\\
+&= \\begin{bmatrix}w^{(i)}\_1 \\\\ \\vdots \\\\ w^{(i)}\_{d}\\end{bmatrix} = \\vec w^{(i)}\\end{aligned}$$
+
+- The "embedding" of $x^{(i)}$ really just extracts the $i^{th}$ row of $W$
+---
+
+### The "softmax" function
+
+- When are are trying to predict probabilities, a typical choice is the "softmax" function
+- If you have done logistic regression, you have used this before
+- The .ye[softmax] for an $n$-element vector $\\vec y$ is the $n$-element vector with entries:
+
+$$\\sigma(\\vec y)\_j = \\begin{bmatrix}\frac{\\exp(y\_j)}{\\sum\_{j' = 1}^n \\exp(y\_{j'})}\\end{bmatrix}$$
+
+--
+
+- Note that the exponential is strictly positive, so the numerator is strictly less than the denominator
+- By construction, $\\sum\_{j = 1}^n \\sigma(\\vec y)\_j = 1$
+  - it produces probabilities
+---
+
+### The "projection" layer provides predicted probabilities
+
+- The first step in the projection layer is to use another matrix $V$ to "project" the embedding back to a $d$-dimensional vector
+  - We do this by taking the product $V^\\top \\vec w^{(i)}$
+  - $V$ is a $d \\times n$ matrix, and $\\vec w^{(i)}$ is a $d$-vector, so we obtain a $n$-vector
+- We then apply the softmax to the result, and the predicted probability for context node $j$ with center node $i$ is:
+$$p^{(i)}\_j(W, V) = \\sigma\\big(V^{\\top} \\vec w^{(i)}\\big)\_j$$
+
+---
+
+### A forwards pass through a Skipgram network
+
+- To conclude off the description of the Skipgram network, we will use something known as a loss function
+- The loss function is the cross-entropy loss, which for a single training sample $\\big(\\vec x^{(i)}, \\vec y^{(i)}\\big)$:
+$$L\_i(W, V) = \\vec y^{(i)} \\log\\bigg(\\vec p^{(i)}(W, V)\\bigg)$$
+
+---
+
+### Forwards pass through a Skipgram network (schematic view)
+
+<br>
+
+<center>![:scale 90%](images/honml/p1/skipgram_schem.png)</center>
+
+---
+
+### How do we actually train the Skipgram network?
+1. Randomly reorder the training data into "epochs" which contain one instance of every training sample (in random order).
+
+--
+2. Split the epochs into $B$ batches.
+
+--
+3. For each batch:
+  - Run a forwards pass for every training sample in that batch, and compute the cross-entropy loss.
+  - Compute the cumulative loss as the sum of the cross-entropy losses for each training sample in the batch.
+  - Use backpropogation to update the embedding matrix $W$ and the projection matrix $V$.
+
+--
+4. Repeat for all epochs, until arbitrary stopping criterion is met.
+
+---
+
+### Skip-gram networks in action
+
+- What we described is known as $\\texttt{DeepWalk}$
+  - it uses first-order random walks
+- There are many other diffusion-based GNNs that use other types of random walks
+  - $\\texttt{node2vec}$: second-order biased random walks
+
+---
+
+### Skip-gram networks in action
+
+<br>
+
+<center>![:scale 90%](images/honml/p1/skipgram_ex.png)</center>
+
+- 2 homophilic communities, and each community has nodes with high degrees (core) and low degrees (periphery)
+
+--
+  - DCSBM??
+
+---
+
+### Skip-gram networks in action
+
+<center>![:scale 90%](images/honml/p1/skipgram_result.png)</center>
+
 
 </textarea>
 <!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script> -->
