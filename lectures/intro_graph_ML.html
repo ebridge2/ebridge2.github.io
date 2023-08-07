@@ -882,15 +882,22 @@ $P = \\color{yellow}{CB}$ $C^{\\top}$
 $$CB = \\begin{aligned} \\begin{bmatrix}c\_{11} & ... & c\_{1K} \\\\ & \\vdots & \\\\ c\_{n1} & ... & c\_{nK} \\end{bmatrix} \\begin{bmatrix}b\_{11} & ... & b\_{1K} \\\\ \\vdots & \\ddots & \\vdots \\\\ b\_{K1} & \\cdots & b\_{KK}\\end{bmatrix}\\end{aligned}$$
 
 - $(CB)\_{ik} = \\sum\_{l = 1}^{K}c\_{il} b\_{lk}$
+
 But:
-$$\\begin{aligned}c\_{il} = \\begin{cases}1, & z\_l = k\\\\ 0,& z\_l \\neq k\\end{cases}\\end{aligned}$$
+$$\\begin{aligned}c\_{il} = \\begin{cases}1, & z\_i = l\\\\ 0,& z\_i \\neq l\\end{cases}\\end{aligned}$$
 
 --
 - so $(CB)\_{ik} = c\_{iz\_i} b\_{z\_i k} + \\sum\_{l \\neq z\_i} c\_{il} b\_{lk} = 1 b\_{z\_ik} + 0$
 
---
-- ... so $(CB)\_{ik} = b\_{z\_i k}$
+---
 
+### Breaking down the probability matrix for an SBM
+
+$P = \\color{yellow}{CB}$ $C^{\\top}$
+
+$$CB = \\begin{aligned} \\begin{bmatrix}c\_{11} & ... & c\_{1K} \\\\ & \\vdots & \\\\ c\_{n1} & ... & c\_{nK} \\end{bmatrix} \\begin{bmatrix}b\_{11} & ... & b\_{1K} \\\\ \\vdots & \\ddots & \\vdots \\\\ b\_{K1} & \\cdots & b\_{KK}\\end{bmatrix}\\end{aligned}$$
+
+- $(CB)\_{ik} = \\sum\_{l = 1}^{K}c\_{il} b\_{lk}=  b\_{z\_i k}$
 ---
 
 ### Breaking down the probability matrix for an SBM
@@ -1761,6 +1768,9 @@ $$L\_i(W, V) = \\vec y^{(i)} \\log\\bigg(\\vec p^{(i)}(W, V)\\bigg)$$
 
 --
 4. Repeat for all epochs, until arbitrary stopping criterion is met.
+
+--
+5. Use the rows $\\vec w^{(i)}$ as the embedding for node $i$.
 
 ---
 
