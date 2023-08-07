@@ -2344,6 +2344,17 @@ name:code
 
 [Google colab notebook](https://colab.research.google.com/drive/1TL7h5qDw24vvDJVAFc9RAgKyl1UYGdnl?usp=sharing)
 
+[https://rb.gy/xph8t](https://rb.gy/xph8t)
+
+---
+
+### graspologic
+
+- Collaboration with Microsoft Research
+- Documentation: [https://microsoft.github.io/graspologic/latest/](https://microsoft.github.io/graspologic/latest/)
+- Tutorials: [https://microsoft.github.io/graspologic/latest/tutorials/index.html](https://microsoft.github.io/graspologic/latest/tutorials/index.html)
+
+- How Microsoft uses graspologic: [link](https://www.microsoft.com/en-us/research/blog/advancing-organizational-science-using-network-machine-learning-to-measure-innovation-in-the-workplace/)
 ---
 
 name:extra
@@ -2444,7 +2455,7 @@ $$x\_j^{(i)} = \\begin{cases}1, & j = i \\\\ 0, & j \\neq i\\end{cases}$$
 - We'll define the probability vector from node $i$ to be:
 
 $$\\begin{aligned}
-\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\ 
+\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\
 &= \\begin{bmatrix} p\_{11} & \\cdots & p\_{1n} \\\\ \\vdots & \\ddots & \\vdots \\\\ p\_{n1} & \\cdots & p\_{nn}\\end{bmatrix}^{\\top}\\begin{bmatrix}x\_1^{(i)} \\\\ \\vdots \\\\ x\_n^{(i)}\\end{bmatrix} \\\\
 &= \\begin{bmatrix} p\_{11} & \\cdots & p\_{n1} \\\\ \\vdots & \\ddots & \\vdots \\\\ p\_{1n} & \\cdots & p\_{nn}\\end{bmatrix}\\begin{bmatrix}x\_1^{(i)} \\\\ \\vdots \\\\ x\_n^{(i)}\\end{bmatrix}\\end{aligned}$$
 
@@ -2455,7 +2466,7 @@ $$\\begin{aligned}
 Continuing, we get:
 
 $$\\begin{aligned}
-\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\ 
+\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\
 &= \\begin{bmatrix}\\sum\_{i = 1}^n p\_{j1}x\_{j}^{(i)} \\\\ \\vdots \\\\ \\sum\_{i = 1}^n p\_{jn }x\_{j}^{(i)}\\end{bmatrix} \\\\
 &= \\begin{bmatrix}p\_{i1} \\\\ \\vdots \\\\ p\_{in}\\end{bmatrix}
 \\end{aligned}$$
@@ -2492,7 +2503,7 @@ Let $\\mathbf s\_{t + 1} \\sim \text{Multinoulli}(\\vec p\_{s\_t})$
         Let p = transpose(P)* x.
         Let s[t] be a Multinoulli sample with probability vector p.
       Return the random walk s.
-    
+
 ---
 
 name:skip
@@ -2508,14 +2519,14 @@ name:skip
 ### Graph Neural Networks
   - [Random walks and "diffusion" on networks](#extra)
   - Skipgram network
-      
+
 ---
 
 ### Graph Neural Network Lexicon
 
 - Note that we have two networks we are dealing with
 1. The network: the object we are studying
-2. The GNN: the network that we are using implicitly as part of the algorithm 
+2. The GNN: the network that we are using implicitly as part of the algorithm
 - We will be studying a technique called $\\texttt{DeepWalk}$
 
 ---
@@ -2604,7 +2615,7 @@ $$W = \\begin{bmatrix} \\leftarrow & \\vec w^{(1)\\top} & \\rightarrow \\\\ & \\
 - To connect the input layer to the hidden nodes, we have an "embedding matrix"
 - We take the product $W^\\top \\vec x^{(i)}$ to be the "embedding" of the node $i$
   - Since $W^\\top$ is $d \\times n$ dimensions and $\\vec x^{(i)}$ is an $n$-vector, the product is $d$-dimensional
-$$W^\\top = \\begin{bmatrix} \\uparrow & & \\uparrow \\\\ \\vec w^{(1)} & \\cdots & \\vec w^{(n)} \\\\ \\downarrow & & \\downarrow\\end{bmatrix}$$ 
+$$W^\\top = \\begin{bmatrix} \\uparrow & & \\uparrow \\\\ \\vec w^{(1)} & \\cdots & \\vec w^{(n)} \\\\ \\downarrow & & \\downarrow\\end{bmatrix}$$
 
 ---
 
