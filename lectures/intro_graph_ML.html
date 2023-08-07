@@ -2574,6 +2574,7 @@ name:skip
 - The GNN itself is extremely simple
   - Input layer: $n$ nodes (one for each node in the network)
   - Hidden layer: $d$ nodes
+    - $d$: "embedding dimensions"
   - Output layer: $n$ nodes (one for each node in the network)
 
 ---
@@ -2594,13 +2595,13 @@ name:skip
 - To connect the input layer to the hidden nodes, we have an "embedding layer"
   - The "embedding layer" describes a weight matrix $W$ which is $n \\times d$
   - $\\vec x^{(i)}$ is $n$-dimensional
-$$W = \\begin{bmatrix} \\leftarrow & w^{(1)\\top} & \\rightarrow \\\\ & \\vdots & \\\\ \\leftarrow & \\vec w^{(n)\\top} & \\rightarrow \\end{bmatrix}$$
+$$W = \\begin{bmatrix} \\leftarrow & \\vec w^{(1)\\top} & \\rightarrow \\\\ & \\vdots & \\\\ \\leftarrow & \\vec w^{(n)\\top} & \\rightarrow \\end{bmatrix}$$
 
 ---
 
-### The embedding layer
+### The embedding matrix
 
-- To connect the input layer to the hidden nodes, we have an "embedding layer"
+- To connect the input layer to the hidden nodes, we have an "embedding matrix"
 - We take the product $W^\\top \\vec x^{(i)}$ to be the "embedding" of the node $i$
   - Since $W^\\top$ is $d \\times n$ dimensions and $\\vec x^{(i)}$ is an $n$-vector, the product is $d$-dimensional
 $$W^\\top = \\begin{bmatrix} \\uparrow & & \\uparrow \\\\ \\vec w^{(1)} & \\cdots & \\vec w^{(n)} \\\\ \\downarrow & & \\downarrow\\end{bmatrix}$$ 
@@ -2633,12 +2634,12 @@ $$\\sigma(\\vec y)\_j = \\begin{bmatrix}\frac{\\exp(y\_j)}{\\sum\_{j' = 1}^n \\e
 
 --
 
-- Note that the exponential is strictly positive, so the numerator is strictly less than the denominator
+- Note that the exponential is strictly positive (for non-infinite $y\_j$), so the numerator is strictly less than the denominator
 - By construction, $\\sum\_{j = 1}^n \\sigma(\\vec y)\_j = 1$
   - it produces probabilities
 ---
 
-### The "projection" layer provides predicted probabilities
+### The "projection" matrix provides predicted probabilities
 
 - The first step in the projection layer is to use another matrix $V$ to "project" the embedding back to a $d$-dimensional vector
   - We do this by taking the product $V^\\top \\vec w^{(i)}$
@@ -2651,8 +2652,8 @@ $$p^{(i)}\_j(W, V) = \\sigma\\big(V^{\\top} \\vec w^{(i)}\\big)\_j$$
 ### A forwards pass through a Skipgram network
 
 - To conclude off the description of the Skipgram network, we will use something known as a loss function
-- The loss function is the cross-entropy loss, which for a single training sample $\\big(\\vec x^{(i)}, \\vec y^{(i)}\\big)$:
-$$L\_i(W, V) = \\vec y^{(i)} \\log\\bigg(\\vec p^{(i)}(W, V)\\bigg)$$
+- The loss function is the cross-entropy loss, which for a single training sample $\\big(\\vec x^{(i)}, \\vec x^{(j)}\\big)$:
+$$L\_{i,j}(W, V) = \\vec x^{(j)} \\log\\bigg(\\vec p^{(i)}(W, V)\\bigg)$$
 
 ---
 
