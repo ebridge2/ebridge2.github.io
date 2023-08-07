@@ -1462,10 +1462,10 @@ name:est
 - Probability matrix $P$ tells us about structure of network
 
 --
-- But we never observe $P$! We observe adjacency matrices $A$.
+- But we never observe $P$! We observe adjacency matrices $A$
 
 --
-- We want to estimate $\hat P$ from $A$ via representations of $A$
+- So study "$\hat P$" from representations of $A$
 
 ![:scale 100%](images/honml/p2/network_reps.png)
 
@@ -1511,13 +1511,13 @@ name:ase
 
 ### .ye[Eigendecomposition] ($\texttt{evd}$) of Symmetric Matrix
 
-- Recall that if $R$ is a symmetric matrix, then $R$ has an $\texttt{evd}$:
+- Recall that if $R$ is a $n\times n$ symmetric matrix, then $R$ has an $\texttt{evd}$:
 
 --
 
 $$R = Q\Lambda Q^\top$$
-- $\Lambda$ : diagonal matrix of the ordered (in decreasing order) eigenvalues of $R$
-- $Q$ : the matrix whose columns are eigenvectors of $R$.
+- $\Lambda$: $n\times n$ diagonal matrix of the ordered (in decreasing order) eigenvalues of $R$
+- $Q$: $n\times n$ matrix whose columns are eigenvectors of $R$.
 - If $R$ is rank $d$, $\Lambda$ has $d$ non-zero eigenvalues; $n-d$ zero eigenvalues.
 
 ---
@@ -1552,7 +1552,7 @@ $$
 
 ### $\texttt{evd}$ of Probability Matrix $P$
 
-- Let $P$ be PSD matrix with rank $d$.
+- Let $P$ be $n\times n$ PSD matrix with rank $d$.
 
 --
 - We can obtain latent positions of $P$ by $\texttt{evd}$($P$)
@@ -1629,11 +1629,11 @@ $\implies$ results in non-real latent positions!
 
 ### .ye[Singular Value Decomposition] ($\texttt{svd}$) of Symmetric Matrices
 
-- Recall that if $R$ is a symmetric matrix, then $R$ has the $\texttt{svd}$:
+- Recall that if $R$ is a $n\times n$ symmetric matrix, then $R$ has $\texttt{svd}$:
 --
 $$R = U \\Sigma U^\\top$$
-- $\Sigma$ : diagonal matrix of the ordered (in decreasing order) singular values of $R$
-- $U$ : the matrix whose columns are singular values of $R$.
+- $\Sigma$ : $n\times n$ diagonal matrix of the ordered (in decreasing order) singular values of $R$
+- $U$ : $n\times n$ the matrix whose columns are singular vectors of $R$.
     - Singular values are always real and non-negative
 --
 - If $R$ is rank $d$, $\Sigma$ has $d$ non-zero SVs; $n-d$ zero SVs
@@ -1653,7 +1653,7 @@ $$
 
 --
 - Applying $\texttt{svd}$ to $A$ while keeping $d$ number of singular values/vectors:
-$$\hat X = U_d \sqrt{\Sigma_d}$$
+$$\hat X = \hat U_d \sqrt{\hat \Sigma_d}$$
 - Gives us an estimate of the probability matrix $P$.
 $$\hat P = \hat X \hat X^\top$$
 --
@@ -1671,14 +1671,14 @@ $$\hat P = \hat X \hat X^\top$$
 ### Adjacency .ye[Spectral] Embedding
 
 - “Adjacency” - operates on the adjacency matrix $A$
-- “Spectral” - intuition relies on the eigenvalues/eigenvectors of $P$
+- “Spectral” - intuition relies on the eigenvalues/eigenvectors
 
 ---
 
 ### Adjacency Spectral .ye[Embedding]
 
 - “Adjacency” - operates on the adjacency matrix $A$
-- “Spectral” - intuition relies on the eigenvalues/eigenvectors of $P$
+- “Spectral” - intuition relies on the eigenvalues/eigenvectors
 - “Embedding” - finds a mathematical structure contained in another (a tabular structure contained within the adjacency matrix).
 
 ---
@@ -1686,10 +1686,9 @@ $$\hat P = \hat X \hat X^\top$$
 ### Adjacency Spectral Embedding
 
 - “Adjacency” - operates on the adjacency matrix $A$
-- “Spectral” - intuition relies on the eigenvalues/eigenvectors of $P$
+- “Spectral” - intuition relies on the eigenvalues/eigenvectors
 - “Embedding” - finds a mathematical structure contained in another (a tabular structure contained within the adjacency matrix).
 
---
 
 ##### Procedure
 
@@ -1733,7 +1732,7 @@ $$\hat P = \hat X \hat X^\top$$
 
 --
 - .ye[Rotational non-identifiability]: rotation of latent positions
-- Given a rotation matrix $W$, and $Y=WX$:
+- Given a rotation matrix $W$, and $Y=XW$:
     - RDPG$_n(X)$ and RDPG$_n(Y)$ have same probability matrix $P$
 --
   - $X$ and $Y$ are .ye[rotationally equivalent]
@@ -1799,7 +1798,7 @@ name:lse
 
 ---
 
-### Laplacian Spectral Embedding (LSE)
+### Laplacian Spectral Embedding ($\texttt{lse}$)
 
 - Remember the [network Laplacian](#dad_lapl) is $L = D^{-\\frac{1}{2}} A D^{-\\frac{1}{2}}$
 --
@@ -1816,14 +1815,60 @@ $$L = XX^\\top, X = U_d \\sqrt{\\Sigma_d}$$
 
 ---
 
-### ASE vs LSE
+### $\texttt{ase}$ vs $\texttt{lse}$
+
+- Suppose we sample $A$ from DCSBM$_n(\\vec \\theta, \\vec z, B)$ with $n = 100$ nodes and $K = 2$ communities.
+
+--
 
 <center>
   <img src="images/honml/p2/dcsbm_lse.png" style="background-color:white; width:60%" />
 </center>
---
+
+---
+
+### $\texttt{ase}$ vs $\texttt{lse}$
 
 - $\texttt{lse}$ preserves within-community structure with degree-corrections
+- Intuitively makes sense since $L$ is normalized by node degree
+
+<center>
+  <img src="images/honml/p2/dcsbm_lse.png" style="background-color:white; width:60%" />
+</center>
+
+---
+
+### $\texttt{ase}$ vs $\texttt{lse}$
+
+- How do we determine when to use $\texttt{lse}$?
+
+--
+- Tail heavy degree distributions
+
+
+<center>
+  <img src="images/honml/p2/lse_degree.png" style="background-color:white; width:100%" />
+</center>
+
+
+---
+
+### Practical Considerations
+
+- $d$ latent dimensions is a hyperparameter.
+
+--
+- How do we choose $d$?
+    - Visual inspection of singular values (scree plot)
+<center>
+  <img src="images/honml/p2/Screeplotr.png" style="background-color:white; width:50%" />
+</center>
+
+--
+    - Automated "elbow" detection algorithms
+--
+    - Try multiple $d$ and evaluate performance on subsequent tasks
+
 
 ---
 name:apps
@@ -2196,10 +2241,37 @@ $$H\_{0, kl}: b\_{kl}^{(1)} = b^{(2)}\_{kl}; \ \ H\_{A, kl} : b\_{kl}^{(1)} \neq
 --
 
 <center>
-  <img src="images/honml/p2/twosamp_sbm_pvals.png" style="background-color:white; width:100%" />
+  <img src="images/honml/p2/twosamp_sbm_pvals.png" style="background-color:white; width:50%" />
 </center>
 
 - Reject the null hypothesis
+
+---
+
+### Testing If Block Matrices are Multiples of Each Other
+
+- What if probability of edge was, in general, 50% higher during daytime?
+    - Was previous result was just due to a scaling factor?
+--
+    - Want to find topolgical differences
+--
+- Modify previous hypothesis:
+$$H_0: B^{(1)} = \alpha B^{(2)}; \ \ H_A: B^{(1)} \neq \alpha B^{(2)}$$
+- We can take $\alpha$ to be the ratio $p^{(1)}/p^{(2)}$
+
+---
+
+### Example - Traffic Patterns
+
+- Hypothesis: $$H_0: B^{(1)} = \alpha B^{(2)}; \ \ H_A: B^{(1)} \neq \alpha B^{(2)}$$
+- Use chi-squared test
+
+<center>
+  <img src="images/honml/p2/twosamp_sbm_pvals2.png" style="background-color:white; width:50%" />
+</center>
+
+- Reject the null hypothesis
+- After adjusting for differences in density, there exists differences in traffic patterns.
 
 ---
 
@@ -2348,7 +2420,7 @@ $$x\_j^{(i)} = \\begin{cases}1, & j = i \\\\ 0, & j \\neq i\\end{cases}$$
 - We'll define the probability vector from node $i$ to be:
 
 $$\\begin{aligned}
-\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\ 
+\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\
 &= \\begin{bmatrix} p\_{11} & \\cdots & p\_{1n} \\\\ \\vdots & \\ddots & \\vdots \\\\ p\_{n1} & \\cdots & p\_{nn}\\end{bmatrix}^{\\top}\\begin{bmatrix}x\_1^{(i)} \\\\ \\vdots \\\\ x\_n^{(i)}\\end{bmatrix} \\\\
 &= \\begin{bmatrix} p\_{11} & \\cdots & p\_{n1} \\\\ \\vdots & \\ddots & \\vdots \\\\ p\_{1n} & \\cdots & p\_{nn}\\end{bmatrix}\\begin{bmatrix}x\_1^{(i)} \\\\ \\vdots \\\\ x\_n^{(i)}\\end{bmatrix}\\end{aligned}$$
 
@@ -2359,7 +2431,7 @@ $$\\begin{aligned}
 Continuing, we get:
 
 $$\\begin{aligned}
-\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\ 
+\\vec p\_i &= P^\\top \\vec x^{(i)} \\\\
 &= \\begin{bmatrix}\\sum\_{i = 1}^n p\_{j1}x\_{j}^{(i)} \\\\ \\vdots \\\\ \\sum\_{i = 1}^n p\_{jn }x\_{j}^{(i)}\\end{bmatrix} \\\\
 &= \\begin{bmatrix}p\_{i1} \\\\ \\vdots \\\\ p\_{in}\\end{bmatrix}
 \\end{aligned}$$
@@ -2396,7 +2468,7 @@ Let $\\mathbf s\_{t + 1} \\sim \text{Multinoulli}(\\vec p\_{s\_t})$
         Let p = transpose(P)* x.
         Let s[t] be a Multinoulli sample with probability vector p.
       Return the random walk s.
-    
+
 
 ---
 
@@ -2404,7 +2476,7 @@ Let $\\mathbf s\_{t + 1} \\sim \text{Multinoulli}(\\vec p\_{s\_t})$
 
 - Note that we have two networks we are dealing with
 1. The network: the object we are studying
-2. The GNN: the network that we are using implicitly as part of the algorithm 
+2. The GNN: the network that we are using implicitly as part of the algorithm
 - We will be studying a technique called $\\texttt{DeepWalk}$
 
 ---
@@ -2503,7 +2575,7 @@ $$W = \\begin{bmatrix} \\leftarrow & w^{(1)\\top} & \\rightarrow \\\\ & \\vdots 
 - To connect the input layer to the hidden nodes, we have an "embedding layer"
 - We take the product $W^\\top \\vec x^{(i)}$ to be the "embedding" of the node $i$
   - Since $W^\\top$ is $d \\times n$ dimensions and $\\vec x^{(i)}$ is an $n$-vector, the product is $d$-dimensional
-$$W^\\top = \\begin{bmatrix} \\uparrow & & \\uparrow \\\\ \\vec w^{(1)} & \\cdots & \\vec w^{(n)} \\\\ \\downarrow & & \\downarrow\\end{bmatrix}$$ 
+$$W^\\top = \\begin{bmatrix} \\uparrow & & \\uparrow \\\\ \\vec w^{(1)} & \\cdots & \\vec w^{(n)} \\\\ \\downarrow & & \\downarrow\\end{bmatrix}$$
 
 ---
 
