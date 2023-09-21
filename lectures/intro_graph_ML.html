@@ -1799,7 +1799,7 @@ $$
   - Let's study $X$ latent positions, which also encodes same structure
 
 --
-3. If we assume $A$ is a random variable,
+3. If we assume $\mathbf A$ is a random network,
   - theoretical results $\implies$ as our networks get larger (more data), our estimates of $P$ get better
   - $\hat X$ is a useful surrogate for studying $X$
   - can be useful even under model misspecification
@@ -1841,7 +1841,7 @@ $$L = XX^\\top, X = U_d \\sqrt{\\Sigma_d}$$
 
 ### $\texttt{ase}$ vs $\texttt{lse}$
 
-- Suppose we sample $A$ from DCSBM$_n(\\vec \\theta, \\vec z, B)$ with $n = 100$ nodes and $K = 2$ communities.
+- Suppose $\\mathbf A$ is a DCSBM$_n(\\vec \\theta, \\vec z, B)$ random network with $n = 100$ nodes and $K = 2$ communities.
 
 --
 
@@ -1896,21 +1896,6 @@ $$L = XX^\\top, X = U_d \\sqrt{\\Sigma_d}$$
 
 ---
 name:apps
-
-### Outline
-
-- [Basics of Graph Data](#whyhave)
-- [Random Graph Models](#models)
-- [Estimating Parameters for Networks](#est)
-- Applications
-  - [Community Detection](#comm)
-  - [Two-Sample Hypothesis Testing](#2samp)
-
-- [Code example](#code)
-
-### [Graph Neural Networks](#extra)
----
-name:comm
 
 ### Outline
 
@@ -2089,7 +2074,7 @@ name:2samp
 - [Random Graph Models](#models)
 - [Estimating Parameters for Networks](#est)
 - Applications
-  - [Community Detection](#comm)
+  - [Community Detection](#apps)
   - Two-Sample Hypothesis Testing
 - [Code example](#code)
 
