@@ -119,7 +119,6 @@ name:back
 
 ---
 
-
 ### How do we propose to address batch effects?
 
 - skip to latent variable modelling (e.g., SVA)?
@@ -134,8 +133,15 @@ Proposal: leverage techniques from .ye[causal inference] to yield strategies whi
 ### Motivating questions
 
 - how do we formulate batch effects as a problem in causal inference?
-- how do we perform causal analyses in graph data?
-- .ye[Do we properly understand the limitations of techniques that are used across neuroimaging?]
+- Do we properly understand the limitations of techniques that are used across neuroimaging?
+
+---
+
+### Motivating questions
+
+- how do we formulate batch effects as a problem in causal inference?
+- Do we properly understand the limitations of techniques that are used across neuroimaging?
+- .ye[how do we perform causal analyses in graph data?]
 
 ---
 
@@ -194,6 +200,18 @@ Proposal: leverage techniques from .ye[causal inference] to yield strategies whi
 
 --
 - subject to .ye[measured confounding biases]
+
+---
+
+### Conditional (Non-Causal) Effect
+
+- compare distributions of outcomes across batches, but conditioned on age
+- what if the age groups sampled do not overlap? One batch is adolescents and adults, the other is adults and geriatrics
+  - conditional approaches make implicit assumptions about how to interpolate the first batch to geriatrics, and the second batch to adolescents
+  - when these implicit assumptions do not reflect the data, results can be erroneous (false positives and false negatives)
+- subject to measured confounding biases
+- existing procedures .ye[cDCorr] and .ye[cComBat] take this approach
+
 ---
 
 ### Conditional (Non-Causal) Effect
@@ -214,6 +232,15 @@ Proposal: leverage techniques from .ye[causal inference] to yield strategies whi
 
 --
 - robust to .ye[measured confounding]
+---
+
+### Adjusted (Causal) Effect
+
+- discard data across batches that are not "comparable"
+  - limit comparison between the two batches only to adults, since we have data in both batches
+  - avoids potential for false positives and false negatives when the data do not support such a conclusion
+- robust to measured confounding
+- our proposed procedures, .ye[Causal cDCorr] and .ye[Causal ComBat], take this approach
 ---
 
 ### Adjusted (Causal Effect)
