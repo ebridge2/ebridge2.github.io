@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Sources of variability</title>
+  <title>Causal graph analyses</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="fonts/quadon/quadon.css">
   <link rel="stylesheet" href="fonts/gentona/gentona.css">
@@ -17,7 +17,7 @@
 
 <!-- TODO add slide numbers & maybe slide name -->
 
-#### A causal perspective for batch effects
+#### Causal Analyses on Populations of Graphs
 
 ![:scale 40%](images/neurodata_blue.png)
 
@@ -44,7 +44,7 @@ name:back
 <center>![:scale 60%](images/defense/causal1.png)</center>
 
 - goal: estimate impact of an exposure (smoking) on measurements (cancer), given a set of covariates (ages)
-
+  - these are almost always the types of relationships we .ye[want] to find in science
 ---
 
 
@@ -141,7 +141,7 @@ Proposal: leverage techniques from .ye[causal inference] to yield strategies whi
 
 - how do we formulate batch effects as a problem in causal inference?
 - Do we properly understand the limitations of techniques that are used across neuroimaging?
-- .ye[how do we perform causal analyses in graph data?]
+- .ye[how do we perform causal analyses with populations of graphs?]
 
 ---
 
@@ -326,14 +326,13 @@ name:disc
 ### Accomplishments
 
 - "It is impossible to publish a paper with multiple datasets in neuroimaging without using ComBat in 2023"
-- developed new causal language and machinery for detection of causal effects in high-dimensional regimes
-- demonstrated that adjusting the data to better reflect the underlying assumptions yielded valid and powerful performance
-  - unlike existing approaches (which often were neither)
+- .ye[developed new causal language and machinery for detection of causal effects in graph data]
+- illustrate that our proposed procedures, .ye[Causal cDCorr] and .ye[Causal cComBat], rectify pain points for conditional procedures
 
 ##### Implications and future work
 
-- CoRR is very good for showing the issues with existing methods (varied levels of covariate overlap)
-  - can we refine by using studies with higher sample size and demographic overlap (e.g., ABCD study?)
+- CoRR is very good for showing issues with existing methods (varied levels of covariate overlap)
+  - can we refine our proposed procedures by using studies with higher sample size and demographic overlap (e.g., ABCD study \[13\]?)
 
 ---
 
