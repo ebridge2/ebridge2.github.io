@@ -17,14 +17,16 @@
 
 <!-- TODO add slide numbers & maybe slide name -->
 
+### GrasPy
 #### Causal Analyses on Populations of Graphs
 
-![:scale 40%](images/neurodata_blue.png)
+![:scale 30%](images/neurodata_blue.png)
+
+PIs: Joshua Vogelstein, Carey E. Priebe
 
 | Eric W. Bridgeford | {Biostatistics, BME, CIS} |
 | --- | --- |
 | [ericwb95@gmail.com](mailto:ericwb95 at gmail dot com)  | [ericwb.me](https://ericwb.me) |
-
 
 ---
 
@@ -113,20 +115,15 @@ name:back
 - Surrogate Variable Analysis [5,6]
   - use latent variable models to capture sources of batch heterogeneity
 
---
-- NeuroHarmonize [7]
-  - estimate covariate relationships with Generalized Additive Models (GAMs)
-
 ---
 
 ### How do we propose to address batch effects?
 
-- skip to latent variable modelling (e.g., SVA)?
-- focus on estimation with linear/non-linear models (e.g., ComBat, NeuroHarmonize)?
 - "It is impossible to publish a paper with multiple datasets in neuroimaging without using ComBat in 2023"
+  - problem: are they actually doing what we think? Are they removing batch effects?
 
-Proposal: leverage techniques from .ye[causal inference] to yield strategies which are both theoretically and empirically sensible for batch effect analyses [8,9]
-- develop suitable language and estimands which allow us to be .ye[precise] when referring to batch effects
+--
+- Proposal: leverage techniques from .ye[causal inference] to yield strategies which allow us to be .ye[precise] when referring to batch effects
 
 ---
 
