@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sources of variability</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="fonts/quadon/quadon.css">
+  <link rel="stylesheet" href="fonts/gentona/gentona.css">
+  <link rel="stylesheet" href="slides_style_i.css">
+  <script type="text/javascript" src="assets/plotly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+  <textarea id="source">
+
+
+
+<!-- TODO add slide numbers & maybe slide name -->
+
+#### A causal perspective for batch effects
+
+![:scale 40%](images/neurodata_blue.png)
+
+| Eric W. Bridgeford | {Biostatistics, BME, CIS} |
+| --- | --- |
+| [ericwb95@gmail.com](mailto:ericwb95 at gmail dot com)  | [ericwb.me](https://ericwb.me) |
+
+
+---
+
+name:back
+
+### Outline
+
+- Motivation and background
+- [Defining batch effects](#define)
+- [Results](#results)
+- [Discussion](#disc)
+
+---
+
+### Typical problem in causal inference
+
+<center>![:scale 60%](images/defense/causal1.png)</center>
+
+- goal: estimate impact of an exposure (smoking) on measurements (cancer), given a set of covariates (ages)
+
+---
+
+
+### Problem 1: Unmeasured variables
+
+<center>![:scale 60%](images/defense/causal2.png)</center>
+
+- what if we didn't measure genetics, but genetics cause cancer and influence smoking? [3]
+
+---
+
+### Solution 1
+
+<center>![:scale 60%](images/defense/causal3.png)</center>
+
+- Assume unmeasured variables are minimally impactful
+
+---
+
+### Problem 2
+
+
+<center>![:scale 60%](images/causal/causal_ex.png)</center>
+
+- Measured: old smokers, and young non-smokers
+  - did the smoking cause the cancer, or is cancer just a function of aging?
+  - Technical term: .ye[Confounding]
+
+---
+
+### Connectome data
+
+- connectome: brain graph, where the edges indicates the level of functional similarity or structural connectivity between areas of the brain
+<p align="center">
+  ![:scale 50%](images/defense/fmri_conn.png)
+</p>
+  - very high-dimensional
+  - properties about graph $\Rightarrow$ insights about brain function
+- expense $\Rightarrow$ collect data and pool (mega studies)
+
+---
+
+### The problem of batch effects
+
+- .ye[batch effect]: the impact of the data collection procedure (measurement device, measurement protocol, season, etc.) on the data collected [4]
+- .ye[demographic effect]: impact on the data of scientifically "interesting" characteristics of the object under study
+- When datasets are demographically diverse (high confounding) and measurements are large (high number of features), difficult to <tagname style="color:red">mitigate batch effects</tagname> while <tagname style="color:green;">preserving demographic effects</tagname>
+
+---
+
+### Existing work (detection)
+
+- classical causal inference focuses on this problem for univariate measurements (e.g., smoking)
+- some work (conditional independence testing) attempts to do this in multivariate regimes
+  - unclear the extent to which these provide reasonable answers in the face of confounding for high-dimensional data
+
+---
+
+### Existing work (correction)
+
+- ComBat [4]
+  - fit a linear model, where individual "batches" are a linear transformation of one another
+  - optional: "adjust" with terms for covariates (e.g., age, sex)
+
+--
+- Surrogate Variable Analysis [5,6]
+  - use latent variable models to capture sources of batch heterogeneity
+
+--
+- NeuroHarmonize [7]
+  - estimate covariate relationships with Generalized Additive Models (GAMs)
+
+---
+
+
+### How do we propose to address batch effects?
+
+- skip to latent variable modelling (e.g., SVA)?
+- focus on estimation with linear/non-linear models (e.g., ComBat, NeuroHarmonize)?
+- "It is impossible to publish a paper with multiple datasets in neuroimaging without using ComBat in 2023"
+
+Proposal: leverage techniques from .ye[causal inference] to yield strategies which are both theoretically and empirically sensible for batch effect analyses [8,9]
+- develop suitable language and estimands which allow us to be .ye[precise] when referring to batch effects
+
+---
+
+### Motivating questions
+
+- how do we formulate batch effects as a problem in causal inference?
+- how do we perform causal analyses in graph data?
+- .ye[Do we properly understand the limitations of techniques that are used across neuroimaging?]
+
+---
+
+### Outline
+
+- [Motivation and background](#back)
+- Defining batch effects
+- [Results](#results)
+- [Discussion](#disc)
+
+---
+
+### Motivating example
+
+- two groups of batches of measurements
+  - for each person, we measure an outcome (e.g., a connectome)
+
+--
+- .ye[Are differences between the batches due to experimental variability, or actual differences between the measurements for each batch?]
+
+--
+- .ye[Are measurements different simply due to the batch?]
+
+---
+
+### Associational Effect
+
+- simplest approach: directly compare the outcomes across the batches
+- what if we sample different age groups in each batch?
+
+--
+  - consider: outcome is a function of age, but we do not account for age
+  - false positives: we detect an effect, but it the "effect" is just due to age differences
+  - false negatives: the batches truly differ, but the "age effect" cancels out this variability
+
+--
+- if there is any confounding, not causal
+---
+
+### Associational Effect
+
+<p align="center">
+  ![:scale 100%](images/causal/ass.png)
+</p>
+
+---
+
+### Conditional (Non-Causal) Effect
+
+- compare distributions of outcomes across batches, but conditioned on age
+- what if the age groups sampled do not overlap? One batch is adolescents and adults, the other is adults and geriatrics
+
+--
+  - conditional approaches make .ye[implicit assumptions] about how to interpolate the first batch to geriatrics, and the second batch to adolescents
+  - when these implicit assumptions do not reflect the data, results can be erroneous (false positives and false negatives)
+
+--
+- subject to .ye[measured confounding biases]
+---
+
+### Conditional (Non-Causal) Effect
+
+<p align="center">
+  ![:scale 100%](images/causal/cond.png)
+</p>
+
+---
+
+### Adjusted (Causal) Effect
+
+- discard data across batches that are not "comparable"
+
+--
+  - limit comparison between the two batches only to adults, since we have data in both batches
+  - avoids potential for false positives and false negatives when the .ye[data do not support such a conclusion]
+
+--
+- robust to .ye[measured confounding]
+---
+
+### Adjusted (Causal Effect)
+
+
+<p align="center">
+  ![:scale 100%](images/causal/adj.png)
+</p>
+
+---
+
+name:results
+
+### Outline
+
+- [Motivation and background](#back)
+- [Defining batch effects](#define)
+- Results
+- [Discussion](#disc)
+
+---
+
+### CoRR Demographics
+
+
+<center>![:scale 100%](images/causal/demographic.png)</center>
+
+---
+
+### Upstream assumptions and batch effect detection 
+
+<center>![:scale 65%](images/causal/cond_vs_adj_detection.png)</center>
+
+---
+
+### With high overlap, non-causal and causal approaches are similar
+
+<center>![:scale 65%](images/causal/overlap.png)</center>
+
+- recall: scanner is an .ye[effect modifier]
+  - different scanners = probably batch effects
+- causal and non-causal approaches agree
+
+---
+
+### With high overlap, non-causal and causal approaches are similar
+
+<center>![:scale 65%](images/causal/overlap.png)</center>
+
+- take-home: batch effects are prominent and detectable when we should detect them (scanners differ)
+
+---
+
+### With low overlap, non-causal and causal approaches disagree
+
+<center>![:scale 50%](images/causal/lowoverlap.png)</center>
+
+- recall: scanner is an .ye[effect modifier]
+
+---
+
+### With low overlap, non-causal and causal approaches disagree
+
+<center>![:scale 50%](images/causal/lowoverlap.png)</center>
+
+- non-causal procedures tend to say no detectable batch effect
+  - causal procedures indicate the batches are demographically confounded
+- non-causal procedures give false negatives
+
+---
+
+name:disc
+
+### Outline
+
+- [Motivation and background](#back)
+- [Defining batch effects](#define)
+- [Results](#results)
+- Discussion
+
+---
+
+### Accomplishments
+
+- "It is impossible to publish a paper with multiple datasets in neuroimaging without using ComBat in 2023"
+- developed new causal language and machinery for detection of causal effects in high-dimensional regimes
+- demonstrated that adjusting the data to better reflect the underlying assumptions yielded valid and powerful performance
+  - unlike existing approaches (which often were neither)
+
+##### Implications and future work
+
+- CoRR is very good for showing the issues with existing methods (varied levels of covariate overlap)
+  - can we refine by using studies with higher sample size and demographic overlap (e.g., ABCD study?)
+
+---
+
+### Acknowledgements
+
+##### Collaborators
+
+<div class="small-container">
+    <img src="faces/jovo.png"/>
+    <div class="centered">Josh Vogelstein</div>
+  </div>
+  <div class="small-container">
+    <img src="faces/bcaffo.jpg"/>
+    <div class="centered">Brian Caffo</div>
+  </div>
+<div class="small-container">
+  <img src="faces/powell.jpg"/>
+  <div class="centered">Mike Powell</div>
+</div>
+<div class="small-container">
+  <img src="faces/shangsi.jpg"/>
+  <div class="centered">Shangsi Wang</div>
+</div>
+<div class="small-container">
+  <img src="faces/zhi.jpeg"/>
+  <div class="centered">Zhi Yang</div>
+</div>
+<div class="small-container">
+  <img src="faces/zeyi.jpeg"/>
+  <div class="centered">Zeyi Wang</div>
+</div>
+<div class="small-container">
+  <img src="faces/ting.jpeg"/>
+  <div class="centered">Ting Xu</div>
+</div>
+<div class="small-container">
+  <img src="faces/cc.jpg"/>
+  <div class="centered">Cameron Craddock</div>
+</div>
+<div class="small-container">
+  <img src="faces/jayanta.jpg"/>
+  <div class="centered">Jayanta Dey</div>
+</div>
+<div class="small-container">
+  <img src="faces/gkiar.jpg"/>
+  <div class="centered">Greg Kiar</div>
+</div>
+<div class="small-container">
+  <img src="faces/wgr.jpg"/>
+  <div class="centered">William Gray-Roncal</div>
+</div>
+<div class="small-container">
+  <img src="faces/cdouville.jpeg"/>
+  <div class="centered">Christopher Douville</div>
+</div>
+<div class="small-container">
+  <img src="faces/snoble.jpeg"/>
+  <div class="centered">Stephanie Noble</div>
+</div>
+<div class="small-container">
+  <img src="faces/cep.png"/>
+  <div class="centered">Carey Priebe</div>
+</div>
+<div class="small-container">
+  <img src="faces/mm.jpg"/>
+  <div class="centered">Michael Milham</div>
+</div>
+<div class="small-container">
+  <img src="faces/xinian.jpg"/>
+  <div class="centered">Xinian Zuo</div>
+</div>
+<div class="small-container">
+  <img src="faces/jaewon.jpg"/>
+  <div class="centered">J1 Chung</div>
+</div>
+<div class="small-container">
+  <img src="faces/sambit.jpg"/>
+  <div class="centered">Sambit Panda</div>
+</div>
+<div class="small-container">
+  <img src="faces/ross.jpg"/>
+  <div class="centered">Ross Lawrence</div>
+</div>
+<div class="small-container">
+  <img src="faces/bgilbert.jpeg"/>
+  <div class="centered">Brian Gilbert</div>
+</div>
+<div class="small-container">
+  <img src="faces/cshen.jpg"/>
+  <div class="centered">Cencheng Shen</div>
+</div>
+<div class="small-container">
+  <img src="faces/cboy.png"/>
+  <div class="centered">Cramér</div>
+</div>
+<div class="small-container">
+    <img src="images/neurodata_blue.png"/>
+    <div class="centered">Neurodata Team</div>
+  </div>
+
+##### Funding
+
+<img src="images/funding/nih_fpo.png" STYLE="HEIGHT:95px;"/>
+
+
+---
+
+##### References
+
+[1] Bridgeford, EW et al. "Eliminating accidental deviations to minimize generalization error and maximize replicability: Applications in connectomics and genomics." PLOS CB. 2021.
+
+[2] Wang, Z et al. "Statistical Analysis of Data Repeatability Measures." arXiv. 2020.
+
+[3] Fisher, RA. "Cancer and Smoking." Nature. 1958.
+
+[4] Johnson, WE et al. "Adjusting batch effects in microarray expression data using empirical Bayes methods." Biostatistics. 2007.
+
+[5] Leek, JT. "Sorrugate Variable Analysis." University of Washington. 2007.
+
+[6] Leek, JT et al. "Capturing Heterogeneity in Gene Expression Studies by Surrogate Variable Analysis." PLOS Genetics. 2007.
+
+[7] Pomponio, R et al. "Harmonization of large MRI datasets for the analysis of brain imaging patterns throughout the lifespan." Neuroimage. 2019.
+
+---
+
+##### References
+
+[8] Bridgeford, EW et al. "Batch Effects are Causal Effects: Applications in Human Connectomics." Under revision at PNAS Nexus. 2023.
+
+[9] Bridgeford, EW et al. "Learning sources of variability from high-dimensional observational studies." In preparation. 2023.
+
+[10] Lopez, MJ et al. "Estimation of Causal Effects with Multiple Treatments: A Review and New Ideas." Stat Sci. 2017.
+
+[11] Stuart, E et al. "Matching methods for causal inference: A review and a look forward." Stat Sci. 2010.
+
+[12] Fortin, JP et al. "Harmonization of multi-site diffusion tensor imaging data." Neuroimage. 2017.
+
+[13] Casey, BJ et al. "The Adolescent Brain Cognitive Development (ABCD) study: Imaging acquisition across 21 sites." Journal of Developmental Cognitive Neuroscience. 2018.
+
+---
+
+### Thank you for your time!
+
+- questions: raise hands, or ask in chat please!
+
+</textarea>
+<!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script> -->
+<!-- <script src="remark-latest.min.js"></script> -->
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/katex.min.css">
+<script type="text/javascript">
+
+  var options = {};
+  var renderMath = function () {
+    renderMathInElement(document.body);
+    // or if you want to use $...$ for math,
+    renderMathInElement(document.body, {
+      delimiters: [ // mind the order of delimiters(!?)
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false },
+      ]
+    });
+  }
+
+  remark.macros.scale = function (percentage) {
+    var url = this;
+    return '<img src="' + url + '" style="width: ' + percentage + '" />';
+  };
+
+  // var slideshow = remark.create({
+  // Set the slideshow display ratio
+  // Default: '4:3'
+  // Alternatives: '16:9', ...
+  // {
+  // ratio: '16:9',
+  // });
+
+  var slideshow = remark.create(options, renderMath);
+
+
+</script>
+</body>
+
+</html>
