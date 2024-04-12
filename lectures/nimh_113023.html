@@ -41,42 +41,6 @@ name:back
 
 ---
 
-### Typical problem in causal inference
-
-<center>![:scale 60%](images/defense/causal1.png)</center>
-
-- goal: estimate impact of an exposure (smoking) on measurements (cancer), given a set of covariates (ages)
-  - these are almost always the types of relationships we .ye[want] to find in science
----
-
-
-### Problem 1: Unmeasured variables
-
-<center>![:scale 60%](images/defense/causal2.png)</center>
-
-- what if we didn't measure genetics, but genetics cause cancer and influence smoking? [3]
-
----
-
-### Solution 1
-
-<center>![:scale 60%](images/defense/causal3.png)</center>
-
-- Assume unmeasured variables are minimally impactful
-
----
-
-### Problem 2
-
-
-<center>![:scale 60%](images/causal/causal_ex.png)</center>
-
-- Measured: old smokers, and young non-smokers
-  - did the smoking cause the cancer, or is cancer just a function of aging?
-  - Technical term: .ye[Confounding]
-
----
-
 ### Connectome data
 
 - connectome: brain graph, where the edges indicates the level of functional similarity or structural connectivity between areas of the brain
