@@ -43,14 +43,14 @@ name:back
 
 #### Fundamental goals of neuroscientific analyses
 
-- causal inference (brief): presence (or absence) of one factor (the <u><i>cause</i></u>, or <u><i>exposure</i></u>) leads to veridical changes in another (the <u><i>effect</i></u> on the <u><i>outcome</i></u>)
-  - find "veridical" relationships
-  - "cause and effect"
-  - identify "mechanisms"
---
-
 - "ultimate goal of neuroscience is to elucidate... <u><i>how</i></u> the brain represents and processes information" [1]
   - <u><i>how</i></u>: inherently a causal question
+
+--
+- causal inference (brief): presence (or absence) of one factor (the <u><i>cause</i></u>, or <u><i>exposure</i></u>) leads to veridical changes in another (the <u><i>effect</i></u> on the <u><i>outcome</i></u>)
+  - find "veridical" relationships
+  - identify "cause and effect" mechanisms
+  - 
 
 ---
 
@@ -81,7 +81,7 @@ name:back
 #### Differentiating causal from non-causal inference
 
 - Hill criteria [2]: Strength, Consistency, Temporality, Plausibility, Experimentation
-- one criteria focuses directly on measuring effect sizes (Strength)
+- one criterion focuses directly on measuring effect sizes (Strength)
 
 --
 - remaining criteria are about <u><i>differentiating alternative explanations</i></u>
@@ -142,7 +142,8 @@ name:basics
 
 --
 - neurofeedback training: use fMRI to "guide" patients in evoking particular activation patterns
-  - can patients learn to recruit positive patterns, and dismiss negative patterns, potentially improving depressive patterns?
+  - can patients learn to recruit positive patterns, and dismiss negative patterns?
+  - can this allow them to "regulate" depressive emotions?
 
 ---
 
@@ -162,8 +163,6 @@ Outcome: variable we expect to see a change in, as a result of changes to the ex
 ### Identifying the exposure
 
 - When individuals <u><i>receive neurofeedback training for anti-depressive activation patterns</i></u>, do they see improvements (in depression severity) <u><i>relative placebo neurofeedback training</i></u> for different activation patterns?
-
---
 - Exposure: variable that is changed/manipulated
 
 ---
@@ -179,9 +178,8 @@ Outcome: variable we expect to see a change in, as a result of changes to the ex
 ### Identifying the outcome
 
 - When individuals receive neurofeedback training for anti-depressive activation patterns, do they see <u><i>improvements (in depression severity)</i></u> relative placebo neurofeedback training for different activation patterns?
-
---
 - Outcome: variable we expect to see a change in, as a result of changes to the exposure
+
 ---
 
 
@@ -189,7 +187,6 @@ Outcome: variable we expect to see a change in, as a result of changes to the ex
 
 - When individuals receive neurofeedback training for anti-depressive activation patterns, do they see <u><i>improvements (in depression severity)</i></u> relative placebo neurofeedback training for different activation patterns?
 
---
 - Outcome: variable we expect to see a change in, as a result of changes to the exposure
   - Mood (changes to depression severity)
 
@@ -230,6 +227,7 @@ Outcome: variable we expect to see a change in, as a result of changes to the ex
   ![:scale 100%](images/causal_persp/simple_dag_rct_qn.png)
 </p>
 - do other variables matter? consider sleep quality, which may influence mood, or vice versa
+- Randomize: give people the exposures at random
 
 ---
 
@@ -240,7 +238,6 @@ Outcome: variable we expect to see a change in, as a result of changes to the ex
 </p>
 
 - Randomization: any variable not correlated with the exposure is randomized <u><i>across</i></u> the exposure levels
-  - <u><i>decouples</i></u> potential relationships between other variables and the exposure (reduced alternative mechanisms)
 
 ---
 
@@ -251,7 +248,7 @@ Outcome: variable we expect to see a change in, as a result of changes to the ex
 </p>
 
 - Randomization: any variable not correlated with the exposure is randomized <u><i>across</i></u> the exposure levels
-  - <u><i>decouples</i></u> potential relationships other variables can have on the exposure (reduced alternative mechanisms)
+  - <u><i>decouples</i></u> potential relationships of other variables on the exposure (reduced alternative mechanisms)
   
 ---
 
@@ -276,10 +273,10 @@ Outcome: variable we expect to see a change in, as a result of changes to the ex
   ![:scale 100%](images/causal_persp/simple_dag_rct.png)
 </p>
 
-- Randomize people to neurofeedback training or placebo: exposure behaves endogenously (no arrows pointing towards)
+- Randomize people to neurofeedback training or placebo: exposure behaves exogenously (no arrows pointing towards)
 
 --
-- When exposures are endogenous, associational analyses can provide evidence of causal relationships across exposure groups
+- When exposures are exogenously, associational analyses can provide evidence of causal relationships across exposure groups
 
 ---
 
@@ -386,11 +383,12 @@ Outcome: variable we expect to see a change in, as a result of changes to the ex
 
 ### Inadequacy of association
 
-- In all cases, note that the exposure remains exogenous
+- In all cases, note that the exposure remains exogenous, and threats are limited
   - Realistic when researchers have full control (RCTs, test-retest, crossover designs)
   - Association is reasonably appropriate (bad bounces aside)
-- "Accidental" endogeneity of the exposure, mediation, and exposure interactions remain potential threats
-  - Well-designed experiments can conceptually accomodate
+
+--
+- Exogeneity of the exposure is rarely a reasonable assumption
 
 ---
 
@@ -479,8 +477,8 @@ name:confounding
 
 ### Simplified batch effects setup
 
-- Unobserved underlying neurology is redundant: parent only to measurement
-  - in these situations, conventional to delete
+- when there is only a direct path from the underlying variable to its measurement, convention to delete the underlying variable
+  - "Underlying neurology" is redundant
 
 <p align="center">
   ![:scale 100%](images/causal_persp/conf_dag_simple_full.png)
@@ -525,7 +523,8 @@ name:confounding
 
 - batch effect correction: "it would be really useful if this arrow just didn't exist"
   - every question is no longer potentially corrupted by a non-interesting mediator
-  - data is "standardized" across analyses
+  - data is "standardized" across batches
+
 <p align="center">
   ![:scale 100%](images/causal_persp/conf_dag_simple_x.png)
 </p>
@@ -619,12 +618,12 @@ name:confounding
 ### Controlling confounding
 
 - <u><i>Blocking</i></u>: use a set of variables (<u><i>adjustment set</i></u>) to tailor the analysis such that either:
-  1. causal relationships can be inferred, or
+  1. causal relationships can be inferred directly with a "good enough" model, or
   2. the dataset can be manipulated to address endogeneity of the exposure
 
 ---
 
-### Inferring non-causal relationships
+#### Inferring non-causal relationships directly
 
 - Conditional analysis: learn about the relationship between exposure and outcome, while (also) learning about relationship between common causes and other variables
 
@@ -734,8 +733,20 @@ name:confounding
   ![:scale 100%](images/causal_persp/strat_reg.png)
 </p>
 
---
+---
+
+### Limitations of stratification
+
+- partition covariates into "bins"
+- learn about covariate/outcome relationship within each bin
+- estimate "global effects" from "bin-wise effects"
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/strat_reg.png)
+</p>
 - How to choose bins? Sensitivity
+
+--
 - Small sample sizes within bins?
 
 ---
@@ -757,7 +768,7 @@ name:confounding
 
 ### Propensity trimming
 
-- in a controlled trial, $p(e, x) = Pr(e | X_i = x) \in \{0, 1\}$
+- in a controlled trial, $p(e, x) = Pr(e | X_i = x) \in (0, 1)$
   - always a "chance" you will be in either exposure group $e$
   - no set of covariates are completely deterministic of one exposure or the other
 
@@ -776,7 +787,7 @@ name:confounding
 ---
 
 ### Propensity trimming
-- propensity trimming: discard samples which are completely dissimiar from one exposure group or another
+- propensity trimming: discard samples which are completely dissimilar from one exposure group or another
 
 <p align="center">
   ![:scale 100%](images/causal_persp/pt_covar.png)
@@ -804,7 +815,7 @@ name:confounding
 
 ### Inverse probability weighting
 
-- in an unstratified RCT, $p(e, x) = p(e', x)$
+- in an RCT, $p(e, x) = p(e', x)$
   - samples have same propensity for any exposure
 - if propensity score distributions are similar, actual values of covariates are irrelevant for subsequent inference
   - what if we re-weight the empirical sample to make the propensity score distributions similar?
@@ -936,18 +947,17 @@ name:confounding
 
 ---
 
-### Causal methods and unobserved common causes
+#### Causal methods and unobserved common causes
 
 <p align="center">
   ![:scale 80%](images/causal_persp/unobs_dag.png)
 </p>
 
---
 - blocking measured common causes also blocks for correlated unmeasured common causes
 
 --
-- we don't have common causes in the data, we have covariates
-  - blocking more covariates = more better?
+- blocking more covariates = "more better"?
+  - we don't have common causes in the data, we have covariates
 
 ---
 
@@ -973,7 +983,9 @@ name:collision
 
 --
 - artifactual challenge: movement induces spatially dependent artifacts to measured signal itself
-  - independent of the displacement challenges
+  - above and beyond displacement issues
+
+--
 - head motion leads to appreciable measurement errors
 
 ---
@@ -1053,6 +1065,7 @@ name:collision
 <br>
 <br>
 <br>
+<br>
 
 <p align="center">
   ![:scale 100%](images/causal_persp/collision_dag_biased.png)
@@ -1063,7 +1076,8 @@ name:collision
 #### Missing data insights
 
 - individuals with ASD "tend" to move more, but not always the case
-- what if we "re-weight" the dataset such that people who look like they should be excluded (but aren't) are upweighted? [7]
+- what if we re-weight the dataset such that measurements from people who look like they should be excluded (but aren't) are upweighted? [7]
+  - "stand ins" for people who look like they should have high motion and do have high motion
 
 <p align="center">
   ![:scale 100%](images/causal_persp/collision_dag.png)
@@ -1073,11 +1087,10 @@ name:collision
 
 #### Missing data insights
 
-- individuals with ASD "tend" to move more, but not always the case
-- what if we "re-weight" the dataset such that people who look like they should be excluded (but aren't) are upweighted? [7]
+1. estimate weights such that people who seem like they should be excluded are up-weighted
 
 <p align="center">
-  ![:scale 100%](images/causal_persp/collision_dag.png)
+  ![:scale 80%](images/causal_persp/collision_dag_prob2.png)
 </p>
 
 - the exposure is continuous, and all causal approaches for continuous exposures involve re-weighting
@@ -1087,14 +1100,13 @@ name:collision
 
 #### Missing data insights
 
-- individuals with ASD "tend" to move more, but not always the case
-- what if we "re-weight" the dataset such that people who look like they should be excluded (but aren't) are upweighted? [7]
+1. estimate weights such that people who seem like they should be excluded have exposures (outcomes?) up-weighted
 
 <p align="center">
-  ![:scale 100%](images/causal_persp/collision_dag.png)
+  ![:scale 80%](images/causal_persp/collision_dag_prob2_badsoln.png)
 </p>
 
-- "pretend" the exposure is the outcome and the outcome is the exposure [7]
+- ML hack: "pretend" the exposure is the outcome and the outcome is the exposure [7]
   - goal is to estimate a spurious quantity (which it also does not do reasonably)
 
 ---
@@ -1122,7 +1134,7 @@ name:discussion
 
 ### What have we shown?
 
-- many strategies for neuroimaging face nuanced criticism through causal lens
+- many strategies for neuroimaging face nuanced challenges through causal lens
 
 --
 - associational methods: almost never relevant unless data collection procedure is designed for it
@@ -1154,11 +1166,20 @@ name:discussion
 
 - <s>what if datasets were constructed pre-hoc with confounding in mind?</s>
 - what about causally-motivated "study arms"?
-  - identify a "matched subcohort" of people with wide demographics, matched across sites to similar people
-  - identify a "crossed over subcohort", who will be measured in a random order at all sites
+  - if batch is exogenous, limited confounding to estimate batch effect
+
+---
+
+### Recommendations for mega-study
+
+- <s>what if datasets were constructed pre-hoc with confounding in mind?</s>
+- what about causally-motivated "study arms"?
+  - if batch is exogenous, limited confounding to estimate batch effect
+1. identify a "matched subcohort" of people with wide demographics, matched across sites to similar people
+2. identify a "crossed over subcohort", who will be measured in a random order at all sites
 
 --
-- can we "learn" batch effect correction within the subcohort (with all causal advantages), and then apply it to new samples?
+- can we "learn" batch effect correction within the subcohort (with all causal advantages), and then apply it to new samples (who might not have similar demographic distributions)?
 
 ---
 
