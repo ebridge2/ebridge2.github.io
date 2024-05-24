@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Causal Perspective</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="fonts/quadon/quadon.css">
+  <link rel="stylesheet" href="fonts/gentona/gentona.css">
+  <link rel="stylesheet" href="slides_style_poldrack.css">
+  <script type="text/javascript" src="assets/plotly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+  <textarea id="source">
+
+
+
+<!-- TODO add slide numbers & maybe slide name -->
+
+### How causal perspectives can inform problems in neuroimaging
+
+<centering>
+  ![:scale 35%](images/stanford_s.png)
+</centering>
+
+| Eric W. Bridgeford | {Biostatistics, BME, CIS} |
+| --- | --- |
+| [ericwb95@gmail.com](mailto:ericwb95 at gmail dot com)  | [ericwb.me](https://ericwb.me) |
+
+---
+
+name:back
+
+### Outline
+
+- Background
+- [Basics](#basics)
+- [Confounding](#confounding)
+- [Collision](#collision)
+- [Discussion](#discussion)
+
+---
+
+#### Fundamental goals of neuroscientific analyses
+
+- causal inference (brief): presence (or absence) of one factor (the <u><i>cause</i></u>, or <u><i>exposure</i></u>) leads to veridical changes in another (the <u><i>effect</i></u> on the <u><i>outcome</i></u>)
+  - find "veridical" relationships
+  - "cause and effect"
+  - identify "mechanisms"
+--
+
+- "ultimate goal of neuroscience is to elucidate... <u><i>how</i></u> the brain represents and processes information" [1]
+  - <u><i>how</i></u>: inherently a causal question
+
+---
+
+#### Differentiating causal from non-causal inference
+
+- almost every scientific analysis will seek a causal conclusion
+  - "interpreting" results implies an analysis provides some sort of veridical/trustable evidence
+--
+
+- Hill criteria [2]: differentiate the types of evidence that inform causal conclusions
+
+--
+1. <u><i>Strength</i></u>: the larger a detected effect, the more likely it is to be causal
+
+--
+2. <u><i>Consistency</i></u>: can the detected effect be reproduced across different studies?
+
+--
+3. <u><i>Temporality</i></u>: does the effect occur (mechanistically) after the cause?
+
+--
+4. <u><i>Plausibility</i></u>: does domain expertise support that the cause could have the observed effect?
+
+--
+5. <u><i>Experimentation</i></u>: does manipulating the cause have the expected effect?
+---
+
+#### Differentiating causal from non-causal inference
+
+- Hill criteria [2]: Strength, Consistency, Temporality, Plausibility, Experimentation
+- one criteria focuses directly on measuring effect sizes (Strength)
+
+--
+- remaining criteria are about <u><i>differentiating alternative explanations</i></u>
+  - Once we establish an effect, are we certain it isn't an artifact of some other explanation?
+  - is an identified effect "interpretable" or "veridical"?
+---
+
+#### What do neuroimaging analyses look like?
+
+- Brief overview of Nature Neuroscience Volume 27, Issue 4 (April 2024, 15 articles)
+  - 12 of 15 articles use ANOVA
+  - 8 of 15 articles use linear regression
+--
+
+- linear statistical models are a workhorse of neuroscience
+  - nearly every paper in a neuroscience journal is using a fairly out-of-the-box linear statistical method
+
+---
+
+#### What do neuroimaging analyses look like?
+  
+- Brief overview of Nature Neuroscience Volume 27, Issue 4 (April 2024, 15 articles)
+  - 12 of 15 articles use ANOVA
+  - 8 of 15 articles use linear regression  
+- <u><i>"correlation does not equal causation"</i></u>
+  - "correlation": "linear statistical methods"
+  - why do we use it as such in practice?
+
+--
+- <u><i>Why is most analytical rigor dedicated towards effect strength, yet so little towards other aspects?</i></u>
+
+---
+
+#### Our proposal
+
+- neuroscience begins to incorporate insights from last three decades of causal inference
+  1. When can causal insights actually be inferred from an analysis?
+  2. When might we run into biases?
+  3. How can we use causal techniques to try to address these biases?
+
+---
+
+name:basics
+
+### Outline
+
+- [Background](#back)
+- Basics
+- [Confounding](#confounding)
+- [Collision](#collision)
+- [Discussion](#discussion)
+
+---
+
+### Working Example: Neurofeedback for treatment of depression
+
+- Hypothesis of neuropathologies: "patterns" of brain activity can be linked to mental illness
+
+--
+- neurofeedback training: use fMRI to "guide" patients in evoking particular activation patterns
+  - can patients learn to recruit positive patterns, and dismiss negative patterns, potentially improving depressive patterns?
+
+---
+
+### Defining the key variables
+
+Exposure: variable that is changed/manipulated
+
+Outcome: variable we expect to see a change in, as a result of changes to the exposure
+- How do we contextualize the neurofeedback example?
+  - Start with refining the question
+
+--
+- When individuals receive neurofeedback training for anti-depressive activation patterns, do they see improvements (in depression severity) relative placebo neurofeedback training for different activation patterns?
+
+---
+
+### Identifying the exposure
+
+- When individuals <u><i>receive neurofeedback training for anti-depressive activation patterns</i></u>, do they see improvements (in depression severity) <u><i>relative placebo neurofeedback training</i></u> for different activation patterns?
+
+--
+- Exposure: variable that is changed/manipulated
+
+---
+
+### Identifying the exposure
+
+- When individuals <u><i>receive neurofeedback training for anti-depressive activation patterns</i></u>, do they see improvements (in depression severity) <u><i>relative placebo neurofeedback training</i></u> for different activation patterns?
+- Exposure: variable that is changed/manipulated
+  - Neurofeedback training (anti-depressive patterns/placebo)
+
+---
+
+### Identifying the outcome
+
+- When individuals receive neurofeedback training for anti-depressive activation patterns, do they see <u><i>improvements (in depression severity)</i></u> relative placebo neurofeedback training for different activation patterns?
+
+--
+- Outcome: variable we expect to see a change in, as a result of changes to the exposure
+---
+
+
+### Identifying the outcome
+
+- When individuals receive neurofeedback training for anti-depressive activation patterns, do they see <u><i>improvements (in depression severity)</i></u> relative placebo neurofeedback training for different activation patterns?
+
+--
+- Outcome: variable we expect to see a change in, as a result of changes to the exposure
+  - Mood (changes to depression severity)
+
+---
+
+### Illustrating the question of interest
+
+- causal graph: graph which uses <u><i>arrows</i></u> to illustrate relationships between variables
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_rct.png)
+</p>
+- directionality of arrows encodes causal mechanisms
+  - bidirectional arrows encode uncertainty as to directionality
+- do other variables matter?
+
+---
+
+### Associational analysis
+
+- deriving conclusion about relationship between an exposure and an outcome by looking at how outcome changes as a function of an exposure
+
+--
+- extremely useful for exploratory analyses
+  - typically straightforward (ANOVA, regression, correlations, etc.)
+
+--
+- when are they causal?
+
+--
+- statistical consistency: if enough data were collected (and the assumptions are reasonably appropriate), will relationships identified indicate a true underlying causal relationship?
+
+---
+
+### Randomized controlled trials (RCTs)
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_rct_qn.png)
+</p>
+- do other variables matter? consider sleep quality, which may influence mood, or vice versa
+
+---
+
+### Randomized controlled trials (RCTs)
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_rct_qn.png)
+</p>
+
+- Randomization: any variable not correlated with the exposure is randomized <u><i>across</i></u> the exposure levels
+  - <u><i>decouples</i></u> potential relationships between other variables and the exposure (reduced alternative mechanisms)
+
+---
+
+### Randomized controlled trials (RCTs)
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_rct.png)
+</p>
+
+- Randomization: any variable not correlated with the exposure is randomized <u><i>across</i></u> the exposure levels
+  - <u><i>decouples</i></u> potential relationships other variables can have on the exposure (reduced alternative mechanisms)
+  
+---
+
+### Identifying exogenous variables
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_rct.png)
+</p>
+
+- <u><i>exogenous variable</i></u>: value of a variable is imposed on a system
+  - variables which have no arrows pointing to them
+
+--
+- <u><i>endogenous variable</i></u>: variables whose values may change in response to changes in other variables
+  - variables which have arrows pointing to them
+
+---
+
+#### Associational analyses and exogeneity
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_rct.png)
+</p>
+
+- Randomize people to neurofeedback training or placebo: exposure behaves endogenously (no arrows pointing towards)
+
+--
+- When exposures are endogenous, associational analyses can provide evidence of causal relationships across exposure groups
+
+---
+
+### Experiments with repeated trials
+
+- same individuals measured multiple times
+- test-retest: experimental conditions imposed by the researchers are the same
+- crossover: researcher imposes changes in the exposure
+
+---
+
+### Test-retest experiments
+
+- Does seasonality cause changes to mood?
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_trt.png)
+</p>
+
+- Measure person in winter, and again in summer, and compare outcomes (associational)
+
+---
+
+### Limitations of test-retest experiments
+
+- are there "accidental" changes to the experimental conditions for the exposures?
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_trt_unobsmed.png)
+</p>
+
+- What if people are measured in winter in the morning, but at night in summer?
+  - Might "accidentally" induce a mediation effect
+
+---
+
+### Limitations of test-retest experiments
+
+- are there "accidental" changes to the experimental conditions for the exposures?
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_trt_unobsmed.png)
+</p>
+
+- Mediation: an indirect route (through another variable) by which an exposure can impact an outcome
+- Association(Exposure, Outcome) = Direct + Indirect
+---
+
+### Limitations of test-retest experiments
+
+- are there "accidental" changes to the experimental conditions for the exposures?
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_trt_med.png)
+</p>
+
+- Causal mediation analysis
+  - differentiate magnitudes of direct effects (exposure on outcome) vs. indirect effects (exposure on other variables on outcome)
+
+---
+
+### Limitations of a randomized trial
+
+- What if we have a small number of people, and after randomization, we get a "bad bounce"?
+  - fifteen of the treated people are women, five are men
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_rct.png)
+</p>
+--
+- "Randomization" is theoretically effective (large $n$; <u><i>consistency</i></u>), but empirically imperfect (small $n$)
+
+---
+
+### Crossover experiment
+
+- For each person, perform both the exposure <u><i>and</i></u> the control condition
+  - Association reduces to comparing each person's outcome under treatment with their outcome under control
+  - "Paired"
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_crossover.png)
+</p>
+
+--
+- Individuals are given one exposure (treatment or control) and then <u><i>crossed over</i></u> into the other
+
+
+---
+
+### Limitations of crossover experiments
+
+- For each person, perform both the treatment <u><i>and</i></u> the control condition
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/simple_dag_crossover.png)
+</p>
+
+- <u><i>exposure interactions</i></u>: receiving one exposure before the other may induce biases
+  - Gustavo example
+  - important to consider whether "cool offs" are necessary/appropriate
+
+---
+
+### Inadequacy of association
+
+- In all cases, note that the exposure remains exogenous
+  - Realistic when researchers have full control (RCTs, test-retest, crossover designs)
+  - Association is reasonably appropriate (bad bounces aside)
+- "Accidental" endogeneity of the exposure, mediation, and exposure interactions remain potential threats
+  - Well-designed experiments can conceptually accomodate
+
+---
+
+name:confounding
+
+### Outline
+
+- [Background](#back)
+- [Basics](#basics)
+- Confounding
+- [Collision](#collision)
+- [Discussion](#discussion)
+
+---
+
+### Observational data
+
+- Observational data: experimenters lack explicit control of the exposure
+
+--
+- is exogeneity of exposure reasonable?
+
+---
+
+### Observational data
+
+- Observational data: experimenters lack explicit control of the exposure
+- is exogeneity of exposure reasonable? <u><i>No</i></u>
+  - extremely stringent assumption that exposure is unassociated with any other variables
+  - associational analytical procedures can be completely misleading (false positives, false negatives, etc.)
+
+--
+- Failure to address endogeneity of the exposure leads to analyses which are "useless for understanding phenomena... and [this criticism] is actually an understatement" [4]
+---
+
+### Working example: batch effects
+
+- fMRI analyses are expensive and require people to come to an imaging facility
+- Require a dedicated team of researchers, technicians, and a subject pool with locality to imaging site
+
+--
+- Mega-analysis: pool data from multiple sites
+  - more sites = more diverse samples
+
+--
+- some sites may have more young people, may sample from different demographic backgrounds, etc.
+
+---
+
+### Working example: batch effects
+
+- by design, demographic variables will make people more/less likely to be "exposed" to particular batches
+- demographic variables certainly impact measurements (e.g., biological sex, age, etc.)
+
+--
+- Problem: signatures or biases in the data are associated with where the data was collected
+  - <u><i>"batch effect"</i></u>
+
+---
+
+### Working example: batch effects
+
+- <u><i>differential</i></u> measurement error: nature of error of measurements (e.g., fMRI connectomes) depends on another covariate (e.g., batch)
+
+--
+- In our mega-analysis, does age alter the connectome?
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_underlying.png)
+</p>
+
+---
+
+### Causal paths
+
+- Causal path: a sequence of variables and relationships (arrows) where we can follow relationships from one variable to the next
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_underlying.png)
+</p>
+
+- Parent: a variable upstream on a causal path
+- Child: a variable downstream on a causal path
+
+---
+
+### Simplified batch effects setup
+
+- Unobserved underlying neurology is redundant: parent only to measurement
+  - in these situations, conventional to delete
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_simple_full.png)
+</p>
+
+---
+
+### Mega-studies with (mega) problems
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_simple.png)
+</p>
+
+- Note: mediation effect (by batch) on the measurement
+
+---
+
+### Mega-studies with (mega) problems
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_simple.png)
+</p>
+
+- Note: mediation effect (by batch) on the measurement: <u><i>Mediation analysis?</i></u>
+
+---
+
+### Mega-studies with (mega) problems
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_simple.png)
+</p>
+
+- Note: mediation effect (by batch) on the measurement: <u><i>Mediation analysis?</i></u>
+  - typically in mediation analyses, both the <font color="green">indirect</font> and <font color="blue">direct</font> effects are interesting
+  - we usually only care about the <font color="blue">direct</font> effect
+- What if there are many questions? Batch is always a mediator
+
+---
+
+#### Why do we want to batch effect correct?
+
+- batch effect correction: "it would be really useful if this arrow just didn't exist"
+  - every question is no longer potentially corrupted by a non-interesting mediator
+  - data is "standardized" across analyses
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_simple_x.png)
+</p>
+
+---
+
+### Conceptualizing batch effects
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_batch_full.png)
+</p>
+
+- <u><i>batch effect</i></u>: effect of batch on the measurement (bold)
+
+---
+
+#### Backdoor paths make quantifying "batch effect" difficult
+
+- Backdoor path: alternating sequence of variables and relationships starting with a $\leftarrow$ from the exposure and ending with a $\rightarrow$ into the outcome
+<br>
+<br>
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_batch.png)
+</p>
+
+---
+
+#### Backdoor paths make quantifying "batch effect" difficult
+
+- Backdoor path: alternating sequence of variables and relationships starting with a $\leftarrow$ from the exposure and ending with a $\rightarrow$ into the outcome
+<br>
+<br>
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_batch_backdoor.png)
+</p>
+
+---
+
+#### Backdoor paths make quantifying "batch effect" difficult
+
+- Backdoor path: alternating sequence of variables and relationships starting with a $\leftarrow$ from the exposure and ending with a $\rightarrow$ into the outcome
+  - non-causal path: arrows don't all point in same direction
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_batch.png)
+</p>
+
+---
+
+### Common causes
+
+- <u><i>Common cause</i></u> (confounder?): a parent of both the exposure and the outcome
+  - exposure is endogenous
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_batch.png)
+</p>
+
+--
+- Age and biological sex
+
+---
+
+### Common causes and confounding biases
+
+- <u><i>Confounding bias</i></u>: spurioius (non-veridical), non-causal relationship that can be "induced" between an exposure and an outcome by other variables
+- Common causes are one route through which confounding biases can occur
+- Example: young people in one batch; old people in another batch
+  - what "portion of variability" is due to age, and what portion due to batch?
+  - How do we attribute the variability appropriately to different sources?
+
+---
+
+### Common causes and confounding biases
+
+
+- Example: young people in one batch; old people in another batch
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_batch.png)
+</p>
+
+- note that with mediation, we still had exogenous exposures
+  - variability between exposure and outcome was still reflective of a causal relationship (perhaps indirectly through the mediator)
+- with common causes, this variability may not be causal (at all)
+
+---
+
+### Controlling confounding
+
+- <u><i>Blocking</i></u>: use a set of variables (<u><i>adjustment set</i></u>) to tailor the analysis such that either:
+  1. causal relationships can be inferred, or
+  2. the dataset can be manipulated to address endogeneity of the exposure
+
+---
+
+### Inferring non-causal relationships
+
+- Conditional analysis: learn about the relationship between exposure and outcome, while (also) learning about relationship between common causes and other variables
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_batch.png)
+</p>
+
+- Intuitively, try to simultaneously try to learn every relationship/arrow above
+
+---
+
+### Conditional analyses
+
+- e.g., multivariate regression (ComBat, ComBat-seq)
+  - "extrapolate" relationships across exposure groups, conditional on other covariates
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_batch.png)
+</p>
+
+---
+
+### Limitations of conditional analyses
+
+- Learning (potentially factorially many) relationships is difficult
+  - is the model correct? No...
+<br>
+<br>
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_batch.png)
+</p>
+
+---
+
+### Limitations of conditional analyses
+
+- Learning (potentially factorially many) relationships is difficult
+  - is the model correct? No...
+  - is extrapolation reasonable? Unclear
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_batch.png)
+</p>
+
+--
+- most common strategy used for neuroimaging (14 of 15 Nature Neuro Articles)
+
+---
+
+### Addressing exposure endogeneity
+
+- Failure to address endogeneity of the exposure leads to analyses which are "useless for understanding phenomena... and [this criticism] is actually an understatement" [4]
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_batch_blocked.png)
+</p>
+
+- Causal analysis: strategy which directly addresses endogeneity of the exposure
+  - under assumptions, endogeneity is irrelevant (<u><i>ignorability</i></u>)
+
+---
+
+### Addressing exposure endogeneity
+
+- Failure to address endogeneity of the exposure leads to analyses which are "useless for understanding phenomena... and [this criticism] is actually an understatement" [4]
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/conf_dag_batch_blocked.png)
+</p>
+
+- Causal analysis: strategy which directly addresses endogeneity of the exposure
+  - under assumptions, endogeneity is irrelevant (<u><i>ignorability</i></u>)
+  - "bias limiting" more specific than "causal"?
+
+---
+
+### Conceptual example
+
+- $n=500$ samples, with $2$ covariates
+  - for each "batch", covariate distribution differs
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/endogeneity_sim.png)
+</p>
+
+---
+
+### Stratification
+
+- partition covariates into "bins"
+  - if these "bins" are "fine enough", perhaps conditional extrapolation is more reasonable
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/strat_sim.png)
+</p>
+
+---
+
+### Stratification
+
+- partition covariates into "bins"
+- learn about covariate/outcome relationship within each bin
+- estimate "global effects" from "bin-wise effects"
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/strat_reg.png)
+</p>
+
+--
+- How to choose bins? Sensitivity
+- Small sample sizes within bins?
+
+---
+
+### Re-weighted methods
+
+- up- or down-weight samples to render exposure "exogenous-like"
+- include propensity methods and matching methods
+
+---
+
+### Propensity methods
+
+- <u><i>Propensity score</i></u>: $p(e,x) \triangleq Pr(e | X_i = x)$
+  - can be estimated using logistic regression
+- under assumptions, the propensity scores encode all of the information about the endogeneity of the exposure with respect to covariates
+
+---
+
+### Propensity trimming
+
+- in a controlled trial, $p(e, x) = Pr(e | X_i = x) \in \{0, 1\}$
+  - always a "chance" you will be in either exposure group $e$
+  - no set of covariates are completely deterministic of one exposure or the other
+
+---
+
+### Propensity trimming
+
+- propensity trimming: discard samples which are completely dissimiar from one exposure group or another
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/pt_props.png)
+</p>
+
+- filtered the "extreme" propensities
+
+---
+
+### Propensity trimming
+- propensity trimming: discard samples which are completely dissimiar from one exposure group or another
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/pt_covar.png)
+</p>
+
+- ... since propensity scores encode information about the covariates, filters "extreme" covariates too
+
+---
+
+### Limitations of propensity trimming
+- propensity trimming: discard samples which are completely dissimiar from one exposure group or another
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/pt_covar.png)
+</p>
+
+- how do we choose "cut points"?
+  - Vertex Matching [5]
+  - guess?
+
+--
+- is outlier removal sufficient?
+
+---
+
+### Inverse probability weighting
+
+- in an unstratified RCT, $p(e, x) = p(e', x)$
+  - samples have same propensity for any exposure
+- if propensity score distributions are similar, actual values of covariates are irrelevant for subsequent inference
+  - what if we re-weight the empirical sample to make the propensity score distributions similar?
+
+---
+
+### Inverse probability weighting
+
+- ipw: re-weight samples by inverse of propensity for their exposure level
+  - for the exposure group, up-weights samples that look like unexposed group
+  - for the unexposed group, up-weights samples that look like exposed group
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/ipw_prop.png)
+</p>
+
+- weighted propensities are similar across exposures
+
+---
+
+### Inverse probability weighting
+
+- ipw: re-weight samples by inverse of propensity for their exposure level
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/ipw_covar.png)
+</p>
+
+- ... since propensity scores encode information about the covariates, weighted covariate distributions are similar
+
+---
+
+### Limitations of ipw
+
+- ipw: re-weight samples by inverse of propensity for their exposure level
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/ipw_covar.png)
+</p>
+
+- how to estimate propensity scores? Typically very parametric
+- "effective" sample size? Some points drive the regression more than others
+---
+
+### Distance matching
+
+- matching: for each individual, find a similar individual from another "exposure" group
+  - repeat for all individuals
+  - discard samples without a match across all exposures
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/match_sim.png)
+</p>
+
+- exposure is basically completely unrelated to covariates (exogenous?)
+- non-parametric
+
+---
+
+### Limitations of distance matching
+
+- matching: for each individual, find a similar individual from another "exposure" group
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/match_sim.png)
+</p>
+
+- how to choose distance function?
+- samples "thrown away"?
+
+---
+
+### Simulations
+
+- $n=200$ samples from one of two exposures
+- Poisson GLM with linear or non-linear components
+- batch effect: difference between exposures (<font color="red">red box</font>)
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/batch_sim.png)
+</p>
+
+- <u><i>Covariate overlap</i></u>: how similar is the covariate distribution across exposures?
+
+---
+
+### Methods compared
+
+- use generalized linear model for estimating batch effect
+- <font color="purple">conditional</font> approaches sees all observed data
+  - does not know the covariate/outcome relationship
+
+--
+- <font color="green">causal</font> approaches only use the covariates for stratifying or re-weighting
+  - use an associational method for actual analysis
+
+--
+- <font color="red">oracle</font>: conditional approach + knows true underlying covariate/outcome relationship
+  - benchmark for estimation error if we had a perfect estimator
+
+---
+
+#### Causal methods greatly outperform non-causal methods
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/batch_results.png)
+</p>
+
+- causal methods $\gg$ non-causal methods when common causes are measured
+  - fairly overlap-agnostic: near optimal performance
+- recall: ipw + matching use <u><i>associational</i></u> methods after their "causal pre-processing"
+
+--
+- "doubly robust" method: combine "causal pre-processing" with conditional methods
+  - if either the causal pre-processing or the conditional method are appropriate, consistent
+
+---
+
+### Unobserved common causes
+
+- Causal methods work exceptionally well when we observe common causes
+
+--
+- measuring all potential common causes is an insurmountable hurdle
+  - will never know "true model"
+
+--
+- causal methods maintain robustness to particular types of "unmeasured confounding"
+
+---
+
+### Causal methods and unobserved common causes
+
+<p align="center">
+  ![:scale 80%](images/causal_persp/unobs_dag.png)
+</p>
+
+--
+- blocking measured common causes also blocks for correlated unmeasured common causes
+
+--
+- we don't have common causes in the data, we have covariates
+  - blocking more covariates = more better?
+
+---
+
+name:collision
+
+### Outline
+
+- [Background](#back)
+- [Basics](#basics)
+- [Confounding](#confounding)
+- Collision
+- [Discussion](#discussion)
+
+---
+
+#### Working example: head motion in fMRI
+
+- participants (especially children or patients) rarely sit still during imaging session
+
+--
+- spatial challenge: does a voxel represent the same piece of information from one time step to the next?
+  - <u><i>spatial motion correction</i></u>: realign brain images across time
+
+--
+- artifactual challenge: movement induces spatially dependent artifacts to measured signal itself
+  - independent of the displacement challenges
+- head motion leads to appreciable measurement errors
+
+---
+
+#### Working example: head motion in fMRI
+
+- What if we are characterizing ASD or ADHD in children?
+  - ASD/ADHD children move more in scanner
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/collision_dag.png)
+</p>
+
+--
+- head motion is a <u><i>collider</i></u>: child of both the exposure and the outcome
+  - differential measurement error: difference between $E_i^*$ and $E_i$ depends on $M_i$
+
+---
+
+#### What about nuisance correction?
+
+- What about incorporating motion into nuisance variable pipelines?
+  - only effective for "low motion" [6]
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/collision_dag.png)
+</p>
+
+--
+- insufficiently addresses the differential measurement error
+
+---
+
+#### Filtering approach
+
+- Satterthwaite et al. [6] suggest filtering high-motion individuals
+  - idea: if this arrow simply "didn't exist", we don't have to worry about it
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/collision_dag_biased.png)
+</p>
+
+--
+- who did we filter?
+
+---
+
+#### Filtering approach
+
+- Satterthwaite et al. [6] suggest filtering high-motion individuals
+  - idea: if this arrow simply "didn't exist", we don't have to worry about it
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/collision_dag_biased.png)
+</p>
+
+- who did we filter? Severe cases, youngest children, particular demographics, etc.
+
+---
+
+#### Filtering approach
+
+- Satterthwaite et al. [6] suggest filtering high-motion individuals
+  - idea: if this arrow simply "didn't exist", we don't have to worry about it
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/collision_dag_biased.png)
+</p>
+
+- <u><i>Type 1 selection bias</i></u>: bias induced by restricting analysis to subsets of levels of a collider
+
+---
+
+#### Missing data insights
+
+- individuals with ASD "tend" to move more, but not always the case
+<br>
+<br>
+<br>
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/collision_dag_biased.png)
+</p>
+
+---
+
+#### Missing data insights
+
+- individuals with ASD "tend" to move more, but not always the case
+- what if we "re-weight" the dataset such that people who look like they should be excluded (but aren't) are upweighted? [7]
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/collision_dag.png)
+</p>
+
+---
+
+#### Missing data insights
+
+- individuals with ASD "tend" to move more, but not always the case
+- what if we "re-weight" the dataset such that people who look like they should be excluded (but aren't) are upweighted? [7]
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/collision_dag.png)
+</p>
+
+- the exposure is continuous, and all causal approaches for continuous exposures involve re-weighting
+- we have "missing data" weights, and "confounding" weights; how to combine?
+
+---
+
+#### Missing data insights
+
+- individuals with ASD "tend" to move more, but not always the case
+- what if we "re-weight" the dataset such that people who look like they should be excluded (but aren't) are upweighted? [7]
+
+<p align="center">
+  ![:scale 100%](images/causal_persp/collision_dag.png)
+</p>
+
+- "pretend" the exposure is the outcome and the outcome is the exposure [7]
+  - goal is to estimate a spurious quantity (which it also does not do reasonably)
+
+---
+
+name:discussion
+
+### Outline
+
+- [Background](#back)
+- [Basics](#basics)
+- [Confounding](#confounding)
+- [Collision](#collision)
+- Discussion
+
+---
+
+### What have we done?
+
+- introduced the language and basic machinery for causal inference
+- delineated various data collection approaches and question types (RCTs, test-retest, crossover, mega-study, brain-behavior) along with causal implications
+  - these delineations make the advantages (and limitations) of different approaches generally apparent
+- detailed the construction and interpretation of causal graphs for neuroimaging problems
+
+---
+
+### What have we shown?
+
+- many strategies for neuroimaging face nuanced criticism through causal lens
+
+--
+- associational methods: almost never relevant unless data collection procedure is designed for it
+
+--
+- mega-studies impart differential measurement errors, and "correction" imparts substantial confounding biases, unless specifically tuned
+
+--
+- head motion can yield differential measurement errors, wherein "addressing" can impart collider stratification biases if not carefully considered
+
+---
+
+### Recommendations for mega-study
+
+- what if datasets were constructed pre-hoc with confounding in mind?
+  - identify common causes, and recruit individuals such that common causes are controlled ("matched" mega-studies, crossover studies)
+
+---
+
+### Recommendations for mega-study
+
+- what if datasets were constructed pre-hoc with confounding in mind?
+  - identify common causes, and recruit individuals such that common causes are controlled ("matched" mega-studies, crossover studies)
+  - expensive; defeats the purpose?
+
+---
+
+### Recommendations for mega-study
+
+- <s>what if datasets were constructed pre-hoc with confounding in mind?</s>
+- what about causally-motivated "study arms"?
+  - identify a "matched subcohort" of people with wide demographics, matched across sites to similar people
+  - identify a "crossed over subcohort", who will be measured in a random order at all sites
+
+--
+- can we "learn" batch effect correction within the subcohort (with all causal advantages), and then apply it to new samples?
+
+---
+
+#### Future directions for head motion investigations
+
+- Self-censoring literature [8]?
+- Outcome-dependent sampling literature [9]?
+
+---
+
+### References
+
+[1] Sejnowski, T. J., et al. "Computational neuroscience." Science, vol. 241, no. 4871, 9 Sept. 1988, pp. 1299-1306.
+
+[2] Hill, Austin Bradford. "The Environment and Disease: Association or Causation?" Proc. R. Soc. Med., vol. 58, no. 5, May. 1965, p. 295.
+
+[3] Mehler, David M. A., et al. "Targeting the affective brain—a randomized controlled trial of real-time fMRI neurofeedback in patients with depression." Neuropsychopharmacology, vol. 43, Dec. 2018, pp. 2578-85.
+
+[4] Antonakis, John, et al. "Causality and Endogeneity: Problems and Solutions." OUP Academic, 20 May. 2014.
+
+[5] Lopez, Michael J. and Roee Gutman. "Estimation of Causal Effects with Multiple Treatments: A Review and New Ideas." Statist. Sci., vol. 32, no. 3, Aug. 2017, pp. 432-54.
+
+---
+
+### References (Cont.)
+
+[6] Satterthwaite, Theodore D., et al. "An improved framework for confound regression and filtering for control of motion artifact in the preprocessing of resting-state functional connectivity data." Neuroimage, vol. 64:240-56., 1 Jan. 2013.
+
+[7] Nebel, Mary Beth, et al. "Accounting for motion in resting-state fMRI: What part of the spectrum are we characterizing in autism spectrum disorder?" Neuroimage, vol. 257, 15 Aug. 2022, p. 119296.
+
+[8] Chen, Jacob M., et al. "Uncertainty in Artificial Intelligence." Causal inference with outcome-dependent missingness and self-censoring. PMLR, 2 July 2023, pp. 358-68.
+
+[9] Sjölander, Arvid. "Selection Bias with Outcome-dependent Sampling." Epidemiology, vol. 34, no. 2, 12 Dec. 2022, p. 186.
+
+</textarea>
+<!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script> -->
+<!-- <script src="remark-latest.min.js"></script> -->
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/katex.min.css">
+<script type="text/javascript">
+
+  var options = {};
+  var renderMath = function () {
+    renderMathInElement(document.body);
+    // or if you want to use $...$ for math,
+    renderMathInElement(document.body, {
+      delimiters: [ // mind the order of delimiters(!?)
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false },
+      ]
+    });
+  }
+
+  remark.macros.scale = function (percentage) {
+    var url = this;
+    return '<img src="' + url + '" style="width: ' + percentage + '" />';
+  };
+
+  // var slideshow = remark.create({
+  // Set the slideshow display ratio
+  // Default: '4:3'
+  // Alternatives: '16:9', ...
+  // {
+  // ratio: '16:9',
+  // });
+
+  var slideshow = remark.create(options, renderMath);
+
+
+</script>
+</body>
+
+</html>
