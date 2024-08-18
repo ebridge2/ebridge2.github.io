@@ -152,10 +152,10 @@ $\\text{logit}(p\_i) = \\log \\frac{p\_i}{1 - p\_i} = \\vec x\_i^\\top \\beta$
 $$\\frac{p\_i}{1 - p\_i} = \exp\\left(\\vec x\_i^\\top \\beta\\right)$$
 
 --
-$$ \\Rightarrow p\_i = (1 - p\_i) y\_i,\,\,\,\, y\_i = \exp\\left(\\vec x\_i^\\top \\beta\\right)$$
+$$ \\Rightarrow p\_i = (1 - p\_i) l\_i,\,\,\,\, l\_i = \exp\\left(\\vec x\_i^\\top \\beta\\right)$$
 
 --
-$$\\Rightarrow p\_i(1 + y\_i) = y\_i$$
+$$\\Rightarrow p\_i(1 + l\_i) = l\_i$$
 
 --
 $$\\Rightarrow p\_i = \\frac{\exp\\left(\\vec x\_i^\\top \\beta\\right)}{1 + \exp\\left(\\vec x\_i^\\top \\beta\\right)} = \text{expit}\\left(\\vec x\_i^\\top \\beta \\right)$$
@@ -328,19 +328,19 @@ $$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb\\s
 - Note: the .ye[interval] is what is random
 
 --
-- When we perform the experiment, we "realize" a single $\\hat{\\beta}\_j$ and $\\hat \\sigma$ (our estimate)
+- When we perform the experiment, we "realize" a single $\\hat{\\beta}\_j$ and $\\hat \\sigma$ (our estimates)
   - use this and properties of the estimator to construct one such interval
 
 --
 - This interval has two possibilities, since $\\beta\_j$ is fixed (called "coverage"):
-  - Either $\\beta\_j \\in \\left[\\hat{\\beta}\_j - \\hat\\sigma z\_{\\alpha/2}, \\hat{\\beta}\_j  + \\hat\\sigma z\_{\\alpha/2}\\right]$, or
-  - $\\beta\_j \\not\\in \\left[\\hat{\\beta}\_j - \\hat\\sigma z\_{\\alpha/2}, \\hat{\\beta}\_j  + \\hat\\sigma z\_{\\alpha/2}\\right]$
+  - $\\beta\_j \\in \\left[\\hat{\\beta}\_j - \\hat\\sigma z\_{\\alpha/2}, \\hat{\\beta}\_j  + \\hat\\sigma z\_{\\alpha/2}\\right]$ (parameter covered), or
+  - $\\beta\_j \\not\\in \\left[\\hat{\\beta}\_j - \\hat\\sigma z\_{\\alpha/2}, \\hat{\\beta}\_j  + \\hat\\sigma z\_{\\alpha/2}\\right]$ (parameter not covered)
 
 ---
 
 ### "Confidence" Intervals
 
-$$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat\\sigma z\_{\\alpha/2}, \\hat{\\pmb \\beta}\_j  + \\hat\\sigma z\_{\\alpha/2}\\right]\\right) = 1 - \\alpha$$
+$$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb \\sigma} z\_{\\alpha/2}, \\hat{\\pmb \\beta}\_j  + \\hat{\\pmb \\sigma} z\_{\\alpha/2}\\right]\\right) = 1 - \\alpha$$
 
 - The probability statement refers to the probability of coverage of these intervals calculated (over repeated experiments) containing the true population parameter
   - "If the experiment were repeated many times, $1 - \\alpha$ of the $1 - \\alpha$ CIs will tend to cover the true population parameter"
