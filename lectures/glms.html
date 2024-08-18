@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>GLMs</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="fonts/quadon/quadon.css">
+  <link rel="stylesheet" href="fonts/gentona/gentona.css">
+  <link rel="stylesheet" href="slides_style_poldrack.css">
+  <script type="text/javascript" src="assets/plotly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+  <textarea id="source">
+
+
+
+<!-- TODO add slide numbers & maybe slide name -->
+
+### A Crash Course on Generalized Linear Models (GLMs)
+
+<centering>
+  ![:scale 35%](images/stanford_s.png)
+</centering>
+
+| Eric W. Bridgeford | {Psychology} |
+| --- | --- |
+| [ericwb95@gmail.com](mailto:ericwb95 at gmail dot com)  | [ericwb.me](https://ericwb.me) |
+
+---
+name:basics
+
+### Outline
+
+- Basics
+- [Simulating and fitting](#simulate)
+- [Evaluation and reporting](#evaluate)
+- ["Robust" regression](#robust)
+
+---
+
+### Notation table
+
+| Notation | Interpretation |
+| --- | --- |
+| $x$ | scalar |
+| $\\vec x$ | vector |
+| $X$ | matrix |
+| $\\mathbf x$ | a random variable (note bold face) |
+| $\\vec{\\mathbf x}$ | a random vector, with elements $\\mathbf x_i$ |
+| $\\mathbf X$ | a random matrix, with elements $\\mathbf x_{ij}$ |
+
+---
+
+### What does a GLM look like?
+
+$g\\left(\\mathbb E\\left[{\\mathbf y}\\right]\\right) = X \\beta$
+
+---
+
+### .ye[Random] component
+
+$g\\left(\\mathbb E\\left[{\\color{yellow}\\vec{\\mathbf y}}\\right]\\right) = X \\beta$
+
+The "response" variables are the vector $\\vec{\\mathbf y}$, which is a vector:
+
+$$
+\\vec{\\mathbf y} = \\begin{bmatrix}
+  y\_1 \\\\
+  \\vdots \\\\
+  y\_n
+\\end{bmatrix}
+$$
+
+--
+
+- $\\mathbf y_i$ are the .ye[responses] for each sample $i$
+- The responses are .ye[independent], and typically, modeled using the exponential family
+  - includes Normal, Poisson, Bernoulli, Categorical, etc. response types
+
+---
+
+### .ye[Systematic] component
+
+$g\\left(\\mathbb E\\left[\\vec{\\mathbf y}\\right]\\right) = {\\color{yellow}X \\beta}$
+
+- For each sample $i$, $\\vec x_i$ is a $d(+1?)$-dimensional "feature vector" or set of "predictors" of the response
+  - E.g., height, weight, biological sex, etc.
+  - typically, $x_{i0} = 1$ is an "intercept" term
+--
+
+- organized in the "model" matrix $X$, which is the $n \\times d(+1?)$:
+
+$$
+X = \\begin{bmatrix}
+  \\vdash & \\vec x_1^\\top & \\dashv \\\\
+  & \\vdots & \\\\
+  \\vdash & \\vec x_n^\\top & \\dashv
+\\end{bmatrix}, \\,\\,\\,\\, X\\beta = \\begin{bmatrix}
+\\vec x_1^\\top\\beta \\\\
+\\vdots \\\\
+\\vec x_n^\\top\\beta
+\\end{bmatrix}
+$$
+
+--
+- Note: elements of $X\\beta$ are .ye[linear combinations] of the predictors, as:
+$\\vec x\_i^\\top \\beta = \\sum\_{j = 1(0?)}^d \\beta\_j x\_{ij}$
+
+---
+
+### .ye[Link] function
+
+${\\color{yellow}g\\big(}\\mathbb E\\left[\\vec{\\mathbf y}\\right]{\\color{yellow}\\big)} = X \\beta$
+
+- The "link" relates the mean of the random component to the systematic component
+  - typically monotonic and differentiable (allows us to estimate $\\beta$)
+  - If the link $g(x) = x$ ("identity link"), standard "linear model"
+
+--
+- .ye[canonical link]: the link function that "makes the most sense" for a given distribution for the responses
+
+---
+name:simulate
+
+### Outline
+
+- [Basics](#basics)
+- Simulating and fitting
+- [Evaluation and reporting](#evaluate)
+- ["Robust" regression](#robust)
+
+---
+
+### Working example: logistic regression
+
+$\\mathbf y_i \\sim Bernoulli(p\_i)$
+
+Random component: $\\mathbb E[\\mathbf y\_i] = p\_i$, $Var(\\mathbf y\_i) = p\_i(1 - p\_i)$
+
+--
+
+Link function: $g(p\_i) = \\text{logit}(p\_i) = \\log \\frac{p\_i}{1 - p\_i}$
+  - "log" of the "odds"
+  - "odds" of $\\mathbf y\_i$: $\\frac{p_i}{1 - p_i}$
+---
+
+### Properties of the logit link
+
+$\\text{logit}(p\_i) = \\log \\frac{p\_i}{1 - p\_i} = \\vec x\_i^\\top \\beta$
+
+$$\\frac{p\_i}{1 - p\_i} = \exp\\left(\\vec x\_i^\\top \\beta\\right)$$
+
+--
+$$ \\Rightarrow p\_i = (1 - p\_i) y\_i,\,\,\,\, y\_i = \exp\\left(\\vec x\_i^\\top \\beta\\right)$$
+
+--
+$$\\Rightarrow p\_i(1 + y\_i) = y\_i$$
+
+--
+$$\\Rightarrow p\_i = \\frac{\exp\\left(\\vec x\_i^\\top \\beta\\right)}{1 + \exp\\left(\\vec x\_i^\\top \\beta\\right)} = \text{expit}\\left(\\vec x\_i^\\top \\beta \\right)$$
+
+---
+
+### Simulations
+
+
+[Collab link](https://colab.research.google.com/drive/1EePntLxO9jmMuDO8IoNSwfh6t_S9NC3g?usp=sharing), See Section 1
+
+---
+name:evaluate
+
+### Outline
+
+- [Basics](#basics)
+- [Simulating and fitting](#simulate)
+- Evaluation and reporting
+- ["Robust" regression](#robust)
+
+---
+
+### Estimation
+
+- "Fitting" a regression model gives us estimates of the coefficients $\beta$, given by $\hat \beta$
+  - "Fit": Approximate MLE (for logistic regression, usually Newton's method)
+
+---
+
+### Coefficient interpretation
+
+Model: $\text{logit}(\\mathbb E[\\mathbf y\_i; x\_{i1}, x\_{i2}]) = \\beta\_0 + \\beta\_1 x\_{i1} + \\beta\_2 x\_{i2}$
+
+Predictors: $x\_{i1}$ is binary, $x\_{i2}$ is continuous
+
+Since $\\mathbf y\_i$ is binary, we can rewrite this:
+
+$\text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1}, x\_{i2}]) = \\beta\_0 + \\beta\_1 x\_{i1} + \\beta\_2 x\_{i2}$
+
+---
+
+### Coefficient interpretation (binary)
+
+Model: $\text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1}, x\_{i2}]) = \\beta\_0 + \\beta\_1 x\_{i1} + \\beta\_2 x\_{i2}$
+
+Step 1: Isolate the coefficient
+
+$\text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1} = 1, x\_{i2}]) - \text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1} = 0, x\_{i2}])$
+
+--
+
+$\,\,\,\, = \left(\\beta\_0 + \\beta\_1 \cdot 1 + \\beta\_2 x\_{i2}\right) - \\left(\\beta\_0 + \\beta\_1 \cdot 0 + \\beta\_2 x\_{i2}\\right)$
+
+--
+
+$\,\,\,\, = \\beta\_1$
+
+---
+
+### Coefficient interpretation (binary)
+
+Step 2: make it something meaningful
+
+$\\beta\_1 = \text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1} = 1, x\_{i2}]) - \text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1} = 0, x\_{i2}])$
+
+"Difference in log odds?"
+
+--
+
+With $p\_{i, x} = \\mathbb P[\\mathbf y\_i = 1; x\_{i1} = x, x\_{i2}]$:
+$$\\beta\_1 = \\log\\frac{p\_{i, 1}}{1 - p\_{i, 1}} - \\log\\frac{p\_{i, 0}}{1 - p\_{i, 0}} = \\log\\frac{\\frac{p\_{i, 1}}{1 - p\_{i, 1}}}{\\frac{p\_{i, 0}}{1 - p\_{i, 0}}}$$
+
+--
+
+$$\\exp(\\beta\_1) = \\frac{\\frac{p\_{i, 1}}{1 - p\_{i, 1}}}{\\frac{p\_{i, 0}}{1 - p\_{i, 0}}}$$
+
+---
+
+### Coefficient interpretation (binary)
+
+$$\\exp(\\beta\_1) = \\frac{\\frac{p\_{i, 1}}{1 - p\_{i, 1}}}{\\frac{p\_{i, 0}}{1 - p\_{i, 0}}}$$
+
+--
+- "odds ratio"  
+
+- $\\exp(\\hat{\\beta}\_1)$ gives a multiplicative change in the odds for the response .ye[with] the predictor ($x\_{i1} = 1$) as-compared to .ye[without] ($x\_{i1} = 0$)
+
+---
+
+### Coefficient interpretation (continuous)
+
+$$\\beta\_2 = \text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1}, x\_{i2} = x+1]) - $$
+$$\,\,\,\,\,\,\,\,\,\text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1}, x\_{i2} = x])$$
+
+Similar derivation to before... with $q\_{i,y} = \\mathbb P[\\mathbf y\_i = 1; x\_{i1}, x\_{i2} = y]$
+
+$$\\exp(\\beta\_2) = \\frac{\\frac{q\_{i, x+1}}{1 - q\_{i, x+1}}}{\\frac{q\_{i, x}}{1 - q\_{i, x}}}$$
+
+- For a $1$-unit change in the predictor $x\_{i2}$, the odds for the response changes by a multiplicative factor of $\\exp(\\hat\\beta\_2)$
+
+---
+name:asy
+
+### "Asymptotics"
+
+- Under appropriate regularity conditions (e.g., assumptions inherent to a GLM):
+$$\\hat{\\pmb\\beta}_j  - \\beta\_j\\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathcal N\\left(0, \\sigma^2\\right)$$
+
+- Note: $\\hat{\\pmb\\beta}\_j$ is the "estimator" (random... "estimates" are based on the data)
+  - $\\sigma$: "variance" of the estimator
+  - Estimated with standard error $\\hat{\\pmb \\sigma} \\xrightarrow[n \\rightarrow \\infty]{\\mathcal P} \\sigma$
+---
+
+### Testing
+
+- "Are the coefficients impactful?"
+  - Do they actually change the log-odds for the response?
+--
+
+- Recall: interpretations are of the form...
+$$\\exp(\\beta\_j) = \text{odds ratio}$$
+--
+
+- If the coefficient is $0$, then $\text{odds ratio} = 1$ (no change in response probability)
+--
+
+- "Null hypothesis", typically "no effect": $H_0 : \\beta\_j = 0$
+- "Alternative hypothesis", typically "some effect": $H_A: \\beta\_j \\neq 0$
+  - "two-tailed": both extreme (negative) or extreme (positive) are "noteworthy"
+---
+
+### "Wald" Test
+
+- Under $H_0: \\beta\_j = 0$, Equation on [Asymptotics](#asy) gives:
+$$\\hat{\\pmb\\beta}_j\\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathcal N\\left(0, \\sigma^2\\right)$$
+- "How extreme is an estimate $\\hat \\beta_j$, relative $\\mathcal N(0, \\sigma^2)$?"
+--
+
+- Equivalent: $\\frac{\\hat{\\pmb\\beta}_j}{\\hat{\\pmb\\sigma}} \\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathcal N\\left(0, 1\\right)$
+- Test statistic: $\\mathbf z = \\frac{\\hat{\\pmb\\beta}_j}{\\hat{\\pmb\\sigma}}$
+- Assumption: $\\mathbf z \\overset{approx}{\\sim} \\mathcal N(0, 1)$
+--
+
+- Compare $z$ to $\\mathcal N(0, 1)$... "Wald" test or "Z" test
+
+---
+
+### "Confidence" Intervals
+
+- Equation on [Asymptotics](#asy) can be rearranged:
+$$\\frac{\\hat{\\pmb\\beta}_j - \\beta_j}{\\hat{\\pmb\\sigma}} \\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathcal N\\left(0, 1\\right)$$
+
+People like to write:
+
+$$\\mathbb P\\left(\\frac{\\hat{\\pmb\\beta}\_j - \\beta\_j}{\\hat{\\pmb\\sigma}} \\in [z\_{\\alpha/2}, z\_{1 - \\alpha/2}]\\right) = 1 - \\alpha$$
+
+--
+And then with rearrangement and symmetry arguments of normal distribution...
+
+$$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb\\sigma} z\_{\\alpha/2}, \\hat{\\pmb \\beta}\_j  + \\hat{\\pmb\\sigma} z\_{\\alpha/2}\\right]\\right) = 1 - \\alpha$$
+
+---
+
+### "Confidence" Intervals
+
+$$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb\\sigma} z\_{\\alpha/2}, \\hat{\\pmb \\beta}\_j  + \\hat{\\pmb\\sigma} z\_{\\alpha/2}\\right]\\right) = 1 - \\alpha$$
+--
+
+- Note: the .ye[interval] is what is random
+
+--
+- When we perform the experiment, we "realize" a single $\\hat{\\beta}\_j$ and $\\hat \\sigma$ (our estimate)
+  - use this and properties of the estimator to construct one such interval
+
+--
+- This interval has two possibilities, since $\\beta\_j$ is fixed (called "coverage"):
+  - Either $\\beta\_j \\in \\left[\\hat{\\beta}\_j - \\hat\\sigma z\_{\\alpha/2}, \\hat{\\beta}\_j  + \\hat\\sigma z\_{\\alpha/2}\\right]$, or
+  - $\\beta\_j \\not\\in \\left[\\hat{\\beta}\_j - \\hat\\sigma z\_{\\alpha/2}, \\hat{\\beta}\_j  + \\hat\\sigma z\_{\\alpha/2}\\right]$
+
+---
+
+### "Confidence" Intervals
+
+$$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat\\sigma z\_{\\alpha/2}, \\hat{\\pmb \\beta}\_j  + \\hat\\sigma z\_{\\alpha/2}\\right]\\right) = 1 - \\alpha$$
+
+- The probability statement refers to the probability of coverage of these intervals calculated (over repeated experiments) containing the true population parameter
+  - "If the experiment were repeated many times, $1 - \\alpha$ of the $1 - \\alpha$ CIs will tend to cover the true population parameter"
+--
+
+- My recommendation: report it, because you have to, and avoid trying to make sense of it or interpreting it
+
+[Collab link](https://colab.research.google.com/drive/1EePntLxO9jmMuDO8IoNSwfh6t_S9NC3g?usp=sharing), See Section 2
+
+---
+
+### AUROC
+
+---
+
+name:robust
+
+### Outline
+
+- [Basics](#basics)
+- [Simulating and fitting](#simulate)
+- [Evaluation and reporting](#evaluate)
+- "Robust" regression
+
+---
+
+</textarea>
+<!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script> -->
+<!-- <script src="remark-latest.min.js"></script> -->
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/katex.min.css">
+<script type="text/javascript">
+
+  var options = {};
+  var renderMath = function () {
+    renderMathInElement(document.body);
+    // or if you want to use $...$ for math,
+    renderMathInElement(document.body, {
+      delimiters: [ // mind the order of delimiters(!?)
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false },
+      ]
+    });
+  }
+
+  remark.macros.scale = function (percentage) {
+    var url = this;
+    return '<img src="' + url + '" style="width: ' + percentage + '" />';
+  };
+
+  // var slideshow = remark.create({
+  // Set the slideshow display ratio
+  // Default: '4:3'
+  // Alternatives: '16:9', ...
+  // {
+  // ratio: '16:9',
+  // });
+
+  var slideshow = remark.create(options, renderMath);
+
+
+</script>
+</body>
+
+</html>
