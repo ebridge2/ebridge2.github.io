@@ -486,11 +486,11 @@ name:asy
 ### "Asymptotics"
 
 - Under appropriate regularity conditions (e.g., assumptions inherent to a GLM):
-$$\\hat{\\pmb\\beta}_j  - \\beta\_j\\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathcal N\\left(0, \\sigma^2\\right)$$
+$$\\hat{\\pmb\\beta}_j  - \\beta\_j\\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathcal N\\left(0, \\sigma\_j^2\\right)$$
 
 - Note: $\\hat{\\pmb\\beta}\_j$ is the "estimator" (random... "estimates" are based on the data)
-  - $\\sigma$: "variance" of the estimator
-  - Estimated with standard error $\\hat{\\pmb \\sigma} \\xrightarrow[n \\rightarrow \\infty]{\\mathcal P} \\sigma$
+  - $\\sigma\_j$: "variance" of the estimator
+  - Estimated with standard error $\\hat{\\pmb \\sigma\_j} \\xrightarrow[n \\rightarrow \\infty]{\\mathcal P} \\sigma\_j$
 ---
 
 ### Testing
@@ -514,12 +514,12 @@ $$\\exp(\\beta\_j) = \text{odds ratio}$$
 ### "Wald" Test
 
 - Under $H_0: \\beta\_j = 0$, Equation on [Asymptotics](#asy) gives:
-$$\\hat{\\pmb\\beta}_j\\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathcal N\\left(0, \\sigma^2\\right)$$
-- "How extreme is an estimate $\\hat \\beta_j$, relative $\\mathcal N(0, \\sigma^2)$?"
+$$\\hat{\\pmb\\beta}_j\\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathcal N\\left(0, \\sigma\_j^2\\right)$$
+- "How extreme is an estimate $\\hat \\beta_j$, relative $\\mathcal N(0, \\sigma\_j^2)$?"
 --
 
-- Equivalent: $\\frac{\\hat{\\pmb\\beta}_j}{\\hat{\\pmb\\sigma}} \\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathcal N\\left(0, 1\\right)$
-- Test statistic: $\\mathbf z = \\frac{\\hat{\\pmb\\beta}_j}{\\hat{\\pmb\\sigma}}$
+- Equivalent: $\\frac{\\hat{\\pmb\\beta}_j}{\\hat{\\pmb\\sigma}\_j} \\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathcal N\\left(0, 1\\right)$
+- Test statistic: $\\mathbf z = \\frac{\\hat{\\pmb\\beta}_j}{\\hat{\\pmb\\sigma}\_j}$
 - Assumption: $\\mathbf z \\overset{approx}{\\sim} \\mathcal N(0, 1)$
 --
 
@@ -530,40 +530,40 @@ $$\\hat{\\pmb\\beta}_j\\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathc
 ### "Confidence" Intervals
 
 - Equation on [Asymptotics](#asy) can be rearranged:
-$$\\frac{\\hat{\\pmb\\beta}_j - \\beta_j}{\\hat{\\pmb\\sigma}} \\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathcal N\\left(0, 1\\right)$$
+$$\\frac{\\hat{\\pmb\\beta}_j - \\beta_j}{\\hat{\\pmb\\sigma}\_j} \\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\mathcal N\\left(0, 1\\right)$$
 
 People like to write:
 
-$$\\mathbb P\\left(\\frac{\\hat{\\pmb\\beta}\_j - \\beta\_j}{\\hat{\\pmb\\sigma}} \\in [z\_{\\alpha/2}, z\_{1 - \\alpha/2}]\\right) = 1 - \\alpha$$
+$$\\mathbb P\\left(\\frac{\\hat{\\pmb\\beta}\_j - \\beta\_j}{\\hat{\\pmb\\sigma}\_j} \\in [z\_{\\alpha/2}, z\_{1 - \\alpha/2}]\\right) = 1 - \\alpha$$
 
 --
 And then with rearrangement and symmetry arguments of normal distribution...
 
-$$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb\\sigma} z\_{1-\\alpha/2}, \\hat{\\pmb \\beta}\_j  + \\hat{\\pmb\\sigma} z\_{1-\\alpha/2}\\right]\\right) = 1 - \\alpha$$
+$$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb\\sigma}\_j z\_{1-\\alpha/2}, \\hat{\\pmb \\beta}\_j  + \\hat{\\pmb\\sigma}\_j z\_{1-\\alpha/2}\\right]\\right) = 1 - \\alpha$$
 
 ---
 
 ### "Confidence" Intervals
 
-$$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb\\sigma} z\_{1-\\alpha/2}, \\hat{\\pmb \\beta}\_j  + \\hat{\\pmb\\sigma} z\_{1-\\alpha/2}\\right]\\right) = 1 - \\alpha$$
+$$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb\\sigma} z\_{1-\\alpha/2}, \\hat{\\pmb \\beta}\_j  + \\hat{\\pmb\\sigma}\_j z\_{1-\\alpha/2}\\right]\\right) = 1 - \\alpha$$
 --
 
 - Note: the .ye[interval] is what is random
 
 --
-- When we perform the experiment, we "realize" a single $\\hat{\\beta}\_j$ and $\\hat \\sigma$ (our estimates)
+- When we perform the experiment, we "realize" a single $\\hat{\\beta}\_j$ and $\\hat \\sigma\_j$ (our estimates)
   - use this and properties of the estimator to construct one such interval
 
 --
-- This interval has two possibilities, since $\\hat\\beta\_j$ and $\\hat \\sigma$ are fixed (called "coverage"):
-  - $\\beta\_j \\in \\left[\\hat{\\beta}\_j - \\hat\\sigma z\_{1-\\alpha/2}, \\hat{\\beta}\_j  + \\hat\\sigma z\_{1-\\alpha/2}\\right]$ (parameter covered), or
-  - $\\beta\_j \\not\\in \\left[\\hat{\\beta}\_j - \\hat\\sigma z\_{1-\\alpha/2}, \\hat{\\beta}\_j  + \\hat\\sigma z\_{1-\\alpha/2}\\right]$ (parameter not covered)
+- This interval has two possibilities, since $\\hat\\beta\_j$ and $\\hat \\sigma\_j$ are fixed (called "coverage"):
+  - $\\beta\_j \\in \\left[\\hat{\\beta}\_j - \\hat\\sigma\_j z\_{1-\\alpha/2}, \\hat{\\beta}\_j  + \\hat\\sigma\_j z\_{1-\\alpha/2}\\right]$ (parameter covered), or
+  - $\\beta\_j \\not\\in \\left[\\hat{\\beta}\_j - \\hat\\sigma\_j z\_{1-\\alpha/2}, \\hat{\\beta}\_j  + \\hat\\sigma\_j z\_{1-\\alpha/2}\\right]$ (parameter not covered)
 
 ---
 
 ### "Confidence" Intervals
 
-$$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb \\sigma} z\_{1-\\alpha/2}, \\hat{\\pmb \\beta}\_j  + \\hat{\\pmb \\sigma} z\_{1-\\alpha/2}\\right]\\right) = 1 - \\alpha$$
+$$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb \\sigma}\_j z\_{1-\\alpha/2}, \\hat{\\pmb \\beta}\_j  + \\hat{\\pmb \\sigma}\_j z\_{1-\\alpha/2}\\right]\\right) = 1 - \\alpha$$
 
 - The probability statement refers to the probability of coverage of these random intervals repeated over many experiments identical to the one analyzed
   - any one realized interval either covers, or does not (no probabilistic interpretation)
