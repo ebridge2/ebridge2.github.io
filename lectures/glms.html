@@ -35,7 +35,7 @@ name:basics
 - Basics
 - [Simulating and fitting](#simulate)
 - [Evaluation and reporting](#evaluate)
-- ["Robust" regression](#robust)
+- [Uncovered material](#uncovered)
 
 ---
 
@@ -52,9 +52,150 @@ name:basics
 
 ---
 
+#### Brief review: matrix multiplication
+
+- Given a matrix $A$ that is $n \times m$ and a matrix $B$ that is $m \\times d$, the matrix product $AB$ is the matrix where $(AB)\_{ij} = \\sum\_{k = 1}^m a\_{ik}b\_{kj}$.
+--
+
+- Pictorally:
+
+$$AB = \\begin{bmatrix}
+{\\color{yellow}a\_{11}} & {\\color{yellow}...} & {\\color{yellow}a\_{1m}} \\\\
+\\vdots & \\ddots & \\vdots \\\\
+a\_{n1} & ... & a\_{nm}
+\\end{bmatrix}\\begin{bmatrix}
+{\\color{yellow}b\_{11}} & ... & b\_{1d} \\\\
+{\\color{yellow}\\vdots} & \\ddots & \\vdots \\\\
+{\\color{yellow}b\_{m1}} & ... & b\_{md}
+\\end{bmatrix}$$
+
+$$
+\,\,\,\, = \\begin{bmatrix}
+{\\color{yellow}\\sum\_{k = 1}^m a\_{1k}b\_{k1}} & ... & \\sum\_{k = 1}^m a\_{1k}b\_{kd} \\\\
+\\vdots & \\ddots & \\vdots \\\\
+\\sum\_{k = 1}^m a\_{nk}b\_{k1} & ... & \\sum\_{k = 1}^m a\_{nk}b\_{kd} 
+\\end{bmatrix}
+$$
+--
+
+- "Linear combination of the elements in a given row of $A$, with coefficients given by a given columns of $B$"
+
+---
+
+#### Application: matrix-vector multiplication
+
+- Given a matrix $A$ that is $n \times d$ and a $d$-dimensional vector $\\vec \\eta$, then:
+
+$$
+A\\vec \\eta = \\begin{bmatrix}
+  \\sum\_{k = 1}^d \\eta\_k a\_{1k} \\\\
+  \\vdots \\\\
+  \\sum\_{k = 1}^d \\eta\_k a\_{nk}
+\\end{bmatrix}
+$$
+
+- "Linear combination of the elements in a given row of $A$, with coefficients given by $\\vec \\eta$"
+
+---
+
+#### Application: matrix-vector multiplication
+
+- If the rows of $A$ are given by $\\vec a\_i$ for each row $i$, then:
+$$
+A\\vec \\eta = \\begin{bmatrix}
+\\vdash & \\vec a\_{1}^\\top & \\dashv \\\\
+& \\vdots & \\\\
+\\vdash & \\vec a\_n^\\top & \\dashv
+\\end{bmatrix} \\vec \\eta =
+\\begin{bmatrix}
+  \\vec a\_1^\\top \\vec \\eta \\\\
+  \\vdots \\\\
+  \\vec a\_n^\\top \\vec \\eta
+\\end{bmatrix}
+$$
+
+- because $\\vec a\_i^\\top \\vec \\eta = \\sum\_{k = 1}^d \\eta\_k a\_{ik}$
+
+---
+
+#### Brief review: expected value
+
+- If $\\mathbf y\_i$ is discrete (with possible values $\\mathcal Y$) and has a pmf $\\mathbb P()$, the expected value is the quantity:
+
+$$\\mathbb E[\\mathbf y\_i] = \\sum\_{y \\in \\mathcal Y} y \\mathbb P(\\mathbf y\_i = y)$$
+
+---
+
+#### Brief review: expected value
+
+- If $\\mathbf y\_i$ is discrete and has a pmf $\\mathbb P()$, the expected value is the quantity:
+
+$$\\mathbb E[\\mathbf y\_i] = {\\color{yellow}\\sum\_{y \\in \\mathcal Y}} y \\mathbb P(\\mathbf y\_i = y)$$
+- What do we want to compute the expected value over?
+
+---
+
+#### Brief review: expected value
+
+- If $\\mathbf y\_i$ is discrete and has a pmf $\\mathbb P()$, the expected value is the quantity:
+
+$$\\mathbb E[\\mathbf y\_i] = \\sum\_{y \\in \\mathcal Y} {\\color{yellow}y} \\mathbb P(\\mathbf y\_i = y)$$
+- what is its value for this particular "increment"?
+
+---
+
+#### Brief review: expected value
+
+- If $\\mathbf y\_i$ is discrete and has a pmf $\\mathbb P()$, the expected value is the quantity:
+
+$$\\mathbb E[\\mathbf y\_i] = \\sum\_{y \\in \\mathcal Y} y {\\color{yellow}\\mathbb P(\\mathbf y\_i = y)}$$
+- "How much" of the time is $\\mathbf y\_i$ the value $y$?
+
+---
+
+#### Brief review: expected value
+
+- If $\\mathbf y\_i$ is discrete and has a pmf $\\mathbb P()$, the expected value is the quantity:
+
+$$\\mathbb E[\\mathbf y\_i] = \\sum\_{y \\in \\mathcal Y} y \\mathbb P(\\mathbf y\_i = y)$$
+- "the expected value is a weighted (by the pmf) average of the possible values that $\\mathbf y\_i$ could take"
+
+---
+
+#### Brief review: expected value
+
+- If $\\mathbf y\_i$ is discrete and has a pmf $\\mathbb P()$, the expected value is the quantity:
+
+$$\\mathbb E[\\mathbf y\_i] \\equiv \\mathbb E[\\mathbf y\_i; \\theta] = \\sum\_{y \\in \\mathcal Y} y \\mathbb P\_\\theta(\\mathbf y\_i = y)$$
+- "the expected value is a weighted (by the pmf) average of the possible values that $\\mathbf y\_i$ could take"
+- parameters of $\\mathbf y\_i$, given by $\\theta$, are typically$^\\dagger$ treated as constant with GLMs
+
+
+$^\\dagger$: unless you're using Bayesian implementations.
+
+---
+
+#### Application: Bernoulli distribution
+
+if $\\mathbf y\_i \sim Bernoulli(p)$, then the pmf is:
+$$
+\\mathbb P(\\mathbf y\_i = y\_i) = \\begin{cases}
+  p, \,\,\,\, y\_i = 1 \\\\
+  1 - p, \,\,\,\, y\_i = 0
+\\end{cases} \\\\
+ = p^{y\_i} (1 - p)^{1 - y\_i}
+$$
+--
+So:
+$$\\mathbb E[\\mathbf y\_i; p] = 1 \cdot p + 0 \cdot (1 - p) = p$$
+
+---
+
 ### What does a GLM look like?
 
 $g\\left(\\mathbb E\\left[{\\mathbf y}\\right]\\right) = X \\beta$
+
+
 
 ---
 
@@ -66,15 +207,17 @@ The "response" variables are the vector $\\vec{\\mathbf y}$, which is a vector:
 
 $$
 \\vec{\\mathbf y} = \\begin{bmatrix}
-  y\_1 \\\\
+  \\mathbf y\_1 \\\\
   \\vdots \\\\
-  y\_n
+  \\mathbf y\_n
 \\end{bmatrix}
 $$
 
 --
 
-- $\\mathbf y_i$ are the .ye[responses] for each sample $i$
+- $\\mathbf y_i$ are the .ye[responses] for each sample $i$ (e.g., heart disease or not)
+--
+
 - The responses are .ye[independent], and typically, modeled using the exponential family
   - includes Normal, Poisson, Bernoulli, Categorical, etc. response types
 
@@ -109,6 +252,29 @@ $\\vec x\_i^\\top \\beta = \\sum\_{j = 1(0?)}^d \\beta\_j x\_{ij}$
 
 ---
 
+### .ye[Systematic] component
+
+$g\\left(\\mathbb E\\left[\\vec{\\mathbf y}\\right]\\right) = {\\color{yellow}X \\beta}$
+
+- For each sample $i$, $\\vec x_i$ is a $d(+1?)$-dimensional "feature vector" or set of "predictors" of the response
+- organized in the "model" matrix $X$, which is the $n \\times d(+1?)$:
+
+$$
+X = \\begin{bmatrix}
+  \\vdash & \\vec x_1^\\top & \\dashv \\\\
+  & \\vdots & \\\\
+  \\vdash & \\vec x_n^\\top & \\dashv
+\\end{bmatrix}, \\,\\,\\,\\, X\\beta = \\begin{bmatrix}
+\\vec x_1^\\top\\beta \\\\
+\\vdots \\\\
+\\vec x_n^\\top\\beta
+\\end{bmatrix}
+$$
+- Note: elements of $X\\beta$ are linear combinations of the predictors, as:
+$\\vec x\_i^\\top \\beta = \\sum\_{j = 1(0?)}^d \\beta\_j x\_{ij}$
+- The predictors are treated as .ye[fixed]
+---
+
 ### .ye[Link] function
 
 ${\\color{yellow}g\\big(}\\mathbb E\\left[\\vec{\\mathbf y}\\right]{\\color{yellow}\\big)} = X \\beta$
@@ -128,7 +294,7 @@ name:simulate
 - [Basics](#basics)
 - Simulating and fitting
 - [Evaluation and reporting](#evaluate)
-- ["Robust" regression](#robust)
+- [Uncovered material](#uncovered)
 
 ---
 
@@ -144,6 +310,7 @@ Link function: $g(p\_i) = \\text{logit}(p\_i) = \\log \\frac{p\_i}{1 - p\_i}$
   - "log" of the "odds"
   - "odds" of $\\mathbf y\_i$: $\\frac{p_i}{1 - p_i}$
 ---
+name:logit
 
 ### Properties of the logit link
 
@@ -175,7 +342,7 @@ name:evaluate
 - [Basics](#basics)
 - [Simulating and fitting](#simulate)
 - Evaluation and reporting
-- ["Robust" regression](#robust)
+- [Uncovered material](#uncovered)
 
 ---
 
@@ -342,7 +509,8 @@ $$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb\\s
 
 $$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb \\sigma} z\_{\\alpha/2}, \\hat{\\pmb \\beta}\_j  + \\hat{\\pmb \\sigma} z\_{\\alpha/2}\\right]\\right) = 1 - \\alpha$$
 
-- The probability statement refers to the probability of coverage of these intervals calculated (over repeated experiments) containing the true population parameter
+- The probability statement refers to the probability of coverage of these random intervals repeated over many experiments identical to the one analyzed
+  - any one realized interval either covers, or does not (no probabilistic interpretation)
   - "If the experiment were repeated many times, $1 - \\alpha$ of the $1 - \\alpha$ CIs will tend to cover the true population parameter"
 --
 
@@ -352,20 +520,113 @@ $$\\mathbb P\\left(\\beta\_j \\in \\left[\\hat{\\pmb \\beta}\_j - \\hat{\\pmb \\
 
 ---
 
-### AUROC
+### The likelihood
+
+- We can use properties of a GLM to construct a likelihood. For instance, for a logistic regression model:
+
+$$\\mathcal L(\\beta; \\vec y, X) = \\prod\_{i = 1}^n \\mathbb P(\\mathbf y\_i = y\_i; \\vec \\beta, X)$$
+$$\,\,\,\, = \\prod\_{i = 1}^n p\_i^{y\_i}(1 - p\_i)^{1 - y\_i}$$
+$$\,\,\,\, = \\prod\_{i = 1}^n \\text{expit}(X\\beta)^{y\_i}(1 - \\text{expit}(X\\beta))^{1 - y\_i}$$
+... from [properties of the logit](#logit)
 
 ---
 
-name:robust
+### Maximum Likelihood Estimation
+
+The MLE $\\hat \\beta$ that we solved for is, in the ideal case:
+$$\\hat \\beta = \\argmax\_{\\beta \\in \\Theta}\\mathcal L(\\beta; \\vec y, X)$$
+
+- $\\Theta$: "what sorts of models are allowed?"
+--
+
+- Easiest case: models with all of the possible covariates included
+- In our example, $\\Theta$ defined that we "allowed" models with $\\beta\_0$ (intercept), $\\beta\_1$ (for $x\_{i1}$), $\\beta\_2$ (for $x\_{i2}$), $\\beta\_3$ (for $x\_{i3}$)
+
+---
+
+### Likelihood Ratio Statistic
+
+$$\\Lambda = \\frac{\\max\_{\\vec\\beta \\in \\Theta}\\mathcal L(\\vec\\beta; \\vec y, X)}{\\max\_{\\vec\\beta \\in \\Theta\_s}\\mathcal L(\\vec\\beta; \\vec y, X)}$$
+
+- where $\\Theta\_s \\subseteq \\Theta$
+- Ratio of likelihood for the best possible (more complex) model to the best possible (less complex) model
+  - Example: $\\Theta$ defined that we "allowed" models with $\\beta\_0$ (intercept), $\\beta\_1$ (for $x\_{i1}$), $\\beta\_2$ (for $x\_{i2}$), $\\beta\_3$ (for $x\_{i3}$)
+  - What if $\\Theta\_s$ .ye[omits] the term for $\\beta\_3$?
+--
+
+- Relevant: degrees of freedom for a given model is the number of parameters
+  - E.g., $\\Theta$ has $4$ terms, $\\Theta\_s$ has $3$ terms
+
+---
+
+### Wilks' Theorem
+
+Under some regularity conditions, with:
+
+$$\\Lambda = \\frac{\\max\_{\\vec\\beta \\in \\Theta}\\mathcal L(\\vec\\beta; \\vec y, X)}{\\max\_{\\vec\\beta \\in \\Theta\_s}\\mathcal L(\\vec\\beta; \\vec y, X)}$$
+
+where $\\Theta$ is a model that allows $p$ terms and $\\Theta\_s$ is a model that allows $p\_s$ terms:
+$$2\\log\\Lambda \\xrightarrow[n \\rightarrow \\infty]{\\mathcal D} \\chi^2\_{p - p\_s}$$
+
+If the true parameter $\\vec\\beta \\in \\Theta\_s$
+
+- "If the bigger model is better, the likelihood ratio statistic will be extreme"
+--
+
+- Allows us to test $H\_0: \\vec\\beta \\in \\Theta\_s$ against $H\_A: \\beta \\in \\Theta \\setminus \\Theta\_s$
+
+---
+
+### Likelihood ratio test (LRT)
+
+$$2\\log \\Lambda = -2 \\left(\\max\_{\\vec\\beta \\in \\Theta}\\ell(\\vec\\beta; \\vec y, X) - \\max\_{\\vec\\beta \\in \\Theta\_s}\\mathcal \\ell(\\vec\\beta; \\vec y, X)\\right)$$
+
+- Using this as the test statistic, compare to $\\chi^2\_{p - p\_s}$ distribution to obtain a $p$-value
+
+--
+- Bias/variance tradeoff:
+  - a fit model with .ye[every] possible parameter has the most possibilities, but also the highest possibility of overfitting
+  - The LRT is often used as a surrogate to find models that fit the data "approximately" as well as more complicated ones
+
+--
+- the goal is model parsimony (simple but explanatory), and the LRT is one way we can check that
+
+[Collab link](https://colab.research.google.com/drive/1EePntLxO9jmMuDO8IoNSwfh6t_S9NC3g?usp=sharing), See Section 3
+
+---
+
+name:uncovered
 
 ### Outline
 
 - [Basics](#basics)
 - [Simulating and fitting](#simulate)
 - [Evaluation and reporting](#evaluate)
-- "Robust" regression
+- Uncovered material
 
 ---
+
+### How do you check whether your model is useful (at all)?
+
+- Most GLMs: Likelihood ratio test, where "smaller" model includes no covariates
+  - "Bernoulli" logistic regression models: nuance...
+--
+
+- There are weird behaviors comparing bernoulli models to intercept-only models
+  - best practice: ROC curves (check sensitivity/specificity)
+
+---
+
+### Other stuff?
+
+- Wald tests: they definitely provide numbers
+  - better: "robust" tests (robust Z test, bootstrapping)
+  - "robust" allow flexibility for .ye[some] of the assumptions made
+- multiple comparisons problems: we produced a lot of $p$-values...
+  - FWER control?
+- incorporating non-linearities into linear models?
+- other types of GLMs?
+- @Jeanette?
 
 </textarea>
 <!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script> -->
