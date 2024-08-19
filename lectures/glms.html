@@ -301,7 +301,7 @@ $\\vec x\_i^\\top \\vec\\beta = \\sum\_{j = 1(0?)}^d \\beta\_j x\_{ij}$
 ${\\color{yellow}g\\big(}\\mathbb E\\left[\\vec{\\mathbf y}\\right]{\\color{yellow}\\big)} = X \\vec\\beta$
 
 - The "link" relates the mean of the random component to the systematic component
-  - typically monotonic and differentiable (allows us to estimate $\\beta$)
+  - typically monotonic and differentiable (allows us to estimate $\\vec\\beta$)
   - If the link $g(x) = x$ ("identity link"), standard "linear model"
 --
 
@@ -409,6 +409,16 @@ $\text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1}, x\_{i2}, x\_{i3}, x\_{i4}])
 
 Model: $\text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1}, x\_{i2}, x\_{i3}, x\_{i4}]) = \\beta\_0 + \\beta\_1 x\_{i1} + \\beta\_2 x\_{i2} + \\beta\_3 x\_{i3} + \\beta\_4 x\_{i4}$
 
+Step 1: Isolate the coefficient (work out vs. does not work out)
+
+- Intuition: "How does the log odds of heart disease change when somebody works out vs does not work out, holding all other variables (age, BMI, etc.) fixed?"
+
+---
+
+### Coefficient interpretation (binary)
+
+Model: $\text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1}, x\_{i2}, x\_{i3}, x\_{i4}]) = \\beta\_0 + \\beta\_1 x\_{i1} + \\beta\_2 x\_{i2} + \\beta\_3 x\_{i3} + \\beta\_4 x\_{i4}$
+
 Step 1: Isolate the coefficient
 
 $\text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1}, x\_{i2} = 1, x\_{i3}, x\_{i4}]) - \text{logit}(\\mathbb P[\\mathbf y\_i = 1; x\_{i1}, x\_{i2} = 0, x\_{i3}, x\_{i4}])$
@@ -450,6 +460,12 @@ $$\\exp(\\beta\_2) = \\frac{\\frac{p\_{i, 1}}{1 - p\_{i, 1}}}{\\frac{p\_{i, 0}}{
 - "odds ratio"  
 
 - $\\exp(\\hat{\\beta}\_2)$ gives a multiplicative change in the odds for the response .ye[with] the predictor ($x\_{i2} = 1$) as-compared to .ye[without] ($x\_{i2} = 0$)
+
+---
+
+### Coefficient interpretation (continuous)
+
+- Intuition: "How does the log odds of heart disease change for somebody who is a year older, holding all other variables (works out/not, BMI, etc.) fixed?"
 
 ---
 
