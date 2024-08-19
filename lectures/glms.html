@@ -99,7 +99,7 @@ $$
 $$
 --
 
-- "Linear combination of the elements in a given row of $A$, with coefficients given by a given columns of $B$"
+- "Linear combination of the elements in a given row of $A$, with coefficients given by a column of $B$"
 
 ---
 
@@ -260,10 +260,10 @@ X = \\begin{bmatrix}
   \\vdash & \\vec x_1^\\top & \\dashv \\\\
   & \\vdots & \\\\
   \\vdash & \\vec x_n^\\top & \\dashv
-\\end{bmatrix}, \\,\\,\\,\\, X\\beta = \\begin{bmatrix}
-\\vec x_1^\\top\\beta \\\\
+\\end{bmatrix}, \\,\\,\\,\\, X\\vec\\beta = \\begin{bmatrix}
+\\vec x_1^\\top\\vec\\beta \\\\
 \\vdots \\\\
-\\vec x_n^\\top\\beta
+\\vec x_n^\\top\\vec\\beta
 \\end{bmatrix}
 $$
 
@@ -291,9 +291,9 @@ X = \\begin{bmatrix}
 \\vec x_n^\\top\\vec\\beta
 \\end{bmatrix}
 $$
-- Note: elements of $X\\beta$ are linear combinations of the predictors, as:
-$\\vec x\_i^\\top \\beta = \\sum\_{j = 1(0?)}^d \\beta\_j x\_{ij}$
-- The predictors are treated as .ye[fixed]
+- Note: elements of $X\\vec\\beta$ are linear combinations of the predictors, as:
+$\\vec x\_i^\\top \\vec\\beta = \\sum\_{j = 1(0?)}^d \\beta\_j x\_{ij}$
+- The predictors are treated as .ye[fixed]; $\\vec\\beta$ are .ye[parameters] of $\\mathbf y\_i$
 ---
 
 ### .ye[Link] function
