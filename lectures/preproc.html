@@ -311,14 +311,14 @@ name:quant
 - $Y_i(t)$: hypothetical measurement if individual $i$ .ye[would have been measured] in batch $t$
 
 --
-- Batch effect: For some covariates $x$, $Y_i(t) \\overset{\\mathcal D}{=} Y_i(t')$
+- Batch effect: For some covariates $x$, $Y_i(t) \\overset{\\mathcal D}{\neq} Y_i(t')$
   - measurement would differ if individual $i$ with covariates $x$ were measured in different batches
 
 ---
 
 ### The problem of observational mega-studies
 
-- Batch effect: For some covariates $x$, $Y_i(t) \\overset{\\mathcal D}{=} Y_i(t')$
+- Batch effect: For some covariates $x$, $Y_i(t) \\overset{\\mathcal D}{\neq} Y_i(t')$
 
 --
 - .ye[observational study]: the variable under investigation (here, batch) is not directly controlled by experimenters
@@ -338,7 +338,9 @@ name:quant
 A conditional $K$-sample test is defined as:
 
 $H\_0: Y\_i | t, x \\overset{\\mathcal D}{=} Y\_i | t', x$ for any $t, t' \in [K]$
+
 against
+
 $H\_A: Y\_i | t, x \\overset{\\mathcal D}{\\neq} Y\_i | t', x$ for some $t, t' \in [K]$
 
 --
@@ -464,7 +466,7 @@ $H\_A: Y\_i | t, x \\overset{\\mathcal D}{\\neq} Y\_i | t', x$ for some $t, t' \
 
 ---
 
-### "Causal" conditional $2$-sample testing
+### "Causal" conditional $K$-sample testing
 
 - propose: propensity trim the dataset, and then run a conditional $K$-sample test
   - Assume: consistency, ignorability
@@ -474,6 +476,9 @@ $H\_A: Y\_i | t, x \\overset{\\mathcal D}{\\neq} Y\_i | t', x$ for some $t, t' \
 - reduce the data such that we have .ye[*similar enough*] people across all studies
   - no "outlier" people completely unique to some studies
 
+--
+- non-causal intuition: when we see variability across studies, since the people are similar enough, that variability is due to batch effects
+  - we have purged variability that could be due to outliers by removing them
 ---
 
 ### Causal cDCorr
