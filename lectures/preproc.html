@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Pre-processing and batch effects</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="fonts/quadon/quadon.css">
+  <link rel="stylesheet" href="fonts/gentona/gentona.css">
+  <link rel="stylesheet" href="slides_style_poldrack.css">
+  <script type="text/javascript" src="assets/plotly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+  <textarea id="source">
+
+
+
+<!-- TODO add slide numbers & maybe slide name -->
+
+### Just how much does data pre-processing impact batch effects?
+
+<centering>
+  ![:scale 35%](images/stanford_s.png)
+</centering>
+
+Eric W. Bridgeford<br>
+
+Follow the slides: [ericwb.me/lectures/rr.html](ericwb.me/lectures/preproc.html)
+
+---
+name:basics
+
+### Outline
+
+- Background
+- [Data Pre-processing](#preproc)
+- [Quantifying batch effects](#quant)
+- [Proposed analysis](#proposal)
+
+---
+
+
+### Typical problem in causal inference
+
+<center>![:scale 60%](images/defense/causal1.png)</center>
+
+- goal: estimate impact of an exposure (smoking) on measurements (cancer), given a set of covariates (ages)
+
+---
+
+
+### Problem 1: Unmeasured variables
+
+<center>![:scale 60%](images/defense/causal2.png)</center>
+
+- what if we didn't measure genetics, but genetics cause cancer and influence smoking? [3]
+
+---
+
+### Solution 1
+
+<center>![:scale 60%](images/defense/causal3.png)</center>
+
+- Assume unmeasured variables are minimally impactful
+
+---
+
+### Problem 2
+
+<center>![:scale 60%](images/causal/causal_ex.png)</center>
+
+- Measured: old smokers, and young non-smokers
+  - did the smoking cause the cancer, or is cancer just a function of aging?
+  - Technical term: .ye[Confounding]
+
+---
+
+### Connectome data
+
+- connectome: brain graph, where the edges indicates the level of functional similarity or structural connectivity between areas of the brain
+<p align="center">
+  ![:scale 50%](images/defense/fmri_conn.png)
+</p>
+  - very high-dimensional
+  - properties about graph $\Rightarrow$ insights about brain function
+- expense $\Rightarrow$ collect data and pool (mega studies)
+
+---
+
+### What do people .ye[want] to do with brain data?
+
+- Brain/behavior studies: determine how different properties/states of the brain alter observed neurophenotypes
+  - e.g., determine whether some "subgraphs" are more/less prominent in people who go on to develop addictive habits?
+  - .ye[neurophenotypic] effects
+
+--
+- demographic studies: determine how demographic variables alter the brain
+  - e.g., does "aging" lead to changes in FC?
+  - .ye[demographic] effects
+- etc.
+
+---
+
+#### Ideal experimental setup for these investigations
+
+<br>
+
+<center>![:scale 50%](images/preproc_be/simpl_variability.png)</center>
+
+- take demographics/phenotypes, run an associational (conditional) analysis with properties of measurements
+
+---
+
+#### Problem of unmeasured confounding
+
+<br>
+
+<center>![:scale 50%](images/preproc_be/simpl_unmeas.png)</center>
+
+- unmeasured variables/states "explain" the associational (conditional) variability observed
+  - our "ideal" analysis is meaningless
+
+---
+
+#### Problem of unmeasured confounding
+
+<br>
+
+<center>![:scale 50%](images/preproc_be/simpl_unmeas_lowalph.png)</center>
+
+- solution: measure .ye[*most*] things you anticipate affecting the observed outcomes
+  - most analyses are robust up to a certain level of unmeasured confounding (e-value?)
+  - if a lot of the big factors are measured and accounted for reasonably well, analysis should hold up
+
+---
+
+### The problem of batch effects
+
+- .ye[batch effect]: the impact of the data collection procedure (measurement device, measurement protocol, season, etc.) on the data collected [4]
+- When datasets are demographically diverse (high confounding) and measurements are large (high number of features), batch effects present a substantial issue
+
+---
+
+### Existing work (detection)
+
+- classical causal inference focuses on this problem for univariate measurements (e.g., smoking)
+- some work (conditional independence testing) attempts to do this in multivariate regimes
+  - unclear the extent to which these provide reasonable answers in the face of confounding for high-dimensional data
+
+---
+
+### Confounding + batch effects
+
+<br>
+
+<center>![:scale 100%](images/preproc_be/batch_effects_issue.png)</center>
+
+---
+
+### Confounding in the ABCD study
+<br>
+<center>![:scale 100%](images/preproc_be/abcd_confounding.png)</center>
+
+---
+
+### Take home points
+
+- batch effects prevent learning about demographic/neurophenotypic effects in datasets
+- batch effects are difficult to identify due to confounding
+  - are differences between datasets due to batch effects, or demographic/neurophenotypic differences?
+
+--
+  - most methods do not do anything to account for this
+
+---
+
+---
+name:preproc
+
+### Outline
+
+- [Background](#basics)
+- Data Pre-processing
+- [Quantifying batch effects](#quant)
+- [Proposed analysis](#proposal)
+
+---
+
+### Data pre-processing TL; DR
+
+- the measurements we obtain often have undesirable features
+  - measurements are often corrupted by noise (nuisance variables), or incomparable between people
+
+<br>
+<center>![:scale 100%](images/preproc_be/preproc_vara.png)</center>
+
+--
+- Data pre-processing: how do we "fix" our measurements, as best we can for downstream analysis?
+
+---
+
+### Step 1: Initial data cleaning
+
+- Initial data cleaning: remove known artifacts
+  - spatial effects of head motion? de-spiking? biases in MR fields? air-tissue interactions?
+
+<center>![:scale 100%](images/preproc_be/bias_cor.png)</center>
+
+<small>Source: [1]</small>
+
+---
+
+### Step 2: Registration
+
+- every brain is a different "shape", but we need to be able to compare across people
+
+--
+- Registration: realign brains to a template
+
+<center>![:scale 100%](images/preproc_be/reg.png)</center>
+
+<small>Source: [2]</small>
+
+---
+
+### Step 3: Nuisance "correction"
+
+- nuisance variable: factors that impact measurements but are not of interest
+  - physiological modulation? motion distortions? Scanner drift?
+
+<center>![:scale 50%](images/preproc_be/compcor.png)</center>
+
+<small>Source: [3]</small>
+
+---
+
+### Data post-processing TL; DR
+
+- the measurements we obtain are rarely the units we wish to analyze
+  - measurements may not be appropriate for the types of things we want to learn about
+
+<br>
+<center>![:scale 100%](images/preproc_be/postproc_vara.png)</center>
+
+--
+- Data post-processing: what functions of the data will give us derivatives that are useful?
+
+---
+
+### Step 1: Downsampling
+
+- timeseries from fMRI are extraordinarily high-dimensional
+  - usually on order of a million voxels
+- even after pre-processing, data are still extremely noisy
+
+--
+- Downsampling: average voxelwise activity at a given timepoint, for all voxels in an "area" of the brain
+
+--
+  - improves SNR: high-frequency noise reductions are "smoothed"
+  - improves interpretability: easier to make sense of region-wise conclusions rather than voxel-wise
+
+---
+
+### Step 2: Connectivity matrices
+
+- what patterns arise between region-wise timeseries that define the particularities of individual brains?
+  - "patterns": usually just similarity metrics, like correlation
+
+--
+- Functional connectivity (FC): measure of how different brain regions interact with one another
+  - for all pairs of regions in the brain, compute "similarity" of region-wise timeseries
+
+<center>![:scale 100%](images/preproc_be/tse_conn.jpg)</center>
+
+<small>Source: [4]</small>
+
+
+---
+
+### Data processing variability
+
+<br>
+<center>![:scale 100%](images/preproc_be/proc_vara.png)</center>
+
+---
+
+#### Sources of variability in neuroimaging studies
+
+<center>![:scale 100%](images/preproc_be/overall_vara.png)</center>
+
+- For each stage of data pre/post-processing, there are many choices one can make
+- How do data processing decisions heighten, or lessen, batch effects?
+
+---
+
+name:quant
+
+### Outline
+
+- [Background](#basics)
+- [Data Pre-processing](#preproc)
+- Quantifying batch effects
+- [Proposed analysis](#proposal)
+
+---
+
+### What is a "batch effect"?
+
+- Let: $Y_i$ be a measurement, $X_i$ be a set of covariates, and $T_i$ be the batch a measurement was taken from
+- $Y_i(t)$: hypothetical measurement if individual $i$ .ye[would have been measured] in batch $t$
+
+--
+- Batch effect: For some covariates $x$, $Y_i(t) \\overset{\\mathcal D}{=} Y_i(t')$
+  - measurement would differ if individual $i$ with covariates $x$ were measured in different batches
+
+---
+
+### The problem of observational mega-studies
+
+- Batch effect: For some covariates $x$, $Y_i(t) \\overset{\\mathcal D}{=} Y_i(t')$
+
+--
+- .ye[observational study]: the variable under investigation (here, batch) is not directly controlled by experimenters
+  - we only observe $Y_i$ for one batch $T_i$
+  - consequence: $Y_i$ and $Y_i(t)$ do not generally have similar distributions given covariates $x$
+
+--
+- sensible definition of a batch effect relies on potential outcomes $Y_i(t)$
+
+---
+
+### Conditional $K$-sample testing
+
+- We observe $(y_i, t_i, x_i)$
+  - measurements, batches for those individuals, and covariates for individuals
+
+A conditional $K$-sample test is defined as:
+
+$H\_0: Y\_i | t, x \\overset{\\mathcal D}{=} Y\_i | t', x$ for any $t, t' \in [K]$
+against
+$H\_A: Y\_i | t, x \\overset{\\mathcal D}{\\neq} Y\_i | t', x$ for some $t, t' \in [K]$
+
+--
+- $H_A$: For some covariates $x$, the observed measurements differ across batches (conditional effect)
+
+--
+- Batch effect: for some covariates $x$, the measurements would differ had the individual been measured in different batches
+
+---
+
+### The "causal nuance"
+
+- Conditional effect: for some covariates $x$, the observed measurements differ across batches
+- Batch effect: for some covariates $x$, the measurements would differ had the individual been measured in different batches
+
+--
+- Batch effect is a statement about what would have happened (hypothetical)
+- Conditional effect is a statement about what we observed
+
+---
+
+### Are conditional effects and batch effects equivalent?
+
+- Recall: no!
+
+--
+- Longer answer: no, except when...
+1. Consistent: someone's measurement at a given site is equivalent to their "hypothetical" measurement at that site
+
+--
+- reasonable!
+---
+
+### Are conditional effects and batch effects equivalent?
+
+- Recall: no!
+- Longer answer: no, except when...
+1. Consistent <span style="color: #4CAF50;">✓</span>
+2. Ignorability: factors that influence demographic discrepancies across batches are measured
+  - after accounting for these factors, why someone ends up in one batch or another is irrelevant
+
+--
+- maybe reasonable, if we measured enough variables
+
+---
+
+### Are conditional effects and batch effects equivalent?
+
+- Recall: no!
+- Longer answer: no, except when...
+1. Consistent <span style="color: #4CAF50;">✓</span>
+2. Ignorability <span style="color: #FFA500;">?</span>
+3. Positivity: For a person $i$ with covariates $x$, is it reasonable to expect that someone else who also has covariates $x$ could have been measured at other sites?
+
+--
+- No, by definition of a mega-study
+- Consider: one study taken at Stanford University, and another at an inner city hospital
+  - the populations are fundamentally different
+---
+
+### Are conditional effects and batch effects equivalent?
+
+- Recall: no!
+- Longer answer: no, except when...
+1. Consistent <span style="color: #4CAF50;">✓</span>
+2. Ignorability <span style="color: #FFA500;">?</span>
+3. Positivity <span style="color: #FF0000;">X</span>
+
+---
+
+### The ABCD study
+
+- $N > 10,000$ children measured at $21$ different sites
+- $3$ different imaging protocols
+  - Goal: "close enough"?
+  - Reality: not quite [5]
+- Considered standard practice to adjust for batch effects when analyzing the data
+
+---
+
+### Making conclusions about batch effects from ABCD
+
+1. Consistent <span style="color: #4CAF50;">✓</span>
+2. Ignorability <span style="color: #FFA500;">?</span>, but assume <span style="color: #4CAF50;">✓</span>
+  - ABCD measures a lot of covariates!
+3. Positivity <span style="color: #FF0000;">X</span>
+---
+
+### Making conclusions about batch effects from ABCD
+
+3. Positivity <span style="color: #FF0000;">X</span>
+
+<center>![:scale 100%](images/preproc_be/abcd_confounding.png)</center>
+
+---
+
+### Making conclusions about batch effects from ABCD
+
+3. Positivity <span style="color: #FF0000;">X</span>
+
+<center>![:scale 50%](images/preproc_be/abcd_confounding.png)</center>
+
+- some covariates are similar across the studies: handedness, male/female, age
+- some covariates can be very different: race, cognitive function, income levels, etc
+
+---
+
+### "Enforcing" positivity, illustrated
+
+<br>
+<center>![:scale 60%](images/causal/ass_fail.png)</center>
+
+- The datasets do not "overlap": wouldn't see anybody under ~20 at site $2$, or over ~80 at site $1$
+
+---
+
+### "Enforcing" positivity, illustrated
+
+<br>
+<center>![:scale 100%](images/causal/vm.png)</center>
+
+- "Propensity" trimming: force it
+
+---
+
+### "Causal" conditional $2$-sample testing
+
+- propose: propensity trim the dataset, and then run a conditional $K$-sample test
+  - Assume: consistency, ignorability
+  - Enforce: positivity
+
+--
+- reduce the data such that we have .ye[*similar enough*] people across all studies
+  - no "outlier" people completely unique to some studies
+
+---
+
+### Causal cDCorr
+
+- run propensity trimming, and then conditional distance correlation (conditional $K$-sample test)
+- [Valid, consistent, powerful](https://ericwb.me/lectures/defense2.html#41)
+  - haven't yet found a simulation context where it was not more performant than other conditional $K$-sample tests
+
+---
+
+name:proposal
+
+### Outline
+
+- [Background](#basics)
+- [Data Pre-processing](#preproc)
+- [Quantifying batch effects](#quant)
+- Proposed analysis
+
+---
+
+### Step 1: Process/analyze data
+
+- factorial/multiverse analysis of baseline participants via different pre-processing pipelines
+1. ACPC alignment, denoising, and N4 bias correction of T1w images (Y/N)
+
+--
+2. Despiking (Y/N), Field map disortion correction (Y/N)
+
+--
+3. boundary-based coregistration (Y/N), non-linear registration method (ANTs, FSL)
+
+--
+4. nuisance correction pipelines: minimal, intermediate, and maximum (intermediate + GSR)
+
+--
+5. bandpass frequency filtering (Y/N)
+
+--
+6. Resolution to downsample to: Schaefer 100, 200, 300, 400 parcel
+
+--
+7. Definiion of FC: correlation, absolute correlation, ranked absolute correlation
+
+--
+- Total: $2 \times 2 \times 2 \times 2 \times 2 \times 3 \times 2 \times 4 \times 3 = 2307$
+
+---
+
+### Holy storage!
+
+- That's going to be a lot of data $10$ thousand individuals!
+
+--
+- [Actually, it is ~10 TB](https://docs.google.com/document/d/1-9jbE4TmX_Jpj1nalDH40A29Vdj3lBnRZgJkl10aTxA/edit?usp=sharing)
+- Only actually need to store the ROI timeseries and the connectivity matrices
+- we have a lot of free storage (~50+ TB, more?)
+
+---
+
+### Holy compute!
+
+- True, but...
+
+--
+- CPAC pipeline: workflow recycler
+  - only actually "executes" a logarithmic number of steps
+  - recycles derivatives whenever possible
+- Simple example: two steps with two options each (Y/N), consider the pipelines YN and YY
+  - all derivatives from step 1 can be recycled
+
+--
+- Serialize: spawn docker process for each individual, compute necessary derivatives, and pool only the derivatives
+- What does a core time, RAM use, and storage per run look like?
+- We have a lot of compute resources
+
+---
+
+### Step 2: Propensity trim the dataset
+
+- reduce dataset using vertex matching, to a subset of individuals who could reasonably have been measured at any of the sites
+  - The datasets have their own particularities, but are in general quite diverse
+  - Unlikely more than half of the study population is excluded
+
+--
+- Unlikely, but I still need to press "go" on this to get a specific number
+
+---
+
+### Step 3: compute batch effects
+
+- Use several notions of how big the batch effect is
+  - PERMANOVA, causal cDCorr (propensity trimmed subset), conditional cDCorr, distance correlation
+
+---
+
+### Step 4: Comparisons across pipelines (batch effects)
+- For each option, "marginalize"
+  - Given a strategy YNY and YYY, can compute the "impact" of option 2 on batch effects by taking YNY - YYY (options 1 and 3 are held fixed)
+  - repeat for all combinations of options 1 and 3 to obtain the "impacts" of option 2 for different combinations of other options (paired data!)
+  - How much does option impact? Wilcoxon signed rank test
+
+--
+- .ye[core research question: How much do different options impact batch effects?]
+
+--
+- .ye[related research question: how much do controversial, or rarely practiced, options reduce (or worsen) batch effects?]
+  - GSR?
+---
+
+### Step 4: Comparisons across pipelines (batch effects)
+- .ye[core research question: How much do different options impact batch effects?]
+- Best pipeline = pipeline with lowest statistic
+- is best pipeline the best marginal pipeline? How close?
+  - were the steps where they differed significant?
+
+--
+- .ye[core research question: what pre-processing steps will minimize batch effects?]
+
+---
+
+### Step 5: Does it matter?
+
+- Choose questions of interest; e.g., covariate effects
+  - conditional distance correlation: Compute strength of sex effect across all individuals' measurements, given other covariates
+- For each pipeline, estimate the strength of the covariate effect
+  - do pipelines with fewer batch effects tend to show stronger sex effects?
+- .ye[core research question: do batch effects hamper the prominence of covariate effects?]
+---
+
+### Step 5: Does it matter?
+
+- .ye[core research question: do batch effects hamper the prominence of covariate effects?]
+- Choose tasks of interest; e.g., prediction of covariates given measurements
+- train a classifier to predict covariate given all-but-one dataset
+  - assess predictive accuracy on the held-out dataset
+
+--
+- .ye[core research question: do pipelines with fewer batch effects yield more generalizable conclusions?]
+
+---
+### Summary of core questions
+
+1. How much do different options impact batch effects?
+2. What pre-processing steps will minimize batch effects?
+3. Do batch effects hamper the prominence of covariate effects?
+4. Do pipelines with fewer batch effects yield more generalizable conclusions?
+
+--
+5. .ye[Bonus: does the answer differ depending on how we define batch effects?]
+  - 4 different statistics to quantify
+---
+
+### Acknowledgements
+
+##### Collaborators
+
+<div class="small-container">
+    <img src="faces/russ.jpg"/>
+    <div class="centered">Russ Poldrack</div>
+  </div>
+  <div class="small-container">
+    <img src="faces/maya.jpeg"/>
+    <div class="centered">Maya Mathur</div>
+  </div>
+
+##### Funding/Resource Support
+
+<img src="images/funding/nih_fpo.png" STYLE="HEIGHT:95px;"/>
+<img src="images/stanford_s.png" STYLE="HEIGHT:95px;"/>
+<img src="images/ut_austin.png" STYLE="HEIGHT:95px;"/>
+
+---
+
+##### References
+
+[1] You, Wonsang, et al. "Robust preprocessing for stimulus-based functional MRI of the moving fetus." J. Med. Imaging, 2016.
+
+[2] "FLIRT/StepByStep." 20 Apr. 2017, web.mit.edu/fsl_v5.0.10/fsl/doc/wiki/FLIRT%282f%29StepByStep.html.
+
+[3] Behzadi, Yashar, et al. "A component based noise correction method (CompCor) for BOLD and perfusion based fMRI." Neuroimage, vol. 37, no. 1, 1 Aug. 2007, pp. 90-101, doi:10.1016/j.neuroimage.2007.04.042.
+
+[4] "Parcellation - an overview | ScienceDirect Topics." 21 Oct. 2024, doi:10.1016/B978-0-323-85280-7.00020-8.
+
+[5] Nielson, Dylan M., et al. "Detecting and harmonizing scanner differences in the ABCD study - annual release 1.0." bioRxiv, 2 May. 2018, p. 309260, doi.org/10.1101/309260.
+
+</textarea>
+<!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script> -->
+<!-- <script src="remark-latest.min.js"></script> -->
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.3/katex.min.css">
+<script type="text/javascript">
+
+  var options = {};
+  var renderMath = function () {
+    renderMathInElement(document.body);
+    // or if you want to use $...$ for math,
+    renderMathInElement(document.body, {
+      delimiters: [ // mind the order of delimiters(!?)
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false },
+      ]
+    });
+  }
+
+  remark.macros.scale = function (percentage) {
+    var url = this;
+    return '<img src="' + url + '" style="width: ' + percentage + '" />';
+  };
+
+  // var slideshow = remark.create({
+  // Set the slideshow display ratio
+  // Default: '4:3'
+  // Alternatives: '16:9', ...
+  // {
+  // ratio: '16:9',
+  // });
+
+  var slideshow = remark.create(options, renderMath);
+
+
+</script>
+</body>
+
+</html>
